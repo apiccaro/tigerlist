@@ -6,7 +6,7 @@ function LoginButton() {
    const buttonStyle = {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'center', 
       height: '40px', // Set a specific height for the button if needed
     };
     return <button style={buttonStyle}>Sign In</button>;
