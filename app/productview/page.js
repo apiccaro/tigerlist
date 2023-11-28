@@ -13,6 +13,16 @@ export default function Home() {
             </p>
 
         </div>
+        
+        <Image
+              src="/2722150.png"
+              alt="Tiger Image"
+              accept="image/*"
+              className="dark:invert"
+              width={100}
+              height={24}
+              priority
+            />
 
         <div className="fixed flex h-48 w-full items-end justify-center lg:static lg:h-auto lg:w-auto lg:bg-none">
 
