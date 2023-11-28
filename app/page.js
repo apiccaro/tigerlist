@@ -1,6 +1,7 @@
 //this will be the sign in page! 
 
 import Image from 'next/image'
+import Link from 'next/link';
 
 function LoginButton() {
    const buttonStyle = {
@@ -12,8 +13,12 @@ function LoginButton() {
      padding: '0 16px', // Add padding for better visual appearance
    };
  
-   return <button style={buttonStyle}>Sign In</button>;
- } 
+   return (
+     <Link href="/SSI">
+         <button style={buttonStyle}>Sign In</button>
+     </Link>
+   );
+ }
  
 
 export default function Home() {
