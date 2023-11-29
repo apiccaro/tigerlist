@@ -17,15 +17,13 @@ export default function MakeListing(){
     const [labelText, setLabelText] = useState();
     function validateForm(){
         if(title==''){
-            
+            error
         }
     }
 
 
     return(
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
-
- 
             <div>
                 <div>
                     <h1>Item For Sale</h1>
@@ -87,8 +85,6 @@ export default function MakeListing(){
                         onChange={e => setTitle(e.target.value)}
                           /> 
                      </label><br></br>
-                     <span id="errorTitle" class="error"></span>
-                     <br></br>
                      <label>
                         
                         <input type="text"
@@ -138,14 +134,13 @@ export default function MakeListing(){
                         <option value="westcampus">West Campus</option> 
                         <option value="offcampus">Off Campus</option> 
                     </select><br></br>
-                    
-                    
                     </form>
                     
                     </div>         
                     
             </div>
-            <button onClick={validateForm}>Submit</button>
+            <button onClick={validateForm()}>Submit</button>
+
             </main>
             
 

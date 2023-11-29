@@ -63,3 +63,11 @@ button{
   cursor: pointer;
   margin: 3px;
 }
+h2{
+  color:white;
+  font-size:35px
+}
+.nav_menu{
+  display: flex;
+}
+
