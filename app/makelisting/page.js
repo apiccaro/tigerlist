@@ -15,12 +15,7 @@ export default function MakeListing(){
     const [borderStyle, setBorderStyle] = useState();
     const [labelHeight, setLabelHeight] = useState();
     const [labelText, setLabelText] = useState();
-    function validateForm(){
-        if(title==''){
-            error
-        }
-    }
-
+    
 
     return(
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -139,7 +134,7 @@ export default function MakeListing(){
                     </div>         
                     
             </div>
-            <button onClick={validateForm()}>Submit</button>
+            <button >Submit</button>
 
             </main>
             
