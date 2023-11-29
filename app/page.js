@@ -17,7 +17,7 @@ function LoginButton() {
     padding: '0 16px', 
   };
   return (
-    <Link href="/verication"> {/* to nav to other page*/}
+    <Link href="/verification"> 
         <button style={buttonStyle}>Sign In</button>
     </Link>
   );
