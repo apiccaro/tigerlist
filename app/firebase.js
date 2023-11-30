@@ -1,33 +1,20 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
+import { initializeApp } from 'firebase/app';
 
 /**
- * firebase configuration to connect our website to firebase
- * unique to every firebase project 
- * using vars from .env.local for security reasons 
- * found all these in FireBase's interface settings for my project 
- */
+* firebase configuration to connect our website to firebase
+* unique to every firebase project
+* using vars from .env.local for security reasons
+* found all these in FireBase's interface settings for my project
+*/
 const firebaseConfig = {
-    apiKey: NEXT_PUBLIC_FIREBASE_API_KEY, 
-    authDomain: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN, 
-    projectId: NEXT_PUBLIC_FIREBASE_PROJECT_ID, 
-    storageBucket: FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: FIREBASE_SENDER_ID, 
-    appId: FIREBASE_APP_ID, 
-    measurementId: FIREBASE_MEASUREMENT_ID
-  };
-  
+  apiKey: "AIzaSyC-vqfnFZjBaqHiieMaMD1tHCc-QJovoH4",
+  authDomain: "tigerlist-10777.firebaseapp.com",
+  projectId: "tigerlist-10777",
+  storageBucket: "tigerlist-10777.appspot.com",
+  messagingSenderId: "316694031166",
+  appId: "1:316694031166:web:335013c245d09420a11a6f",
+  measurementId: "G-0TFVF3NL29"
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+};
 
-export default firebase;
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);

@@ -1,35 +1,63 @@
-import React from 'react';
-import Image from 'next/image';
+// This is a client component
+"use client";
 
-const LoginForm = () => {
-  const labelStyle = { color: 'black', marginBottom: '8px' };
-  const inputStyle = { color: 'black', marginLeft: '5px' };
+import React, { useState } from 'react';
+import Image from 'next/image';
+import firebase from '../firebase';
+
+const actionCodeSettings = {
+  // URL you want to redirect back to. The domain (www.example.com) for this
+  // URL must be in the authorized domains list in the Firebase Console.
+  url: 'https://www.example.com/finishSignUp?cartId=1234',
+  // This must be true.
+  handleCodeInApp: true,
+  iOS: {
+    bundleId: 'com.example.ios'
+  },
+  android: {
+    packageName: 'com.example.android',
+    installApp: true,
+    minimumVersion: '12'
+  },
+  dynamicLinkDomain: 'example.page.link'
+};
+
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      console.log('User logged in successfully!');
+    } catch (error) {
+      console.error('Error logging in:', error.message);
+    }
+  };
 
   return (
-    <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
-      <h1 style={{ color: 'black' }}>Sign In</h1>
-      <form>
-        <label style={labelStyle}>
-          Email:
-          <input type="email" name="email" style={inputStyle} />
-        </label>
-        <br />
-        <label style={labelStyle}>
-          Password:
-          <input type="password" name="password" style={inputStyle} />
-        </label>
-        <br />  {/* line break */}
-        <button type="button">Submit</button>
-      </form>
-    </div> 
+    <form onSubmit={handleLogin} className="flex flex-col items-center">
+      <label className="mb-2 text-white">Email:
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="border p-2 text-black"
+        />
+      </label>
+      <label className="mb-2 text-white">Password:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="border p-2 text-black"
+        />
+      </label>
+      <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Log In</button>
+    </form>
   );
 };
 
-export default function Home() {
-  return (
-    //flex min-h-screen 
-    <main className="flex flex-col items-center justify-between p-24">
-       <LoginForm />
-    </main>
-  )
- }
+export default Login;
