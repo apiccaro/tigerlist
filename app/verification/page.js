@@ -1,26 +1,25 @@
-// This is a client component
+// ensuring this is a client component
 "use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import firebase from '../firebase';
 
+import firebase from '../firebase';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { getAuth, sendSignInLinkToEmail } from "firebase/auth";
+
+
+// CHECKING TO SEE IF FIREBASE IS PROPERLY CONFIGURED 
+console.log('Here Is The Proof:', firebase);
+
+
+//from FireBase documentation. Step 1. 
 const actionCodeSettings = {
-  // URL you want to redirect back to. The domain (www.example.com) for this
-  // URL must be in the authorized domains list in the Firebase Console.
-  url: 'https://www.example.com/finishSignUp?cartId=1234',
-  // This must be true.
+  // URL you want to redirect back to 
+  url: 'http://localhost:3000',
+  // ALWAYS TRUE 
   handleCodeInApp: true,
-  iOS: {
-    bundleId: 'com.example.ios'
-  },
-  android: {
-    packageName: 'com.example.android',
-    installApp: true,
-    minimumVersion: '12'
-  },
-  dynamicLinkDomain: 'example.page.link'
 };
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -29,14 +28,22 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      console.log('User logged in successfully!');
-    } catch (error) {
-      console.error('Error logging in:', error.message);
-    }
-  };
-
+    //from FireBase documentation. Step 2.  
+    const auth = getAuth();
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+    .then(() => {
+    // the link was successfully sent. inform the user!
+    // save the email locally so you don't need to ask the user for it again
+    // if they open the link on the same device.
+    window.localStorage.setItem('emailForSignIn', email);
+    })
+    .catch((error) => {
+    console.error('Error logging in:', error.message);
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    });
+  }
+  
   return (
     <form onSubmit={handleLogin} className="flex flex-col items-center">
       <label className="mb-2 text-white">Email:
@@ -60,4 +67,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login; 
