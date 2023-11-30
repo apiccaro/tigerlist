@@ -43,8 +43,8 @@ label{
 select{
   width: 400px;
   height: 50px;
-  color: grey;
   margin: 1px 0px;
+  color: black;
   border-radius: 2px;
   cursor: pointer;
 }
@@ -52,16 +52,12 @@ img{
   margin: 3px 0px;
 }
 button{
-  display: inline-block;
-  border-radius: 12px;
-  background-color: darkblue;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 16px;
-  width: 80px;
-  height:40px;
-  cursor: pointer;
-  margin: 3px;
+  display: 'flex';
+  border: 2px solid white; 
+  alignItems: 'center';
+  justifyContent: 'center';
+  padding: 0 16px;
+  border-radius: 5px;
 }
 h2{
   color:white;
@@ -69,4 +65,9 @@ h2{
 }
 .nav_menu{
   display: flex;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center
 }

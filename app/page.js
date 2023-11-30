@@ -8,17 +8,10 @@ import Link from 'next/link';
 function LoginButton() {
   //defining variable containing all the stylistic elements for this button 
   //let for dynamic vars, const otherwidr 
-  const buttonStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center', 
-    height: '40px', 
-    border: '2px solid white', 
-    padding: '0 16px', 
-  };
+  
   return (
-    <Link href="/verification"> {/* to nav to other page*/}
-        <button style={buttonStyle}>Sign In</button>
+    <Link href="/verification"> 
+        <button style={{width: '100px', height: '50px'}}>Sign In</button>
     </Link>
   );
 }
@@ -30,10 +23,10 @@ return (
   <main className="flex flex-col items-center justify-between p-24">
      <h1>Welcome to TigerList</h1>
      <p>a program connecting Colorado College students looking to exchange goods, services, and reduce waste.</p>
-     <div className="flex items-center justify-center mt-20"> 
+     <div className="flex items-center justify-center mt-10"> 
         <p> </p>
      </div>
-     <div className="flex items-center justify-center mt-20"> 
+     <div className="flex items-center justify-center mt-10"> 
         <LoginButton />
      </div>
   </main>
