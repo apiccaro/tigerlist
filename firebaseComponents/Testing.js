@@ -1,4 +1,4 @@
-import WriteToCloudFirestore from './'
+import WriteToCloudFirestore from '.'
 
 
 console.log("Will this show up?") 

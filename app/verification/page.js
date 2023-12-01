@@ -1,9 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+//import WriteToCloudFirestore from '../..firebase_components'
+
 
 const LoginForm = () => {
   const labelStyle = { color: 'black', marginBottom: '8px' };
   const inputStyle = { color: 'black', marginLeft: '5px' };
+
 
   return (
     <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
@@ -20,6 +23,7 @@ const LoginForm = () => {
         </label>
         <br />  {/* line break */}
         <button type="button">Submit</button>
+
       </form>
     </div> 
   );

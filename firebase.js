@@ -1,11 +1,11 @@
 import { initializeApp } from 'firebase/app';
-
 /**
 * firebase configuration to connect our website to firebase
 * unique to every firebase project
 * using vars from .env.local for security reasons
 * found all these in FireBase's interface settings for my project
 */
+
 const firebaseConfig = {
   apiKey: "AIzaSyC-vqfnFZjBaqHiieMaMD1tHCc-QJovoH4",
   authDomain: "tigerlist-10777.firebaseapp.com",
