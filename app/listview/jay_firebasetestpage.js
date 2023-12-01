@@ -7,8 +7,6 @@ const WritingForm = () => {
 
 }
 
-
-
 // Home component
 export default function Home() {
     console.log("Hi, you successfully started Home()")
