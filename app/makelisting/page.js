@@ -277,7 +277,7 @@ export default function MakeListing(){
                      
                     <button style={{width: '100px', height: '50px',alignItems: 'center',margin: "0 0 0 135px"}}>Submit</button>
                     </form>
-                    <p id="readin">
+                    <p id="readIn">
                     {readinTitle}
                     </p>
                     <p id="readin2">
