@@ -1,3 +1,4 @@
+// Design for the individual product pages of the website
 import PNI from "@/Components/PNameImage"
 import PI from "@/Components/PInfo";
 

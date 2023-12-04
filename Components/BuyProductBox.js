@@ -1,3 +1,4 @@
+// Configuration for the product display on the browse page
 'use client'
 
 import styled from "styled-components";

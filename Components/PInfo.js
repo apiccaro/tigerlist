@@ -1,3 +1,4 @@
+// Configuration for where the product and contact information will appear on the product view page
 'use client'
 
 import styled from "styled-components";

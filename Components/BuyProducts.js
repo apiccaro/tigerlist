@@ -1,3 +1,4 @@
+// Configuration for all of the products that will appear on the browse page.
 'use client'
 
 import styled from "styled-components";
@@ -5,7 +6,7 @@ import Image from "next/image";
 import Link from 'next/link';
 import BuyProductBox from "./BuyProductBox";
 
-// This youtube video provided formatting help https://www.youtube.com/watch?v=dTFXufTgfOE
+// This youtube video provided grid formatting help https://www.youtube.com/watch?v=dTFXufTgfOE
 
 const ProductsGrid = styled.div`
     margin-top: 20px;

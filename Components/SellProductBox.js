@@ -1,3 +1,4 @@
+// Configuration for product appearance on the "My Listings" page.
 'use client'
 
 import styled from "styled-components";

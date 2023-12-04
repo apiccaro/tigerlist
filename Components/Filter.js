@@ -1,3 +1,4 @@
+// The filters that appear on the browse page
 'use client'
 
 import styled from "styled-components";

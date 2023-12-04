@@ -1,3 +1,4 @@
+// The edit link formatted to be the same as the active/on hold button
 'use client'
 
 import styled from "styled-components";
@@ -15,11 +16,11 @@ const LinkBG = styled.div`
     border-radius: 10px;
 `;
 
-export default function LinkBackground(){
+export default function EditLink(){
     return(
         <Wrapper>
             <LinkBG>
-                <Link href={'/editlisting'} className="flex text-semibold text-2xl">
+                <Link href={'/editlisting'} className="flex text-semibold text-xl">
                     Edit
                 </Link>
             </LinkBG>

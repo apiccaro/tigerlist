@@ -1,3 +1,4 @@
+// The product name and image layout that are placed in the product grid
 import Image from "next/image";
 
 

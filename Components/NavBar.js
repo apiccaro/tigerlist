@@ -1,3 +1,4 @@
+// Configutation for all of the links that appear on the navigation bar that exists at the top of each page.
 'use client'
 
 import styled from "styled-components";
