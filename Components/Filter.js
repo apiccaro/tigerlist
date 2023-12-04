@@ -21,7 +21,7 @@ export default function Filter(){
                 <option value="appliances">Appliance</option> 
                 <option value="clothing">Clothing</option> 
                 <option value="service">Service</option> 
-                <option value="sarpool">Carpool</option>
+                <option value="carpool">Carpool</option>
             </select> <br></br><br></br>
 
             <label for="condition" className=""> </label> 
