@@ -79,6 +79,7 @@ export default function MakeListing() {
       email: emailValue,
       phoneValue: phoneValue,
       image: imageValue,
+      active: "true",
     }
 
     setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
@@ -151,8 +152,11 @@ export default function MakeListing() {
               <img
                 id="imagePreview"
                 src={previewImage ? previewImage : ''}
-                width={imgWidth ? imgWidth : 0}
-                height={imgHeight ? imgHeight : 0}
+                style={{
+                  width: imgWidth,
+                  height: imgHeight,
+                  objectFit: 'cover',
+                }}
               />
               <div style={{ display: 'inline-block' }}>
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
@@ -419,6 +423,7 @@ export default function MakeListing() {
               margin: "60px 100px 0 0",
             }}>
               <label>
+                Enter Title: <br></br>
                 <input
                   id="title"
                   type="text"
@@ -439,7 +444,7 @@ export default function MakeListing() {
               </label><br></br>
               <span></span>
               <label>
-
+                  Enter Price: <br></br>
                 <input type="text"
                   style={{ color: 'black' }}
                   value={price}
@@ -462,7 +467,7 @@ export default function MakeListing() {
 
               </label><br></br>
               <label>
-
+                Enter Description:<br></br>
                 <input type="text"
                   style={{ color: 'black' }}
                   value={description}
@@ -483,9 +488,9 @@ export default function MakeListing() {
 
               <label
                 for="category"
-
-              > </label>
-
+              > 
+              Pick a Category <br></br>
+              </label>
               <select name="category"
                 id="category"
                 style={{ color: 'black' }}
@@ -500,18 +505,20 @@ export default function MakeListing() {
               >
                 <option value=""
                   disabled selected>Category</option>
-                <option value="textbook" >Textbook </option>
-                <option value="furniture">Furniture</option>
-                <option value="appliances">Appliance</option>
-                <option value="clothing">Clothing</option>
-                <option value="service">Service</option>
-                <option value="carpool">Carpool</option>
+                <option value="Textbook" >Textbook </option>
+                <option value="Furniture">Furniture</option>
+                <option value="Appliances">Appliance</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Service">Service</option>
+                <option value="Carpool">Carpool</option>
               </select>
               <small style={{ color: 'red' }}>
                 <br></br>
                 {errors?.category && errors.category.message}
               </small><br></br>
-              <label for="condition" > </label>
+              <label for="condition" > 
+              Pick a Label<br></br>
+              </label>
 
               <select name="condition"
                 id="condition"
@@ -525,17 +532,18 @@ export default function MakeListing() {
 
               >
                 <option value="" disabled selected >Condition</option>
-                <option value="new">New</option>
-                <option value="used-like new">Used-Like New</option>
-                <option value="used-good">Used-Good</option>
-                <option value="used-fair">Used-Fair</option>
+                <option value="New">New</option>
+                <option value="Used-Like New">Used-Like New</option>
+                <option value="Used-Good">Used-Good</option>
+                <option value="Used-Fair">Used-Fair</option>
               </select>
               <small style={{ color: 'red' }}>
                 <br></br>
                 {errors?.condition && errors.condition.message}
               </small>
               <br></br>
-              <label for="location" > </label>
+              <label for="location" > 
+              Pick a Location:<br></br></label>
 
               <select name="location"
                 id="location"
@@ -549,9 +557,9 @@ export default function MakeListing() {
 
               >
                 <option value="" disabled selected >Location</option>
-                <option value="eastcampus">East Campus</option>
-                <option value="westcampus">West Campus</option>
-                <option value="offcampus">Off Campus</option>
+                <option value="East Campus">East Campus</option>
+                <option value="West Campus">West Campus</option>
+                <option value="Off Campus">Off Campus</option>
               </select>
               <br></br>
               <small style={{ color: 'red' }}>

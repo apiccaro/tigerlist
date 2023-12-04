@@ -89,6 +89,7 @@ export default function MakeListing() {
       email: emailValue,
       phoneValue: phoneValue,
       image: imageValue,
+      active: "true"
     }
 
 
@@ -195,9 +196,13 @@ export default function MakeListing() {
                 id="imagePreview"
                 //if no previewImage- load in the original image
                 src={previewImage ? previewImage : originalImage}
+                style={{
+                  objectFit: 'cover',
+                  width: originalImage || previewImage ? '500px' : 0,
+                  height: originalImage || previewImage ? '350px' : 0,
+                }}
                 //if not original image- do not show image component at all
-                width={originalImage || previewImage ? 500 : 0}
-                height={originalImage || previewImage ? 350 : 0}
+
               />
               <div style={{ display: 'inline-block' }}>
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
@@ -256,9 +261,14 @@ export default function MakeListing() {
                     id="imagePreview1"
                     //if no previewImage- load in the original image
                     src={previewImage1 ? previewImage1 : originalImage1}
-                    //if not original image- do not show image component at all
-                    width={originalImage1 || previewImage1 ? 100 : 0}
-                    height={originalImage1 || previewImage1 ? 100 : 0}
+                    style={{
+                      cursor: 'pointer',
+                      objectFit: 'cover',
+                      //if not original image- do not show image component at all
+                    width:originalImage1 || previewImage1 ? '100px' : 0,
+                    height:originalImage1 || previewImage1 ? '100px' : 0,
+                    }}
+                    
                     /**
                      * When you click the image it swaps with the main big image
                      * @param {event} event
@@ -327,9 +337,14 @@ export default function MakeListing() {
                     id="imagePreview2"
                     //if no previewImage- load in the original image
                     src={previewImage2 ? previewImage2 : originalImage2}
+                    style={{
+                      cursor: 'pointer',
+                      objectFit: 'cover',
+                      width:originalImage2 || previewImage2 ? 100 : 0,
+                      height:originalImage2 || previewImage2 ? 100 : 0,
+                    }}
                     //if not original image- do not show image component at all
-                    width={originalImage2 || previewImage2 ? 100 : 0}
-                    height={originalImage2 || previewImage2 ? 100 : 0}
+                    
                     /**
                      * When you click the image it swaps with the main big image
                      * @param {event} event
@@ -398,9 +413,14 @@ export default function MakeListing() {
                     id="imagePreview3"
                     //if no previewImage- load in the original image
                     src={previewImage3 ? previewImage3 : originalImage3}
-                    //if not original image- do not show image component at all
-                    width={originalImage3 || previewImage3 ? 100 : 0}
-                    height={originalImage3 || previewImage3 ? 100 : 0}
+                    style={{
+                      cursor: 'pointer',
+                      objectFit: 'cover',
+                       //if not original image- do not show image component at all
+                    width:originalImage3 || previewImage3 ? 100 : 0,
+                    height:originalImage3 || previewImage3 ? 100 : 0,
+                    }}
+                   
                     /**
                      * When you click the image it swaps with the main big image
                      * @param {event} event
@@ -469,9 +489,14 @@ export default function MakeListing() {
                     id="imagePreview4"
                     //if no previewImage- load in the original image
                     src={previewImage4 ? previewImage4 : originalImage4}
-                   //if not original image- do not show image component at all
-                    width={originalImage4 || previewImage4 ? 100 : 0}
-                    height={originalImage4 || previewImage4 ? 100 : 0}
+                    style={{
+                      cursor: 'pointer',
+                      objectFit: 'cover',
+                       //if not original image- do not show image component at all
+                    width:originalImage4 || previewImage4 ? 100 : 0,
+                    height:originalImage4 || previewImage4 ? 100 : 0,
+                    }}
+                   
                     /**
                      * When you click the image it swaps with the main big image
                      * @param {event} event
@@ -581,12 +606,12 @@ export default function MakeListing() {
 
               >
                 <option value="" disabled selected>Category</option>
-                <option value="textbook" >Textbook </option>
-                <option value="furniture">Furniture</option>
-                <option value="appliances">Appliance</option>
-                <option value="clothing">Clothing</option>
-                <option value="service">Service</option>
-                <option value="carpool">Carpool</option>
+                <option value="Textbook" >Textbook </option>
+                <option value="Furniture">Furniture</option>
+                <option value="Appliances">Appliance</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Service">Service</option>
+                <option value="Carpool">Carpool</option>
               </select>
               <small style={{ color: 'red' }}>
                 <br></br>
@@ -607,10 +632,10 @@ export default function MakeListing() {
 
               >
                 <option value="" disabled selected >Condition</option>
-                <option value="new">New</option>
-                <option value="used-like new">Used-Like New</option>
-                <option value="used-good">Used-Good</option>
-                <option value="used-fair">Used-Fair</option>
+                <option value="New">New</option>
+                <option value="Used-Like New">Used-Like New</option>
+                <option value="Used-Good">Used-Good</option>
+                <option value="Used-Fair">Used-Fair</option>
               </select>
               <small style={{ color: 'red' }}>
                 <br></br>
@@ -632,9 +657,9 @@ export default function MakeListing() {
 
               >
                 <option value="" disabled selected >Location</option>
-                <option value="eastcampus">East Campus</option>
-                <option value="westcampus">West Campus</option>
-                <option value="offcampus">Off Campus</option>
+                <option value="East Campus">East Campus</option>
+                <option value="West Campus">West Campus</option>
+                <option value="Off Campus">Off Campus</option>
               </select>
               <br></br>
               <small style={{ color: 'red' }}>

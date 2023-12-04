@@ -16,29 +16,29 @@ export default function Filter(){
             <label for="category"> </label> 
                 <select name="category" id="category" style={{ color: 'grey' }}> 
                 <option value="" disabled selected>Category</option>
-                <option value="textbook" >Textbook </option> 
-                <option value="furniture">Furniture</option> 
-                <option value="appliances">Appliance</option> 
-                <option value="clothing">Clothing</option> 
-                <option value="service">Service</option> 
-                <option value="carpool">Carpool</option>
+                <option value="Textbook" >Textbook </option> 
+                <option value="Furniture">Furniture</option> 
+                <option value="Appliances">Appliance</option> 
+                <option value="Clothing">Clothing</option> 
+                <option value="Service">Service</option> 
+                <option value="Carpool">Carpool</option>
             </select> <br></br><br></br>
 
             <label for="condition" className=""> </label> 
                 <select name="condition" id="condition" style={{ color: 'grey'}}> 
                 <option value="" disabled selected >Condition</option>
-                <option value="furniture">New</option> 
-                <option value="appliances">Used-Like New</option> 
-                <option value="clothing">Used-Good</option> 
-                <option value="service">Used-Fair</option>
+                <option value="New">New</option>
+                <option value="Used-Like New">Used-Like New</option>
+                <option value="Used-Good">Used-Good</option>
+                <option value="Used-Fair">Used-Fair</option>
             </select><br></br><br></br>
 
             <label for="location" > </label> 
                 <select name="location" id="location" style={{ color: 'grey'}}> 
                 <option value="" disabled selected >Location</option>
-                <option value="eastcampus">East Campus</option> 
-                <option value="westcampus">West Campus</option> 
-                <option value="offcampus">Off Campus</option> 
+                <option value="East Campus">East Campus</option> 
+                <option value="West Campus">West Campus</option> 
+                <option value="Off Campus">Off Campus</option> 
             </select><br></br>
         </FilterOptions>
     );
