@@ -1,0 +1,4 @@
+npx prisma migrate dev --preview-feature
+    Asks for name for migration
+    Makes prisma/migrations, holds a migration.sql that can be modified before applying to database 
+
