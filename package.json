@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@astrajs/collections": "^0.3.4",
     "firebase": "^10.7.0",
     "http-cas-client": "^0.4.3",
-    "@astrajs/collections": "^0.3.4",
+    "lru-cache": "^10.1.0",
     "next": "^14.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

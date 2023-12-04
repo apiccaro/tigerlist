@@ -1,4 +1,4 @@
-// from GitHub 
+// from GitHub https://github.com/produck/cas-client/blob/master/README.md
 
 //imports Node.js http module 
 const http = require('http');
