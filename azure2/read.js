@@ -1,15 +1,18 @@
 const sql = require('mssql');
 const getConfig = require('./azureAuth.js');
 const useDB = false
+const {getValidRequest,testMethod_access} = require('./access.js');
 
 
 //For external use. Will return sample data until the new database methods are added. 
 function getPost(key){
     if (useDB){
-        console.log("Functionality not added to this method yet")
+        //console.log("Functionality not added to this method yet")
+        post = new_readPost(key)
+        return post
     }
     else {
-        return sampleUserDict(key)
+        return samplePostDict(key)
     }
 }
 //For external use. Will return sample data until the new database methods are added. 
@@ -18,7 +21,7 @@ function getUser(key){
         console.log("Functionality not added to this method yet")
     }
     else {
-        return samplePostDict(key)
+        return sampleUserDict(key)
     }
 }
 //For external use. Will return sample data until the new database methods are added. 
@@ -27,7 +30,7 @@ function getAllPosts(){
         console.log("Functionality not added to this method yet")
     }
     else {
-        allPosts = [sampleUserDict(0),sampleUserDict(1),sampleUserDict(2)]
+        allPosts = [samplePostDict(0),samplePostDict(1),samplePostDict(2)]
         return allPosts
     }
 }
@@ -124,9 +127,37 @@ function testMethod_read(code){
 
  /**
   * Actual Database code is below. 
-  * Ideally everything above this point is user friendly, and changes minimally so pages can call them and expect a consistent result. 
-  * When more methods match our standards Ill move them (or an access method) up and comment
+  * Ideally everything above this point is outsider friendly, and changes minimally so pages can call them and expect a consistent result. 
+  * When more methods match our standards I'll move them (or an access method) up and comment appropriately
   */ 
+
+ //Currently passes a null through if we get a connection error. What logic makes sense for the frontend?
+
+async function new_readPost(postID) {
+    const newRequest = getValidRequest();
+
+    if (!newRequest) {
+        console.log("Failed to obtain a valid database request. Returning null");
+        return null;
+    }
+
+    try {
+        const result = await newRequest
+            .input('postID', sql.Int, postID)
+            .query('SELECT * FROM Posts WHERE postID = @postID');
+        
+        return result.recordset;
+    } catch (err) {
+        console.error('Failed to select post with ID ' + postID, err);
+        return null //does this work for us?
+        throw err; // Do we need to rethrow the error?
+    } finally {
+        if (connection) {
+            await connection.close();
+        }
+    }
+}
+
 function readPost(id){
     if (useDB){
         console.log("Attempting to use database")
@@ -203,8 +234,6 @@ async function getAllUsers() {
         return [];
     }
 }
-
-
 
 function printDict(dict){
     for ( d in dict){

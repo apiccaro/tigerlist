@@ -2,7 +2,7 @@ const sql = require('mssql');
 
 // Configure database connection
 
-//REPLACE WITH a .env.local REFERENCE ONCE WE HAVE SOMETHING UNIVERSAL
+//REPLACE WITH A .env.local REFERENCE ONCE WE HAVE SOMETHING UNIVERSAL
 const config = {
     user: 'tigerAdmin@tigerlinkserver.database.windows.net',
     //user: 'j_moran@ColoradoCollege.edu',
@@ -18,5 +18,11 @@ const config = {
 function getConfig(){
     return config
 }
+
+// async function getValidRequest(){
+//   const connection = await sql.connect(config);
+//   const request = connection.request();
+//   return request
+// }
 
 module.exports = getConfig;
