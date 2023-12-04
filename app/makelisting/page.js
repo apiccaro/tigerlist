@@ -567,6 +567,7 @@ export default function MakeListing() {
               </small>
               <br></br>
               <label>
+                Enter Email:<br></br>
                 <input
                   id="email"
                   type="email"
@@ -590,6 +591,7 @@ export default function MakeListing() {
                 </small>
               </label><br></br>
               <label>
+                Enter Phone Number:<br></br>
                 <input
                   id="phonenumber"
                   type="tel"
