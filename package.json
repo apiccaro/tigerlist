@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "firebase": "^10.7.0",
+    "http-cas-client": "^0.4.3",
     "@astrajs/collections": "^0.3.4",
     "next": "^14.0.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "7.34.2",
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

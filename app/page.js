@@ -1,13 +1,17 @@
-//this will be the sign in page!
-
+//SIGN IN PAGE 
+"use client";
 
 import Image from 'next/image'
 import Link from 'next/link';
 
+// defining a function assigning it to var handleLogin 
+const handleLogin = () => {
+  // TODO: REPLACE WITH CC'S SSI PAGE 
+  // change the browser's location to the specified URL 
+  window.location.href = 'https://cas.coloradocollege.edu/cas/';
+};
 
 function LoginButton() {
-  //defining variable containing all the stylistic elements for this button 
-  //let for dynamic vars, const otherwidr 
   const buttonStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -17,9 +21,7 @@ function LoginButton() {
     padding: '0 16px', 
   };
   return (
-    <Link href="/verification"> {/* to nav to other page*/}
-        <button style={buttonStyle}>Sign In</button>
-    </Link>
+      <button style={buttonStyle} onClick={handleLogin}>Sign In</button>
   );
 }
 
@@ -30,16 +32,13 @@ return (
   <main className="flex flex-col items-center justify-between p-24">
      <h1>Welcome to TigerList</h1>
      <p>a program connecting Colorado College students looking to exchange goods, services, and reduce waste.</p>
-     <div className="flex items-center justify-center mt-20"> 
+     <div className="flex items-center justify-center mt-10"> 
         <p> </p>
      </div>
-     <div className="flex items-center justify-center mt-20"> 
+     <div className="flex items-center justify-center mt-10"> 
         <LoginButton />
      </div>
   </main>
 )
 }
-
-
-// sign in page with AUTHENTICATION
 
