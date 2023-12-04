@@ -1,0 +1,19 @@
+At some point we need to nail down exactly what methods we'll be using to get DB information to the pages. 
+The dictionary also really shouldnt change after that
+Here are some methods I feel like i'd want if I was doing front end
+
+
+getUser(email) - Return user or null
+getPost(ID) - Return Post or null
+
+getAllUsers() - Return list of all users (is there a max size?)
+getAllPosts() - Return list of all posts 
+
+getUserPosts(email) - Return all posts by a given user
+getPostSearch(“search terms”) - return posts with matching content in title or description.
+getCategoryPosts(ID) - return posts matching a category, indicated by numeric system
+
+getSearchPrice() - Search by price (default to ascending)
+getSearchAge() - Search by age (default to new?)
+
+
