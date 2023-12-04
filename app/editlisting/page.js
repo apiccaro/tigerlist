@@ -104,7 +104,7 @@ export default function MakeListing() {
    */
   const readInData = () => {
     originalImage = "/ticket.jpeg"
-    originalImage1 = "/ticket.jpeg"
+    originalImage1 = "/bomb.jpeg"
     originalImage2="/ticket.jpeg"
     //originalImage3="/ticket.jpeg"
 
@@ -145,6 +145,7 @@ export default function MakeListing() {
                   width: '500px',
                   //if there is not an original image or an uploaded 
                   //image default to "add image" setting
+                  
                   height: originalImage || previewImage ? '40px' : '280px',
                   border: originalImage || previewImage ? '2px solid white' : '2px dashed white',
                   cursor: 'pointer',
@@ -195,7 +196,8 @@ export default function MakeListing() {
               <img
                 id="imagePreview"
                 //if no previewImage- load in the original image
-                src={previewImage ? previewImage : originalImage}
+
+                src={previewImage ? previewImage : originalImage? setPreviewImage(originalImage):originalImage}
                 style={{
                   objectFit: 'cover',
                   width: originalImage || previewImage ? '500px' : 0,
@@ -208,6 +210,7 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image1"
+
                     style={{
                       width: '115px',
                       //if there is not an original image or an uploaded 
@@ -260,7 +263,7 @@ export default function MakeListing() {
                   <img
                     id="imagePreview1"
                     //if no previewImage- load in the original image
-                    src={previewImage1 ? previewImage1 : originalImage1}
+                    src={previewImage1 ? previewImage1 : originalImage1? setPreviewImage1(originalImage1):originalImage1}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
@@ -336,7 +339,7 @@ export default function MakeListing() {
                   <img
                     id="imagePreview2"
                     //if no previewImage- load in the original image
-                    src={previewImage2 ? previewImage2 : originalImage2}
+                    src={previewImage2 ? previewImage2 : originalImage2? setPreviewImage2(originalImage2):originalImage2}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
@@ -412,7 +415,8 @@ export default function MakeListing() {
                   <img
                     id="imagePreview3"
                     //if no previewImage- load in the original image
-                    src={previewImage3 ? previewImage3 : originalImage3}
+                    src={previewImage3 ? previewImage3 : originalImage3? setPreviewImage3(originalImage3):originalImage3}
+                    //src={previewImage1 ? previewImage1 : setPreviewImage1(originalImage1)}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
@@ -488,7 +492,7 @@ export default function MakeListing() {
                   <img
                     id="imagePreview4"
                     //if no previewImage- load in the original image
-                    src={previewImage4 ? previewImage4 : originalImage4}
+                    src={previewImage4 ? previewImage4 : originalImage4? setPreviewImage4(originalImage4):originalImage4}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
