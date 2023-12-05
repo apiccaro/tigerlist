@@ -16,10 +16,21 @@ const ProductBG = styled.div`
     border-radius: 10px;
 `;
 
+var title;
+var price;
+var location;
+var description;
+var category;
+var condition;
+var email;
+var phone;
+var image;
+
 export default function BuyProductBox(){
     return(
         <Wrapper>
             <ProductBG>
+                {/* This link should pass info about the product that is clicked on */}
                 <Link href={'/productview'} className="flex text-semibold text-2xl">
                     <Image
                         src="/product.png"
@@ -33,6 +44,7 @@ export default function BuyProductBox(){
                 </Link>
             </ProductBG>
             <div className="flex flex-row gap-8">
+                {/* This link should pass info about the product that is clicked on */}
                 <Link href={'/productview'} className="flex text-semibold text-2xl text-black">
                     Product Name
                 </Link>

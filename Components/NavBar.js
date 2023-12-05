@@ -11,7 +11,7 @@ const NavBarBG = styled.div`
     background-color: black;
     height: 150px;
     display: flex;
-    align-items: top;
+    align-items: bottom;
     justify-content: center;
     border-radius: 10px;
 `;
@@ -24,11 +24,11 @@ export default function NavBar() {
             <Link href={'/listview'} className="flex text-6xl font-bold">
                 TigerList
                 <Image
-                src="/TigerIcon.svg"
+                src="/CCLogoDerp.png"
                 alt="Tiger Image"
                 accept="image/*"
-                className="dark:invert"
-                width={200}
+                //className="dark:invert"
+                width={150}
                 height={50}
                 priority
                 />
@@ -39,7 +39,7 @@ export default function NavBar() {
                     Browse
                 </Link>
 
-                <Link href={'/makelisting'} className="flex p-3 underline-on-hover">
+                <Link href={'/makelisting'} className="flex p-3">
                     Make Listing   
                 </Link>
 
@@ -53,7 +53,7 @@ export default function NavBar() {
                         name="Enter Keyword"
                         type="text"
 
-                        style={{ color: 'black' }}
+                        style={{ color: 'black', borderRadius: '10px'}}
 
                         value={title} 
                         placeholder='Enter Keyword'
@@ -73,8 +73,6 @@ export default function NavBar() {
 
             </div>
             
-
-
         </NavBarBG>
     );
 }

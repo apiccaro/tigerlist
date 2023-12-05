@@ -17,7 +17,7 @@ const ProductsGrid = styled.div`
 
 export default function Products(){
     return(
-        <div className="flex flex-col gap-3 text-4xl font-semibold">
+        <div className="flex flex-col gap-1 text-4xl font-semibold">
             <ProductsGrid className="flex flex-grow">
                 <SellProductBox />
                 <SellProductBox />
