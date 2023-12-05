@@ -8,8 +8,7 @@ import Link from 'next/link';
 const handleLogin = () => {
   // TODO: REPLACE WITH CC'S SSI PAGE 
   // change the browser's location to the specified URL 
-  window.location.href = 'https://cas.coloradocollege.edu/cas/'
-  console.log('BUTTON WAS CLICKED')
+  window.location.href = 'https://cas.coloradocollege.edu/cas/';
 };
 
 function LoginButton() {
@@ -42,4 +41,3 @@ return (
   </main>
 )
 }
-
