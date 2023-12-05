@@ -1,5 +1,4 @@
 const sql = require('mssql');
-const getConfig = require('./azureAuth.js');
 const useDB = false
 
 
@@ -9,7 +8,7 @@ function getPost(key){
         console.log("Functionality not added to this method yet")
     }
     else {
-        return sampleUserDict(key)
+        return samplePostDict(key)
     }
 }
 //For external use. Will return sample data until the new database methods are added. 
@@ -18,7 +17,7 @@ function getUser(key){
         console.log("Functionality not added to this method yet")
     }
     else {
-        return samplePostDict(key)
+        return sampleUserDict(key)
     }
 }
 //For external use. Will return sample data until the new database methods are added. 
@@ -27,7 +26,7 @@ function getAllPosts(){
         console.log("Functionality not added to this method yet")
     }
     else {
-        allPosts = [sampleUserDict(0),sampleUserDict(1),sampleUserDict(2)]
+        allPosts = [samplePostDict(0),samplePostDict(1),samplePostDict(2)]
         return allPosts
     }
 }
@@ -138,7 +137,7 @@ function readPost(id){
     }
 }
 
-async function getAllPosts() {
+async function getAllPosts1() {
     try {
         const connection = await sql.connect(getConfig());
         const request = connection.request();
@@ -185,22 +184,6 @@ async function DBreadPost(postID) {
     } catch (err) {
         console.error('Error: selecting post with ID '+postID, err);
         return null;
-    }
-}
-
-async function getAllUsers() {
-    try {
-        const connection = await sql.connect(getConfig());
-        const request = connection.request();
-
-        const result = await request.query('SELECT * FROM Users');
-        await connection.close();
-
-        return result.recordset;
-
-    } catch (err) {
-        console.error('Error selecting all users', err);
-        return [];
     }
 }
 
