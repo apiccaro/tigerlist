@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-//import { getPost } from '@/azure2/read';
 
 
 export default function EditListing({listingID}) {
