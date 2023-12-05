@@ -3,9 +3,13 @@
 import { useState } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { getPost } from '@/azure2/read';
 
 
-export default function MakeListing() {
+export default function EditListing(listingID) {
+  listingID:{
+    id:string;
+  }
   const SMALLIMAGE='100px';
   const [title, setTitle] = useState();
   const [price, setPrice] = useState();
@@ -103,6 +107,8 @@ export default function MakeListing() {
    * 
    */
   const readInData = () => {
+    var id=listingID.id;
+    //var dict = getPost(id);
     originalImage = "/ticket.jpeg"
     originalImage1 = "/bomb.jpeg"
     originalImage2="/ticket.jpeg"
