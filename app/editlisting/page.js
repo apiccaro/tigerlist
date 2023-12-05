@@ -5,6 +5,7 @@ import {useState} from 'react';
 import React from 'react';
 import Image from 'next/image';
 import { useForm } from "react-hook-form";
+import { getPost } from '@/azure2/read';
 
 
 export default function MakeListing(){

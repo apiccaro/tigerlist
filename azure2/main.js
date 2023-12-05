@@ -2,16 +2,10 @@
 const sql = require('mssql');
 
 //import azureAuth, handles credentials / configuration
-const getConfig = require('./azureAuth.js');
+//const getConfig = require('./azureAuth.js');
 //import write.js,  handles writing to database
-const {writeUser, writePost, sampleUserDict, samplePostDict, testMethod_write, printDict} = require('./write.js');
-// const writeUser = require('./write.js');
-// const writePost = require('./write.js');
-// const sampleUserDict = require('./write.js');
-// const samplePostDict = require('./write.js');
-// const dummyMethod_write = require('./write.js');
-//From write.js: module.exports = writeUser, writePost, sampleUserDict, samplePostDict, dummyMethod_write;
-const {getUser,getPost,getAllPosts,testMethod_read} = require('./read.js');
+const {writePost, samplePostDict, testMethod_write, printDict,getPostQuery,addUser,createPostTable,deletePostTable,createUserTable,deleteUserTable,writeSampleUser,writeUser,clearPosts,clearUsers} = require('./write.js');
+const {getUser,getPost,getAllPosts,getAllUsers,testMethod_read,postDict_new,sampleUserDict} = require('./read.js');
 
 const http = require('http');
 
@@ -36,12 +30,29 @@ async function connectToDatabase() {
   }
 }
 
+async function connectToDatabaseWithPool() {
+  let pool;
+  try {
+    // Create a connection pool
+    pool = await sql.connect(connectionString);
+    console.log('Connected to the database');
+
+    // Now you can execute your SQL queries or perform database operations here
+
+  } catch (err) {
+    console.error('Error connecting to the database:', err);
+  } finally {
+    // Close the connection pool when done
+    if (pool) {
+      await pool.close();
+      console.log('Connection pool closed');
+    }
+  }
+}
 
 function testMethod_main(code){
     console.log("Hello from main.js - code:",code)
 }
-
-
 
 function testExchanges(){
     console.log("Starting test")
@@ -62,22 +73,83 @@ function testExchanges(){
 
     console.log("Ending test")
 }
-
-
 function testWrappers(){
   console.log("Starting test from main.js")
   testMethod_main(101)//not neccessary, just a print statement and sanity check
+  console.log("")
 
   testMethod_read(1)//not neccessary, just a print statement and sanity check
   post1 = getPost(1)
   printDict(post1) 
+  console.log("")
+
 
   testMethod_read(2)//not neccessary, just a print statement and sanity check
   post2 = getPost(2)
   printDict(post2) 
+  console.log("")
+
+
+  console.log("Ending test")
+}
+function test5(){
+
+  createPostTable()
+  createUserTable()
+
+  // deletePostTable()
+  // deleteUserTable()
+
+
+}
+function testRead(){
+
+  ///user = getUser("roccy@coloradocollege.edu")
+  ///console.log(user)
+  getAllUsers()
+  
+}
+function testWrite(){
+
+  clearPosts()
+  dict1 = samplePostDict(1)
+  console.log("writing",dict1,"to database")
+  writePost(dict1)
+
+  dict2 = samplePostDict(2)
+  console.log("writing",dict2,"to database")
+  writePost(dict2)
+  // writePost(samplePostDict(0))
+
+  // post1 = samplePostDict(1)
+  // post2 = samplePostDict(2)
+  console.log("done I guess")
+}
+
+
+function Main(){
+
+  console.log("Starting test from main.js")
+  testMethod_main(101)
+  testMethod_read(102)
+  testMethod_write(103)
+
+  clearUsers()
+  writeUser(sampleUserDict(0))
+  writeUser(sampleUserDict(1))
+  writeUser(sampleUserDict(2))
+  writeUser(sampleUserDict(3))
+  writeUser(sampleUserDict(4))
 
   console.log("Ending test")
 }
 
-testWrappers()
+function dictCheck(){
+  console.log("Starting Test")
+  postDict = postDict_new()
+  console.log(postDict)
+  console.log("Ending Test")
+}
 
+Main()
+// testWrite()
