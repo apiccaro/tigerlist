@@ -20,7 +20,7 @@ export default function NavBar() {
 
     return(
         <NavBarBG>
-            <Link href={'/listview'} className="flex text-6xl font-bold">
+            <Link href={'/'} className="flex text-6xl font-bold">
                 TigerList
                 <Image
                 src="/TigerIcon.svg"
@@ -34,7 +34,7 @@ export default function NavBar() {
             </Link>
 
             <div className="flex p-5 text-2xl font-semibold">
-                <Link href={'/listview'} className="flex p-3">
+                <Link href={'/'} className="flex p-3">
                     Browse
                 </Link>
 
