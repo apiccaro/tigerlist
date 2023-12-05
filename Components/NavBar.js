@@ -27,8 +27,8 @@ export default function NavBar() {
                 alt="Tiger Image"
                 accept="image/*"
                 className="dark:invert"
-                width={200}
-                height={50}
+                width={'200px'}
+                height={'50px'}
                 priority
                 />
             </Link>
