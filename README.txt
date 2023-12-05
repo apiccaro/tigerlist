@@ -1,3 +1,5 @@
+AUTHENTICATION: 
+
 package.json code for duo authenticaion: 
  "scripts": {
     "dev": "node server.js",

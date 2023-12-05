@@ -1,5 +1,6 @@
 'use client'
 
+import { getPost } from '@/azure2/read'; 
 import {useState} from 'react';
 import React from 'react';
 import Image from 'next/image';
