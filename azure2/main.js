@@ -4,14 +4,14 @@ const sql = require('mssql');
 //import azureAuth, handles credentials / configuration
 const getConfig = require('./azureAuth.js');
 //import write.js,  handles writing to database
-const {writeUser, writePost, sampleUserDict, samplePostDict, dummyMethod_write} = require('./write.js');
+const {writeUser, writePost, sampleUserDict, samplePostDict, testMethod_write, printDict} = require('./write.js');
 // const writeUser = require('./write.js');
 // const writePost = require('./write.js');
 // const sampleUserDict = require('./write.js');
 // const samplePostDict = require('./write.js');
 // const dummyMethod_write = require('./write.js');
 //From write.js: module.exports = writeUser, writePost, sampleUserDict, samplePostDict, dummyMethod_write;
-const {readPost, getAllPosts, getAllUsers, dummyMethod_read} = require('./read.js');
+const {getUser,getPost,getAllPosts,testMethod_read} = require('./read.js');
 
 const http = require('http');
 
@@ -37,7 +37,7 @@ async function connectToDatabase() {
 }
 
 
-function dummyMethod(code){
+function testMethod_main(code){
     console.log("Hello from main.js - code:",code)
 }
 
@@ -45,8 +45,8 @@ function dummyMethod(code){
 
 function testExchanges(){
     console.log("Starting test")
-    dummyMethod(101)
-    dummyMethod_write(102)
+    testMethod_main(101)
+    testMethod_main(102)
 
     userData = sampleUserDict(2)
     writeUser(userData)
@@ -63,5 +63,21 @@ function testExchanges(){
     console.log("Ending test")
 }
 
-testExchanges()
+
+function testWrappers(){
+  console.log("Starting test from main.js")
+  testMethod_main(101)//not neccessary, just a print statement and sanity check
+
+  testMethod_read(1)//not neccessary, just a print statement and sanity check
+  post1 = getPost(1)
+  printDict(post1) 
+
+  testMethod_read(2)//not neccessary, just a print statement and sanity check
+  post2 = getPost(2)
+  printDict(post2) 
+
+  console.log("Ending test")
+}
+
+testWrappers()
 

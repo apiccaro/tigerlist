@@ -1,10 +1,8 @@
 const sql = require('mssql');
 const getConfig = require('./azureAuth.js');
-
-
 const useDB = true
 
-function dummyMethod_write(code){
+function testMethod_write(code){
     console.log("Hello from write.js - code:",code)
   }
 
@@ -57,7 +55,7 @@ async function DBinsertPost(postDict) {
     } finally {
     //   pool.close();
     }
-  }
+}
 
 async function DBinsertUser(userDict) {
         // const pool = new sql.ConnectionPool(getConfig);
@@ -133,22 +131,24 @@ function printDict(dict){
 // WriteUserDataStr (userID,Str email,Str preferredname)
 // WritePostData(Str (userID,Int category,Str title,Str description,null 
 
-// async function DBinsertForm2() {
-    //     try {
-    //       const result = await sql.query`INSERT INTO Listings (Column1, Column2) VALUES ('Value1', 'Value2')`;
-    //       console.log(result.rowsAffected);
-    //     } catch (err) {
-    //       console.error('Error:', err);
-    //     }
-    //   }
+/*
+    async function DBinsertForm2() {
+        try {
+          const result = await sql.query`INSERT INTO Listings (Column1, Column2) VALUES ('Value1', 'Value2')`;
+          console.log(result.rowsAffected);
+        } catch (err) {
+          console.error('Error:', err);
+        }
+      }
     
-    // async function DBinsertUser2(userDict) {
-    //     try {
-    //       const result = await sql.query`INSERT INTO Users (Column1, Column2) VALUES ('Value1', 'Value2')`;
-    //       console.log(result.rowsAffected);
-    //     } catch (err) {
-    //       console.error('Error:', err);
-    //     }
-    //   }
+    async function DBinsertUser2(userDict) {
+        try {
+          const result = await sql.query`INSERT INTO Users (Column1, Column2) VALUES ('Value1', 'Value2')`;
+          console.log(result.rowsAffected);
+        } catch (err) {
+          console.error('Error:', err);
+        }
+      }
+      */
   
-module.exports = {writeUser, writePost, sampleUserDict, samplePostDict, dummyMethod_write};
+module.exports = {writeUser, writePost, sampleUserDict, samplePostDict, testMethod_write,printDict};
