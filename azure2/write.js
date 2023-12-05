@@ -47,7 +47,7 @@ function writePost(postDict){
     // + category + "','" + condition + "','" + location + "','"+ email + "','"+ phone + "','"+ active +")"
 
 
-    query = "INSERT INTO PostTable (post_key, title, price) VALUES ('"+post_key+"','"+title+"',"+price+",)"
+    query = "INSERT INTO PostTable (post_key, title, price) VALUES ('"+post_key+"','"+title+"',"+price+")"
 
     doQuery(query)
 }
@@ -208,14 +208,6 @@ async function DBinsertUser(userDict) {
     }
 }
 
-function sampleUserDict(){
-    userDict = {
-        userID: "123",
-        email: "jayM@cc.edu",
-        name: "Jay M"
-    }
-    return userDict
-}
 
 function samplePostDict(number){
     //Default 
@@ -281,4 +273,4 @@ function printDict(dict){
       }
       */
   
-module.exports = {writePost, sampleUserDict, samplePostDict, testMethod_write,printDict, getPostQuery,addUser,createPostTable,deletePostTable,createUserTable,deleteUserTable,writeSampleUser,writeUser,clearPosts,clearUsers};
+module.exports = {writePost, samplePostDict, testMethod_write,printDict, getPostQuery,addUser,createPostTable,deletePostTable,createUserTable,deleteUserTable,writeSampleUser,writeUser,clearPosts,clearUsers};

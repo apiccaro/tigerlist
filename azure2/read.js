@@ -49,7 +49,7 @@ function getAllPosts(){
     }
 }
 //For external use. Will return sample data until the new database methods are added. 
-function getAllUsers(){
+function getAllUsers(){ç
     if (useDB){
         //console.log("Functionality not added to this method yet")
         //console.log("Functionality being tested")
@@ -108,7 +108,7 @@ function sampleUserDict(id){
 function samplePostDict(id){
     //Default 
     postDict = {
-        post_key: "(unique key placeholder 0)",
+        post_key: "(defaultKey)",
         title: "Listing",
         price: 0,
         description: "listing description",
@@ -135,7 +135,7 @@ function samplePostDict(id){
         }
     }
     else if (id==2){
-        postDict = postDict = {
+        postDict = {
             post_key: "(unique key placeholder 2)",
             title: "Introductory Modern Physics",
             price: 20,
@@ -191,16 +191,31 @@ function testMethod_read(code){
     return output
 }
 
+
+function postDict_new(){
+    newDict = {
+        post_key: "(unique key placeholder 2)",
+        title: "Introductory Modern Physics",
+        price: 20,
+        description: "its a book",
+        category: "Textbook",
+        condition: "Used-Like New",
+        location: "West Campus",
+        email: "tiger0@coloradocollege.edu",
+        phone: "(719)-123-4569",
+        is_active: "true"
+    }
+    return newDict
+}
+
+
+
 function readUser(key){
     query = "SELECT * FROM UserTable WHERE email = '"+key+"'"
     console.log(query)
     result = doQuery(key)
     return result
 }
-
-
-
-
 
  async function connectToDatabase() {
     try {
@@ -212,7 +227,7 @@ function readUser(key){
 }
 
 async function connectToDatabaseWithPool() {
-    const output = []
+    output = []
     let pool;
     try {
         // Creates connection pool
@@ -331,4 +346,4 @@ function printDict(dict){
 }
 
 
-module.exports = {getUser,getPost,getAllPosts,getAllUsers,testMethod_read};
+module.exports = {getUser,getPost,getAllPosts,getAllUsers,testMethod_read,postDict_new,sampleUserDict};
