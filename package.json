@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "node server.js",
+    "start": "next start" 
   },
+
   "dependencies": {
+    "@astrajs/collections": "^0.3.4",
     "@astrajs/collections": "^0.3.4",
     "firebase": "^10.7.0",
     "http-cas-client": "^0.4.3",
@@ -234,4 +234,5 @@
       "node": "16|| 18 || 20"
     }
   }
+  
 }
