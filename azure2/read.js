@@ -197,11 +197,6 @@ function readUser(key){
     result = doQuery(key)
     return result
 }
-
-
-
-
-
  async function connectToDatabase() {
     try {
       await sql.connect(connectionString);
@@ -211,7 +206,6 @@ function readUser(key){
     }
     return output
 }
-
 async function connectToDatabaseWithPool() {
     const output = []
     let pool;
@@ -343,4 +337,27 @@ function printDict(dict){
 }
 
 
-module.exports = {getUser,getPost,getAllPosts,getAllUsers,testMethod_read};
+
+/*
+WriteUserDataStr (userID,Str email,Str preferredname)
+WritePostData(Str (userID,Int category,Str title,Str description,null 
+
+async function DBinsertForm2() {
+        try {
+          const result = await sql.query`INSERT INTO Listings (Column1, Column2) VALUES ('Value1', 'Value2')`;
+          console.log(result.rowsAffected);
+        } catch (err) {
+          console.error('Error:', err);
+        }
+      }
+    
+    async function DBinsertUser2(userDict) {
+        try {
+          const result = await sql.query`INSERT INTO Users (Column1, Column2) VALUES ('Value1', 'Value2')`;
+          console.log(result.rowsAffected);
+        } catch (err) {
+          console.error('Error:', err);
+        }
+      }
+  */
+module.exports = {getUser,getPost,getAllPosts,testMethod_read};
