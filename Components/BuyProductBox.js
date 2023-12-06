@@ -4,21 +4,24 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 
-const Wrapper = styled.div``;
 
-const ProductBG = styled.div`
-    background-color: black;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-`;
+const ProductBGStyle ={
+    backgroundColor: 'black',
+    height: '250px',
+    display: 'flex',
+    alignItems: 'center', 
+    justifyContent: 'center',
+    borderRadius: '10px',
+}
 
 export default function BuyProductBox(){
     return(
-        <Wrapper>
-            <ProductBG>
+
+        
+        <div>
+            <div style={ProductBGStyle}>
+
+           
                 <Link href={'/productview'} className="flex text-semibold text-2xl">
                     <Image
                         src="/product.png"
@@ -30,7 +33,7 @@ export default function BuyProductBox(){
                         priority
                     />
                 </Link>
-            </ProductBG>
+                </div>
             <div className="flex flex-row gap-8">
                 <Link href={'/productview'} className="flex text-semibold text-2xl text-black">
                     Product Name
@@ -39,6 +42,7 @@ export default function BuyProductBox(){
                     $100
                 </div>
             </div>
-        </Wrapper>
+        </div>
+        
     );
 }
