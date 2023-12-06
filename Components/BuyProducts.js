@@ -25,11 +25,11 @@ const ProductsGridStyle={
 
 export default function BuyProducts(){
     return(
-        <ProductsGrid className="flex flex-grow">
+        <div style={ProductsGridStyle} className="flex flex-grow">
             {allListings.map((listing, index) => (
                 <BuyProductBox key={index} title={listing.title} price={listing.price} />
             ))}
-        </ProductsGrid>
+        </div>
     );
 }
 

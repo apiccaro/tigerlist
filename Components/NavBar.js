@@ -27,7 +27,7 @@ export default function NavBar() {
 
     return(
         <div style={NavBarBGStyle}>
-            <Link href={'/listview'} style={{fontSize: "3rem", fontWeight: "bold"}} className="flex">
+            <Link href={'/'} style={{fontSize: "3rem", fontWeight: "bold"}} className="flex">
                 TigerList
                 <Image
                 src="/CCLogoDerp.png"
@@ -40,7 +40,7 @@ export default function NavBar() {
             </Link>
 
             <div style={{fontSize: "1.60rem", fontWeight: "semibold", display:"flex", padding:"1.25rem"}}>
-                <Link href={'/listview'} style={{display:"flex",padding:"1.25rem"}} className="flex p-3">
+                <Link href={'/'} style={{display:"flex",padding:"1.25rem"}} className="flex p-3">
                     Browse
                 </Link>
 

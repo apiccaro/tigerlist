@@ -39,10 +39,10 @@ export default function BuyProductBox(){
             <div className="flex flex-row gap-8">
                 {/* This link should pass info about the product that is clicked on */}
                 <Link href={'/productview'} className="flex text-semibold text-2xl text-black">
-                    {title}
+                    Title
                 </Link>
                 <div className="flex font-bold text-3xl">
-                    {price}
+                    Price
                 </div>
             </div>
         </div>
