@@ -4,8 +4,8 @@ const sql = require('mssql');
 //import azureAuth, handles credentials / configuration
 //const getConfig = require('./azureAuth.js');
 //import write.js,  handles writing to database
-const {writePost, samplePostDict, testMethod_write, printDict,getPostQuery,addUser,createPostTable,deletePostTable,createUserTable,deleteUserTable,writeSampleUser,writeUser,clearPosts,clearUsers} = require('./write.js');
-const {getUser,getPost,getAllPosts,getAllUsers,testMethod_read,postDict_new,sampleUserDict} = require('./read.js');
+const {writePost, testMethod_write, printDict,getPostQuery,addUser,createPostTable,deletePostTable,createUserTable,deleteUserTable,writeSampleUser,writeUser,clearPosts,clearUsers} = require('./write.js');
+const {getUser,getPost,getAllPosts,getAllUsers,sampleUserDict,samplePostDict,testMethod_read} = require('./read.js');
 
 const http = require('http');
 
@@ -126,23 +126,24 @@ function testWrite(){
   console.log("done I guess")
 }
 
-
-function Main(){
-
-  console.log("Starting test from main.js")
-  testMethod_main(101)
-  testMethod_read(102)
-  testMethod_write(103)
-
-  clearUsers()
+async function testClearAndFill(){
+  await clearUsers()
   writeUser(sampleUserDict(0))
   writeUser(sampleUserDict(1))
   writeUser(sampleUserDict(2))
   writeUser(sampleUserDict(3))
   writeUser(sampleUserDict(4))
+}
+
+async function Main(){
+  console.log("Starting test from main.js")
+
+  jay = await getUser("jaym@coloradocollege.edu")
+  console.log("jay:",jay)
 
   console.log("Ending test")
 }
+
 
 function dictCheck(){
   console.log("Starting Test")

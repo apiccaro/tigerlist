@@ -14,7 +14,6 @@ function testMethod_write(code){
   }
 
 function addPost(postDict){
-
 }
 
 function writeSampleUser(){
@@ -273,4 +272,4 @@ function printDict(dict){
       }
       */
   
-module.exports = {writePost, samplePostDict, testMethod_write,printDict, getPostQuery,addUser,createPostTable,deletePostTable,createUserTable,deleteUserTable,writeSampleUser,writeUser,clearPosts,clearUsers};
+module.exports = {writePost, testMethod_write,printDict, getPostQuery,addUser,createPostTable,deletePostTable,createUserTable,deleteUserTable,writeSampleUser,writeUser,clearPosts,clearUsers};

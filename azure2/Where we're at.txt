@@ -16,16 +16,30 @@ read.js/samplePostDict() - gives sample post dictionary based on given id. inval
 
 
 TO DO:
+- tls issue
+- fix this async bs
 - key check method when creating posts and users to avoid duplicate keys
 - new key making system. research or just make it with a feature similar to that^. 
     randomize strings and compare using key check
     literally add something onto username, check that very small list to see what it cant be.
 
 
+METHODS WE WANT:
+read:
+getAllPosts() - basically done, need to clarify output format
+getUserPosts(email) - easy query once we have a good key system 
+getPost(ID) - easy query once we have a good key system 
+
+write:
+makeUser(dict) - basically done, needs a wrapper. also needs existing key checker
+makePost(dict) - need new query using updated dictionary keys. also needs existing key checker
 
 
 
-NOTES FOR JAY:
+
+
+
+OTHER JAY NOTES - IGNORE
 Finally found dictionary issue:
 somehow the old format is getting sent to DB, userID is not defined there. Find vestigial dictionary method
 {

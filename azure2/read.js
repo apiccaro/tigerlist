@@ -6,6 +6,31 @@ const {connectionString} = require('./access.js');
 //const connectionString = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:tigerlist.database.windows.net,1433;Database=TigerBase;Uid=TigerAdmin;Pwd=TeamSoftwareProject1;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
 
 //For external use. Will return sample data until the new database methods are added. 
+function getUser(key){
+    if (useDB){
+        //console.log("Functionality not added to this method yet")
+        return readUser(key)
+    }
+    else {
+        return sampleUserDict(key)
+    }
+}
+//For external use. Will return sample data until the new database methods are added. 
+async function getAllUsers(){
+    if (useDB){
+
+        query = "SELECT * FROM UserTable"
+        allusers = await doQuery(query)
+        console.log("allUsers",allusers)
+        return allusers
+
+    }
+    else {
+        allPosts = [samplePostDict(0),samplePostDict(1),samplePostDict(2)]
+        return allPosts
+    }
+}
+//For external use. Will return sample data until the new database methods are added. 
 function getPost(key){
     if (useDB){
         console.log("Functionality not added to this method yet")
@@ -17,16 +42,6 @@ function getPost(key){
     }
 }
 //For external use. Will return sample data until the new database methods are added. 
-function getUser(key){
-    if (useDB){
-        //console.log("Functionality not added to this method yet")
-        readUser(key)
-    }
-    else {
-        return sampleUserDict(key)
-    }
-}
-//For external use. Will return sample data until the new database methods are added. 
 function getAllPosts(){
     if (useDB){
         //console.log("Functionality not added to this method yet")
@@ -35,33 +50,12 @@ function getAllPosts(){
         query = "SELECT * FROM PostTable"
         console.log("querying")
 
-        allPosts = doQuery(query)
+        allPosts = doQuery(query,false)
 
         console.log("before")
         console.log(allPosts)
         console.log("after")
         return allPosts
-
-    }
-    else {
-        allPosts = [samplePostDict(0),samplePostDict(1),samplePostDict(2)]
-        return allPosts
-    }
-}
-//For external use. Will return sample data until the new database methods are added. 
-function getAllUsers(){ç
-    if (useDB){
-        //console.log("Functionality not added to this method yet")
-        //console.log("Functionality being tested")
-        //allPosts = readAllPosts()
-        query = "SELECT * FROM UserTable"
-        allusers = doQuery(query)
-
-        console.log("before")
-        console.log(allusers)
-        console.log("after")
-
-        return allusers
 
     }
     else {
@@ -79,25 +73,25 @@ function sampleUserDict(id){
     //Check for valid preset number to replace default
     if (id==1){
         userDict = {
-            email: "JayM@coloradocollege.edu",
+            email: "jaym@coloradocollege.edu",
             name: "Jay M"
         }
     }
     else if (id==2){
         userDict = {
-            email: "AnnikaP@coloradocollege.edu",
+            email: "annikap@coloradocollege.edu",
             name: "Annika P"
         }
     }
     else if (id==3){
         userDict = {
-            email: "LucyF@coloradocollege.edu",
+            email: "lucyf@coloradocollege.edu",
             name: "Lucy F"
         }
     }
     else if (id==4){
         userDict = {
-            email: "JackD@coloradocollege.edu",
+            email: "jackd@coloradocollege.edu",
             name: "Jack D"
         }
     }
@@ -156,76 +150,56 @@ function testMethod_read(code){
     console.log("Hello from read.js - code:",code)
 }
 
-
-
-
-
  /**
   * Actual Database code is below. 
   * Ideally everything above this point is outsider friendly, and changes minimally so pages can call them and expect a consistent result. 
   * When more methods match our standards I'll move them (or an access method) up and comment appropriately
   */ 
 
- //Currently passes a null through if we get a connection error. What logic makes sense for the frontend?
+//This one makes things easier. Boolean version optionally prints query result
+async function doQuery(queryText){doQuery(queryText,false)}
+async function doQuery(queryText,printOutput) {
+    let output = []
+    let pool
 
- async function doQuery(queryText) {
-    output = []
-    let pool;
     try {
-        // Creates connection pool
-        pool = await sql.connect(connectionString);
-        console.log('Connected to the database with a connection pool');
+        // Create connection pool
+        pool = await sql.connect(connectionString)
+        console.log('Connected to the database with a connection pool')
 
-        //Do SQL Stuff Here
-        output = await pool.request().query(queryText);
+        // Do SQL Stuff
+        const result = await pool.request().query(queryText)
+        output = result.recordset
+        if (printOutput){console.log("doQuery:",output)}
 
     } catch (err) {
-        console.error('Failed to connect to the database:', err);
+        console.error('Database Error:', err)
     } finally {
-        // Closes connection pool
+        // Close connection pool
         if (pool) {
-            await pool.close();
-            console.log('Connection pool closed');
+            await pool.close()
+            console.log('Connection pool closed')
         }
     }
+
     return output
 }
 
-
-function postDict_new(){
-    newDict = {
-        post_key: "(unique key placeholder 2)",
-        title: "Introductory Modern Physics",
-        price: 20,
-        description: "its a book",
-        category: "Textbook",
-        condition: "Used-Like New",
-        location: "West Campus",
-        email: "tiger0@coloradocollege.edu",
-        phone: "(719)-123-4569",
-        is_active: "true"
-    }
-    return newDict
-}
-
-
-
-function readUser(key){
-    query = "SELECT * FROM UserTable WHERE email = '"+key+"'"
-    console.log(query)
-    result = doQuery(key)
+async function readUser(key){
+    query = "SELECT * FROM UserTable WHERE email='"+key+"';"
+    //query = "SELECT * FROM UserTable WHERE email='jaym@coloradocollege.edu';"
+    result = await doQuery(query,true)
     return result
 }
 
- async function connectToDatabase() {
-    try {
-      await sql.connect(connectionString);
-      console.log('Connected to the database!');
-    } catch (err) {
-        console.error('Database Error:', err);
-    }
-}
+module.exports = {getUser,getPost,getAllPosts,getAllUsers,sampleUserDict,samplePostDict,testMethod_read}
 
+
+//OLD METHODS:
+//Everything moved here should no longer be relevant
+/*
+
+//Method worked, replaced with more universal doQuery(query)
 async function connectToDatabaseWithPool() {
     output = []
     let pool;
@@ -248,6 +222,136 @@ async function connectToDatabaseWithPool() {
         }
     }
     return output
+}
+
+
+async function getAllUsers_older() {
+    try {
+        const connection = await sql.connect(getConfig())
+        const request = connection.request()
+
+        const result = await request.query('SELECT * FROM Users')
+        await connection.close()
+
+        return result.recordset
+
+    } catch (err) {
+        console.error('Error selecting all users', err)
+        return []
+    }
+}
+
+async function getAllUsers_old() {
+    try {
+        const connection = await sql.connect(getConfig())
+        const request = connection.request();
+
+        const result = await request.query('SELECT * FROM Users')
+        await connection.close();
+
+        return result.recordset;
+
+    } catch (err) {
+        console.error('Error selecting all users', err)
+        return [];
+    }
+}
+
+
+
+
+async function DBreadPost(postID) {
+    try {
+        const connection = await sql.connect(getConfig())
+        const request = connection.request();
+
+        const result = await request
+            .input('postID', sql.Int, postID)
+            .query('SELECT * FROM Posts WHERE postID = @postID')
+
+        await connection.close();
+
+        return result.recordset;
+    } catch (err) {
+        console.error('Error: selecting post with ID '+postID, err)
+        return null;
+    }
+}
+
+function printDict(dict){
+    for ( d in dict){
+        console.log(d,":",dict[d])
+    }
+}
+
+async function new_allPosts(id) {
+    console.log("welcome to newreadpost. not currently doing anything")
+    //return connectToDatabaseWithPool()
+}
+
+
+ async function connectToDatabase() {
+    try {
+      await sql.connect(connectionString);
+      console.log('Connected to the database!');
+    } catch (err) {
+        console.error('Database Error:', err);
+    }
+}
+
+
+
+async function doQuery_old(queryText) {
+    output = []
+    let pool;
+    try {
+        const pool = await sql.connect(connectionString);
+        console.log('Connected to the database with a connection pool');
+
+        //Do SQL Stuff Here
+        const output = await pool.request().query(queryText);
+        console.log(output.recordset);
+
+    } catch (err) {
+        console.error('Failed to connect to the database:', err);
+    } finally {
+        if (pool) {
+            await pool.close();
+            console.log('Connection pool closed');
+        }
+    }
+    return output
+}
+
+
+function readUser_old(key){
+    key = 'roccy@coloradocollege.edu'
+
+    // query = "SELECT * FROM UserTable WHERE email = '"+key+"'"
+    query = "SELECT * FROM UserTable WHERE email = 'annikap@coloradocollege.edu';"
+    //console.log(query)
+    result = doQuery(key)
+    return result
+}
+//should fix the bug for now
+async function readUserWorkAround(key){
+    //query = "SELECT * FROM UserTable WHERE 'email'='"+key+"';"
+    query = "SELECT * FROM UserTable WHERE email='jaym@coloradocollege.edu';"
+    result = await doQuery(query)
+    validResult = null
+
+    result.forEach(function (row) {
+        if (validResult==null){
+            if (row['email']==key){
+                console.log("key found!",row)
+                return row
+            }
+        }
+    });
+    if (validResult = null){
+        console.log("key not found, returning null")
+    }
+    return validResult
 }
 
 async function old_readPost(postID) {
@@ -275,75 +379,28 @@ async function old_readPost(postID) {
     }
 }
 
-async function new_allPosts(id) {
-    console.log("welcome to newreadpost. not currently doing anything")
-    //return connectToDatabaseWithPool()
+function postDict_new(){
+    newDict = {
+        post_key: "(unique key placeholder 2)",
+        title: "Introductory Modern Physics",
+        price: 20,
+        description: "its a book",
+        category: "Textbook",
+        condition: "Used-Like New",
+        location: "West Campus",
+        email: "tiger0@coloradocollege.edu",
+        phone: "(719)-123-4569",
+        is_active: "true"
+    }
+    return newDict
 }
 
 
 
-function readPost(id){
-    if (useDB){
-        console.log("Attempting to use database")
-        return DBreadPost(id)
-    }
-    else{
-        console.log("Returning Simulated placeholder post")
-        return samplePostDict(id)
-    }
-}
-async function getAllUsers_old() {
-    try {
-        const connection = await sql.connect(getConfig())
-        const request = connection.request();
-
-        const result = await request.query('SELECT * FROM Users')
-        await connection.close();
-
-        return result.recordset;
-
-    } catch (err) {
-        console.error('Error selecting all users', err)
-        return [];
-    }
-}
-async function DBreadPost(postID) {
-    try {
-        const connection = await sql.connect(getConfig())
-        const request = connection.request();
-
-        const result = await request
-            .input('postID', sql.Int, postID)
-            .query('SELECT * FROM Posts WHERE postID = @postID')
-
-        await connection.close();
-
-        return result.recordset;
-    } catch (err) {
-        console.error('Error: selecting post with ID '+postID, err)
-        return null;
-    }
-}
-async function getAllUsers_older() {
-    try {
-        const connection = await sql.connect(getConfig())
-        const request = connection.request()
-
-        const result = await request.query('SELECT * FROM Users')
-        await connection.close()
-
-        return result.recordset
-
-    } catch (err) {
-        console.error('Error selecting all users', err)
-        return []
-    }
-}
-function printDict(dict){
-    for ( d in dict){
-        console.log(d,":",dict[d])
-    }
-}
 
 
-module.exports = {getUser,getPost,getAllPosts,getAllUsers,testMethod_read,postDict_new,sampleUserDict};
+
+
+
+*/
+
