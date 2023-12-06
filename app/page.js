@@ -1,43 +1,17 @@
-//SIGN IN PAGE 
-"use client";
+// Design for the browsing page of the website
+import Filter from "@/Components/Filter";
+import BuyProducts from "@/Components/BuyProducts";
 
-import Image from 'next/image'
-import Link from 'next/link';
-
-// defining a function assigning it to var handleLogin 
-const handleLogin = () => {
-  // TODO: REPLACE WITH CC'S SSI PAGE 
-  // change the browser's location to the specified URL 
-  window.location.href = 'https://cas.coloradocollege.edu/cas/';
-};
-
-function LoginButton() {
-  const buttonStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center', 
-    height: '40px', 
-    border: '2px solid white', 
-    padding: '0 16px', 
-  };
-  return (
-      <button style={buttonStyle} onClick={handleLogin}>Sign In</button>
-  );
-}
-
+// var titles = ["Hockey Ticket", "Carpool", "Clothing Item", "Service", "Bike", "Tool", "Dogsitting"]
+// var descriptions = ["This is the description of a hockey ticket", "This is the description of a Carpool", "This is the description of a clothing item", "This is the description of a service", "This is the description of a bike", "This is the description of a tool", "This is the description of dogsitting"]
+// var prices = ["$100", "$35", "$5", "$0", "$10", "$20","$15"]
+// var phones = ["(123)456-7890", "(987)654-3210", "(222)111-3333", "(123)789-4560", "(456)123-7890", "(456)789-1230","(777)888-9999"]
 
 export default function Home() {
-return (
-  //flex min-h-screen
-  <main className="flex flex-col items-center justify-between p-24">
-     <h1>Welcome to TigerList</h1>
-     <p>a program connecting Colorado College students looking to exchange goods, services, and reduce waste.</p>
-     <div className="flex items-center justify-center mt-10"> 
-        <p> </p>
-     </div>
-     <div className="flex items-center justify-center mt-10"> 
-        <LoginButton />
-     </div>
-  </main>
-)
+    return (
+        <div className="flex flex-row bg-yellow-600 min-h-screen">
+            <Filter />
+            <BuyProducts />
+        </div>
+    );
 }
