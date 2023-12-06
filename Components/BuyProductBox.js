@@ -51,7 +51,7 @@ export default function BuyProductBox(){
 }
 
 
-export default BuyProductBox;
+//export default BuyProductBox;
 //     return(
 //         <Wrapper>
 //             <ProductBG>

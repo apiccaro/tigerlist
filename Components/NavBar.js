@@ -33,7 +33,6 @@ export default function NavBar() {
                 src="/CCLogoDerp.png"
                 alt="Tiger Image"
                 accept="image/*"
-                className="dark:invert"
                 width={'200'}
                 height={'50'}
                 priority
