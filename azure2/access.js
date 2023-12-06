@@ -11,17 +11,17 @@ const config = {
     },
   };
 
-async function getValidRequest() {
-  try {
-    const connection = await sql.connect(config);
-    const request = connection.request();
-    return request;
-  } catch (error) {
-    console.error('Failed to connect to database:', error.message,"\nReturning Null instead");
-    //throw error;
-    return null
-  }
-}
+// async function getValidRequest() {
+//   try {
+//     const connection = await sql.connect(config);
+//     const request = connection.request();
+//     return request;
+//   } catch (error) {
+//     console.error('Failed to connect to database:', error.message,"\nReturning Null instead");
+//     //throw error;
+//     return null
+//   }
+// }
 
 async function getValidRequest() {
     try {

@@ -6,7 +6,24 @@ import Image from 'next/image';
 import { useForm } from "react-hook-form";
 
 
-export default function MakeListing(){
+export default function MakeListing({searchParams}) {
+  //export default function MakeListing({ testTitle, testPrice, testDescription, testCategory, testCondition, testLocation, testEmail, testPhone }) {
+
+    //  const { testTitle, testPrice, testDescription,
+    //          testCategory, testCondition, testLocation, 
+    //          testEmail, testPhone} = searchParams;
+
+    const { productID} = searchParams;
+    const {testPrice} = searchParams;
+    const {testDescription} = searchParams;
+    const {testCategory} = searchParams;
+    const {testCondition} = searchParams;
+    const {testLocation} = searchParams;
+    const {testEmail} = searchParams;
+    const {testPhone} = searchParams;
+
+
+
     const [title, setTitle] = useState();
     const [price, setPrice] = useState();
     const [cat, setCat] = useState();
@@ -34,6 +51,9 @@ export default function MakeListing(){
     var originalLocation;
     var originalEmail;
     var originalPhone;
+    // var testTitle = testDict["testTitle"];
+    // var testPrice = testDict["testPrice"];
+
 
     const { register,  handleSubmit,formState: { errors } } = useForm();
     const handleRegistration = (data) => {
@@ -53,7 +73,7 @@ export default function MakeListing(){
     }
     const readInData=()=>{
        originalImage="/ticket.jpeg"
-        originalTitle="couch"
+        originalTitle="Title"
         originalPrice="2000"
         originalDescription="black and leather"
         originalCategory="textbook"
@@ -147,9 +167,9 @@ export default function MakeListing(){
                         id="title"
                         type="text"
                         style={{ color: 'black'}}
-                        defaultValue={originalTitle}
-                        value={title}
-                        placeholder='Title'
+                        //defaultValue={testTitle}
+                        value={productID}
+                        placeholder="Title"
                         onChange={e => setTitle(e.target.value)}
                         {...register("title",{required: 'Please enter a title with less than 50 characters', maxLength:{ value: 50, message: "Please enter a title with less than 50 characters"}
                         })}
@@ -166,8 +186,8 @@ export default function MakeListing(){
                         Edit Price: <br></br>
                         <input type="text"
                         style={{ color: 'black' }}
-                        defaultValue={originalPrice}
-                        value={price}
+                        //defaultValue={testPrice}
+                        value={testPrice}
                         placeholder='Price'
                         onChange={e => setPrice(e.target.value)}
                         {...register("price",{required: 'Please enter a number',maxLength:{value: 10, message: "We cannot support purchases over $999,999,999"}, 
@@ -188,8 +208,8 @@ export default function MakeListing(){
                         Edit Description:<br></br>
                         <input type="text"
                         style={{ color: 'black' }}
-                        value={description} 
-                        defaultValue={originalDescription}
+                        value={testDescription} 
+                        //defaultValue={originalDescription}
                         placeholder='Description'
                         onChange={e => setDescription(e.target.value)}
 
@@ -212,8 +232,8 @@ export default function MakeListing(){
                         <select name="category" 
                         id="category" 
                         
-                        defaultValue={originalCategory}
-                        value={cat}
+                        //defaultValue={originalCategory}
+                        value={testCategory}
                         onChange={e => setCat(e.target.value)}
                          {...register("category",{required: 'Please choose one'
                         })}
@@ -236,8 +256,8 @@ export default function MakeListing(){
                         <select name="condition" 
                         id="condition" 
                         
-                        defaultValue={originalCondition}
-                        value={cond}
+                        //defaultValue={originalCondition}
+                        value={testCondition}
                         onChange={e => setCond(e.target.value)}
                         {...register("condition",{required: 'Please choose one'
                         })}
@@ -259,8 +279,8 @@ export default function MakeListing(){
                         <select name="location"
                         id="location" 
                         
-                        value={loc}
-                        defaultValue={originalLocation}
+                        value={testLocation}
+                        //defaultValue={originalLocation}
                         onChange={e => setLoc(e.target.value)}
                         {...register("location",{required: 'Please choose one'
                         })}
@@ -282,9 +302,9 @@ export default function MakeListing(){
                         id="email"
                         type="email"
                         style={{ color: 'black'}}
-                        value={email} 
+                        value={testEmail} 
                         placeholder='Email'
-                        defaultValue={originalEmail}
+                        //defaultValue={originalEmail}
                         onChange={e => setEmail(e.target.value)}
                         {...register("email",{required: 'Please enter your CC email',maxLength: { value: 50, message: "Please enter your CC email" }, 
                         pattern: {
@@ -305,10 +325,10 @@ export default function MakeListing(){
                         id="phonenumber"
                         type="tel"
                         style={{ color: 'black'}}
-                        value={phonenumber} 
+                        value={testPhone} 
                         
                         placeholder='Phone Number'
-                        defaultValue={originalPhone}
+                        //defaultValue={originalPhone}
                         onChange={e => setPhoneNumber(e.target.value)}
                         {...register("phonenumber",{required: 'Please enter a number', maxLength: { value: 10, message: "Please enter a 10 digit number" } ,
                         pattern: {
@@ -345,6 +365,6 @@ export default function MakeListing(){
                     </div>         
                     
             </div>
-            </main>   
+            </main>  
     )
 }
