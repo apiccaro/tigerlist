@@ -1,3 +1,4 @@
+// Design for the "My Listings" page of the website
 import SellProducts from "@/Components/SellProducts";
 
 export default function Home() {

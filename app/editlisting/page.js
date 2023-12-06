@@ -5,99 +5,71 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 
 
-export default function EditListing({listingID}) {
-  //var id=listingID.id;
-  
-  const SMALLIMAGE='100px';
-  const [title, setTitle] = useState();
-  const [price, setPrice] = useState();
-  const [cat, setCat] = useState();
-  const [cond, setCond] = useState();
-  const [loc, setLoc] = useState();
-  const [description, setDescription] = useState();
-  const [previewImage, setPreviewImage] = useState();
-  const [previewImage1, setPreviewImage1] = useState();
-  const [previewImage2, setPreviewImage2] = useState();
-  const [previewImage3, setPreviewImage3] = useState();
-  const [previewImage4, setPreviewImage4] = useState();
-  const [email, setEmail] = useState();
-  const [phonenumber, setPhoneNumber] = useState();
-  const [borderStyle, setBorderStyle] = useState();
-  const [borderStyle1, setBorderStyle1] = useState();
-  const [borderStyle2, setBorderStyle2] = useState();
-  const [borderStyle3, setBorderStyle3] = useState();
-  const [borderStyle4, setBorderStyle4] = useState();
-  const [imgWidth, setWidth] = useState();
-  const [imgHeight, setHeight] = useState();
-  const [imgWidth1, setWidth1] = useState();
-  const [imgHeight1, setHeight1] = useState();
-  const [imgWidth2, setWidth2] = useState();
-  const [imgHeight2, setHeight2] = useState();
-  const [imgWidth3, setWidth3] = useState();
-  const [imgHeight3, setHeight3] = useState();
-  const [imgWidth4, setWidth4] = useState();
-  const [imgHeight4, setHeight4] = useState();
-  const [labelText, setLabelText] = useState();
-  const [labelText1, setLabelText1] = useState();
-  const [labelText2, setLabelText2] = useState();
-  const [labelText3, setLabelText3] = useState();
-  const [labelText4, setLabelText4] = useState();
+export default function EditListing({searchParams}) {
+  //export default function MakeListing({ testTitle, testPrice, testDescription, testCategory, testCondition, testLocation, testEmail, testPhone }) {
 
-  const [readinTitle2, setReadinTitle2] = useState();
-  const [readinTitle, setReadinTitle] = useState("");
-  var originalImage = null;
-  var originalTitle;
-  var originalPrice;
-  var originalDescription;
-  var originalCategory;
-  var originalCondition;
-  var originalLocation;
-  var originalEmail;
-  var originalLocation;
-  var originalEmail;
-  var originalPhone;
-  var originalImage1;
-  var originalImage2;
-  var originalImage3;
-  var originalImage4;
-/**
-   * Handles the onSubmit action of the form
-   */
-  const { register, handleSubmit, formState: { errors } } = useForm();
-   /**
-   * Takes in data from the form and builds a dictionary to be 
-   * write into the database.
-   * Place holder as of now
-   * @param {*} data 
-   */
-  const handleRegistration = (data) => {
-    console.log(data);
-    const titleValue = data.title;
-    const priceValue = data.price;
-    const descriptionValue = data.description;
-    const catValue = data.category;
-    const condValue = data.condition;
-    const locValue = data.location;
-    const emailValue = data.email;
-    const phoneValue = data.phonenumber;
-    const imageValue = [previewImage,previewImage1,previewImage2,previewImage3,previewImage4];
-    var dict = {
-      title: titleValue,
-      price: priceValue,
-      description: descriptionValue,
-      category: catValue,
-      condition: condValue,
-      location: locValue,
-      email: emailValue,
-      phoneValue: phoneValue,
-      image: imageValue,
-      active: "true"
+    //  const { testTitle, testPrice, testDescription,
+    //          testCategory, testCondition, testLocation, 
+    //          testEmail, testPhone} = searchParams;
+
+    const { productID} = searchParams;
+    const {testPrice} = searchParams;
+    const {testDescription} = searchParams;
+    const {testCategory} = searchParams;
+    const {testCondition} = searchParams;
+    const {testLocation} = searchParams;
+    const {testEmail} = searchParams;
+    const {testPhone} = searchParams;
+
+
+
+    const [title, setTitle] = useState();
+    const [price, setPrice] = useState();
+    const [cat, setCat] = useState();
+    const [cond, setCond] = useState();
+    const [loc, setLoc] = useState();
+    const [description, setDescription] = useState();
+    const [previewImage, setPreviewImage] = useState();
+    const [email, setEmail] = useState();
+    const [phonenumber, setPhoneNumber] = useState();
+    const [imgWidth, setWidth] = useState();
+    const [imgHeight, setHeight] = useState();
+    const [borderStyle, setBorderStyle] = useState();
+    const [labelHeight, setLabelHeight] = useState();
+    const [labelText, setLabelText] = useState();
+    const [readinTitle2, setReadinTitle2] = useState();
+    const [readinTitle, setReadinTitle] = useState("");
+    var originalImage=null;
+    var originalTitle;
+    var originalPrice;
+    var originalDescription;
+    var originalCategory;
+    var originalCondition;
+    var originalLocation;
+    var originalEmail;
+    var originalLocation;
+    var originalEmail;
+    var originalPhone;
+    // var testTitle = testDict["testTitle"];
+    // var testPrice = testDict["testPrice"];
+
+
+    const { register,  handleSubmit,formState: { errors } } = useForm();
+    const handleRegistration = (data) => {
+        console.log(data);
+        const titleValue = data.title;
+        const priceValue= data.price;
+        const descriptionValue = data.description;
+        const catValue= data.category;
+        const condValue = data.condition;
+        const locValue =data.location;
+        const emailValue = data.email;
+        const phoneValue = data.phonenumber;
+        const imageValue= previewImage? previewImage:originalImage;
+        
+        setReadinTitle("Title: "+titleValue+"\nPrice: "+priceValue+"\nDescription: "+descriptionValue+"\nCategory: "+catValue+"\nCondition: "+condValue);
+        setReadinTitle2("\nLocation: "+locValue+"\nEmail: "+emailValue+"\nPhone"+phoneValue+"\nImage"+imageValue);
     }
-
-
-    setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
-    setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
-  }
    /**
    * Reads in data from the database and autopopulates the
    * form with the particular listing data
@@ -735,8 +707,6 @@ export default function EditListing({listingID}) {
 
 
             </div>
-
-
           </form>
           <p id="readin">
             {readinTitle}

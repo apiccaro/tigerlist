@@ -1,3 +1,4 @@
+// Configuration for where the product and contact information will appear on the product view page
 'use client'
 
 import styled from "styled-components";
@@ -20,18 +21,22 @@ export default function PI() {
         <aside style={{display: "flex", flexDirection: 'col', gap:'3rem', text:"white", padding:"1rem", }} className="flex flex-col gap-10 text-white p-4 mt-5">
             <div style={InfoBoxStyle}>
                 <div className="flex flex-col gap-2">
-                    <h3 className="flex gap-1 font-semibold">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style={{width:'1.5rem', height:'1.5rem'}} class="w-6 h-6">
+                    <h3 className="flex gap-1 font-semibold text-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                         </svg>
                         Product Details
                     </h3>
-                    <span className="">
-                        All product information should exist here
-                    </span>
+                    <div className="font-bold">
+                        Description:
+                    </div>
+                    <div className="font-bold">
+                        Location:
+                    </div>
+                    
                 </div>
-            </div>
-            <div style={InfoBoxStyle}>
+            </DetailsBox>
+            <ContactBox>
                 <div className="flex flex-col gap-2">
                     <h3 className="flex gap-1 font-semibold">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style={{width:'1.5rem', height:'1.5rem'}} class="w-6 h-6">
@@ -39,11 +44,14 @@ export default function PI() {
                         </svg>
                         Contanct Information
                     </h3>
-                    <span className="">
-                        All contact information should exist here
-                    </span>
+                    <div className="font-bold">
+                        Email:
+                    </div>
+                    <div className="font-bold">
+                        Phone Number:
+                    </div>
                 </div>
-            </div>
+            </ContactBox>
         </aside>
     );
 }

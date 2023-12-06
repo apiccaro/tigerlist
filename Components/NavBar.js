@@ -1,3 +1,4 @@
+// Configutation for all of the links that appear on the navigation bar that exists at the top of each page.
 'use client'
 
 import styled from "styled-components";
@@ -10,7 +11,7 @@ const NavBarBGStyle = {
     backgroundColor: 'black',
     height: '150px',
     display: 'flex',
-    alignItems: 'top', 
+    alignItems: 'bottom', 
     justifyContent: 'center',
     borderRadius: '10px',
 }
@@ -29,7 +30,7 @@ export default function NavBar() {
             <Link href={'/listview'} style={{fontSize: "3rem", fontWeight: "bold"}} className="flex">
                 TigerList
                 <Image
-                src="/TigerIcon.svg"
+                src="/CCLogoDerp.png"
                 alt="Tiger Image"
                 accept="image/*"
                 className="dark:invert"
@@ -58,7 +59,7 @@ export default function NavBar() {
                         name="Enter Keyword"
                         type="text"
 
-                        style={{ color: 'black' }}
+                        style={{ color: 'black', borderRadius: '10px'}}
 
                         value={title} 
                         placeholder='Enter Keyword'

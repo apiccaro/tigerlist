@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+
   "dependencies": {
     "@astrajs/collections": "^0.3.4",
     "firebase": "^10.7.0",
@@ -234,4 +235,5 @@
       "node": "16|| 18 || 20"
     }
   }
+  
 }

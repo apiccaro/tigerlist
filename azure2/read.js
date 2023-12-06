@@ -132,67 +132,136 @@ function testMethod_read(code){
 
  //Currently passes a null through if we get a connection error. What logic makes sense for the frontend?
 
-//Currently passes a null through if we get a connection error. What logic makes sense for the frontend?
+// async function new_readPost(postID) {
+//     const newRequest = getValidRequest();
 
-async function new_readPost(postID) {
-    const newRequest = getValidRequest();
+//     if (!newRequest) {
+//         console.log("Failed to obtain a valid database request. Returning null");
+//         return null;
+//     }
 
-    if (!newRequest) {
-        console.log("Failed to obtain a valid database request. Returning null");
-        return null;
-    }
+//     try {
+//         const result = await newRequest
+//             .input('postID', sql.Int, postID)
+//             .query('SELECT * FROM Posts WHERE postID = @postID');
+        
+//         return result.recordset;
+//     } catch (err) {
+//         console.error('Failed to select post with ID ' + postID, err);
+//         return null //does this work for us?
+//         throw err; // Do we need to rethrow the error?
+//     } finally {
+//         if (connection) {
+//             await connection.close();
+//         }
+//     }
+// }
 
-    try {
-        const result = await newRequest
-            .input('postID', sql.Int, postID)
-            .query('SELECT * FROM Posts WHERE postID = @postID');
+// function readPost(id){
+//     if (useDB){
+//         console.log("Attempting to use database")
+//         return DBreadPost(id)
+//     }
+//     else{
+//         console.log("Returning Simulated placeholder post")
+//         return samplePostDict(id)
+//     }
+// }
 
-        return result.recordset;
-    } catch (err) {
-        console.error('Failed to select post with ID ' + postID, err);
-        return null //does this work for us?
-        throw err; // Do we need to rethrow the error?
-    } finally {
-        if (connection) {
-            await connection.close();
-        }
-    }
-}
-function printDict(dict){
-    for ( d in dict){
-        console.log(d,":",dict[d])
-    }
-}
-function readPost(id){
-    if (useDB){
-        console.log("Attempting to use database")
-async function getAllUsers() {
-    }
-}
-}
+// async function getAllPosts() {
+//     try {
+//         const connection = await sql.connect(getConfig());
+//         const request = connection.request();
+
+//         const result = await request.query('SELECT * FROM Posts');
+//         await connection.close();
+
+//         return result.recordset;
+
+//     } catch (err) {
+//         console.error('Error selecting all posts', err);
+//         return [];
+//     }
+// }
+
+// async function getAllUsers() {
+//     try {
+//         const connection = await sql.connect(getConfig());
+//         const request = connection.request();
+
+//         const result = await request.query('SELECT * FROM Users');
+//         await connection.close();
+
+//         return result.recordset;
+
+//     } catch (err) {
+//         console.error('Error selecting all users', err);
+//         return [];
+//     }
+// }
+
+// async function DBreadPost(postID) {
+//     try {
+//         const connection = await sql.connect(getConfig());
+//         const request = connection.request();
+
+//         const result = await request
+//             .input('postID', sql.Int, postID)
+//             .query('SELECT * FROM Posts WHERE postID = @postID');
+
+//         await connection.close();
+
+//         return result.recordset;
+//     } catch (err) {
+//         console.error('Error: selecting post with ID '+postID, err);
+//         return null;
+//     }
+// }
+
+// async function getAllUsers() {
+//     try {
+//         const connection = await sql.connect(getConfig());
+//         const request = connection.request();
+
+//         const result = await request.query('SELECT * FROM Users');
+//         await connection.close();
+
+//         return result.recordset;
+
+//     } catch (err) {
+//         console.error('Error selecting all users', err);
+//         return [];
+//     }
+// }
+
+// function printDict(dict){
+//     for ( d in dict){
+//         console.log(d,":",dict[d])
+//     }
+// }
 
 
 
-/*
-WriteUserDataStr (userID,Str email,Str preferredname)
-WritePostData(Str (userID,Int category,Str title,Str description,null 
+// /*
+// WriteUserDataStr (userID,Str email,Str preferredname)
+// WritePostData(Str (userID,Int category,Str title,Str description,null 
 
-async function DBinsertForm2() {
-        try {
-          const result = await sql.query`INSERT INTO Listings (Column1, Column2) VALUES ('Value1', 'Value2')`;
-          console.log(result.rowsAffected);
-        } catch (err) {
-          console.error('Error:', err);
-        }
-      }
+// async function DBinsertForm2() {
+//         try {
+//           const result = await sql.query`INSERT INTO Listings (Column1, Column2) VALUES ('Value1', 'Value2')`;
+//           console.log(result.rowsAffected);
+//         } catch (err) {
+//           console.error('Error:', err);
+//         }
+//       }
     
-    async function DBinsertUser2(userDict) {
-        try {
-          const result = await sql.query`INSERT INTO Users (Column1, Column2) VALUES ('Value1', 'Value2')`;
-          console.log(result.rowsAffected);
-        } catch (err) {
-          console.error('Error:', err);
-        }
-      }
-  */
-module.exports = {getUser,getPost,getAllPosts,testMethod_read};
+//     async function DBinsertUser2(userDict) {
+//         try {
+//           const result = await sql.query`INSERT INTO Users (Column1, Column2) VALUES ('Value1', 'Value2')`;
+//           console.log(result.rowsAffected);
+//         } catch (err) {
+//           console.error('Error:', err);
+//         }
+//       }
+//   */
+// module.exports = {getUser,getPost,getAllPosts,testMethod_read};
