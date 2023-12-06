@@ -1,75 +1,104 @@
 'use client'
-
-import { useState } from 'react';
+import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
+//import { getPost } from '@/azure2/read';
 
 
-export default function EditListing({searchParams}) {
-  //export default function MakeListing({ testTitle, testPrice, testDescription, testCategory, testCondition, testLocation, testEmail, testPhone }) {
-
-    //  const { testTitle, testPrice, testDescription,
-    //          testCategory, testCondition, testLocation, 
-    //          testEmail, testPhone} = searchParams;
-
-    const { productID} = searchParams;
-    const {testPrice} = searchParams;
-    const {testDescription} = searchParams;
-    const {testCategory} = searchParams;
-    const {testCondition} = searchParams;
-    const {testLocation} = searchParams;
-    const {testEmail} = searchParams;
-    const {testPhone} = searchParams;
-
-
-
-    const [title, setTitle] = useState();
-    const [price, setPrice] = useState();
-    const [cat, setCat] = useState();
-    const [cond, setCond] = useState();
-    const [loc, setLoc] = useState();
-    const [description, setDescription] = useState();
-    const [previewImage, setPreviewImage] = useState();
-    const [email, setEmail] = useState();
-    const [phonenumber, setPhoneNumber] = useState();
-    const [imgWidth, setWidth] = useState();
-    const [imgHeight, setHeight] = useState();
-    const [borderStyle, setBorderStyle] = useState();
-    const [labelHeight, setLabelHeight] = useState();
-    const [labelText, setLabelText] = useState();
-    const [readinTitle2, setReadinTitle2] = useState();
-    const [readinTitle, setReadinTitle] = useState("");
-    var originalImage=null;
-    var originalTitle;
-    var originalPrice;
-    var originalDescription;
-    var originalCategory;
-    var originalCondition;
-    var originalLocation;
-    var originalEmail;
-    var originalLocation;
-    var originalEmail;
-    var originalPhone;
-    // var testTitle = testDict["testTitle"];
-    // var testPrice = testDict["testPrice"];
-
-
-    const { register,  handleSubmit,formState: { errors } } = useForm();
-    const handleRegistration = (data) => {
-        console.log(data);
-        const titleValue = data.title;
-        const priceValue= data.price;
-        const descriptionValue = data.description;
-        const catValue= data.category;
-        const condValue = data.condition;
-        const locValue =data.location;
-        const emailValue = data.email;
-        const phoneValue = data.phonenumber;
-        const imageValue= previewImage? previewImage:originalImage;
-        
-        setReadinTitle("Title: "+titleValue+"\nPrice: "+priceValue+"\nDescription: "+descriptionValue+"\nCategory: "+catValue+"\nCondition: "+condValue);
-        setReadinTitle2("\nLocation: "+locValue+"\nEmail: "+emailValue+"\nPhone"+phoneValue+"\nImage"+imageValue);
+export default function EditListing({listingID}) {
+  //var id=listingID.id;
+  
+  const SMALLIMAGE='100px';
+  const [title, setTitle] = useState();
+  const [price, setPrice] = useState();
+  const [cat, setCat] = useState();
+  const [cond, setCond] = useState();
+  const [loc, setLoc] = useState();
+  const [description, setDescription] = useState();
+  const [previewImage, setPreviewImage] = useState();
+  const [previewImage1, setPreviewImage1] = useState();
+  const [previewImage2, setPreviewImage2] = useState();
+  const [previewImage3, setPreviewImage3] = useState();
+  const [previewImage4, setPreviewImage4] = useState();
+  const [email, setEmail] = useState();
+  const [phonenumber, setPhoneNumber] = useState();
+  const [borderStyle, setBorderStyle] = useState();
+  const [borderStyle1, setBorderStyle1] = useState();
+  const [borderStyle2, setBorderStyle2] = useState();
+  const [borderStyle3, setBorderStyle3] = useState();
+  const [borderStyle4, setBorderStyle4] = useState();
+  const [imgWidth, setWidth] = useState();
+  const [imgHeight, setHeight] = useState();
+  const [imgWidth1, setWidth1] = useState();
+  const [imgHeight1, setHeight1] = useState();
+  const [imgWidth2, setWidth2] = useState();
+  const [imgHeight2, setHeight2] = useState();
+  const [imgWidth3, setWidth3] = useState();
+  const [imgHeight3, setHeight3] = useState();
+  const [imgWidth4, setWidth4] = useState();
+  const [imgHeight4, setHeight4] = useState();
+  const [labelText, setLabelText] = useState();
+  const [labelText1, setLabelText1] = useState();
+  const [labelText2, setLabelText2] = useState();
+  const [labelText3, setLabelText3] = useState();
+  const [labelText4, setLabelText4] = useState();
+  const [readinTitle2, setReadinTitle2] = useState();
+  const [readinTitle, setReadinTitle] = useState("");
+  var originalImage = null;
+  var originalTitle;
+  var originalPrice;
+  var originalDescription;
+  var originalCategory;
+  var originalCondition;
+  var originalLocation;
+  var originalEmail;
+  var originalLocation;
+  var originalEmail;
+  var originalPhone;
+  var originalImage1;
+  var originalImage2;
+  var originalImage3;
+  var originalImage4;
+/**
+   * Handles the onSubmit action of the form
+   */
+  const { register, handleSubmit, formState: { errors } } = useForm();
+   /**
+   * Takes in data from the form and builds a dictionary to be 
+   * write into the database.
+   * Place holder as of now
+   * @param {*} data 
+   */
+  const handleRegistration = (data) => {
+    console.log(data);
+    const titleValue = data.title;
+    const priceValue = data.price;
+    const descriptionValue = data.description;
+    const catValue = data.category;
+    const condValue = data.condition;
+    const locValue = data.location;
+    const emailValue = data.email;
+    const phoneValue = data.phonenumber;
+    const imageValue = [previewImage,previewImage1,previewImage2,previewImage3,previewImage4];
+    var dict = {
+      title: titleValue,
+      price: priceValue,
+      description: descriptionValue,
+      category: catValue,
+      condition: condValue,
+      location: locValue,
+      email: emailValue,
+      phoneValue: phoneValue,
+      image: imageValue,
+      active: "true"
     }
+    setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
+    setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
+  }
+  const fetchTodos = async () => {
+    const res = await fetch("/api/listings/read");
+    return res;
+  };
    /**
    * Reads in data from the database and autopopulates the
    * form with the particular listing data
@@ -77,14 +106,14 @@ export default function EditListing({searchParams}) {
    * 
    */
   const readInData = () => {
+    var dict=fetchTodos()
     //var id=listingID.id;
     //var dict = getPost(id);
     originalImage = "/ticket.jpeg"
     originalImage1 = "/bomb.jpeg"
     originalImage2="/ticket.jpeg"
     //originalImage3="/ticket.jpeg"
-
-    originalTitle = "couch"
+    originalTitle = 'couch'
     originalPrice = "2000"
     originalDescription = "black and leather"
     originalCategory = "textbook"
@@ -93,6 +122,12 @@ export default function EditListing({searchParams}) {
     originalEmail = "ap@coloradocollege.edu"
     originalPhone = "9787657788"
   }
+  useEffect(() => {
+    (async () => {
+      const todos = await fetchTodos();
+      setTitle(todos.title);
+    })();
+  }, []);
   /**
    * Takes in a list of error messages and applies them when necessary 
    * when input checking.
@@ -113,8 +148,6 @@ export default function EditListing({searchParams}) {
         <div >
           <form onSubmit={handleSubmit(handleRegistration, handleError)} >
             <div style={{ float: "left", margin: "60px 100px 0 30px" }}>
-
-
               <label
                 htmlFor="image"
                 style={{
@@ -128,7 +161,6 @@ export default function EditListing({searchParams}) {
                   display: 'inline-block',
                 }}
               >
-
                 {originalImage || previewImage ? 'Change Image' : 'Add Image'}
                 <input
                   id="image"
@@ -162,17 +194,14 @@ export default function EditListing({searchParams}) {
                       reader.readAsDataURL(file);
                     }
                   }
-
                   }
                 //end citation
                 />
                 <br></br>
-
               </label>
               <img
                 id="imagePreview"
                 //if no previewImage- load in the original image
-
                 src={previewImage ? previewImage : originalImage? setPreviewImage(originalImage):originalImage}
                 style={{
                   objectFit: 'cover',
@@ -180,13 +209,11 @@ export default function EditListing({searchParams}) {
                   height: originalImage || previewImage ? '350px' : 0,
                 }}
                 //if not original image- do not show image component at all
-
               />
               <div style={{ display: 'inline-block' }}>
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image1"
-
                     style={{
                       width: '115px',
                       //if there is not an original image or an uploaded 
@@ -216,7 +243,6 @@ export default function EditListing({searchParams}) {
                    */
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
-
                           const file = event.target.files[0];
                           const reader = new FileReader();
                           reader.onloadend = () => {
@@ -229,12 +255,10 @@ export default function EditListing({searchParams}) {
                           reader.readAsDataURL(file);
                         }
                       }
-
                       }
                     //end citation
                     />
                     <br></br>
-
                   </label>
                   <img
                     id="imagePreview1"
@@ -292,7 +316,6 @@ export default function EditListing({searchParams}) {
                         */
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
-
                           const file = event.target.files[0];
                           const reader = new FileReader();
                           reader.onloadend = () => {
@@ -305,12 +328,10 @@ export default function EditListing({searchParams}) {
                           reader.readAsDataURL(file);
                         }
                       }
-
                       }
                     //end citation
                     />
                     <br></br>
-
                   </label>
                   <img
                     id="imagePreview2"
@@ -368,7 +389,6 @@ export default function EditListing({searchParams}) {
                         */
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
-
                           const file = event.target.files[0];
                           const reader = new FileReader();
                           reader.onloadend = () => {
@@ -381,12 +401,10 @@ export default function EditListing({searchParams}) {
                           reader.readAsDataURL(file);
                         }
                       }
-
                       }
                     //end citation
                     />
                     <br></br>
-
                   </label>
                   <img
                     id="imagePreview3"
@@ -445,7 +463,6 @@ export default function EditListing({searchParams}) {
                         */
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
-
                           const file = event.target.files[0];
                           const reader = new FileReader();
                           reader.onloadend = () => {
@@ -458,12 +475,10 @@ export default function EditListing({searchParams}) {
                           reader.readAsDataURL(file);
                         }
                       }
-
                       }
                     //end citation
                     />
                     <br></br>
-
                   </label>
                   <img
                     id="imagePreview4"
@@ -489,17 +504,12 @@ export default function EditListing({searchParams}) {
                     }
                   />
                 </div>
-
-
               </div>
-
             </div>
             <div style={{
               float: "right",
               margin: "60px 100px 0 0",
             }}>
-
-
               <label>
                 Edit Title: <br></br>
                 <input
@@ -514,9 +524,7 @@ export default function EditListing({searchParams}) {
                   {...register("title", {
                     required: 'Please enter a title with less than 50 characters', maxLength: { value: 50, message: "Please enter a title with less than 50 characters" }
                   })}
-
                 />
-
                 <small style={{ color: 'red' }}>
                   <br></br>
                   {errors?.title && errors.title.message}
@@ -540,12 +548,10 @@ export default function EditListing({searchParams}) {
                     },
                   })}
                 />
-
                 <small style={{ color: 'red' }}>
                   <br></br>
                   {errors?.price && errors.price.message}
                 </small>
-
               </label><br></br>
               <label>
                 Edit Description:<br></br>
@@ -560,22 +566,17 @@ export default function EditListing({searchParams}) {
                     required: 'Please enter a description with less than 500 characters', maxLength: { value: 500, message: "Please enter a description with less than 500 characters" },
                   })}
                 />
-
                 <small style={{ color: 'red' }}>
                   <br></br>
                   {errors?.description && errors.description.message}
                 </small>
-
               </label><br></br>
-
               <label
                 for="category"
-
               > </label>
               Edit Category:<br></br>
               <select name="category"
                 id="category"
-
                 defaultValue={originalCategory}
                 value={cat}
                 onChange={e => setCat(e.target.value)}
@@ -583,7 +584,6 @@ export default function EditListing({searchParams}) {
                 {...register("category", {
                   required: 'Please choose one'
                 })}
-
               >
                 <option value="" disabled selected>Category</option>
                 <option value="Textbook" >Textbook </option>
@@ -601,7 +601,6 @@ export default function EditListing({searchParams}) {
               Edit Condition: <br></br>
               <select name="condition"
                 id="condition"
-
                 defaultValue={originalCondition}
                 value={cond}
                 onChange={e => setCond(e.target.value)}
@@ -609,7 +608,6 @@ export default function EditListing({searchParams}) {
                 {...register("condition", {
                   required: 'Please choose one'
                 })}
-
               >
                 <option value="" disabled selected >Condition</option>
                 <option value="New">New</option>
@@ -626,7 +624,6 @@ export default function EditListing({searchParams}) {
               Edit Location: <br></br>
               <select name="location"
                 id="location"
-
                 value={loc}
                 defaultValue={originalLocation}
                 onChange={e => setLoc(e.target.value)}
@@ -634,7 +631,6 @@ export default function EditListing({searchParams}) {
                 {...register("location", {
                   required: 'Please choose one'
                 })}
-
               >
                 <option value="" disabled selected >Location</option>
                 <option value="East Campus">East Campus</option>
@@ -665,7 +661,6 @@ export default function EditListing({searchParams}) {
                     },
                   })}
                 />
-
                 <small style={{ color: 'red' }}>
                   <br></br>
                   {errors?.email && errors.email.message}
@@ -678,7 +673,6 @@ export default function EditListing({searchParams}) {
                   type="tel"
                   style={{ color: 'black' }}
                   value={phonenumber}
-
                   placeholder='Phone Number'
                   defaultValue={originalPhone}
                   onChange={e => setPhoneNumber(e.target.value)}
@@ -695,7 +689,6 @@ export default function EditListing({searchParams}) {
                      },*/
                   })}
                 />
-
                 <small style={{ color: 'red' }}>
                   <br></br>
                   {errors?.phonenumber && errors.phonenumber.message}
@@ -704,8 +697,6 @@ export default function EditListing({searchParams}) {
               <div >
                 <button style={{ width: '100px', height: '50px', alignItems: 'center', margin: "0 0 0 135px" }}>Submit</button>
               </div>
-
-
             </div>
           </form>
           <p id="readin">
@@ -715,7 +706,6 @@ export default function EditListing({searchParams}) {
             {readinTitle2}
           </p>
         </div>
-
       </div>
     </main>
   )
