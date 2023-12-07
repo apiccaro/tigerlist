@@ -44,7 +44,7 @@ export default function NavBar() {
                     Browse
                 </Link>
 
-                <Link href={'/makelisting'} style={{display:"flex",padding:"1.25rem"}} className="nderline-on-hover">
+                <Link href={'/makelisting'} style={{display:"flex",padding:"1.25rem"}} className="underline-on-hover">
                     Make Listing   
                 </Link>
 

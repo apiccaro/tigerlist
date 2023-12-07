@@ -52,6 +52,14 @@ export default function MakeListing() {
    * Handles the onSubmit action of the form
    */
   const { register, handleSubmit, formState: { errors } } = useForm();
+  /**const createListing = async (title) => {
+    const res = await fetch("/api/todos/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title }),
+    });
+    return await res.json();
+  };**/
   /**
    * Takes in data from the form and builds a dictionary to be 
    * write into the database.
@@ -59,6 +67,22 @@ export default function MakeListing() {
    * @param {*} data 
    */
   const handleRegistration = (data) => {
+    /**
+     * const handleCreate = async () => {
+    if (inputValue.trim()) {
+      const newTodo = await createTodo(inputValue);
+      setTodos([...todos, newTodo]);
+      setInputValue("");
+      toast({
+        title: "Todo created.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+     */
     console.log(data);
     const titleValue = data.title;
     const priceValue = data.price;
@@ -93,11 +117,7 @@ export default function MakeListing() {
   const handleError = (errors) => { };
 
   return (
-    <main style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}>
+    <main className="listingBuild">
       <div >
         <div>
           <h1>Create Listing</h1>

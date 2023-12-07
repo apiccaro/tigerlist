@@ -1,8 +1,7 @@
 'use client'
-import { useState } from 'react';
+import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-//import { getPost } from '@/azure2/read';
 
 
 export default function EditListing({listingID}) {
@@ -69,7 +68,21 @@ export default function EditListing({listingID}) {
    * Place holder as of now
    * @param {*} data 
    */
+
+    /*const updateListing = async (id, updatedListing) => {
+      await fetch(`/api/todos/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTodo),
+      });
+    };*/
+
   const handleRegistration = (data) => {
+    /**const handleUpdate = async (id, completed) => {
+      const updatedListings= listings.find((todo) => todo.id === id);
+      await updateTodo(id, updatedTodo);
+    };**/
+  
     console.log(data);
     const titleValue = data.title;
     const priceValue = data.price;
@@ -95,6 +108,11 @@ export default function EditListing({listingID}) {
     setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
     setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
   }
+  /*const getListing = async () => {
+    const res = await fetch("/api/listings/read");
+    return await res.json();
+  };*/
+
    /**
    * Reads in data from the database and autopopulates the
    * form with the particular listing data
@@ -102,13 +120,14 @@ export default function EditListing({listingID}) {
    * 
    */
   const readInData = () => {
+    //var dict=fetchTodos()
     //var id=listingID.id;
     //var dict = getPost(id);
     originalImage = "/ticket.jpeg"
     originalImage1 = "/bomb.jpeg"
     originalImage2="/ticket.jpeg"
     //originalImage3="/ticket.jpeg"
-    originalTitle = "couch"
+    originalTitle = 'couch'
     originalPrice = "2000"
     originalDescription = "black and leather"
     originalCategory = "textbook"
@@ -117,6 +136,12 @@ export default function EditListing({listingID}) {
     originalEmail = "ap@coloradocollege.edu"
     originalPhone = "9787657788"
   }
+  /*useEffect(() => {
+    (async () => {
+      const todos = await fetchTodos();
+      setTitle(todos.title);
+    })();
+  }, []);*/
   /**
    * Takes in a list of error messages and applies them when necessary 
    * when input checking.
@@ -125,27 +150,30 @@ export default function EditListing({listingID}) {
   const handleError = (errors) => { };
   readInData();
   return (
-    <main style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}>
+    <div className="flex flex-col bg-yellow-600 min-h-screen">
+
+
+    <main className='listingBuild'>
       <div >
         <div>
-          <h1>Edit Your Listing</h1>
+          <h1 style={{fontWeight: 'bold'}}>Edit Your Listing</h1>
         </div>
         <div >
           <form onSubmit={handleSubmit(handleRegistration, handleError)} >
-            <div style={{ float: "left", margin: "60px 100px 0 30px" }}>
+            <div className='multipleImages'>
               <label
                 htmlFor="image"
+
                 style={{
                   width: '500px',
+                  fontWeight: 'bold',
+
                   //if there is not an original image or an uploaded 
                   //image default to "add image" setting
-                  
+                  color:"black",
+                  borderRadius: '10px',
                   height: originalImage || previewImage ? '40px' : '280px',
-                  border: originalImage || previewImage ? '2px solid white' : '2px dashed white',
+                  border: originalImage || previewImage ? '4px solid black' : '4px dashed black',
                   cursor: 'pointer',
                   display: 'inline-block',
                 }}
@@ -177,7 +205,7 @@ export default function EditListing({listingID}) {
                         setPreviewImage(reader.result);
                         setWidth(400);
                         setHeight(200);
-                        setBorderStyle('2px solid white');
+                        setBorderStyle('4px solid black');
                         setLabelText('Change Image');
                       };
                       reader.readAsDataURL(file);
@@ -205,10 +233,13 @@ export default function EditListing({listingID}) {
                     htmlFor="image1"
                     style={{
                       width: '115px',
+                      color:"black",
+                      borderRadius: '10px',
+                      fontWeight: 'bold',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage1 || previewImage1 ? '0px' : '115px',
-                      border: originalImage1 || previewImage1 ? '' : '2px dashed white',
+                      border: originalImage1 || previewImage1 ? '' : '4px dashed black',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}
@@ -278,10 +309,13 @@ export default function EditListing({listingID}) {
                     htmlFor="image2"
                     style={{
                       width: '115px',
+                      color:"black",
+                      borderRadius: '10px',
+                      fontWeight: 'bold',
                        //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage2 || previewImage2 ? '0px' : '115px',
-                      border: originalImage2 || previewImage2 ? '' : '2px dashed white',
+                      border: originalImage2 || previewImage2 ? '' : '4px dashed black',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}
@@ -351,10 +385,13 @@ export default function EditListing({listingID}) {
                     htmlFor="image3"
                     style={{
                       width: '115px',
+                      color:"black",
+                      fontWeight: 'bold',
+                      borderRadius: '10px',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage3 || previewImage3 ? '0px' : '115px',
-                      border: originalImage3 || previewImage3 ? '' : '2px dashed white',
+                      border: originalImage3 || previewImage3 ? '' : '4px dashed black',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}
@@ -425,10 +462,13 @@ export default function EditListing({listingID}) {
                     htmlFor="image4"
                     style={{
                       width: '115px',
+                      borderRadius: '10px',
+                      fontWeight: 'bold',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage4 || previewImage4 ? '0px' : '115px',
-                      border: originalImage4 || previewImage4 ? '' : '2px dashed white',
+                      border: originalImage4 || previewImage4 ? '' : '4px dashed black',
+                      borderRadius: '10px',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}
@@ -500,10 +540,15 @@ export default function EditListing({listingID}) {
               margin: "60px 100px 0 0",
             }}>
               <label>
+                <span className='formOption'>
                 Edit Title: <br></br>
+                </span>
+                
                 <input
                   id="title"
                   type="text"
+                  
+                  
                   style={{ color: 'black' }}
                   defaultValue={originalTitle}
                   value={title}
@@ -521,7 +566,9 @@ export default function EditListing({listingID}) {
               </label><br></br>
               <span></span>
               <label>
+              <span className='formOption'>
                 Edit Price: <br></br>
+                </span>
                 <input type="text"
                   style={{ color: 'black' }}
                   defaultValue={originalPrice}
@@ -543,7 +590,9 @@ export default function EditListing({listingID}) {
                 </small>
               </label><br></br>
               <label>
-                Edit Description:<br></br>
+                <span className='formOption'>
+                Edit Description: <br></br>
+                </span>
                 <input type="text"
                   style={{ color: 'black' }}
                   value={description}
@@ -563,7 +612,10 @@ export default function EditListing({listingID}) {
               <label
                 for="category"
               > </label>
-              Edit Category:<br></br>
+              <span className='formOption'>
+                Edit Category: <br></br>
+                </span>
+             
               <select name="category"
                 id="category"
                 defaultValue={originalCategory}
@@ -587,7 +639,9 @@ export default function EditListing({listingID}) {
                 {errors?.category && errors.category.message}
               </small><br></br>
               <label for="condition" > </label>
-              Edit Condition: <br></br>
+              <span className='formOption'>
+                Edit Condition: <br></br>
+                </span>
               <select name="condition"
                 id="condition"
                 defaultValue={originalCondition}
@@ -610,7 +664,9 @@ export default function EditListing({listingID}) {
               </small>
               <br></br>
               <label for="location" > </label>
-              Edit Location: <br></br>
+              <span className='formOption'>
+                Edit Location: <br></br>
+                </span>
               <select name="location"
                 id="location"
                 value={loc}
@@ -632,7 +688,9 @@ export default function EditListing({listingID}) {
               </small>
               <br></br>
               <label>
-                Edit Email:<br></br>
+                <span className='formOption'>
+                Edit Email: <br></br>
+                </span>
                 <input
                   id="email"
                   type="email"
@@ -656,7 +714,9 @@ export default function EditListing({listingID}) {
                 </small>
               </label><br></br>
               <label>
+                <span className='formOption'>
                 Edit Phone Number: <br></br>
+                </span>
                 <input
                   id="phonenumber"
                   type="tel"
@@ -697,5 +757,6 @@ export default function EditListing({listingID}) {
         </div>
       </div>
     </main>
+    </div>
   )
 }
