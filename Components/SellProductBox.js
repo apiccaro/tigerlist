@@ -9,37 +9,42 @@ import {useState} from 'react';
 
 const Wrapper = styled.div``;
 
-const ProductBG = styled.div`
-    background-color: black;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-`;
+const ProductBGStyle ={
+    backgroundColor: 'black',
+    height: '250px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '10px',
+}
+const Style = {
+    display: 'flex',
+    fontWeight: 600, 
+    fontSize: '1.25rem',
+};
 
 export default function SellProductBox(){
     return(
-        <Wrapper>
-            <ProductBG>
-                <Link href={'/productview'} className="flex text-semibold text-2xl">
+        <div>
+            <div style={ProductBGStyle}>
+                <Link href={'/productview'} style={Style}>
                     <Image
                         src="/product.png"
                         alt="Product Image"
                         accept="image/*"
-                        className="dark:invert"
+                        //className="dark:invert"
                         width={200}
                         height={50}
                         priority
                     />
                 </Link>
-            </ProductBG>
+            </div>
             <div className="flex flex-row gap-40 mt-2">
                 <Link href={'/productview'} className="flex text-semibold text-2xl text-black">
                     Product Name
                 </Link>
                 <ActiveInactive />
             </div>
-        </Wrapper>
+        </div>
     );
 }

@@ -11,20 +11,20 @@ import Link from "next/link";
 
 const Wrapper = styled.div``;
 
-const LinkBG = styled.div`
-    background-color: black;
-    height: 30px;
-    width: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-`;
+const LinkBGStyle = {
+    backgroundColor: 'black',
+    height: '30px',
+    width: '80px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '10px',
+}
 
 export default function EditLink(){
     return(
         <Wrapper>
-            <LinkBG>
+            <div style={LinkBGStyle}>
                 <Link href={{
                     pathname: '/editlisting',
                     query: {
@@ -47,7 +47,7 @@ export default function EditLink(){
                     >
                     Edit
                     </Link> */}
-            </LinkBG>
+            </div>
         </Wrapper>
     );
 }

@@ -14,6 +14,17 @@ const ProductBGStyle ={
     justifyContent: 'center',
     borderRadius: '10px',
 }
+const ProductStyle = {
+    display: 'flex',
+    fontWeight: 'bold', 
+    fontSize: '1.5rem',    
+    color: 'black',
+};
+const PriceStyle = {
+    display: 'flex',
+    fontWeight: 'bold',
+    fontSize: '1.75rem',
+};
 
 export default function BuyProductBox(){
     return(
@@ -38,10 +49,10 @@ export default function BuyProductBox(){
                 </div>
             <div className="flex flex-row gap-8">
                 {/* This link should pass info about the product that is clicked on */}
-                <Link href={'/productview'} className="flex text-semibold text-2xl text-black">
+                <Link href={'/productview'} style={ProductStyle}>
                     Title
                 </Link>
-                <div className="flex font-bold text-3xl">
+                <div style={PriceStyle}>
                     Price
                 </div>
             </div>
