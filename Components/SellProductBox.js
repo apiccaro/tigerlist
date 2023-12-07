@@ -17,18 +17,25 @@ const ProductBGStyle ={
     justifyContent: 'center',
     borderRadius: '10px',
 }
-const Style = {
+const linkStyle = {
     display: 'flex',
     fontWeight: 600, 
     fontSize: '1.7rem',
     color:'black',
 };
+const buttonStyle = {
+    display: 'flex',
+    flexDirection: 'row', 
+    gap: '40px',
+    marginTop: '2px',
+};
+
 
 export default function SellProductBox(){
     return(
         <div>
             <div style={ProductBGStyle}>
-                <Link href={'/productview'} style={Style}>
+                <Link href={'/productview'} style={linkStyle}>
                     <Image
                         src="/product.png"
                         alt="Product Image"
@@ -40,8 +47,8 @@ export default function SellProductBox(){
                     />
                 </Link>
             </div>
-            <div className="flex flex-row gap-40 mt-2">
-                <Link href={'/productview'} style={Style}>
+            <div style={buttonStyle}>
+                <Link href={'/productview'} style={linkStyle}>
                     Product Name
                 </Link>
                 <ActiveInactive />
