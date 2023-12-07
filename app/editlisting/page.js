@@ -2,7 +2,7 @@
 import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-//import { getPost } from '@/azure2/read';
+//import handle from '../api/listings/read';
 
 
 export default function EditListing({listingID}) {
@@ -69,7 +69,20 @@ export default function EditListing({listingID}) {
    * Place holder as of now
    * @param {*} data 
    */
+    const updateListing = async (id, updatedListing) => {
+      await fetch(`/api/todos/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTodo),
+      });
+    };
+
   const handleRegistration = (data) => {
+    /**const handleUpdate = async (id, completed) => {
+      const updatedListings= listings.find((todo) => todo.id === id);
+      await updateTodo(id, updatedTodo);
+    };**/
+  
     console.log(data);
     const titleValue = data.title;
     const priceValue = data.price;
@@ -95,10 +108,10 @@ export default function EditListing({listingID}) {
     setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
     setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
   }
-  const fetchTodos = async () => {
+  /*const getListing = async () => {
     const res = await fetch("/api/listings/read");
-    return res;
-  };
+    return await res.json();
+  };*/
    /**
    * Reads in data from the database and autopopulates the
    * form with the particular listing data
@@ -122,12 +135,12 @@ export default function EditListing({listingID}) {
     originalEmail = "ap@coloradocollege.edu"
     originalPhone = "9787657788"
   }
-  useEffect(() => {
+  /*useEffect(() => {
     (async () => {
       const todos = await fetchTodos();
       setTitle(todos.title);
     })();
-  }, []);
+  }, []);*/
   /**
    * Takes in a list of error messages and applies them when necessary 
    * when input checking.
