@@ -18,28 +18,57 @@ const ProductBG = styled.div`
     border-radius: 10px;
 `;
 
-export default function SellProductBox(){
+const SellProductBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
     return(
         <Wrapper>
             <ProductBG>
-                <Link href={'/productview'} className="flex text-semibold text-2xl">
+                <Link href={{
+                    pathname: '/productview',
+                    query: {
+                        productTitle: title,
+                        productPrice: price,
+                        productDescription: description,
+                        productCategory: category,
+                        productCondition: condition,
+                        productLocation: location,
+                        listerEmail: email,
+                        listerPhone: phone,
+                        productImages: images
+                    } 
+                }} className="flex text-semibold text-2xl">
                     <Image
-                        src="/product.png"
+                        //src="/product.png"
+                        src={images[0]? images[0]:"/photo.svg"}
                         alt="Product Image"
                         accept="image/*"
-                        className="dark:invert"
-                        width={200}
-                        height={50}
+                        width={300}
+                        height={100}
                         priority
                     />
                 </Link>
             </ProductBG>
             <div className="flex flex-row gap-40 mt-2">
-                <Link href={'/productview'} className="flex text-semibold text-2xl text-black">
-                    Product Name
+                <Link href={{
+                    pathname: '/productview',
+                    query: {
+                        productTitle: title,
+                        productPrice: price,
+                        productDescription: description,
+                        productCategory: category,
+                        productCondition: condition,
+                        productLocation: location,
+                        listerEmail: email,
+                        listerPhone: phone,
+                        productImages: images
+                    } 
+                }} className="flex text-semibold text-2xl text-black">
+                    {title}
                 </Link>
-                <ActiveInactive />
+                {/* Need to send data to ActiveInactive for edit link to access */}
+                <ActiveInactive title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images}/>
             </div>
         </Wrapper>
     );
 }
+
+export default SellProductBox;

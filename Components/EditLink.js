@@ -21,21 +21,22 @@ const LinkBG = styled.div`
     border-radius: 10px;
 `;
 
-export default function EditLink(){
+const EditLink = ({ title, price, description, category, condition, location, email, phone, images}) => {
     return(
         <Wrapper>
             <LinkBG>
                 <Link href={{
                     pathname: '/editlisting',
                     query: {
-                        productID: '12345',
-                        testPrice: 'Test Price',
-                        testDescription: 'Test Description',
-                        testCategory: 'Textbook',
-                        testCondition: "Used-Fair",
-                        testLocation: "East Campus",
-                        testEmail: "test@coloradocollege.edu",
-                        testPhone: "2079561870"
+                        productID: title,
+                        testPrice: price,
+                        testDescription: description,
+                        testCategory: category,
+                        testCondition: condition,
+                        testLocation: location,
+                        testEmail: email,
+                        testPhone: phone,
+                        testImages: images
                     }
                 }} className="flex text-semibold text-xl">
                     Edit
@@ -51,3 +52,5 @@ export default function EditLink(){
         </Wrapper>
     );
 }
+
+export default EditLink;

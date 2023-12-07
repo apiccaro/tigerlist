@@ -29,7 +29,7 @@ const ContactBox = styled.div`
     padding-right: 20px;
 `;
 
-export default function PI() {
+const ProductInfo = ({ title, price, description, category, condition, location, email, phone }) => {
     return(
         <aside className="flex flex-col gap-10 text-white p-4 mt-5">
             <DetailsBox>
@@ -41,10 +41,10 @@ export default function PI() {
                         Product Details
                     </h3>
                     <div className="font-bold">
-                        Description:
+                        Description: {description}
                     </div>
                     <div className="font-bold">
-                        Location:
+                        Location: {location}
                     </div>
                     
                 </div>
@@ -55,16 +55,18 @@ export default function PI() {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        Contanct Information
+                        Contact Information
                     </h3>
                     <div className="font-bold">
-                        Email:
+                        Email: {email}
                     </div>
                     <div className="font-bold">
-                        Phone Number:
+                        Phone Number: {phone}
                     </div>
                 </div>
             </ContactBox>
         </aside>
     );
 }
+
+export default ProductInfo;

@@ -21,6 +21,7 @@ export default function MakeListing({searchParams}) {
     const {testLocation} = searchParams;
     const {testEmail} = searchParams;
     const {testPhone} = searchParams;
+    const {testImages} = searchParams;
 
 
 
