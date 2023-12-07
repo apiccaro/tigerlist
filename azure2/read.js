@@ -50,7 +50,7 @@ function getAllPosts(){
         query = "SELECT * FROM PostTable"
         console.log("querying")
 
-        allPosts = doQuery(query,false)
+        allPosts = doQuery(query)
 
         console.log("before")
         console.log(allPosts)
@@ -157,8 +157,7 @@ function testMethod_read(code){
   */ 
 
 //This one makes things easier. Boolean version optionally prints query result
-async function doQuery(queryText){doQuery(queryText,false)}
-async function doQuery(queryText,printOutput) {
+async function doQuery(queryText) {
     let output = []
     let pool
 
@@ -188,7 +187,7 @@ async function doQuery(queryText,printOutput) {
 async function readUser(key){
     query = "SELECT * FROM UserTable WHERE email='"+key+"';"
     //query = "SELECT * FROM UserTable WHERE email='jaym@coloradocollege.edu';"
-    result = await doQuery(query,true)
+    result = await doQuery(query)
     return result
 }
 
