@@ -25,6 +25,11 @@ const PriceStyle = {
     fontWeight: 'bold',
     fontSize: '1.75rem',
 };
+const RowStyle={
+    display: 'flex', 
+    flexDirection: 'row',
+     gap: '8px',
+    }
 
 export default function BuyProductBox(){
     return(
@@ -47,7 +52,7 @@ export default function BuyProductBox(){
                     />
                 </Link>
                 </div>
-            <div className="flex flex-row gap-8">
+            <div style={RowStyle}>
                 {/* This link should pass info about the product that is clicked on */}
                 <Link href={'/productview'} style={ProductStyle}>
                     Title
