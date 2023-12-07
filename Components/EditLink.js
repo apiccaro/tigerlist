@@ -20,6 +20,12 @@ const LinkBGStyle = {
     justifyContent: 'center',
     borderRadius: '10px',
 }
+const EditStyle = {
+    display: 'flex',
+    fontWeight: '600', 
+    fontSize: `1.3rem`,
+    
+};
 
 export default function EditLink(){
     return(
@@ -37,7 +43,7 @@ export default function EditLink(){
                         testEmail: "test@coloradocollege.edu",
                         testPhone: "2079561870"
                     }
-                }} className="flex text-semibold text-xl">
+                }} style={EditStyle}>
                     Edit
                 </Link>
                 {/* <Link

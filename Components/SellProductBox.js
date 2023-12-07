@@ -20,7 +20,8 @@ const ProductBGStyle ={
 const Style = {
     display: 'flex',
     fontWeight: 600, 
-    fontSize: '1.25rem',
+    fontSize: '1.7rem',
+    color:'black',
 };
 
 export default function SellProductBox(){
@@ -40,7 +41,7 @@ export default function SellProductBox(){
                 </Link>
             </div>
             <div className="flex flex-row gap-40 mt-2">
-                <Link href={'/productview'} className="flex text-semibold text-2xl text-black">
+                <Link href={'/productview'} style={Style}>
                     Product Name
                 </Link>
                 <ActiveInactive />
