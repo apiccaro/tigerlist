@@ -2,7 +2,6 @@
 import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-//import handle from '../api/listings/read';
 
 
 export default function EditListing({listingID}) {
@@ -69,13 +68,13 @@ export default function EditListing({listingID}) {
    * Place holder as of now
    * @param {*} data 
    */
-    const updateListing = async (id, updatedListing) => {
+    /*const updateListing = async (id, updatedListing) => {
       await fetch(`/api/todos/update/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedTodo),
       });
-    };
+    };*/
 
   const handleRegistration = (data) => {
     /**const handleUpdate = async (id, completed) => {
@@ -119,7 +118,7 @@ export default function EditListing({listingID}) {
    * 
    */
   const readInData = () => {
-    var dict=fetchTodos()
+    //var dict=fetchTodos()
     //var id=listingID.id;
     //var dict = getPost(id);
     originalImage = "/ticket.jpeg"
