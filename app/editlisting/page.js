@@ -103,7 +103,7 @@ export default function EditListing({listingID}) {
    */
   const readInData = () => {
     //var id=listingID.id;
-    //var dict = getPost(id);
+    //var dict = getListing();
     originalImage = "/ticket.jpeg"
     originalImage1 = "/bomb.jpeg"
     originalImage2="/ticket.jpeg"
