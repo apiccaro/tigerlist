@@ -129,7 +129,7 @@ export default function EditListing({listingID}) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor:'#D97706',
+      backgroundColor:'#D09B2C',
       color: 'black'
     }}>
       <div >
@@ -712,7 +712,7 @@ export default function EditListing({listingID}) {
                 <button style={{ width: '100px',
                  height: '50px',
                   alignItems: 'center',
-                   margin: "0 0 015px135px" }}>
+                   margin: "0 0 15px 135px" }}>
                     Submit
                     </button>
               </div>
