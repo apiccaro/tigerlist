@@ -14,6 +14,22 @@ const ProductBGStyle ={
     justifyContent: 'center',
     borderRadius: '10px',
 }
+const ProductStyle = {
+    display: 'flex',
+    fontWeight: 'bold', 
+    fontSize: '1.5rem',    
+    color: 'black',
+};
+const PriceStyle = {
+    display: 'flex',
+    fontWeight: 'bold',
+    fontSize: '1.75rem',
+};
+const RowStyle={
+    display: 'flex', 
+    flexDirection: 'row',
+     gap: '8px',
+    }
 
 const BuyProductBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
     return (
@@ -45,8 +61,8 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
                         priority
                     />
                 </Link>
-            </div>
-            <div className="flex flex-row gap-2">
+                </div>
+            <div style={RowStyle}>
                 {/* This link should pass info about the product that is clicked on */}
                 <Link href={{
                     pathname: '/productview',
@@ -62,10 +78,10 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
                         productImages: images
                     } 
                 }} 
-                className="flex text-semibold font-bold text-2xl text-black">
+                style={ProductStyle}>
                     {title}
                 </Link>
-                <div className="flex font-bold text-3xl">
+                <div style={PriceStyle}>
                     {price}
                 </div>
             </div>

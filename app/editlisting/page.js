@@ -179,25 +179,29 @@ export default function EditListing({searchParams}) {
     <div className="flex flex-col bg-yellow-600 min-h-screen">
 
 
-    <main className='listingBuild'>
+    <main style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor:'#D09B2C',
+      color: 'black'
+    }}>
       <div >
         <div>
           <h1 style={{fontWeight: 'bold'}}>Edit Your Listing</h1>
         </div>
         <div >
           <form onSubmit={handleSubmit(handleRegistration, handleError)} >
-            <div className='multipleImages'>
+            <div style={{ float: "left", margin: "60px 100px 0 30px" }}>
               <label
                 htmlFor="image"
 
                 style={{
                   width: '500px',
                   fontWeight: 'bold',
-
                   //if there is not an original image or an uploaded 
                   //image default to "add image" setting
-                  color:"black",
-                  borderRadius: '10px',
+                  
                   height: originalImage || previewImage ? '40px' : '280px',
                   border: originalImage || previewImage ? '4px solid black' : '4px dashed black',
                   cursor: 'pointer',
@@ -259,9 +263,8 @@ export default function EditListing({searchParams}) {
                     htmlFor="image1"
                     style={{
                       width: '115px',
-                      color:"black",
-                      borderRadius: '10px',
-                      fontWeight: 'bold',
+                      borderRadius:'10px',
+                      fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage1 || previewImage1 ? '0px' : '115px',
@@ -335,9 +338,8 @@ export default function EditListing({searchParams}) {
                     htmlFor="image2"
                     style={{
                       width: '115px',
-                      color:"black",
-                      borderRadius: '10px',
-                      fontWeight: 'bold',
+                      borderRadius:'10px',
+                      fontWeight: '600',
                        //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage2 || previewImage2 ? '0px' : '115px',
@@ -411,9 +413,8 @@ export default function EditListing({searchParams}) {
                     htmlFor="image3"
                     style={{
                       width: '115px',
-                      color:"black",
-                      fontWeight: 'bold',
-                      borderRadius: '10px',
+                      borderRadius:'10px',
+                      fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage3 || previewImage3 ? '0px' : '115px',
@@ -488,13 +489,12 @@ export default function EditListing({searchParams}) {
                     htmlFor="image4"
                     style={{
                       width: '115px',
-                      borderRadius: '10px',
-                      fontWeight: 'bold',
+                      borderRadius:'10px',
+                      fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage4 || previewImage4 ? '0px' : '115px',
                       border: originalImage4 || previewImage4 ? '' : '4px dashed black',
-                      borderRadius: '10px',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}

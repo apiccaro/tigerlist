@@ -9,19 +9,32 @@ import {useState} from 'react';
 
 const Wrapper = styled.div``;
 
-const ProductBG = styled.div`
-    background-color: black;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-`;
+const ProductBGStyle ={
+    backgroundColor: 'black',
+    height: '250px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '10px',
+}
+const linkStyle = {
+    display: 'flex',
+    fontWeight: 600, 
+    fontSize: '1.7rem',
+    color:'black',
+};
+const buttonStyle = {
+    display: 'flex',
+    flexDirection: 'row', 
+    gap: '40px',
+    marginTop: '2px',
+};
+
 
 const SellProductBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
     return(
-        <Wrapper>
-            <ProductBG>
+        <div>
+            <div style={ProductBGStyle}>
                 <Link href={{
                     pathname: '/productview',
                     query: {
@@ -35,18 +48,19 @@ const SellProductBox = ({ title, price, description, category, condition, locati
                         listerPhone: phone,
                         productImages: images
                     } 
-                }} className="flex text-semibold text-2xl">
+                }} style={linkStyle}>
                     <Image
                         //src="/product.png"
                         src={images[0]? images[0]:"/photo.svg"}
                         alt="Product Image"
                         accept="image/*"
-                        width={300}
-                        height={100}
+                        //className="dark:invert"
+                        width={200}
+                        height={50}
                         priority
                     />
                 </Link>
-            </ProductBG>
+            </div>
             <div className="flex flex-row gap-40 mt-2">
                 <Link href={{
                     pathname: '/productview',
@@ -61,13 +75,13 @@ const SellProductBox = ({ title, price, description, category, condition, locati
                         listerPhone: phone,
                         productImages: images
                     } 
-                }} className="flex text-semibold text-2xl text-black">
+                }} style={linkStyle}>
                     {title}
                 </Link>
                 {/* Need to send data to ActiveInactive for edit link to access */}
                 <ActiveInactive title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images}/>
             </div>
-        </Wrapper>
+        </div>
     );
 }
 

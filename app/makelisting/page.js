@@ -117,10 +117,16 @@ export default function MakeListing() {
   const handleError = (errors) => { };
 
   return (
-    <main className="listingBuild">
+    <main style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor:'#D09B2C',
+      color: 'black'
+    }}>
       <div >
         <div>
-          <h1>Create Listing</h1>
+          <h1 style={{fontWeight: 'bold'}}>Create Listing</h1>
         </div>
         <div >
           <form onSubmit={handleSubmit(handleRegistration, handleError)} >
@@ -442,8 +448,9 @@ export default function MakeListing() {
               float: "right",
               margin: "60px 100px 0 0",
             }}>
-              <label>
+              <label><span className='formOption'>
                 Enter Title: <br></br>
+                </span>
                 <input
                   id="title"
                   type="text"
@@ -464,7 +471,9 @@ export default function MakeListing() {
               </label><br></br>
               <span></span>
               <label>
-                  Enter Price: <br></br>
+                <span className='formOption'>
+                Enter Price: <br></br>
+                </span>
                 <input type="text"
                   style={{ color: 'black' }}
                   value={price}
@@ -487,7 +496,9 @@ export default function MakeListing() {
 
               </label><br></br>
               <label>
-                Enter Description:<br></br>
+                <span className='formOption'>
+                Enter Description: <br></br>
+                </span>
                 <input type="text"
                   style={{ color: 'black' }}
                   value={description}
@@ -509,7 +520,9 @@ export default function MakeListing() {
               <label
                 for="category"
               > 
-              Pick a Category <br></br>
+              <span className='formOption'>
+              Pick a Category: <br></br>
+              </span>
               </label>
               <select name="category"
                 id="category"
@@ -537,7 +550,9 @@ export default function MakeListing() {
                 {errors?.category && errors.category.message}
               </small><br></br>
               <label for="condition" > 
-              Pick a Label<br></br>
+              <span className='formOption'>
+              Pick a Label: <br></br>
+              </span>
               </label>
 
               <select name="condition"
@@ -563,7 +578,10 @@ export default function MakeListing() {
               </small>
               <br></br>
               <label for="location" > 
-              Pick a Location:<br></br></label>
+              <span className='formOption'>
+              Pick a Label: <br></br>
+              </span>
+              </label>
 
               <select name="location"
                 id="location"
@@ -587,7 +605,9 @@ export default function MakeListing() {
               </small>
               <br></br>
               <label>
-                Enter Email:<br></br>
+                <span className='formOption'>
+                Enter Email: <br></br>
+                </span>
                 <input
                   id="email"
                   type="email"
@@ -611,7 +631,9 @@ export default function MakeListing() {
                 </small>
               </label><br></br>
               <label>
-                Enter Phone Number:<br></br>
+                <span className='formOption'>
+                Enter Phone Number: <br></br>
+                </span>
                 <input
                   id="phonenumber"
                   type="tel"

@@ -11,20 +11,26 @@ import Link from "next/link";
 
 const Wrapper = styled.div``;
 
-const LinkBG = styled.div`
-    background-color: black;
-    height: 30px;
-    width: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-`;
+const LinkBGStyle = {
+    backgroundColor: 'black',
+    height: '30px',
+    width: '80px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '10px',
+}
+const EditStyle = {
+    display: 'flex',
+    fontWeight: '600', 
+    fontSize: `1.3rem`,
+    
+};
 
 const EditLink = ({ title, price, description, category, condition, location, email, phone, images}) => {
     return(
         <Wrapper>
-            <LinkBG>
+            <div style={LinkBGStyle}>
                 <Link href={{
                     pathname: '/editlisting',
                     query: {
@@ -38,7 +44,7 @@ const EditLink = ({ title, price, description, category, condition, location, em
                         testPhone: phone,
                         testImages: images
                     }
-                }} className="flex text-semibold text-xl">
+                }} style={EditStyle}>
                     Edit
                 </Link>
                 {/* <Link
@@ -48,7 +54,7 @@ const EditLink = ({ title, price, description, category, condition, location, em
                     >
                     Edit
                     </Link> */}
-            </LinkBG>
+            </div>
         </Wrapper>
     );
 }
