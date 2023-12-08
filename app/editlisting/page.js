@@ -54,7 +54,7 @@ export default function MakeListing(){
     }
 
     const getListing = async () => {
-    const res = await fetch("/api/listings/read");
+    const res = await fetch("http://localhost:3000/api/listings/read");
     return await res.json();
     };
 
