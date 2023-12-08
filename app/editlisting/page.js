@@ -1,11 +1,10 @@
 'use client'
 
-import { getPost } from '@/azure2/read'; 
 import {useState} from 'react';
 import React from 'react';
 import Image from 'next/image';
 import { useForm } from "react-hook-form";
-import { getPost } from '@/azure2/read';
+// import { getPost } from '@/azure2/read';
 
 
 export default function MakeListing(){
@@ -53,6 +52,19 @@ export default function MakeListing(){
         setReadinTitle("Title: "+titleValue+"\nPrice: "+priceValue+"\nDescription: "+descriptionValue+"\nCategory: "+catValue+"\nCondition: "+condValue);
         setReadinTitle2("\nLocation: "+locValue+"\nEmail: "+emailValue+"\nPhone"+phoneValue+"\nImage"+imageValue);
     }
+
+    const getListing = async () => {
+    const res = await fetch("/api/listings/read");
+    return await res.json();
+    };
+
+    /*
+     * Reads in data from the database and autopopulates the
+     * form with the particular listing data
+     * Place holder as of now
+     * 
+     */
+
     const readInData=()=>{
        originalImage="/ticket.jpeg"
         originalTitle="couch"
