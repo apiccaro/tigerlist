@@ -2,9 +2,41 @@
 import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
+//USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
+
+/*DIDNT WORK
+/ This function runs only on the server side
+export async function getStaticProps() {
+  // Instead of fetching your `/api` route you can call the same
+  // function directly in `getStaticProps`
+  const posts = await loadPosts()
+ 
+  // Props returned will be passed to the page component
+  return { props: { title } }
+}*/
+const getListing = async () => {
+  const response = await fetch("/api/read",{
+    method:"GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const data = await response.json();
+  console.log(data)
+  return data;
+};
 
 
 export default function EditListing({listingID}) {
+  useEffect(() => {
+    (async () => {
+      const data = await getListing();
+      setTitle(data);
+    })();
+  }, []);
   //var id=listingID.id;
   
   const SMALLIMAGE='100px';
@@ -72,14 +104,14 @@ export default function EditListing({listingID}) {
       await fetch(`/api/todos/update/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedTodo),
+        body: JSON.stringify(updatedListing),
       });
     };*/
 
   const handleRegistration = (data) => {
     /**const handleUpdate = async (id, completed) => {
-      const updatedListings= listings.find((todo) => todo.id === id);
-      await updateTodo(id, updatedTodo);
+      const updatedListing= listings.find((listing) => listing.id === id);
+      await updateListing(id, updatedListing);
     };**/
   
     console.log(data);
@@ -107,10 +139,25 @@ export default function EditListing({listingID}) {
     setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
     setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
   }
-  /*const getListing = async () => {
-    const res = await fetch("/api/listings/read");
-    return await res.json();
-  };*/
+
+  
+  
+    /**
+   * async function getData() {
+  const res = await fetch('https://api.example.com/...')
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+   */
+  
+  
    /**
    * Reads in data from the database and autopopulates the
    * form with the particular listing data
@@ -120,7 +167,6 @@ export default function EditListing({listingID}) {
   const readInData = () => {
     //var dict=fetchTodos()
     //var id=listingID.id;
-    //var dict = getPost(id);
     originalImage = "/ticket.jpeg"
     originalImage1 = "/bomb.jpeg"
     originalImage2="/ticket.jpeg"
