@@ -15,23 +15,22 @@ var allListings = [{title: "Hockey Ticket", price: "$5", description: "Ticket fo
                     {title: "Jacket", price: "$30", description: "Brown leather jacket. Good condition. Size medium.", category: "Clothing", condition: "Used-Good", location: "West Campus", email: "student2@coloradocollege.edu", phone: "2071233333", images: ["/testimage1.jpeg", "/testimage5.jpeg", "/testimage2.jpeg"]},
                     {title: "Carpool", price: "$15", description: "Driving to DIA Wednesday at 2:30pm.", category: "Carpool", condition: "New", location: "East Campus", email: "student3@coloradocollege.edu", phone: "5555552222", images: [""]}]
 
-// This youtube video provided grid formatting help https://www.youtube.com/watch?v=dTFXufTgfOE
-const ProductsGrid = styled.div`
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 20px;
-`;
+const ProductsGridStyle={
+    marginTop: '20px',
+    marginLeft: '20px',
+    marginRight: '20px',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    gap:'20px',
+}
 
 export default function BuyProducts(){
     return(
-        <ProductsGrid className="flex flex-grow">
+        <div style={ProductsGridStyle} className="flex flex-grow">
             {allListings.map((listing, index) => (
                 <BuyProductBox key={index} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images}/>
             ))}
-        </ProductsGrid>
+        </div>
     );
 }
 

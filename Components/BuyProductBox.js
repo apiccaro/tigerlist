@@ -4,22 +4,21 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import { DynamicServerError } from "next/dist/client/components/hooks-server-context";
 
-const Wrapper = styled.div``;
-
-const ProductBG = styled.div`
-    background-color: black;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-`;
+const ProductBGStyle ={
+    backgroundColor: 'black',
+    height: '250px',
+    display: 'flex',
+    alignItems: 'center', 
+    justifyContent: 'center',
+    borderRadius: '10px',
+}
 
 const BuyProductBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
     return (
-    <Wrapper>
-            <ProductBG>
+    <div>
+            <div style={ProductBGStyle}>
                 {/* This link should pass info about the product that is clicked on */}
                 <Link href={{
                     pathname: '/productview',
@@ -46,7 +45,7 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
                         priority
                     />
                 </Link>
-            </ProductBG>
+            </div>
             <div className="flex flex-row gap-2">
                 {/* This link should pass info about the product that is clicked on */}
                 <Link href={{
@@ -70,12 +69,14 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
                     {price}
                 </div>
             </div>
-        </Wrapper>
+        </div>
     )
 }
 
-
 export default BuyProductBox;
+
+
+//export default BuyProductBox;
 //     return(
 //         <Wrapper>
 //             <ProductBG>

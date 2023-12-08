@@ -75,4 +75,29 @@ h2{
 a:hover {
   text-decoration: underline;
 }
+.nav_menu{
+  display: flex;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+a:hover {
+  text-decoration: underline;
+}
+.formOption{
+  font-weight: 600;
+}
+.listingBuild{
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+  color: 'black';
+}
+.mulitpleImages{
+float: "left";
+ margin: "60px 100px 0 30px";
+}
+
 

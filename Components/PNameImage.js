@@ -26,12 +26,6 @@ import { useState } from 'react';
     var originalImage3 = images[3];
     var originalImage4 = images[4];
 
-    console.log(images[0]);
-    console.log(originalImage);
-    console.log(images[1]);
-    console.log(originalImage1);
-
-
     // Need catches for when any of the images are null
     return(
         <aside className="flex flex-col text-white p-4">

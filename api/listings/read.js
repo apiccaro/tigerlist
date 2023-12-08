@@ -1,7 +1,6 @@
 const sql = require('mssql');
-const getConfig = require('./azureAuth.js');
 const useDB = false
-const {getValidRequest,testMethod_access} = require('./access.js');
+const {getValidRequest,testMethod_access} = require('./access.js.js');
 
 
 //For external use. Will return sample data until the new database methods are added. 
