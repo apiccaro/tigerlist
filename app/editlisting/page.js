@@ -14,29 +14,27 @@ export async function getStaticProps() {
   // Props returned will be passed to the page component
   return { props: { title } }
 }*/
-const getListing = async () => {
+/*const getListing = async () => {
   const response = await fetch("/api/read",{
     method:"GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
+    });
   const data = await response.json();
-  console.log(data)
   return data;
+};*/
+const makeListing = async (listingDict) => {
+  const response = await fetch("/api/write",{
+    method:"PUT",
+    body : JSON.stringify({
+    listing:(listingDict)
+    })
+    },
+    );
+  await response;
 };
 
 
 export default function EditListing({listingID}) {
-  useEffect(() => {
-    (async () => {
-      const data = await getListing();
-      setTitle(data);
-    })();
-  }, []);
+  
   //var id=listingID.id;
   
   const SMALLIMAGE='100px';
@@ -90,6 +88,25 @@ export default function EditListing({listingID}) {
   var originalImage2;
   var originalImage3;
   var originalImage4;
+
+const getData =async () => {
+      const data = await getListing();
+      originalTitle=data.title;
+
+      setDescription(data.description);
+      setPrice(data.price);
+      setCat(data.category);
+      setCond(data.condition);
+      setLoc(data.location);
+      setEmail(data.email);
+      setPhoneNumber(data.phoneValue);
+      console.log(data.images)
+      setPreviewImage(data.images[0])
+      setPreviewImage1(data.images[1])
+      setPreviewImage2(data.images[2])
+      setPreviewImage3(data.images[3])
+      setPreviewImage4(data.images[4])
+}
 /**
    * Handles the onSubmit action of the form
    */
@@ -114,7 +131,6 @@ export default function EditListing({listingID}) {
       await updateListing(id, updatedListing);
     };**/
   
-    console.log(data);
     const titleValue = data.title;
     const priceValue = data.price;
     const descriptionValue = data.description;
@@ -136,6 +152,8 @@ export default function EditListing({listingID}) {
       image: imageValue,
       active: "true"
     }
+    makeListing(dict);
+
     setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
     setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
   }
@@ -164,22 +182,7 @@ export default function EditListing({listingID}) {
    * Place holder as of now
    * 
    */
-  const readInData = () => {
-    //var dict=fetchTodos()
-    //var id=listingID.id;
-    originalImage = "/ticket.jpeg"
-    originalImage1 = "/bomb.jpeg"
-    originalImage2="/ticket.jpeg"
-    //originalImage3="/ticket.jpeg"
-    originalTitle = 'couch'
-    originalPrice = "2000"
-    originalDescription = "black and leather"
-    originalCategory = "textbook"
-    originalCondition = "new"
-    originalLocation = "offcampus"
-    originalEmail = "ap@coloradocollege.edu"
-    originalPhone = "9787657788"
-  }
+  
   /*useEffect(() => {
     (async () => {
       const todos = await fetchTodos();
@@ -192,7 +195,6 @@ export default function EditListing({listingID}) {
    * @param {list} errors 
    */
   const handleError = (errors) => { };
-  readInData();
   return (
     <main style={{
       display: 'flex',

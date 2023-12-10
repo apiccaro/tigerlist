@@ -3,7 +3,16 @@
 import { useState } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-
+const makeListing = async (listingDict) => {
+  const response = await fetch("/api/write",{
+    method:"PUT",
+    body : JSON.stringify({
+    listing:(listingDict)
+    })
+    },
+    );
+  await response;
+};
 
 export default function MakeListing() {
   const SMALLIMAGE = '100px';
@@ -81,9 +90,9 @@ export default function MakeListing() {
       image: imageValue,
       active: "true",
     }
+    makeListing(dict);
 
-    setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
-    setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
+    
   }
   /**
    * Takes in a list of error messages and applies them when necessary 
