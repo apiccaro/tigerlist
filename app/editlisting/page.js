@@ -15,24 +15,28 @@ export async function getStaticProps() {
   // Props returned will be passed to the page component
   return { props: { title } }
 }*/
-
-
-
-const getListing = async () => { //creates an async function which makes a GET request to the API endpoint 
-  // we will use fetch function to make a GET request to the API endpoint
-  // await awaits the response 
-  const res = await fetch("http://localhost:3000//api/listing",{ 
-    method:"GET", //same as defalt so I think this line is optional   
-    headers: {
-      "Content-Type": "application/json", //indicates that the expected response is in JSON format 
+const getListing = async () => {
+  const response = await fetch("/api/getListing",{
+    method:"GET",
+    });
+  const data = await response.json();
+  return data;
+};
+const makeListing = async (listingDict) => {
+  const response = await fetch("/api/putListing",{
+    method:"PUT",
+    body : JSON.stringify({
+    listing:(listingDict)
+    })
     },
-  });
-  if (!res.ok) //checks if response is ok, IE in the 200-299 range 
-  {
-    throw new Error('Failed to fetch data')
-  }
-  const data = await res.json(); //parses the response body as a JSON. server must return JSON data!
-  console.log(data)
+    );
+  await response;
+};
+const getAllListings = async () => {
+  const response = await fetch("/api/getAllListings",{
+    method:"GET",
+    });
+  const data = await response.json();
   return data;
 };
 
@@ -52,12 +56,7 @@ const getListing = async () => { //creates an async function which makes a GET r
 ////////// RENDERING //////////
 
 export default function EditListing({listingID}) {
-  useEffect(() => {
-    (async () => {
-      const data = await getListing();
-      setTitle(data);
-    })();
-  }, []);
+  
   //var id=listingID.id;
   
   const SMALLIMAGE='100px';
@@ -111,6 +110,25 @@ export default function EditListing({listingID}) {
   var originalImage2;
   var originalImage3;
   var originalImage4;
+
+const getData =async () => {
+      const data = await getListing();
+      originalTitle=data.title;
+
+      setDescription(data.description);
+      setPrice(data.price);
+      setCat(data.category);
+      setCond(data.condition);
+      setLoc(data.location);
+      setEmail(data.email);
+      setPhoneNumber(data.phoneValue);
+      console.log(data.images)
+      setPreviewImage(data.images[0])
+      setPreviewImage1(data.images[1])
+      setPreviewImage2(data.images[2])
+      setPreviewImage3(data.images[3])
+      setPreviewImage4(data.images[4])
+}
 /**
    * Handles the onSubmit action of the form
    */
@@ -135,7 +153,6 @@ export default function EditListing({listingID}) {
       await updateListing(id, updatedListing);
     };**/
   
-    console.log(data);
     const titleValue = data.title;
     const priceValue = data.price;
     const descriptionValue = data.description;
@@ -157,6 +174,8 @@ export default function EditListing({listingID}) {
       image: imageValue,
       active: "true"
     }
+    makeListing(dict);
+
     setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
     setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
   }
@@ -185,22 +204,7 @@ export default function EditListing({listingID}) {
    * Place holder as of now
    * 
    */
-  const readInData = () => {
-    //var dict=fetchTodos()
-    //var id=listingID.id;
-    originalImage = "/ticket.jpeg"
-    originalImage1 = "/bomb.jpeg"
-    originalImage2="/ticket.jpeg"
-    //originalImage3="/ticket.jpeg"
-    originalTitle = 'couch'
-    originalPrice = "2000"
-    originalDescription = "black and leather"
-    originalCategory = "textbook"
-    originalCondition = "new"
-    originalLocation = "offcampus"
-    originalEmail = "ap@coloradocollege.edu"
-    originalPhone = "9787657788"
-  }
+  
   /*useEffect(() => {
     (async () => {
       const todos = await fetchTodos();
@@ -213,7 +217,6 @@ export default function EditListing({listingID}) {
    * @param {list} errors 
    */
   const handleError = (errors) => { };
-  readInData();
   return (
     <main style={{
       display: 'flex',
