@@ -55,8 +55,8 @@ const SellProductBox = ({ title, price, description, category, condition, locati
                         alt="Product Image"
                         accept="image/*"
                         //className="dark:invert"
-                        width={200}
-                        height={50}
+                        width={300}
+                        height={100}
                         priority
                     />
                 </Link>

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import { DynamicServerError } from "next/dist/client/components/hooks-server-context";
+import React, { useState } from 'react';
 
 const ProductBGStyle ={
     backgroundColor: 'black',
@@ -32,6 +33,13 @@ const RowStyle={
     }
 
 const BuyProductBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
+
+    const [isActive, setIsActive] = useState(true);
+
+    const toggleFlagButton = () => {
+        setIsActive(!isActive);
+    };
+
     return (
     <div>
             <div style={ProductBGStyle}>
@@ -84,6 +92,11 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
                 <div style={PriceStyle}>
                     {price}
                 </div>
+                {/* <button
+                style={{ width: '80px', height: '30px', justifyContent: 'center', alignItems: 'center', borderRadius: '10px', fontSize:"1.3rem", backgroundColor: isActive ? 'white' : 'black', color: isActive ? 'black' : 'white'}}
+                onClick={toggleFlagButton} className="flex font-bold text-xl">
+                {isActive ? '/unflagged.svg' : '/flagged.svg'}
+                </button> */}
             </div>
         </div>
     )
@@ -91,34 +104,3 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
 
 export default BuyProductBox;
 
-
-//export default BuyProductBox;
-//     return(
-//         <Wrapper>
-//             <ProductBG>
-//                 {/* This link should pass info about the product that is clicked on */}
-//                 <Link href={'/productview'} className="flex text-semibold text-2xl">
-//                     <Image
-//                         src="/product.png"
-//                         //src={image}
-//                         alt="Product Image"
-//                         accept="image/*"
-//                         className="dark:invert"
-//                         width={200}
-//                         height={50}
-//                         priority
-//                     />
-//                 </Link>
-//             </ProductBG>
-//             <div className="flex flex-row gap-8">
-//                 {/* This link should pass info about the product that is clicked on */}
-//                 <Link href={'/productview'} className="flex text-semibold text-2xl text-black">
-//                     Title
-//                 </Link>
-//                 <div className="flex font-bold text-3xl">
-//                     $100
-//                 </div>
-//             </div>
-//         </Wrapper>
-//     );
-// }
