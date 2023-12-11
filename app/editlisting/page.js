@@ -2,6 +2,8 @@
 import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
+
+
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 
 
@@ -15,13 +17,15 @@ export async function getStaticProps() {
   // Props returned will be passed to the page component
   return { props: { title } }
 }*/
+
 const getListing = async () => {
-  const response = await fetch("/api/getListing",{
+  const response = await fetch("http://localhost:3000/api/getListing",{
     method:"GET",
     });
   const data = await response.json();
   return data;
 };
+
 const makeListing = async (listingDict) => {
   const response = await fetch("/api/putListing",{
     method:"PUT",
@@ -32,10 +36,11 @@ const makeListing = async (listingDict) => {
     );
   await response;
 };
+
 const getAllListings = async () => {
   const response = await fetch("/api/getAllListings",{
     method:"GET",
-    });
+    });n
   const data = await response.json();
   return data;
 };
@@ -112,8 +117,14 @@ export default function EditListing({listingID}) {
   var originalImage4;
 
 const getData =async () => {
+
+      ////////////////////////////
+      // DISPLAYING THE RESULTS //
+      ////////////////////////////
       const data = await getListing();
-      originalTitle=data.title;
+      console.log(data); 
+      setTitle(data.title);
+
 
       setDescription(data.description);
       setPrice(data.price);
@@ -128,6 +139,7 @@ const getData =async () => {
       setPreviewImage2(data.images[2])
       setPreviewImage3(data.images[3])
       setPreviewImage4(data.images[4])
+      
 }
 /**
    * Handles the onSubmit action of the form
@@ -146,7 +158,7 @@ const getData =async () => {
         body: JSON.stringify(updatedListing),
       });
     };*/
-
+ 
   const handleRegistration = (data) => {
     /**const handleUpdate = async (id, completed) => {
       const updatedListing= listings.find((listing) => listing.id === id);
@@ -174,6 +186,9 @@ const getData =async () => {
       image: imageValue,
       active: "true"
     }
+
+
+    //
     makeListing(dict);
 
     setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
@@ -217,6 +232,10 @@ const getData =async () => {
    * @param {list} errors 
    */
   const handleError = (errors) => { };
+  ///////////////////////////////////
+  // ACTUALLY CALLING THE FUNCTION //
+  /////////////////////////////////// 
+  getData();
   return (
     <main style={{
       display: 'flex',
