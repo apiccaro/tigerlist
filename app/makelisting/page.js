@@ -525,7 +525,8 @@ export default function MakeListing() {
                 </small>
 
               </label><br></br>
-              <label> <span className='formOption'>
+              <label>
+                <span className='formOption'>
                 Enter Description: <br></br>
                 </span>
                 <input type="text"
@@ -548,7 +549,8 @@ export default function MakeListing() {
 
               <label
                 for="category"
-              >  <span className='formOption'>
+              > 
+              <span className='formOption'>
               Pick a Category: <br></br>
               </span>
               </label>
@@ -632,7 +634,8 @@ export default function MakeListing() {
                 {errors?.location && errors.location.message}
               </small>
               <br></br>
-              <label> <span className='formOption'>
+              <label>
+                <span className='formOption'>
                 Enter Email: <br></br>
                 </span>
                 <input
@@ -658,7 +661,7 @@ export default function MakeListing() {
                 </small>
               </label><br></br>
               <label>
-              <span className='formOption'>
+                <span className='formOption'>
                 Enter Phone Number: <br></br>
                 </span>
                 <input

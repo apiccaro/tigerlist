@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 //import { getPost } from '@/azure2/read';
 
 
-export default function EditListing({listingID}) {
+export default function EditListing({searchParams}) {
   //var id=listingID.id;
   
   const SMALLIMAGE='100px';
@@ -69,6 +69,45 @@ export default function EditListing({listingID}) {
    * Place holder as of now
    * @param {*} data 
    */
+
+    /*const updateListing = async (id, updatedListing) => {
+      await fetch(`/api/todos/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTodo),
+      });
+    };*/
+
+    const { productID} = searchParams;
+    const {testPrice} = searchParams;
+    const {testDescription} = searchParams;
+    const {testCategory} = searchParams;
+    const {testCondition} = searchParams;
+    const {testLocation} = searchParams;
+    const {testEmail} = searchParams;
+    const {testPhone} = searchParams;
+    const {testImages} = searchParams;
+
+    var originalImage = testImages[0];
+    var originalImage1 = testImages[1];
+    var originalImage2 = testImages[2];
+    var originalImage3 = testImages[3];
+    var originalImage4 = testImages[4];
+
+    //var originalImage=null;
+    var originalTitle;
+    var originalPrice;
+    var originalDescription;
+    var originalCategory;
+    var originalCondition;
+    var originalLocation;
+    var originalEmail;
+    var originalLocation;
+    var originalEmail;
+    var originalPhone;
+    // var testTitle = testDict["testTitle"];
+    // var testPrice = testDict["testPrice"];
+
   const handleRegistration = (data) => {
     console.log(data);
     const titleValue = data.title;
@@ -103,10 +142,10 @@ export default function EditListing({listingID}) {
    */
   const readInData = () => {
     //var id=listingID.id;
-    //var dict = getListing();
-    originalImage = "/ticket.jpeg"
-    originalImage1 = "/bomb.jpeg"
-    originalImage2="/ticket.jpeg"
+    //var dict = getPost(id);
+    // originalImage = "/ticket.jpeg"
+    // originalImage1 = "/bomb.jpeg"
+    // originalImage2="/ticket.jpeg"
     //originalImage3="/ticket.jpeg"
     originalTitle = "couch"
     originalPrice = "2000"
@@ -518,8 +557,8 @@ export default function EditListing({listingID}) {
                   id="title"
                   type="text"
                   style={{ color: 'black' }}
-                  defaultValue={originalTitle}
-                  value={title}
+                  //defaultValue={originalTitle}
+                  value={productID}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters
                   onChange={e => setTitle(e.target.value)}
@@ -538,8 +577,8 @@ export default function EditListing({listingID}) {
                 </span>
                 <input type="text"
                   style={{ color: 'black' }}
-                  defaultValue={originalPrice}
-                  value={price}
+                  //defaultValue={originalPrice}
+                  value={testPrice}
                   placeholder='Price'
                   onChange={e => setPrice(e.target.value)}
                   {//confirms that users submit a price under 10 digits
@@ -562,8 +601,8 @@ export default function EditListing({listingID}) {
                 </span>
                 <input type="text"
                   style={{ color: 'black' }}
-                  value={description}
-                  defaultValue={originalDescription}
+                  value={testDescription}
+                  //defaultValue={originalDescription}
                   placeholder='Description'
                   onChange={e => setDescription(e.target.value)}
                   //confirms that users submit a description under 500 characters
@@ -584,8 +623,8 @@ export default function EditListing({listingID}) {
                 </span>
               <select name="category"
                 id="category"
-                defaultValue={originalCategory}
-                value={cat}
+                //defaultValue={originalCategory}
+                value={testCategory}
                 onChange={e => setCat(e.target.value)}
                 //confirms that users submit a category
                 {...register("category", {
@@ -610,8 +649,8 @@ export default function EditListing({listingID}) {
                 </span>
               <select name="condition"
                 id="condition"
-                defaultValue={originalCondition}
-                value={cond}
+                //defaultValue={originalCondition}
+                value={testCondition}
                 onChange={e => setCond(e.target.value)}
                 //confirms that users submit a condition
                 {...register("condition", {
@@ -635,8 +674,8 @@ export default function EditListing({listingID}) {
                 </span>
               <select name="location"
                 id="location"
-                value={loc}
-                defaultValue={originalLocation}
+                value={testLocation}
+                //defaultValue={originalLocation}
                 onChange={e => setLoc(e.target.value)}
                 //confirms that users submit a location
                 {...register("location", {
@@ -661,9 +700,9 @@ export default function EditListing({listingID}) {
                   id="email"
                   type="email"
                   style={{ color: 'black' }}
-                  value={email}
+                  value={testEmail}
                   placeholder='Email'
-                  defaultValue={originalEmail}
+                  //defaultValue={originalEmail}
                   onChange={e => setEmail(e.target.value)}
                   //confirms that users submit an email that matches a CC email.
                   {...register("email", {
@@ -686,9 +725,9 @@ export default function EditListing({listingID}) {
                   id="phonenumber"
                   type="tel"
                   style={{ color: 'black' }}
-                  value={phonenumber}
+                  value={testPhone}
                   placeholder='Phone Number'
-                  defaultValue={originalPhone}
+                  //defaultValue={originalPhone}
                   onChange={e => setPhoneNumber(e.target.value)}
                   //confirms that users submit a 10 digit phone number
                   {...register("phonenumber", {

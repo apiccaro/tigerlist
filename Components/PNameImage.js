@@ -1,50 +1,43 @@
 // The product name and image layout that are placed in the product grid
 'use client'
 
-import Image from "next/image";
 import { useState } from 'react';
 
-const readInData = () => {
-    originalImage = "/ticket.jpeg"
-    originalImage1 = "/ticket.jpeg"
-    originalImage2="/ticket.jpeg"
-    //originalImage3="/ticket.jpeg"
-
-    originalTitle = "couch"
-    originalPrice = "2000"
-    originalDescription = "black and leather"
-    originalCategory = "textbook"
-    originalCondition = "new"
-    originalLocation = "offcampus"
-    originalEmail = "ap@coloradocollege.edu"
-    originalPhone = "9787657788"
-  }
-
-export default function PNI() {
+  const PNI = ({ title, price, description, category, condition, location, email, phone, images }) => {
     const [previewImage, setPreviewImage] = useState();
     const [previewImage1, setPreviewImage1] = useState();
     const [previewImage2, setPreviewImage2] = useState();
     const [previewImage3, setPreviewImage3] = useState();
     const [previewImage4, setPreviewImage4] = useState();
-    var originalImage = '/testimage1.jpeg';
-    var originalImage1 = '/testimage2.jpeg';
-    var originalImage2 = '/testimage3.jpeg';
-    var originalImage3 = '/testimage4.jpeg';
-    var originalImage4 = '/testimage5.jpeg';
+    //var originalImage = '/testimage1.jpeg';
+    //var originalImage = null;
+    //var originalImage1 = '/testimage2.jpeg';
+    //var originalImage1 = null;
+    //var originalImage2 = '/testimage3.jpeg';
+    //var originalImage2 = null;
+    //var originalImage3 = '/testimage4.jpeg';
+    //var originalImage3 = null;
+    //var originalImage4 = '/testimage5.jpeg';
     //var originalImage4 = null;
+
+    var originalImage = images[0];
+    var originalImage1 = images[1];
+    var originalImage2 = images[2];
+    var originalImage3 = images[3];
+    var originalImage4 = images[4];
 
     // Need catches for when any of the images are null
     return(
         <aside className="flex flex-col text-white p-4">
 
-            <h2 className="flex pl-10 mt-5 text-black text-4xl font-semibold"> Product Name </h2>
-            <h2 className="flex pl-10 mt-5 text-white text-3xl font-semibold"> $100 </h2>
+            <h2 className="flex pl-10 mt-5 text-black text-4xl font-semibold"> {title} </h2>
+            <h2 className="flex pl-10 mt-5 text-white text-3xl font-semibold"> {price} </h2>
 
             <div style={{ float: "left", margin: "10px 40px 0 30px"}}>
                 <img
                 id="imagePreview"
                 //if no previewImage- load in the original image
-                src={previewImage ? previewImage : setPreviewImage(originalImage)}
+                src={previewImage ? previewImage : originalImage? setPreviewImage(originalImage):"/photo.svg"}
                 //if not original image- do not show image component at all
                 style={{
                     borderRadius: '10px',
@@ -58,7 +51,7 @@ export default function PNI() {
                     <img
                     id="imagePreview1"
                     //if no previewImage- load in the original image
-                    src={previewImage1 ? previewImage1 : setPreviewImage1(originalImage1)}
+                    src={previewImage1 ? previewImage1 : originalImage1? setPreviewImage1(originalImage1):"/photo.svg"}
                     //if not original image- do not show image component at all
                     style={{
                         borderRadius: '10px',
@@ -83,7 +76,8 @@ export default function PNI() {
                     <img
                     id="imagePreview2"
                     //if no previewImage- load in the original image
-                    src={previewImage2 ? previewImage2 : setPreviewImage2(originalImage2)}
+                    //src={previewImage2 ? previewImage2 : setPreviewImage2(originalImage2)}
+                    src={previewImage2 ? previewImage2 : originalImage2? setPreviewImage2(originalImage2):"/photo.svg"}
                     //if not original image- do not show image component at all
                     style={{
                         borderRadius: '10px',
@@ -108,7 +102,8 @@ export default function PNI() {
                     <img
                     id="imagePreview3"
                     //if no previewImage- load in the original image
-                    src={previewImage3 ? previewImage3 : setPreviewImage3(originalImage3)}
+                    //src={previewImage3 ? previewImage3 : setPreviewImage3(originalImage3)}
+                    src={previewImage3 ? previewImage3 : originalImage3? setPreviewImage3(originalImage3):"/photo.svg"}
                     //if not original image- do not show image component at all
                     style={{
                         borderRadius: '10px',
@@ -133,7 +128,8 @@ export default function PNI() {
                     <img
                     id="imagePreview4"
                     //if no previewImage- load in the original image
-                    src={previewImage4 ? previewImage4 : setPreviewImage4(originalImage4)}
+                    //src={previewImage4 ? previewImage4 : setPreviewImage4(originalImage4)}
+                    src={previewImage4 ? previewImage4 : originalImage4? setPreviewImage4(originalImage4):"/photo.svg"}
                     //if not original image- do not show image component at all
                     style={{
                         borderRadius: '10px',
@@ -163,3 +159,5 @@ export default function PNI() {
         </aside>
     );
 }
+
+export default PNI;

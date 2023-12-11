@@ -3,17 +3,16 @@
 
 import styled from "styled-components";
 
-const FilterOptions = styled.div`
-    display: col;
-    padding: 5px;
-    padding-top: 20px;
-    
-`;
+const FilterOptions = {
+    display: 'col',
+    padding: '20px 20px 20px',
+    // Add this line for left padding
+}
 
 export default function Filter(){
     return(
-        <FilterOptions>
-            <div className="text-bold text-3xl text-black">Filter Options</div><br></br>
+        <div style={FilterOptions}>
+            <div style={{ fontWeight: 'bold', fontSize: '1.75rem', color: 'black', }}>Filter Options</div><br></br>
             <label for="category"> </label> 
                 <select name="category" id="category" style={{ color: 'grey' }}> 
                 <option value="" disabled selected>Category</option>
@@ -41,6 +40,6 @@ export default function Filter(){
                 <option value="West Campus">West Campus</option> 
                 <option value="Off Campus">Off Campus</option> 
             </select><br></br>
-        </FilterOptions>
+        </div>
     );
 }

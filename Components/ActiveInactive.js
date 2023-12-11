@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import EditLink from './EditLink';
 import Link from 'next/link';
 
-export default function ActiveInactive() {
-    // Used in button state to change button color and text
-    const [isActive, setIsActive] = useState(true);
+const ActiveInactive = ({ title, price, description, category, condition, location, email, phone, images}) => {
+  // Used in button state to change button color and text
+  const [isActive, setIsActive] = useState(true);
 
   const toggleButtonText = () => {
     setIsActive(!isActive);
@@ -13,9 +13,9 @@ export default function ActiveInactive() {
 
   return (
     <div>
-        <EditLink />
+        <EditLink title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images}/>
         <button
-        style={{ width: '80px', height: '30px', justifyContent: 'center', alignItems: 'center', borderRadius: '10px', backgroundColor: isActive ? 'white' : 'black', color: isActive ? 'black' : 'white'}}
+        style={{ width: '80px', height: '30px', justifyContent: 'center', alignItems: 'center', borderRadius: '10px', fontSize:"1.3rem", backgroundColor: isActive ? 'white' : 'black', color: isActive ? 'black' : 'white'}}
         onClick={toggleButtonText} className="flex font-bold text-xl"
         >
         {isActive ? 'Active' : 'Hold'}
@@ -23,3 +23,5 @@ export default function ActiveInactive() {
     </div>
   );
 }
+
+export default ActiveInactive;

@@ -28,7 +28,7 @@ const ContactBoxStyle = {
     paddingRight: '20px'
 }
 
-export default function PI() {
+const ProductInfo = ({ title, price, description, category, condition, location, email, phone }) => {
     return(
         <aside style={{display: "flex", flexDirection: 'col', gap:'3rem', text:"white", padding:"1rem", }} className="flex flex-col gap-10 text-white p-4 mt-5">
             <div style={InfoBoxStyle}>
@@ -40,10 +40,10 @@ export default function PI() {
                         Product Details
                     </h3>
                     <div className="font-bold">
-                        Description:
+                        Description: {description}
                     </div>
                     <div className="font-bold">
-                        Location:
+                        Location: {location}
                     </div>
                     
                 </div>
@@ -57,13 +57,15 @@ export default function PI() {
                         Contact Information
                     </h3>
                     <div className="font-bold">
-                        Email:
+                        Email: {email}
                     </div>
                     <div className="font-bold">
-                        Phone Number:
+                        Phone Number: {phone}
                     </div>
                 </div>
             </div>
         </aside>
     );
 }
+
+export default ProductInfo;
