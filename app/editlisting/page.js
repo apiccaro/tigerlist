@@ -14,15 +14,15 @@ export async function getStaticProps() {
   // Props returned will be passed to the page component
   return { props: { title } }
 }*/
-/*const getListing = async () => {
-  const response = await fetch("/api/read",{
+const getListing = async () => {
+  const response = await fetch("/api/getListing",{
     method:"GET",
     });
   const data = await response.json();
   return data;
-};*/
+};
 const makeListing = async (listingDict) => {
-  const response = await fetch("/api/write",{
+  const response = await fetch("/api/putListing",{
     method:"PUT",
     body : JSON.stringify({
     listing:(listingDict)
@@ -30,6 +30,13 @@ const makeListing = async (listingDict) => {
     },
     );
   await response;
+};
+const getAllListings = async () => {
+  const response = await fetch("/api/getAllListings",{
+    method:"GET",
+    });
+  const data = await response.json();
+  return data;
 };
 
 
