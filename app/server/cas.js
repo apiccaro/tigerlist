@@ -1,45 +1,25 @@
-// from GitHub 
+// script from GitHub repo: https://github.com/produck/cas-client/blob/master/README.md 
 
-//imports Node.js http module 
 const http = require('http');
-//imports cas-client module 
-const httpCasClient = require('http-cas-client');
+const httpCasClient = require('http-cas-client'); //import the cas module from above repo 
 
-//initializes cas client handler using https-cas-client module we just imported 
-//configures handler with the url prefix, serverName
-const handler = httpCasClient({
-    /**
-     * TODO: 
-     * casServerUrlPrefix: replace with CC's CAS server URL
-    */
-  casServerUrlPrefix: 'https://cas.coloradocollege.edu/cas/',
-  serverName: 'http://localhost:3000'
+const handler = httpCasClient({ // creating a handler with my specific configurations 
+  casServerUrlPrefix: 'https://cas.coloradocollege.edu/cas',
+  serverName: 'https://tigerlist.vercel.app'
 });
 
-// now creates an HTTP server for request handling
 
-// Extracts the principal (user identity) and ticket from the request object.
-// Logs the principal and ticket to the console.
-// Performs any additional logic you might want to add (commented as "// your statements...").
-// Sends the response with the text 'hello world'.
-http.createServer(async (req, res) => {
-    // if CAS authentification fails OR
-    // if user is not authenticated, end response 
+const casHandler = async (req, res) => {
   if (!await handler(req, res)) {
-    return res.end();
+    return false; // return false to indicate authentication failure
   }
 
-  //res.redirect('/makelisting');
-
-  /**
-   * NOT SURE IF BELOW IS NECESSARY 
-   */
-  // extract princial (user ID) and ticket from request object 
+  // additional logic...
   const { principal, ticket } = req;
   console.log(principal, ticket);
   // { user: 'test', attributes: { ... } }
 
-  // your statements...
-  res.end('hello world');
-//listening on port 80
-}).listen(80);
+  return true; // return true to indicate successful authentication
+};
+
+module.exports = casHandler; // export the casHandler function to make available for server.js

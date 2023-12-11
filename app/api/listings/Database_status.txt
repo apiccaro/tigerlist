@@ -1,0 +1,57 @@
+
+FULLY FUNCTIONAL:
+read.js/getUser() - takes user key (email), returns correct row or empty list
+read.js/getAllUsers() - returns all rows in UserTable
+write.js/writeUser() - takes user dictionary, adds to database
+write.js/clearUsers() - clears all data from UserTable
+write.js/clearPosts() - clears all data from PostTable
+write.js/createUserTable() - recreates UserTable
+write.js/createPostTable() - recreates PostTable
+write.js/deletePostTable() - deletes PostTable
+write.js/deleteUserTable() - deletes UserTable
+
+Other test methods without issues:
+read.js/sampleUserDict() - gives sample user dictionary based on given id. An invalid id defaults to roccy@coloradocollege.edu
+read.js/samplePostDict() - gives sample post dictionary based on given id. An invalid id defaults to defaultKey
+
+TO DO:
+- tls issue
+- fix this async bs (good now?)
+- turn results into dictionaries
+- copy user functionality to posts now that everything is smooth
+- key check method when creating posts and users to avoid duplicate keys
+- new key making system. research or just make it with a feature similar to that^. 
+    randomize strings and compare using key check
+    literally add something onto username, check that very small list to see what it cant be.
+
+
+
+METHODS WE WANT:
+read:
+getAllPosts() - basically done, need to clarify output format
+getUserPosts(email) - easy query once we have a good key system 
+getPost(ID) - easy query once we have a good key system 
+getUser(ID) - easy query once we have a good key system 
+
+write:
+makeUser(dict) - basically done, needs a wrapper. also needs existing key checker
+makePost(dict) - need new query using updated dictionary keys. also needs existing key checker
+
+
+
+
+
+
+OTHER JAY NOTES - IGNORE
+Finally found dictionary issue:
+somehow the old format is getting sent to DB, userID is not defined there. Find vestigial dictionary method
+{
+  userID: '123',
+  category: 0,
+  price: 10.01,
+  title: 'Medium skillet',
+  description: 'Nonstick. Light scratches',
+  image: null
+}
+
+

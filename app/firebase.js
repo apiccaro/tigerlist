@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
+// from FireBase console 
 const firebaseConfig = {
   apiKey: "AIzaSyC-vqfnFZjBaqHiieMaMD1tHCc-QJovoH4",
   authDomain: "tigerlist-10777.firebaseapp.com",
