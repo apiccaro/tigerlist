@@ -3,7 +3,30 @@ import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
-
+const getListing = async () => {
+  const response = await fetch("/api/getListing",{
+    method:"GET",
+    });
+  const data = await response.json();
+  return data;
+};
+const makeListing = async (listingDict) => {
+  const response = await fetch("/api/putListing",{
+    method:"PUT",
+    body : JSON.stringify({
+    listing:(listingDict)
+    })
+    },
+    );
+  await response;
+};
+const getAllListings = async () => {
+  const response = await fetch("/api/getAllListings",{
+    method:"GET",
+    });
+  const data = await response.json();
+  return data;
+};
 
 export default function EditListing({searchParams}) {
   //var id=listingID.id;
@@ -44,31 +67,7 @@ export default function EditListing({searchParams}) {
   const [labelText4, setLabelText4] = useState();
   const [readinTitle2, setReadinTitle2] = useState();
   const [readinTitle, setReadinTitle] = useState("");
-  var originalImage = null;
-  var originalTitle;
-  var originalPrice;
-  var originalDescription;
-  var originalCategory;
-  var originalCondition;
-  var originalLocation;
-  var originalEmail;
-  var originalLocation;
-  var originalEmail;
-  var originalPhone;
-  var originalImage1;
-  var originalImage2;
-  var originalImage3;
-  var originalImage4;
-/**
-   * Handles the onSubmit action of the form
-   */
-  const { register, handleSubmit, formState: { errors } } = useForm();
-   /**
-   * Takes in data from the form and builds a dictionary to be 
-   * write into the database.
-   * Place holder as of now
-   * @param {*} data 
-   */
+
 
     /*const updateListing = async (id, updatedListing) => {
       await fetch(`/api/todos/update/${id}`, {
@@ -94,19 +93,12 @@ export default function EditListing({searchParams}) {
     var originalImage3 = testImages[3];
     var originalImage4 = testImages[4];
 
-    //var originalImage=null;
-    var originalTitle;
-    var originalPrice;
-    var originalDescription;
-    var originalCategory;
-    var originalCondition;
-    var originalLocation;
-    var originalEmail;
-    var originalLocation;
-    var originalEmail;
-    var originalPhone;
+
     // var testTitle = testDict["testTitle"];
     // var testPrice = testDict["testPrice"];
+    const getData =async () => {
+      const data = await getListing();
+      originalTitle=data.title;
 
       setDescription(data.description);
       setPrice(data.price);
@@ -122,6 +114,7 @@ export default function EditListing({searchParams}) {
       setPreviewImage3(data.images[3])
       setPreviewImage4(data.images[4])
 }
+/**
 /**
    * Handles the onSubmit action of the form
    */
@@ -168,42 +161,10 @@ export default function EditListing({searchParams}) {
       active: "true"
     }
     makeListing(dict);
-
-    setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
-    setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
   }
+  
 
-  
-  
-    /**
-   * async function getData() {
-  const res = await fetch('https://api.example.com/...')
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
  
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
- 
-  return res.json()
-}
-   */
-  
-  
-   /**
-   * Reads in data from the database and autopopulates the
-   * form with the particular listing data
-   * Place holder as of now
-   * 
-   */
-  
-  /*useEffect(() => {
-    (async () => {
-      const todos = await fetchTodos();
-      setTitle(todos.title);
-    })();
-  }, []);*/
   /**
    * Takes in a list of error messages and applies them when necessary 
    * when input checking.
@@ -604,8 +565,8 @@ export default function EditListing({searchParams}) {
                   id="title"
                   type="text"
                   style={{ color: 'black' }}
-                  //defaultValue={originalTitle}
-                  value={productID}
+                  defaultValue={productID}
+                  value={title}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters
                   onChange={e => setTitle(e.target.value)}
@@ -624,8 +585,8 @@ export default function EditListing({searchParams}) {
                 </span>
                 <input type="text"
                   style={{ color: 'black' }}
-                  //defaultValue={originalPrice}
-                  value={testPrice}
+                  defaultValue={testPrice}
+                  value={price}
                   placeholder='Price'
                   onChange={e => setPrice(e.target.value)}
                   {//confirms that users submit a price under 10 digits
@@ -648,8 +609,8 @@ export default function EditListing({searchParams}) {
                 </span>
                 <input type="text"
                   style={{ color: 'black' }}
-                  value={testDescription}
-                  //defaultValue={originalDescription}
+                  value={description}
+                  defaultValue={testDescription}
                   placeholder='Description'
                   onChange={e => setDescription(e.target.value)}
                   //confirms that users submit a description under 500 characters
@@ -670,8 +631,8 @@ export default function EditListing({searchParams}) {
                 </span>
               <select name="category"
                 id="category"
-                //defaultValue={originalCategory}
-                value={testCategory}
+                defaultValue={testCategory}
+                value={cat}
                 onChange={e => setCat(e.target.value)}
                 //confirms that users submit a category
                 {...register("category", {
@@ -696,8 +657,8 @@ export default function EditListing({searchParams}) {
                 </span>
               <select name="condition"
                 id="condition"
-                //defaultValue={originalCondition}
-                value={testCondition}
+                defaultValue={testCondition}
+                value={cond}
                 onChange={e => setCond(e.target.value)}
                 //confirms that users submit a condition
                 {...register("condition", {
@@ -721,8 +682,8 @@ export default function EditListing({searchParams}) {
                 </span>
               <select name="location"
                 id="location"
-                value={testLocation}
-                //defaultValue={originalLocation}
+                value={loc}
+                defaultValue={testLocation}
                 onChange={e => setLoc(e.target.value)}
                 //confirms that users submit a location
                 {...register("location", {
@@ -747,9 +708,9 @@ export default function EditListing({searchParams}) {
                   id="email"
                   type="email"
                   style={{ color: 'black' }}
-                  value={testEmail}
+                  value={email}
                   placeholder='Email'
-                  //defaultValue={originalEmail}
+                  defaultValue={testEmail}
                   onChange={e => setEmail(e.target.value)}
                   //confirms that users submit an email that matches a CC email.
                   {...register("email", {
@@ -772,9 +733,9 @@ export default function EditListing({searchParams}) {
                   id="phonenumber"
                   type="tel"
                   style={{ color: 'black' }}
-                  value={testPhone}
+                  value={phonenumber}
                   placeholder='Phone Number'
-                  //defaultValue={originalPhone}
+                  defaultValue={testPhone}
                   onChange={e => setPhoneNumber(e.target.value)}
                   //confirms that users submit a 10 digit phone number
                   {...register("phonenumber", {
@@ -804,12 +765,7 @@ export default function EditListing({searchParams}) {
               </div>
             </div>
           </form>
-          <p id="readin">
-            {readinTitle}
-          </p>
-          <p id="readin2">
-            {readinTitle2}
-          </p>
+         
         </div>
       </div>
     </main>
