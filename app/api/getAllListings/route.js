@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 var dict1={ title: "couch",
 price: "2000",
 description: "black and leather",
