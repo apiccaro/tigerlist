@@ -1,8 +1,8 @@
 'use client'
-import { useState } from 'react';
+import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-//import { getPost } from '@/azure2/read';
+//USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 
 
 export default function EditListing({searchParams}) {
@@ -108,8 +108,44 @@ export default function EditListing({searchParams}) {
     // var testTitle = testDict["testTitle"];
     // var testPrice = testDict["testPrice"];
 
+      setDescription(data.description);
+      setPrice(data.price);
+      setCat(data.category);
+      setCond(data.condition);
+      setLoc(data.location);
+      setEmail(data.email);
+      setPhoneNumber(data.phoneValue);
+      console.log(data.images)
+      setPreviewImage(data.images[0])
+      setPreviewImage1(data.images[1])
+      setPreviewImage2(data.images[2])
+      setPreviewImage3(data.images[3])
+      setPreviewImage4(data.images[4])
+}
+/**
+   * Handles the onSubmit action of the form
+   */
+  const { register, handleSubmit, formState: { errors } } = useForm();
+   /**
+   * Takes in data from the form and builds a dictionary to be 
+   * write into the database.
+   * Place holder as of now
+   * @param {*} data 
+   */
+    /*const updateListing = async (id, updatedListing) => {
+      await fetch(`/api/todos/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedListing),
+      });
+    };*/
+
   const handleRegistration = (data) => {
-    console.log(data);
+    /**const handleUpdate = async (id, completed) => {
+      const updatedListing= listings.find((listing) => listing.id === id);
+      await updateListing(id, updatedListing);
+    };**/
+  
     const titleValue = data.title;
     const priceValue = data.price;
     const descriptionValue = data.description;
@@ -131,38 +167,49 @@ export default function EditListing({searchParams}) {
       image: imageValue,
       active: "true"
     }
+    makeListing(dict);
+
     setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
     setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
   }
+
+  
+  
+    /**
+   * async function getData() {
+  const res = await fetch('https://api.example.com/...')
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+   */
+  
+  
    /**
    * Reads in data from the database and autopopulates the
    * form with the particular listing data
    * Place holder as of now
    * 
    */
-  const readInData = () => {
-    //var id=listingID.id;
-    //var dict = getPost(id);
-    // originalImage = "/ticket.jpeg"
-    // originalImage1 = "/bomb.jpeg"
-    // originalImage2="/ticket.jpeg"
-    //originalImage3="/ticket.jpeg"
-    originalTitle = "couch"
-    originalPrice = "2000"
-    originalDescription = "black and leather"
-    originalCategory = "textbook"
-    originalCondition = "new"
-    originalLocation = "offcampus"
-    originalEmail = "ap@coloradocollege.edu"
-    originalPhone = "9787657788"
-  }
+  
+  /*useEffect(() => {
+    (async () => {
+      const todos = await fetchTodos();
+      setTitle(todos.title);
+    })();
+  }, []);*/
   /**
    * Takes in a list of error messages and applies them when necessary 
    * when input checking.
    * @param {list} errors 
    */
   const handleError = (errors) => { };
-  readInData();
   return (
     <main style={{
       display: 'flex',
@@ -767,4 +814,5 @@ export default function EditListing({searchParams}) {
       </div>
     </main>
   )
+                
 }

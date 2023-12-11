@@ -5,7 +5,7 @@ const sql = require('mssql');
 //const getConfig = require('./azureAuth.js');
 //import write.js,  handles writing to database
 const {writePost, sampleUserDict, samplePostDict, testMethod_write, printDict,getPostQuery,addUser,createPostTable,deletePostTable,createUserTable,deleteUserTable,writeSampleUser,writeUser,clearPosts,clearUsers} = require('./write.js');
-const {getUser,getPost,getAllPosts,getAllUsers,testMethod_read} = require('./read.js');
+const {getUser,getPost,getAllPosts,getAllUsers,testMethod_read} = require('./read.js.js.js');
 
 const http = require('http');
 
