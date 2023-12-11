@@ -4,6 +4,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 
+
 /*DIDNT WORK
 / This function runs only on the server side
 export async function getStaticProps() {
@@ -14,21 +15,41 @@ export async function getStaticProps() {
   // Props returned will be passed to the page component
   return { props: { title } }
 }*/
-const getListing = async () => {
-  const response = await fetch("/api/read",{
-    method:"GET",
+
+
+
+const getListing = async () => { //creates an async function which makes a GET request to the API endpoint 
+  // we will use fetch function to make a GET request to the API endpoint
+  // await awaits the response 
+  const res = await fetch("http://localhost:3000//api/listing",{ 
+    method:"GET", //same as defalt so I think this line is optional   
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json", //indicates that the expected response is in JSON format 
     },
   });
-  if (!res.ok) {
+  if (!res.ok) //checks if response is ok, IE in the 200-299 range 
+  {
     throw new Error('Failed to fetch data')
   }
-  const data = await response.json();
+  const data = await res.json(); //parses the response body as a JSON. server must return JSON data!
   console.log(data)
   return data;
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////// RENDERING //////////
 
 export default function EditListing({listingID}) {
   useEffect(() => {
