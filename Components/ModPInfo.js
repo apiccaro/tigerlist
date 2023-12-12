@@ -4,6 +4,7 @@
 import styled from "styled-components";
 import { useState } from 'react';
 import Image from 'next/image';
+import AllowDelete from "./AllowDelete";
 
 
 const InfoBoxStyle = {
@@ -31,24 +32,19 @@ const ContactBoxStyle = {
     paddingRight: '20px'
 }
 
-const editListing = async (listingDict) => {
-    const response = await fetch("http://localhost:3000/api/deleteListing",{
-      method:"PUT",
-      body : JSON.stringify({
-      listing:(listingDict)
-      })
-      },
-      );
-    await response;
-  };
-
-const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
+const ModProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
 
     const [isActive, setIsActive] = useState(true);
 
     const toggleFlagButton = () => {
         setIsActive(!isActive);
     };
+
+    const RowStyle={
+        display: 'flex', 
+        flexDirection: 'row',
+        gap: '20px',
+    }
 
     return(
         <aside style={{display: "flex", flexDirection: 'col', gap:'3rem', text:"white", padding:"1rem", }} className="flex flex-col gap-10 text-white p-4 mt-5">
@@ -85,27 +81,33 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
                     </div>
                 </div>
             </div>
-            <button
-            style={{height: '80px', width: '80px', alignItems: 'center', borderRadius: '10px', backgroundColor: 'black', borderColor: 'black'}}
-            onClick={"toggleFlagButton() ; editListing({listingID: listingID, title: title, price: price, description: description, category: category, condition: condition, location: location, email: email, phone: phone, images: images, flagged: !flagged})"}>
-                {isActive ? <Image
-                                src="/unflagged.svg"
-                                alt="Tiger Image"
-                                accept="image/*"
-                                width={'200'}
-                                height={'50'}
-                                priority
-                /> : <Image
-                        src="/flagged.svg"
-                        alt="Tiger Image"
-                        accept="image/*"
-                        width={'200'}
-                        height={'50'}
-                        priority
-                    />}
-            </button>
+
+            <div style={RowStyle}>
+                <button
+                style={{height: '80px', width: '80px', alignItems: 'center', borderRadius: '10px', backgroundColor: 'black', borderColor: 'black'}}
+                onClick={toggleFlagButton}>
+                    {isActive ? <Image
+                                    src="/unflagged.svg"
+                                    alt="Tiger Image"
+                                    accept="image/*"
+                                    width={'200'}
+                                    height={'50'}
+                                    priority
+                    /> : <Image
+                            src="/flagged.svg"
+                            alt="Tiger Image"
+                            accept="image/*"
+                            width={'200'}
+                            height={'50'}
+                            priority
+                        />}
+                </button>
+                <AllowDelete />
+            </div>
+
+
         </aside>
     );
 }
 
-export default ProductInfo;
+export default ModProductInfo;

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import EditLink from './EditLink';
 import Link from 'next/link';
 
-const ActiveInactive = ({ title, price, description, category, condition, location, email, phone, images}) => {
+const ActiveInactive = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
   // Used in button state to change button color and text
   const [isActive, setIsActive] = useState(true);
 
@@ -13,7 +13,7 @@ const ActiveInactive = ({ title, price, description, category, condition, locati
 
   return (
     <div>
-        <EditLink title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images}/>
+        <EditLink title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} flagged={flagged}/>
         <button
         style={{ width: '80px', height: '30px', justifyContent: 'center', alignItems: 'center', borderRadius: '10px', fontSize:"1.3rem", backgroundColor: isActive ? 'white' : 'black', color: isActive ? 'black' : 'white'}}
         onClick={toggleButtonText} className="flex font-bold text-xl"

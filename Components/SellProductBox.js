@@ -31,13 +31,14 @@ const buttonStyle = {
 };
 
 
-const SellProductBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
+const SellProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
     return(
         <div>
             <div style={ProductBGStyle}>
                 <Link href={{
                     pathname: '/productview',
                     query: {
+                        productID: listingID,
                         productTitle: title,
                         productPrice: price,
                         productDescription: description,
@@ -46,7 +47,8 @@ const SellProductBox = ({ title, price, description, category, condition, locati
                         productLocation: location,
                         listerEmail: email,
                         listerPhone: phone,
-                        productImages: images
+                        productImages: images,
+                        isFlagged: flagged
                     } 
                 }} style={linkStyle}>
                     <Image
@@ -65,6 +67,7 @@ const SellProductBox = ({ title, price, description, category, condition, locati
                 <Link href={{
                     pathname: '/productview',
                     query: {
+                        productID: listingID,
                         productTitle: title,
                         productPrice: price,
                         productDescription: description,
@@ -73,13 +76,14 @@ const SellProductBox = ({ title, price, description, category, condition, locati
                         productLocation: location,
                         listerEmail: email,
                         listerPhone: phone,
-                        productImages: images
+                        productImages: images,
+                        isFlagged: flagged
                     } 
                 }} style={linkStyle}>
                     {title}
                 </Link>
                 {/* Need to send data to ActiveInactive for edit link to access */}
-                <ActiveInactive title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images}/>
+                <ActiveInactive listingID={listingID} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} flagged={flagged}/>
             </div>
         </div>
     );

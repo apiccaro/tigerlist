@@ -32,7 +32,7 @@ const RowStyle={
      gap: '8px',
     }
 
-const BuyProductBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
+const BuyProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
     return (
     <div>
@@ -49,7 +49,8 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
                         productLocation: location,
                         listerEmail: email,
                         listerPhone: phone,
-                        productImages: images
+                        productImages: images,
+                        isFlagged: flagged
                     } 
                 }} className="flex text-semibold text-2xl">
                     <Image
@@ -77,7 +78,8 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
                         productLocation: location,
                         listerEmail: email,
                         listerPhone: phone,
-                        productImages: images
+                        productImages: images,
+                        isFlagged: flagged
                     } 
                 }} 
                 style={ProductStyle}>

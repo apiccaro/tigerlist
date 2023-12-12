@@ -77,7 +77,8 @@ export default function EditListing({searchParams}) {
       });
     };*/
 
-    const { productID} = searchParams;
+    const {listingID} = searchParams;
+    const {testTitle} = searchParams;
     const {testPrice} = searchParams;
     const {testDescription} = searchParams;
     const {testCategory} = searchParams;
@@ -86,6 +87,7 @@ export default function EditListing({searchParams}) {
     const {testEmail} = searchParams;
     const {testPhone} = searchParams;
     const {testImages} = searchParams;
+    const {isFlagged} = searchParams;
 
     var originalImage = testImages[0];
     var originalImage1 = testImages[1];
@@ -577,7 +579,7 @@ export default function EditListing({searchParams}) {
                   
                   style={{ color: 'black' }}
                   //defaultValue={originalTitle}
-                  value={productID}
+                  value={testTitle}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters
                   onChange={e => setTitle(e.target.value)}
