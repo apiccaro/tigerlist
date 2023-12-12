@@ -2,6 +2,9 @@
 'use client'
 
 import styled from "styled-components";
+import { useState } from 'react';
+import Image from 'next/image';
+
 
 const InfoBoxStyle = {
     backgroundColor: 'black',
@@ -17,7 +20,7 @@ const InfoBoxStyle = {
 }
 const ContactBoxStyle = {
     backgroundColor: 'black',
-    height: '200px',
+    height: '140px',
     width: '700px',
     display: 'flex',
     alignItems: 'top',
@@ -29,6 +32,13 @@ const ContactBoxStyle = {
 }
 
 const ProductInfo = ({ title, price, description, category, condition, location, email, phone }) => {
+
+    const [isActive, setIsActive] = useState(true);
+
+    const toggleFlagButton = () => {
+        setIsActive(!isActive);
+    };
+
     return(
         <aside style={{display: "flex", flexDirection: 'col', gap:'3rem', text:"white", padding:"1rem", }} className="flex flex-col gap-10 text-white p-4 mt-5">
             <div style={InfoBoxStyle}>
@@ -64,6 +74,25 @@ const ProductInfo = ({ title, price, description, category, condition, location,
                     </div>
                 </div>
             </div>
+            <button
+            style={{height: '80px', width: '80px', alignItems: 'center', borderRadius: '10px', backgroundColor: 'black', borderColor: 'black'}}
+            onClick={toggleFlagButton}>
+                {isActive ? <Image
+                                src="/unflagged.svg"
+                                alt="Tiger Image"
+                                accept="image/*"
+                                width={'200'}
+                                height={'50'}
+                                priority
+                /> : <Image
+                        src="/flagged.svg"
+                        alt="Tiger Image"
+                        accept="image/*"
+                        width={'200'}
+                        height={'50'}
+                        priority
+                    />}
+            </button>
         </aside>
     );
 }
