@@ -113,6 +113,7 @@ export default function MakeListing() {
       phoneValue: phoneValue,
       image: imageValue,
       active: "true",
+      flagged: "false"
     }
     makeListing(dict);
 
