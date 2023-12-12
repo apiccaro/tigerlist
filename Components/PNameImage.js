@@ -2,6 +2,7 @@
 'use client'
 
 import { useState } from 'react';
+import Image from 'next/image';
 
   const PNI = ({ title, price, description, category, condition, location, email, phone, images }) => {
     const [previewImage, setPreviewImage] = useState();
@@ -29,7 +30,6 @@ import { useState } from 'react';
     // Need catches for when any of the images are null
     return(
         <aside className="flex flex-col text-white p-4">
-
             <h2 className="flex pl-10 mt-5 text-black text-4xl font-semibold"> {title} </h2>
             <h2 className="flex pl-10 mt-5 text-white text-3xl font-semibold"> {price} </h2>
 

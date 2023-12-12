@@ -34,12 +34,6 @@ const RowStyle={
 
 const BuyProductBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
 
-    const [isActive, setIsActive] = useState(true);
-
-    const toggleFlagButton = () => {
-        setIsActive(!isActive);
-    };
-
     return (
     <div>
             <div style={ProductBGStyle}>
@@ -92,11 +86,6 @@ const BuyProductBox = ({ title, price, description, category, condition, locatio
                 <div style={PriceStyle}>
                     {price}
                 </div>
-                {/* <button
-                style={{ width: '80px', height: '30px', justifyContent: 'center', alignItems: 'center', borderRadius: '10px', fontSize:"1.3rem", backgroundColor: isActive ? 'white' : 'black', color: isActive ? 'black' : 'white'}}
-                onClick={toggleFlagButton} className="flex font-bold text-xl">
-                {isActive ? '/unflagged.svg' : '/flagged.svg'}
-                </button> */}
             </div>
         </div>
     )

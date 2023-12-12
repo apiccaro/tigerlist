@@ -1,5 +1,5 @@
 // Design for the "My Listings" page of the website
-import SellProducts from "@/Components/SellProducts";
+import ModeratePosts from "@/Components/ModeratePosts";
 import Link from "next/link";
 
 export default function Home() {
@@ -13,10 +13,10 @@ export default function Home() {
     return (
         <div className="flex flex-col bg-yellow-600 min-h-screen">
             <div style={RowStyle}>
-                <div className="text-4xl text-black font-semibold p-5">My Listings</div><br></br>
-                <Link href={'/flaggedposts'} className="text-4xl text-black font-semibold p-5">Flagged Posts</Link>
+                <Link href={'/mylistings'} className="text-4xl text-black font-semibold p-5">My Listings</Link>
+                <div className="text-4xl text-black font-semibold p-5">Flagged Posts</div><br></br>
             </div>
-            <SellProducts />
+            <ModeratePosts />
         </div>
         );
 }
