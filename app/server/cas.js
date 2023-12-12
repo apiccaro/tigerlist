@@ -2,7 +2,6 @@
 
 const http = require('http');
 const httpCasClient = require('http-cas-client'); //import the cas module from above repo 
-export const user  = "a_piccaro@coloradocollege.edu";
 
 
 const handler = httpCasClient({ // creating a handler with my specific configurations 

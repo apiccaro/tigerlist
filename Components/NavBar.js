@@ -6,7 +6,15 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react';
 import {useState,useEffect} from 'react'; 
-var user ="a_piccaro@coloradocollege.edu"
+
+const getUser= async()=>{
+    const response = await fetch("http://localhost:3000/api/getUser",{
+      method:"GET",
+      });
+    const data = await response.json();
+    console.log(data)
+    return data;
+}
 
 
 
@@ -45,6 +53,7 @@ export default function NavBar() {
           try {
             const data = await getAllModeratedUsers();
             setModeratedUsers(data.title);
+            const user=await getUser();
             const userModerated = data.title.includes(user);
             setIsModerated(userModerated);
           } catch (error) {
