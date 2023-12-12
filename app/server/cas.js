@@ -2,7 +2,7 @@
 
 const http = require('http');
 const httpCasClient = require('http-cas-client'); //import the cas module from above repo 
-
+const testUserEmail = "l_flanagan@coloradocollege.edu";
 
 const handler = httpCasClient({ // creating a handler with my specific configurations 
   casServerUrlPrefix: 'https://cas.coloradocollege.edu/cas',
@@ -20,7 +20,7 @@ const casHandler = async (req, res) => {
 
    // assuming the email is sent as an attribute
    const userEmail = principal.attributes.email;
-   const testUserEmail = "l_flanagan@coloradocollege.edu"
+  
  
    if (userEmail) {
      console.log("User's Email: ", userEmail);
@@ -35,4 +35,4 @@ const casHandler = async (req, res) => {
   return true; // return true to indicate successful authentication
 };
 
-module.exports = casHandler; // export the casHandler function to make available for server.js
+module.exports = {casHandler,testUserEmail}; // export the casHandler function to make available for server.js

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react';
 import {useState,useEffect} from 'react'; 
-
+//isModerated ? '/makelisting' : 
 const getUser= async()=>{
     const response = await fetch("http://localhost:3000/api/getUser",{
       method:"GET",
@@ -55,6 +55,7 @@ export default function NavBar() {
             setModeratedUsers(data.title);
             const user=await getUser();
             const userModerated = data.title.includes(user);
+            console.log(user);
             setIsModerated(userModerated);
           } catch (error) {
           }
@@ -109,8 +110,8 @@ export default function NavBar() {
                         onChange={e => setTitle(e.target.value)}
                           /> 
                 </label>
-
-                <Link href={isModerated ? '/makelisting' : '/mylistings'} style={{display:"flex",padding:"1.25rem"}} className="flex p-3">
+                
+                <Link href={'/mylistings'} style={{display:"flex",padding:"1.25rem"}} className="flex p-3">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{width:'3rem', height:'3rem'}} className="w-12 h-12">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>

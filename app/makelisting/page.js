@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const makeListing = async (listingDict) => {
-  const response = await fetch("/api/write",{
+  const response = await fetch("/api/putListing",{
     method:"PUT",
     body : JSON.stringify({
     listing:(listingDict)
@@ -115,8 +117,9 @@ export default function MakeListing() {
       active: "true",
       flagged: "false"
     }
-    makeListing(dict);
-
+    if(makeListing(dict)){
+      toast("Your listing has been uploaded!");
+    }
     
   }
   /**
@@ -134,6 +137,14 @@ export default function MakeListing() {
       backgroundColor:'#D09B2C',
       color: 'black'
     }}>
+       <ToastContainer 
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={true}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme="dark" />
       <div >
         <div>
           <h1 style={{fontWeight: 'bold'}}>Create Listing</h1>

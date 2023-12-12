@@ -2,7 +2,9 @@
 import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-export const user  = "bat@coloradocollege.edu";
+export const user  = "@coloradocollege.edu";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 const getListing = async () => {
   const response = await fetch("/api/getListing",{
@@ -161,7 +163,10 @@ export default function EditListing({searchParams}) {
       active: "true",
       flagged: "false"
     }
-    makeListing(dict);
+    if(makeListing(dict)){
+      toast("Your listing has been edited!");
+    }
+    
   }
   
 
@@ -180,6 +185,15 @@ export default function EditListing({searchParams}) {
       backgroundColor:'#D09B2C',
       color: 'black'
     }}>
+      <ToastContainer 
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={true}
+      color='black'
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme="dark" />
       <div >
         <div>
           <h1 style={{fontWeight: 'bold'}}>Edit Your Listing</h1>
