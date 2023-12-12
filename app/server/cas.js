@@ -3,6 +3,7 @@
 const http = require('http');
 const httpCasClient = require('http-cas-client'); //import the cas module from above repo 
 
+
 const handler = httpCasClient({ // creating a handler with my specific configurations 
   casServerUrlPrefix: 'https://cas.coloradocollege.edu/cas',
   serverName: 'https://tigerlist.vercel.app'
