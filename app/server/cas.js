@@ -15,9 +15,21 @@ const casHandler = async (req, res) => {
     return false; // return false to indicate authentication failure
   }
 
+   // extract user information
+   const { principal, ticket } = req;
+
+   // assuming the email is sent as an attribute
+   const userEmail = principal.attributes.email;
+   const testUserEmail = "l_flanagan@coloradocollege.edu"
+ 
+   if (userEmail) {
+     console.log("User's Email: ", userEmail);
+     // here is where we would store the email in the database! 
+   }
+
   // additional logic...
-  const { principal, ticket } = req;
-  console.log(principal, ticket);
+  // const { principal, ticket } = req;
+  // console.log(principal, ticket);
   // { user: 'test', attributes: { ... } }
 
   return true; // return true to indicate successful authentication
