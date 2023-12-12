@@ -2,7 +2,7 @@
 import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-export const user  = "a_piccaro@coloradocollege.edu";
+export const user  = "bat@coloradocollege.edu";
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 const getListing = async () => {
   const response = await fetch("/api/getListing",{

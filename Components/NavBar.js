@@ -5,10 +5,9 @@ import styled from "styled-components";
 import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react';
-import {useState} from 'react'; 
-var moderatedUsers=[];
-var isModerated=false;
-import {user} from '/app/editListing/page.js';
+import {useState,useEffect} from 'react'; 
+var user ="a_piccaro@coloradocollege.edu"
+
 
 
 const getAllModeratedUsers = async () => {
@@ -16,15 +15,11 @@ const getAllModeratedUsers = async () => {
       method:"GET",
       });
     const data = await response.json();
+    console.log(data)
     return data;
   };
 
-const isModeratedUser=async(thisUser)=>{
-    moderatedUsers= await getAllModeratedUsers();
-    if(moderatedUsers.includes(user)){
-        isModerated=true;
-    }
-}
+
 
 const NavBarBGStyle = {
     backgroundColor: 'black',
@@ -40,8 +35,27 @@ const LinkStyle={
         fontWeight: 'bold',
         alignItems: 'center',
 };
-isModeratedUser(user);
+
+
 export default function NavBar() {
+    const [moderatedUsers, setModeratedUsers] = useState();
+    const [isModerated,setIsModerated]=useState();
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const data = await getAllModeratedUsers();
+            setModeratedUsers(data.title);
+            const userModerated = data.title.includes(user);
+            setIsModerated(userModerated);
+          } catch (error) {
+          }
+        };
+    
+        fetchData();
+      }, []);
+    
+    
+    
    
     const [title, setTitle] = useState();
 
@@ -81,8 +95,8 @@ export default function NavBar() {
 
                         style={{ color: 'black', borderRadius: '10px'}}
 
-                        value={moderatedUsers} 
-                        placeholder='Enter Keyword'
+                        value={title} 
+                        placeholder="Enter a title"
                         onChange={e => setTitle(e.target.value)}
                           /> 
                 </label>
