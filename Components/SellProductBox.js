@@ -16,18 +16,21 @@ const ProductBGStyle ={
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: '10px',
+    color:'white'
 }
 const linkStyle = {
     display: 'flex',
     fontWeight: 600, 
     fontSize: '1.7rem',
     color:'black',
+    color:'white'
 };
 const buttonStyle = {
     display: 'flex',
     flexDirection: 'row', 
     gap: '40px',
     marginTop: '2px',
+    color:"white",
 };
 
 

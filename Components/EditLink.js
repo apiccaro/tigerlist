@@ -24,6 +24,7 @@ const EditStyle = {
     display: 'flex',
     fontWeight: '600', 
     fontSize: `1.3rem`,
+    color:'white'
     
 };
 

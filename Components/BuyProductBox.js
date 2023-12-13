@@ -25,6 +25,7 @@ const PriceStyle = {
     display: 'flex',
     fontWeight: 'bold',
     fontSize: '1.75rem',
+    color:"white",
 };
 const RowStyle={
     display: 'flex', 
