@@ -2,22 +2,10 @@
 import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-
-
+export const user  = "@coloradocollege.edu";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
-
-
-/*DIDNT WORK
-/ This function runs only on the server side
-export async function getStaticProps() {
-  // Instead of fetching your `/api` route you can call the same
-  // function directly in `getStaticProps`
-  const posts = await loadPosts()
- 
-  // Props returned will be passed to the page component
-  return { props: { title } }
-}*/
-
 const getListing = async () => {
   const response = await fetch("http://localhost:3000/api/getListing",{
     method:"GET",
@@ -45,23 +33,7 @@ const getAllListings = async () => {
   return data;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-////////// RENDERING //////////
-
-export default function EditListing({listingID}) {
-  
+export default function EditListing({searchParams}) {
   //var id=listingID.id;
   
   const SMALLIMAGE='100px';
@@ -100,32 +72,40 @@ export default function EditListing({listingID}) {
   const [labelText4, setLabelText4] = useState();
   const [readinTitle2, setReadinTitle2] = useState();
   const [readinTitle, setReadinTitle] = useState("");
-  var originalImage = null;
-  var originalTitle;
-  var originalPrice;
-  var originalDescription;
-  var originalCategory;
-  var originalCondition;
-  var originalLocation;
-  var originalEmail;
-  var originalLocation;
-  var originalEmail;
-  var originalPhone;
-  var originalImage1;
-  var originalImage2;
-  var originalImage3;
-  var originalImage4;
 
-const getData =async () => {
 
-      ////////////////////////////
-      // DISPLAYING THE RESULTS //
-      ////////////////////////////
+    /*const updateListing = async (id, updatedListing) => {
+      await fetch(`/api/todos/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTodo),
+      });
+    };*/
+
+    const {listingID} = searchParams;
+    const {testTitle} = searchParams;
+    const {testPrice} = searchParams;
+    const {testDescription} = searchParams;
+    const {testCategory} = searchParams;
+    const {testCondition} = searchParams;
+    const {testLocation} = searchParams;
+    const {testEmail} = searchParams;
+    const {testPhone} = searchParams;
+    const {testImages} = searchParams;
+    const {isFlagged} = searchParams;
+
+    var originalImage = testImages[0];
+    var originalImage1 = testImages[1];
+    var originalImage2 = testImages[2];
+    var originalImage3 = testImages[3];
+    var originalImage4 = testImages[4];
+
+
+    // var testTitle = testDict["testTitle"];
+    // var testPrice = testDict["testPrice"];
+    const getData =async () => {
       const data = await getListing();
-      console.log(data); 
-      setTitle(data.title);
-
-
+      originalTitle=data.title;
       setDescription(data.description);
       setPrice(data.price);
       setCat(data.category);
@@ -141,6 +121,7 @@ const getData =async () => {
       setPreviewImage4(data.images[4])
       
 }
+/**
 /**
    * Handles the onSubmit action of the form
    */
@@ -184,48 +165,17 @@ const getData =async () => {
       email: emailValue,
       phoneValue: phoneValue,
       image: imageValue,
-      active: "true"
+      active: "true",
+      flagged: "false"
     }
-
-
-    //
-    makeListing(dict);
-
-    setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
-    setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
+    if(makeListing(dict)){
+      toast("Your listing has been edited!");
+    }
+    
   }
+  
 
-  
-  
-    /**
-   * async function getData() {
-  const res = await fetch('https://api.example.com/...')
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
  
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
- 
-  return res.json()
-}
-   */
-  
-  
-   /**
-   * Reads in data from the database and autopopulates the
-   * form with the particular listing data
-   * Place holder as of now
-   * 
-   */
-  
-  /*useEffect(() => {
-    (async () => {
-      const todos = await fetchTodos();
-      setTitle(todos.title);
-    })();
-  }, []);*/
   /**
    * Takes in a list of error messages and applies them when necessary 
    * when input checking.
@@ -241,10 +191,21 @@ const getData =async () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor:'#D09B2C',
+      color: 'black'
     }}>
+      <ToastContainer 
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={true}
+      color='black'
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme="dark" />
       <div >
         <div>
-          <h1>Edit Your Listing</h1>
+          <h1 style={{fontWeight: 'bold'}}>Edit Your Listing</h1>
         </div>
         <div >
           <form onSubmit={handleSubmit(handleRegistration, handleError)} >
@@ -253,11 +214,13 @@ const getData =async () => {
                 htmlFor="image"
                 style={{
                   width: '500px',
+                  borderRadius:'10px',
+                  fontWeight: '600',
                   //if there is not an original image or an uploaded 
                   //image default to "add image" setting
                   
                   height: originalImage || previewImage ? '40px' : '280px',
-                  border: originalImage || previewImage ? '2px solid white' : '2px dashed white',
+                  border: originalImage || previewImage ? '4px solid black' : '4px dashed black',
                   cursor: 'pointer',
                   display: 'inline-block',
                 }}
@@ -289,7 +252,7 @@ const getData =async () => {
                         setPreviewImage(reader.result);
                         setWidth(400);
                         setHeight(200);
-                        setBorderStyle('2px solid white');
+                        setBorderStyle('4px solid black');
                         setLabelText('Change Image');
                       };
                       reader.readAsDataURL(file);
@@ -317,10 +280,12 @@ const getData =async () => {
                     htmlFor="image1"
                     style={{
                       width: '115px',
+                      borderRadius:'10px',
+                      fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage1 || previewImage1 ? '0px' : '115px',
-                      border: originalImage1 || previewImage1 ? '' : '2px dashed white',
+                      border: originalImage1 || previewImage1 ? '' : '4px dashed black',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}
@@ -390,10 +355,12 @@ const getData =async () => {
                     htmlFor="image2"
                     style={{
                       width: '115px',
+                      borderRadius:'10px',
+                      fontWeight: '600',
                        //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage2 || previewImage2 ? '0px' : '115px',
-                      border: originalImage2 || previewImage2 ? '' : '2px dashed white',
+                      border: originalImage2 || previewImage2 ? '' : '4px dashed black',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}
@@ -463,10 +430,12 @@ const getData =async () => {
                     htmlFor="image3"
                     style={{
                       width: '115px',
+                      borderRadius:'10px',
+                      fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage3 || previewImage3 ? '0px' : '115px',
-                      border: originalImage3 || previewImage3 ? '' : '2px dashed white',
+                      border: originalImage3 || previewImage3 ? '' : '4px dashed black',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}
@@ -537,10 +506,12 @@ const getData =async () => {
                     htmlFor="image4"
                     style={{
                       width: '115px',
+                      borderRadius:'10px',
+                      fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage4 || previewImage4 ? '0px' : '115px',
-                      border: originalImage4 || previewImage4 ? '' : '2px dashed white',
+                      border: originalImage4 || previewImage4 ? '' : '4px dashed black',
                       cursor: 'pointer',
                       display: 'inline-block',
                     }}
@@ -611,13 +582,14 @@ const getData =async () => {
               float: "right",
               margin: "60px 100px 0 0",
             }}>
-              <label>
+              <label><span className='formOption'>
                 Edit Title: <br></br>
+                </span>
                 <input
                   id="title"
                   type="text"
                   style={{ color: 'black' }}
-                  defaultValue={originalTitle}
+                  defaultValue={productID}
                   value={title}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters
@@ -632,11 +604,12 @@ const getData =async () => {
                 </small>
               </label><br></br>
               <span></span>
-              <label>
+              <label><span className='formOption'>
                 Edit Price: <br></br>
+                </span>
                 <input type="text"
                   style={{ color: 'black' }}
-                  defaultValue={originalPrice}
+                  defaultValue={testPrice}
                   value={price}
                   placeholder='Price'
                   onChange={e => setPrice(e.target.value)}
@@ -655,11 +628,13 @@ const getData =async () => {
                 </small>
               </label><br></br>
               <label>
-                Edit Description:<br></br>
+                <span className='formOption'>
+                Edit Description: <br></br>
+                </span>
                 <input type="text"
                   style={{ color: 'black' }}
                   value={description}
-                  defaultValue={originalDescription}
+                  defaultValue={testDescription}
                   placeholder='Description'
                   onChange={e => setDescription(e.target.value)}
                   //confirms that users submit a description under 500 characters
@@ -675,10 +650,12 @@ const getData =async () => {
               <label
                 for="category"
               > </label>
-              Edit Category:<br></br>
+              <span className='formOption'>
+                Edit Category: <br></br>
+                </span>
               <select name="category"
                 id="category"
-                defaultValue={originalCategory}
+                defaultValue={testCategory}
                 value={cat}
                 onChange={e => setCat(e.target.value)}
                 //confirms that users submit a category
@@ -699,10 +676,12 @@ const getData =async () => {
                 {errors?.category && errors.category.message}
               </small><br></br>
               <label for="condition" > </label>
-              Edit Condition: <br></br>
+              <span className='formOption'>
+                Edit Category: <br></br>
+                </span>
               <select name="condition"
                 id="condition"
-                defaultValue={originalCondition}
+                defaultValue={testCondition}
                 value={cond}
                 onChange={e => setCond(e.target.value)}
                 //confirms that users submit a condition
@@ -722,11 +701,13 @@ const getData =async () => {
               </small>
               <br></br>
               <label for="location" > </label>
-              Edit Location: <br></br>
+              <span className='formOption'>
+                Edit Location: <br></br>
+                </span>
               <select name="location"
                 id="location"
                 value={loc}
-                defaultValue={originalLocation}
+                defaultValue={testLocation}
                 onChange={e => setLoc(e.target.value)}
                 //confirms that users submit a location
                 {...register("location", {
@@ -743,15 +724,17 @@ const getData =async () => {
                 {errors?.location && errors.location.message}
               </small>
               <br></br>
-              <label>
-                Edit Email:<br></br>
+              <label>  
+                <span className='formOption'>
+                Edit Email: <br></br>
+                </span>
                 <input
                   id="email"
                   type="email"
                   style={{ color: 'black' }}
                   value={email}
                   placeholder='Email'
-                  defaultValue={originalEmail}
+                  defaultValue={testEmail}
                   onChange={e => setEmail(e.target.value)}
                   //confirms that users submit an email that matches a CC email.
                   {...register("email", {
@@ -767,15 +750,16 @@ const getData =async () => {
                   {errors?.email && errors.email.message}
                 </small>
               </label><br></br>
-              <label>
+              <label><span className='formOption'>
                 Edit Phone Number: <br></br>
+                </span>
                 <input
                   id="phonenumber"
                   type="tel"
                   style={{ color: 'black' }}
                   value={phonenumber}
                   placeholder='Phone Number'
-                  defaultValue={originalPhone}
+                  defaultValue={testPhone}
                   onChange={e => setPhoneNumber(e.target.value)}
                   //confirms that users submit a 10 digit phone number
                   {...register("phonenumber", {
@@ -796,18 +780,19 @@ const getData =async () => {
                 </small>
               </label><br></br>
               <div >
-                <button style={{ width: '100px', height: '50px', alignItems: 'center', margin: "0 0 0 135px" }}>Submit</button>
+                <button style={{ width: '100px',
+                 height: '50px',
+                  alignItems: 'center',
+                   margin: "0 0 15px 135px" }}>
+                    Submit
+                    </button>
               </div>
             </div>
           </form>
-          <p id="readin">
-            {readinTitle}
-          </p>
-          <p id="readin2">
-            {readinTitle2}
-          </p>
+         
         </div>
       </div>
     </main>
   )
+                
 }

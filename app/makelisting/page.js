@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const makeListing = async (listingDict) => {
-  const response = await fetch("/api/write",{
+  const response = await fetch("/api/putListing",{
     method:"PUT",
     body : JSON.stringify({
     listing:(listingDict)
@@ -61,6 +63,14 @@ export default function MakeListing() {
    * Handles the onSubmit action of the form
    */
   const { register, handleSubmit, formState: { errors } } = useForm();
+  /**const createListing = async (title) => {
+    const res = await fetch("/api/todos/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title }),
+    });
+    return await res.json();
+  };**/
   /**
    * Takes in data from the form and builds a dictionary to be 
    * write into the database.
@@ -68,6 +78,22 @@ export default function MakeListing() {
    * @param {*} data 
    */
   const handleRegistration = (data) => {
+    /**
+     * const handleCreate = async () => {
+    if (inputValue.trim()) {
+      const newTodo = await createTodo(inputValue);
+      setTodos([...todos, newTodo]);
+      setInputValue("");
+      toast({
+        title: "Todo created.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+     */
     console.log(data);
     const titleValue = data.title;
     const priceValue = data.price;
@@ -89,9 +115,11 @@ export default function MakeListing() {
       phoneValue: phoneValue,
       image: imageValue,
       active: "true",
+      flagged: "false"
     }
-    makeListing(dict);
-
+    if(makeListing(dict)){
+      toast("Your listing has been uploaded!");
+    }
     
   }
   /**
@@ -106,10 +134,20 @@ export default function MakeListing() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor:'#D09B2C',
+      color: 'black'
     }}>
+       <ToastContainer 
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={true}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme="dark" />
       <div >
         <div>
-          <h1>Create Listing</h1>
+          <h1 style={{fontWeight: 'bold'}}>Create Listing</h1>
         </div>
         <div >
           <form onSubmit={handleSubmit(handleRegistration, handleError)} >
@@ -117,7 +155,13 @@ export default function MakeListing() {
 
               <label
                 htmlFor="image"
-                style={{ width: '500px', height: labelHeight ?? 480, border: borderStyle ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                style={{ width: '500px',
+                 height: labelHeight ?? 480,
+                  border: borderStyle ?? '4px dashed black',
+                   cursor: 'pointer',
+                    display: 'inline-block',
+                    borderRadius:'10px',
+                    fontWeight: '600', }}
               >
                 {labelText ?? 'Add Image'}
                 <input
@@ -145,7 +189,7 @@ export default function MakeListing() {
                         setWidth('500px');
                         setPreviewImage(reader.result);
                         setLabelHeight(40);
-                        setBorderStyle('2px solid white');
+                        setBorderStyle('4px solid black');
                         setLabelText('Change Image');
                       };
                       reader.readAsDataURL(file);
@@ -171,7 +215,13 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image1"
-                    style={{ width: '115px', height: labelHeight1 ?? 115, border: borderStyle1 ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                    style={{ width: '115px',
+                     height: labelHeight1 ?? 115,
+                      border: borderStyle1 ?? '4px dashed black',
+                       cursor: 'pointer',
+                        display: 'inline-block',
+                        borderRadius:'10px',
+                        fontWeight: '600', }}
                   >
                     {labelText1 ?? 'Add Image'}
                     <input
@@ -234,7 +284,13 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image2"
-                    style={{ width: '115px', height: labelHeight2 ?? 115, border: borderStyle2 ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                    style={{ width: '115px',
+                     height: labelHeight2 ?? 115,
+                      border: borderStyle2 ?? '4px dashed black',
+                       cursor: 'pointer', 
+                       display: 'inline-block',
+                       borderRadius:'10px',
+                       fontWeight: '600', }}
                   >
                     {labelText2 ?? 'Add Image'}
                     <input
@@ -298,7 +354,13 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image3"
-                    style={{ width: '115px', height: labelHeight3 ?? 115, border: borderStyle3 ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                    style={{ width: '115px',
+                     height: labelHeight3 ?? 115,
+                      border: borderStyle3 ?? '4px dashed black',
+                       cursor: 'pointer',
+                        display: 'inline-block',
+                        borderRadius:'10px',
+                        fontWeight: '600', }}
                   >
                     {labelText3 ?? 'Add Image'}
                     <input
@@ -362,7 +424,13 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 0px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image4"
-                    style={{ width: '115px', height: labelHeight4 ?? 115, border: borderStyle4 ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                    style={{ width: '115px',
+                     height: labelHeight4 ?? 115,
+                      border: borderStyle4 ?? '4px dashed black',
+                       cursor: 'pointer',
+                        display: 'inline-block' ,
+                        borderRadius:'10px',
+                        fontWeight: '600',}}
                   >
                     {labelText4 ?? 'Add Image'}
                     <input
@@ -431,8 +499,9 @@ export default function MakeListing() {
               float: "right",
               margin: "60px 100px 0 0",
             }}>
-              <label>
+              <label><span className='formOption'>
                 Enter Title: <br></br>
+                </span>
                 <input
                   id="title"
                   type="text"
@@ -453,7 +522,9 @@ export default function MakeListing() {
               </label><br></br>
               <span></span>
               <label>
-                  Enter Price: <br></br>
+                <span className='formOption'>
+                Enter Price: <br></br>
+                </span>
                 <input type="text"
                   style={{ color: 'black' }}
                   value={price}
@@ -476,7 +547,9 @@ export default function MakeListing() {
 
               </label><br></br>
               <label>
-                Enter Description:<br></br>
+                <span className='formOption'>
+                Enter Description: <br></br>
+                </span>
                 <input type="text"
                   style={{ color: 'black' }}
                   value={description}
@@ -498,7 +571,9 @@ export default function MakeListing() {
               <label
                 for="category"
               > 
-              Pick a Category <br></br>
+              <span className='formOption'>
+              Pick a Category: <br></br>
+              </span>
               </label>
               <select name="category"
                 id="category"
@@ -526,7 +601,9 @@ export default function MakeListing() {
                 {errors?.category && errors.category.message}
               </small><br></br>
               <label for="condition" > 
-              Pick a Label<br></br>
+              <span className='formOption'>
+              Pick a Label: <br></br>
+              </span>
               </label>
 
               <select name="condition"
@@ -551,8 +628,11 @@ export default function MakeListing() {
                 {errors?.condition && errors.condition.message}
               </small>
               <br></br>
-              <label for="location" > 
-              Pick a Location:<br></br></label>
+              <label for="location" >
+                 <span className='formOption'>
+              Pick a Location: <br></br>
+              </span>
+              </label>
 
               <select name="location"
                 id="location"
@@ -576,7 +656,9 @@ export default function MakeListing() {
               </small>
               <br></br>
               <label>
-                Enter Email:<br></br>
+                <span className='formOption'>
+                Enter Email: <br></br>
+                </span>
                 <input
                   id="email"
                   type="email"
@@ -600,7 +682,9 @@ export default function MakeListing() {
                 </small>
               </label><br></br>
               <label>
-                Enter Phone Number:<br></br>
+                <span className='formOption'>
+                Enter Phone Number: <br></br>
+                </span>
                 <input
                   id="phonenumber"
                   type="tel"
@@ -629,7 +713,12 @@ export default function MakeListing() {
               </label><br></br>
 
 
-              <button style={{ width: '100px', height: '50px', alignItems: 'center', margin: "0 0 0 135px" }}>Submit</button>
+              <button style={{ width: '100px',
+               height: '50px',
+                alignItems: 'center',
+                 margin: "0 0 15px 135px"
+                 ,color: 'black',}}>
+                  Submit</button>
             </div>
           </form>
           <p id="readIn">

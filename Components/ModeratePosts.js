@@ -2,7 +2,7 @@
 'use client'
 
 import styled from "styled-components";
-import SellProductBox from "./SellProductBox";
+import ModeratePostsBox from "./ModeratePostsBox";
 
 var myListings = [{listingID: "123", title: "Hockey Ticket", price: "$5", description: "Ticket for Friday's game against North Dakota", category: "Service", condition: "New", location: "Off Campus", email: "student1@coloradocollege.edu", phone: "1234567890", images: ["/testimage3.jpeg", "/testimage4.jpeg"], flagged: false},
                     {listingID: "456", title: "Jacket", price: "$30", description: "Brown leather jacket. Good condition. Size medium.", category: "Clothing", condition: "Used-Good", location: "West Campus", email: "student2@coloradocollege.edu", phone: "2071233333", images: ["/testimage1.jpeg", "/testimage5.jpeg", "/testimage2.jpeg"], flagged: false},
@@ -19,12 +19,12 @@ const ProductsGrid = styled.div`
     gap: 20px;
 `;
 
-export default function Products(){
+export default function ModeratePosts(){
     return(
-        <div className="flex flex-col gap-1 text-4xl font-semibold">
+        <div className="flex flex-col gap-1 text-xl font-semibold">
             <ProductsGrid className="flex flex-grow">
             {myListings.map((listing, index) => (
-                <SellProductBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
+                <ModeratePostsBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
             ))}
             </ProductsGrid>
         </div>

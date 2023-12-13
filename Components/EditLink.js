@@ -11,43 +11,48 @@ import Link from "next/link";
 
 const Wrapper = styled.div``;
 
-const LinkBG = styled.div`
-    background-color: black;
-    height: 30px;
-    width: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-`;
+const LinkBGStyle = {
+    backgroundColor: 'black',
+    height: '30px',
+    width: '80px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '10px',
+}
+const EditStyle = {
+    display: 'flex',
+    fontWeight: '600', 
+    fontSize: `1.3rem`,
+    color:'white'
+    
+};
 
-export default function EditLink(){
+const EditLink = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
     return(
         <Wrapper>
-            <LinkBG>
+            <div style={LinkBGStyle}>
                 <Link href={{
                     pathname: '/editlisting',
                     query: {
-                        productID: '12345',
-                        testPrice: 'Test Price',
-                        testDescription: 'Test Description',
-                        testCategory: 'Textbook',
-                        testCondition: "Used-Fair",
-                        testLocation: "East Campus",
-                        testEmail: "test@coloradocollege.edu",
-                        testPhone: "2079561870"
+                        listingID: listingID,
+                        testTitle: title,
+                        testPrice: price,
+                        testDescription: description,
+                        testCategory: category,
+                        testCondition: condition,
+                        testLocation: location,
+                        testEmail: email,
+                        testPhone: phone,
+                        testImages: images,
+                        isFlagged: flagged
                     }
-                }} className="flex text-semibold text-xl">
+                }} style={EditStyle}>
                     Edit
                 </Link>
-                {/* <Link
-                    href="/editlisting"
-                    as={`/editlisting?title=${encodeURIComponent("test title")}&price=${encodeURIComponent("test price")}&description=${encodeURIComponent("test description")}&category=${encodeURIComponent("Textbook")}&condition=${encodeURIComponent("New")}&location=${encodeURIComponent("East Campus")}&email=${encodeURIComponent("test@coloradocollege.edu")}&phone=${encodeURIComponent("2079561870")}`}
-                    className="flex text-semibold text-xl"
-                    >
-                    Edit
-                    </Link> */}
-            </LinkBG>
+            </div>
         </Wrapper>
     );
 }
+
+export default EditLink;
