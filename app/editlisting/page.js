@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 export const user  = "@coloradocollege.edu";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 const getListing = async () => {
   const response = await fetch("http://localhost:3000/api/getListing",{
@@ -15,7 +17,7 @@ const getListing = async () => {
 };
 
 const makeListing = async (listingDict) => {
-  const response = await fetch("/api/putListing",{
+  const response = await fetch("http://localhost:3000/api/putListing",{
     method:"PUT",
     body : JSON.stringify({
     listing:(listingDict)
@@ -26,7 +28,7 @@ const makeListing = async (listingDict) => {
 };
 
 const getAllListings = async () => {
-  const response = await fetch("/api/getAllListings",{
+  const response = await fetch("http://localhost:3000/api/getAllListings",{
     method:"GET",
     });n
   const data = await response.json();
