@@ -27,14 +27,15 @@ const EditStyle = {
     
 };
 
-const EditLink = ({ title, price, description, category, condition, location, email, phone, images}) => {
+const EditLink = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
     return(
         <Wrapper>
             <div style={LinkBGStyle}>
                 <Link href={{
                     pathname: '/editlisting',
                     query: {
-                        productID: title,
+                        listingID: listingID,
+                        testTitle: title,
                         testPrice: price,
                         testDescription: description,
                         testCategory: category,
@@ -42,18 +43,12 @@ const EditLink = ({ title, price, description, category, condition, location, em
                         testLocation: location,
                         testEmail: email,
                         testPhone: phone,
-                        testImages: images
+                        testImages: images,
+                        isFlagged: flagged
                     }
                 }} style={EditStyle}>
                     Edit
                 </Link>
-                {/* <Link
-                    href="/editlisting"
-                    as={`/editlisting?title=${encodeURIComponent("test title")}&price=${encodeURIComponent("test price")}&description=${encodeURIComponent("test description")}&category=${encodeURIComponent("Textbook")}&condition=${encodeURIComponent("New")}&location=${encodeURIComponent("East Campus")}&email=${encodeURIComponent("test@coloradocollege.edu")}&phone=${encodeURIComponent("2079561870")}`}
-                    className="flex text-semibold text-xl"
-                    >
-                    Edit
-                    </Link> */}
             </div>
         </Wrapper>
     );

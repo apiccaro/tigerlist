@@ -80,7 +80,8 @@ export default function EditListing({searchParams}) {
       });
     };*/
 
-    const { productID} = searchParams;
+    const {listingID} = searchParams;
+    const {testTitle} = searchParams;
     const {testPrice} = searchParams;
     const {testDescription} = searchParams;
     const {testCategory} = searchParams;
@@ -89,6 +90,7 @@ export default function EditListing({searchParams}) {
     const {testEmail} = searchParams;
     const {testPhone} = searchParams;
     const {testImages} = searchParams;
+    const {isFlagged} = searchParams;
 
     var originalImage = testImages[0];
     var originalImage1 = testImages[1];

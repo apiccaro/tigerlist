@@ -32,13 +32,14 @@ const buttonStyle = {
 };
 
 
-const ModeratePostsBox = ({ title, price, description, category, condition, location, email, phone, images}) => {
+const ModeratePostsBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
     return(
         <div>
             <div style={ProductBGStyle}>
                 <Link href={{
-                    pathname: '/productview',
+                    pathname: '/modproductview',
                     query: {
+                        productID: listingID,
                         productTitle: title,
                         productPrice: price,
                         productDescription: description,
@@ -47,7 +48,8 @@ const ModeratePostsBox = ({ title, price, description, category, condition, loca
                         productLocation: location,
                         listerEmail: email,
                         listerPhone: phone,
-                        productImages: images
+                        productImages: images,
+                        isFlagged: flagged
                     } 
                 }} style={linkStyle}>
                     <Image
