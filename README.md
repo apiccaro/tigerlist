@@ -1,8 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+TigerList is a website for Colorado College to buy, sell and exchange goods. Mimicking an online marketplace, TigerList allows only Colorado College students to buy and sell goods. Instead of other online marketplaces, TigerList guarantees products are within walking distance, are in safe locations and are amongst other students. This increases safety of students and reusability of any item on campus. Colorado College students have no single interface to message each other about buying and selling goods. Messages end up in class GroupMes or Instagram stories or by word of mouth. TigerList is a confluence for students to buy and sell goods without going to extreme measures. 
+The website has a Colorado College sign in with Duopush to confirm a student’s identity. From there, the student can browse listings and sort them, make a listing, and edit one of their personal listings. Based on other online marketplaces, TigerList has a familiarity that students can easily navigate. 
 
-## Getting Started
 
-First, run the development server:
+This is a [Next.js](https://nextjs.org/) project using HTML/CSS with a postgresql database to be implemented and to eventually be hosted on Colorado College's server.
+
+First, run the development server: 
 
 ```bash
 npm run dev
@@ -15,22 +17,3 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
