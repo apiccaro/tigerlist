@@ -4,7 +4,83 @@ import {useState} from 'react';
 import React from 'react';
 import Image from 'next/image';
 import { useForm } from "react-hook-form";
+<<<<<<< HEAD
 import { getPost } from '@/azure2/read';
+=======
+export const user  = "@coloradocollege.edu";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+//USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
+const getListing = async () => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getListing", {
+    method:"GET",
+    });
+  const data = await response.json();
+  return data;
+};
+
+const makeListing = async (listingDict) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing", {
+    method:"PUT",
+    body : JSON.stringify({
+    listing:(listingDict)
+    })
+    },
+    );
+  await response;
+};
+
+export default function EditListing({searchParams}) {
+  //var id=listingID.id;
+  
+  const SMALLIMAGE='100px';
+  const [title, setTitle] = useState();
+  const [price, setPrice] = useState();
+  const [cat, setCat] = useState();
+  const [cond, setCond] = useState();
+  const [loc, setLoc] = useState();
+  const [description, setDescription] = useState();
+  const [previewImage, setPreviewImage] = useState();
+  const [previewImage1, setPreviewImage1] = useState();
+  const [previewImage2, setPreviewImage2] = useState();
+  const [previewImage3, setPreviewImage3] = useState();
+  const [previewImage4, setPreviewImage4] = useState();
+  const [email, setEmail] = useState();
+  const [phonenumber, setPhoneNumber] = useState();
+  const [borderStyle, setBorderStyle] = useState();
+  const [borderStyle1, setBorderStyle1] = useState();
+  const [borderStyle2, setBorderStyle2] = useState();
+  const [borderStyle3, setBorderStyle3] = useState();
+  const [borderStyle4, setBorderStyle4] = useState();
+  const [imgWidth, setWidth] = useState();
+  const [imgHeight, setHeight] = useState();
+  const [imgWidth1, setWidth1] = useState();
+  const [imgHeight1, setHeight1] = useState();
+  const [imgWidth2, setWidth2] = useState();
+  const [imgHeight2, setHeight2] = useState();
+  const [imgWidth3, setWidth3] = useState();
+  const [imgHeight3, setHeight3] = useState();
+  const [imgWidth4, setWidth4] = useState();
+  const [imgHeight4, setHeight4] = useState();
+  const [labelText, setLabelText] = useState();
+  const [labelText1, setLabelText1] = useState();
+  const [labelText2, setLabelText2] = useState();
+  const [labelText3, setLabelText3] = useState();
+  const [labelText4, setLabelText4] = useState();
+  const [readinTitle2, setReadinTitle2] = useState();
+  const [readinTitle, setReadinTitle] = useState("");
+
+
+    /*const updateListing = async (id, updatedListing) => {
+      await fetch(`/api/todos/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTodo),
+      });
+    };*/
+>>>>>>> 4b9d3364e39965bdb019021541f97b94d59b296d
 
 
 export default function MakeListing(){
