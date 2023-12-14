@@ -3,7 +3,18 @@
 import { useState } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const makeListing = async (listingDict) => {
+  const response = await fetch(process.env.API_CONNECTION_URL+"putListing",{
+    method:"PUT",
+    body : JSON.stringify({
+    listing:(listingDict)
+    })
+    },
+    );
+  await response;
+};
 
 export default function MakeListing() {
   const SMALLIMAGE = '100px';
@@ -104,10 +115,12 @@ export default function MakeListing() {
       phoneValue: phoneValue,
       image: imageValue,
       active: "true",
+      flagged: "false"
     }
-
-    setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
-    setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
+    if(makeListing(dict)){
+      toast("Your listing has been uploaded!");
+    }
+    
   }
   /**
    * Takes in a list of error messages and applies them when necessary 
@@ -124,6 +137,14 @@ export default function MakeListing() {
       backgroundColor:'#D09B2C',
       color: 'black'
     }}>
+       <ToastContainer 
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={true}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme="dark" />
       <div >
         <div>
           <h1 style={{fontWeight: 'bold'}}>Create Listing</h1>
@@ -134,7 +155,13 @@ export default function MakeListing() {
 
               <label
                 htmlFor="image"
-                style={{ width: '500px', height: labelHeight ?? 480, border: borderStyle ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                style={{ width: '500px',
+                 height: labelHeight ?? 480,
+                  border: borderStyle ?? '4px dashed black',
+                   cursor: 'pointer',
+                    display: 'inline-block',
+                    borderRadius:'10px',
+                    fontWeight: '600', }}
               >
                 {labelText ?? 'Add Image'}
                 <input
@@ -162,7 +189,7 @@ export default function MakeListing() {
                         setWidth('500px');
                         setPreviewImage(reader.result);
                         setLabelHeight(40);
-                        setBorderStyle('2px solid white');
+                        setBorderStyle('4px solid black');
                         setLabelText('Change Image');
                       };
                       reader.readAsDataURL(file);
@@ -188,7 +215,13 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image1"
-                    style={{ width: '115px', height: labelHeight1 ?? 115, border: borderStyle1 ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                    style={{ width: '115px',
+                     height: labelHeight1 ?? 115,
+                      border: borderStyle1 ?? '4px dashed black',
+                       cursor: 'pointer',
+                        display: 'inline-block',
+                        borderRadius:'10px',
+                        fontWeight: '600', }}
                   >
                     {labelText1 ?? 'Add Image'}
                     <input
@@ -251,7 +284,13 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image2"
-                    style={{ width: '115px', height: labelHeight2 ?? 115, border: borderStyle2 ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                    style={{ width: '115px',
+                     height: labelHeight2 ?? 115,
+                      border: borderStyle2 ?? '4px dashed black',
+                       cursor: 'pointer', 
+                       display: 'inline-block',
+                       borderRadius:'10px',
+                       fontWeight: '600', }}
                   >
                     {labelText2 ?? 'Add Image'}
                     <input
@@ -315,7 +354,13 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image3"
-                    style={{ width: '115px', height: labelHeight3 ?? 115, border: borderStyle3 ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                    style={{ width: '115px',
+                     height: labelHeight3 ?? 115,
+                      border: borderStyle3 ?? '4px dashed black',
+                       cursor: 'pointer',
+                        display: 'inline-block',
+                        borderRadius:'10px',
+                        fontWeight: '600', }}
                   >
                     {labelText3 ?? 'Add Image'}
                     <input
@@ -379,7 +424,13 @@ export default function MakeListing() {
                 <div style={{ width: '22%', margin: '0 0px 0px 0px', float: 'left' }}>
                   <label
                     htmlFor="image4"
-                    style={{ width: '115px', height: labelHeight4 ?? 115, border: borderStyle4 ?? '2px dashed white', cursor: 'pointer', display: 'inline-block' }}
+                    style={{ width: '115px',
+                     height: labelHeight4 ?? 115,
+                      border: borderStyle4 ?? '4px dashed black',
+                       cursor: 'pointer',
+                        display: 'inline-block' ,
+                        borderRadius:'10px',
+                        fontWeight: '600',}}
                   >
                     {labelText4 ?? 'Add Image'}
                     <input
@@ -577,9 +628,9 @@ export default function MakeListing() {
                 {errors?.condition && errors.condition.message}
               </small>
               <br></br>
-              <label for="location" > 
-              <span className='formOption'>
-              Pick a Label: <br></br>
+              <label for="location" >
+                 <span className='formOption'>
+              Pick a Location: <br></br>
               </span>
               </label>
 
@@ -662,7 +713,12 @@ export default function MakeListing() {
               </label><br></br>
 
 
-              <button style={{ width: '100px', height: '50px', alignItems: 'center', margin: "0 0 0 135px" }}>Submit</button>
+              <button style={{ width: '100px',
+               height: '50px',
+                alignItems: 'center',
+                 margin: "0 0 15px 135px"
+                 ,color: 'black',}}>
+                  Submit</button>
             </div>
           </form>
           <p id="readIn">

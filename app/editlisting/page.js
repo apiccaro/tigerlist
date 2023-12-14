@@ -2,7 +2,30 @@
 import { useState,useEffect  } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
+export const user  = "@coloradocollege.edu";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+
+//USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
+const getListing = async () => {
+  const response = await fetch(process.env.API_CONNECTION_URL+"getListing", {
+    method:"GET",
+    });
+  const data = await response.json();
+  return data;
+};
+
+const makeListing = async (listingDict) => {
+  const response = await fetch(process.env.API_CONNECTION_URL+"putListing", {
+    method:"PUT",
+    body : JSON.stringify({
+    listing:(listingDict)
+    })
+    },
+    );
+  await response;
+};
 
 export default function EditListing({searchParams}) {
   //var id=listingID.id;
@@ -43,31 +66,7 @@ export default function EditListing({searchParams}) {
   const [labelText4, setLabelText4] = useState();
   const [readinTitle2, setReadinTitle2] = useState();
   const [readinTitle, setReadinTitle] = useState("");
-  var originalImage = null;
-  var originalTitle;
-  var originalPrice;
-  var originalDescription;
-  var originalCategory;
-  var originalCondition;
-  var originalLocation;
-  var originalEmail;
-  var originalLocation;
-  var originalEmail;
-  var originalPhone;
-  var originalImage1;
-  var originalImage2;
-  var originalImage3;
-  var originalImage4;
-/**
-   * Handles the onSubmit action of the form
-   */
-  const { register, handleSubmit, formState: { errors } } = useForm();
-   /**
-   * Takes in data from the form and builds a dictionary to be 
-   * write into the database.
-   * Place holder as of now
-   * @param {*} data 
-   */
+
 
     /*const updateListing = async (id, updatedListing) => {
       await fetch(`/api/todos/update/${id}`, {
@@ -95,27 +94,52 @@ export default function EditListing({searchParams}) {
     var originalImage3 = testImages[3];
     var originalImage4 = testImages[4];
 
-    //var originalImage=null;
-    var originalTitle;
-    var originalPrice;
-    var originalDescription;
-    var originalCategory;
-    var originalCondition;
-    var originalLocation;
-    var originalEmail;
-    var originalLocation;
-    var originalEmail;
-    var originalPhone;
+
     // var testTitle = testDict["testTitle"];
     // var testPrice = testDict["testPrice"];
-
+    const getData =async () => {
+      const data = await getListing();
+      originalTitle=data.title;
+      setDescription(data.description);
+      setPrice(data.price);
+      setCat(data.category);
+      setCond(data.condition);
+      setLoc(data.location);
+      setEmail(data.email);
+      setPhoneNumber(data.phoneValue);
+      console.log(data.images)
+      setPreviewImage(data.images[0])
+      setPreviewImage1(data.images[1])
+      setPreviewImage2(data.images[2])
+      setPreviewImage3(data.images[3])
+      setPreviewImage4(data.images[4])
+      
+}
+/**
+/**
+   * Handles the onSubmit action of the form
+   */
+  const { register, handleSubmit, formState: { errors } } = useForm();
+   /**
+   * Takes in data from the form and builds a dictionary to be 
+   * write into the database.
+   * Place holder as of now
+   * @param {*} data 
+   */
+    /*const updateListing = async (id, updatedListing) => {
+      await fetch(`/api/todos/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedListing),
+      });
+    };*/
+ 
   const handleRegistration = (data) => {
     /**const handleUpdate = async (id, completed) => {
-      const updatedListings= listings.find((todo) => todo.id === id);
-      await updateTodo(id, updatedTodo);
+      const updatedListing= listings.find((listing) => listing.id === id);
+      await updateListing(id, updatedListing);
     };**/
   
-    console.log(data);
     const titleValue = data.title;
     const priceValue = data.price;
     const descriptionValue = data.description;
@@ -135,52 +159,28 @@ export default function EditListing({searchParams}) {
       email: emailValue,
       phoneValue: phoneValue,
       image: imageValue,
-      active: "true"
+      active: "true",
+      flagged: "false"
     }
-    setReadinTitle("Title: " + titleValue + "\nPrice: " + priceValue + "\nDescription: " + descriptionValue + "\nCategory: " + catValue + "\nCondition: " + condValue);
-    setReadinTitle2("\nLocation: " + locValue + "\nEmail: " + emailValue + "\nPhone" + phoneValue + "\nImage" + imageValue);
+    if(makeListing(dict)){
+      toast("Your listing has been edited!");
+    }
+    
   }
+  
 
-   /**
-   * Reads in data from the database and autopopulates the
-   * form with the particular listing data
-   * Place holder as of now
-   * 
-   */
-  const readInData = () => {
-    //var dict=fetchTodos()
-    //var id=listingID.id;
-    //var dict = getPost(id);
-    // originalImage = "/ticket.jpeg"
-    // originalImage1 = "/bomb.jpeg"
-    // originalImage2="/ticket.jpeg"
-    //originalImage3="/ticket.jpeg"
-    originalTitle = 'couch'
-    originalPrice = "2000"
-    originalDescription = "black and leather"
-    originalCategory = "textbook"
-    originalCondition = "new"
-    originalLocation = "offcampus"
-    originalEmail = "ap@coloradocollege.edu"
-    originalPhone = "9787657788"
-  }
-  /*useEffect(() => {
-    (async () => {
-      const todos = await fetchTodos();
-      setTitle(todos.title);
-    })();
-  }, []);*/
+ 
   /**
    * Takes in a list of error messages and applies them when necessary 
    * when input checking.
    * @param {list} errors 
    */
   const handleError = (errors) => { };
-  readInData();
+  ///////////////////////////////////
+  // ACTUALLY CALLING THE FUNCTION //
+  /////////////////////////////////// 
+  getData();
   return (
-    <div className="flex flex-col bg-yellow-600 min-h-screen">
-
-
     <main style={{
       display: 'flex',
       alignItems: 'center',
@@ -188,6 +188,15 @@ export default function EditListing({searchParams}) {
       backgroundColor:'#D09B2C',
       color: 'black'
     }}>
+      <ToastContainer 
+      position="top-center"
+      autoClose={3000}
+      hideProgressBar={true}
+      color='black'
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme="dark" />
       <div >
         <div>
           <h1 style={{fontWeight: 'bold'}}>Edit Your Listing</h1>
@@ -197,10 +206,10 @@ export default function EditListing({searchParams}) {
             <div style={{ float: "left", margin: "60px 100px 0 30px" }}>
               <label
                 htmlFor="image"
-
                 style={{
                   width: '500px',
-                  fontWeight: 'bold',
+                  borderRadius:'10px',
+                  fontWeight: '600',
                   //if there is not an original image or an uploaded 
                   //image default to "add image" setting
                   
@@ -567,19 +576,15 @@ export default function EditListing({searchParams}) {
               float: "right",
               margin: "60px 100px 0 0",
             }}>
-              <label>
-                <span className='formOption'>
+              <label><span className='formOption'>
                 Edit Title: <br></br>
                 </span>
-                
                 <input
                   id="title"
                   type="text"
-                  
-                  
                   style={{ color: 'black' }}
-                  //defaultValue={originalTitle}
-                  value={testTitle}
+                  defaultValue={productID}
+                  value={title}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters
                   onChange={e => setTitle(e.target.value)}
@@ -593,14 +598,13 @@ export default function EditListing({searchParams}) {
                 </small>
               </label><br></br>
               <span></span>
-              <label>
-              <span className='formOption'>
+              <label><span className='formOption'>
                 Edit Price: <br></br>
                 </span>
                 <input type="text"
                   style={{ color: 'black' }}
-                  //defaultValue={originalPrice}
-                  value={testPrice}
+                  defaultValue={testPrice}
+                  value={price}
                   placeholder='Price'
                   onChange={e => setPrice(e.target.value)}
                   {//confirms that users submit a price under 10 digits
@@ -623,8 +627,8 @@ export default function EditListing({searchParams}) {
                 </span>
                 <input type="text"
                   style={{ color: 'black' }}
-                  value={testDescription}
-                  //defaultValue={originalDescription}
+                  value={description}
+                  defaultValue={testDescription}
                   placeholder='Description'
                   onChange={e => setDescription(e.target.value)}
                   //confirms that users submit a description under 500 characters
@@ -643,11 +647,10 @@ export default function EditListing({searchParams}) {
               <span className='formOption'>
                 Edit Category: <br></br>
                 </span>
-             
               <select name="category"
                 id="category"
-                //defaultValue={originalCategory}
-                value={testCategory}
+                defaultValue={testCategory}
+                value={cat}
                 onChange={e => setCat(e.target.value)}
                 //confirms that users submit a category
                 {...register("category", {
@@ -668,12 +671,12 @@ export default function EditListing({searchParams}) {
               </small><br></br>
               <label for="condition" > </label>
               <span className='formOption'>
-                Edit Condition: <br></br>
+                Edit Category: <br></br>
                 </span>
               <select name="condition"
                 id="condition"
-                //defaultValue={originalCondition}
-                value={testCondition}
+                defaultValue={testCondition}
+                value={cond}
                 onChange={e => setCond(e.target.value)}
                 //confirms that users submit a condition
                 {...register("condition", {
@@ -697,8 +700,8 @@ export default function EditListing({searchParams}) {
                 </span>
               <select name="location"
                 id="location"
-                value={testLocation}
-                //defaultValue={originalLocation}
+                value={loc}
+                defaultValue={testLocation}
                 onChange={e => setLoc(e.target.value)}
                 //confirms that users submit a location
                 {...register("location", {
@@ -715,7 +718,7 @@ export default function EditListing({searchParams}) {
                 {errors?.location && errors.location.message}
               </small>
               <br></br>
-              <label>
+              <label>  
                 <span className='formOption'>
                 Edit Email: <br></br>
                 </span>
@@ -723,9 +726,9 @@ export default function EditListing({searchParams}) {
                   id="email"
                   type="email"
                   style={{ color: 'black' }}
-                  value={testEmail}
+                  value={email}
                   placeholder='Email'
-                  //defaultValue={originalEmail}
+                  defaultValue={testEmail}
                   onChange={e => setEmail(e.target.value)}
                   //confirms that users submit an email that matches a CC email.
                   {...register("email", {
@@ -741,17 +744,16 @@ export default function EditListing({searchParams}) {
                   {errors?.email && errors.email.message}
                 </small>
               </label><br></br>
-              <label>
-                <span className='formOption'>
+              <label><span className='formOption'>
                 Edit Phone Number: <br></br>
                 </span>
                 <input
                   id="phonenumber"
                   type="tel"
                   style={{ color: 'black' }}
-                  value={testPhone}
+                  value={phonenumber}
                   placeholder='Phone Number'
-                  //defaultValue={originalPhone}
+                  defaultValue={testPhone}
                   onChange={e => setPhoneNumber(e.target.value)}
                   //confirms that users submit a 10 digit phone number
                   {...register("phonenumber", {
@@ -772,19 +774,19 @@ export default function EditListing({searchParams}) {
                 </small>
               </label><br></br>
               <div >
-                <button style={{ width: '100px', height: '50px', alignItems: 'center', margin: "0 0 0 135px" }}>Submit</button>
+                <button style={{ width: '100px',
+                 height: '50px',
+                  alignItems: 'center',
+                   margin: "0 0 15px 135px" }}>
+                    Submit
+                    </button>
               </div>
             </div>
           </form>
-          <p id="readin">
-            {readinTitle}
-          </p>
-          <p id="readin2">
-            {readinTitle2}
-          </p>
+         
         </div>
       </div>
     </main>
-    </div>
   )
+                
 }

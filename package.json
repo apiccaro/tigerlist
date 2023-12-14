@@ -2,14 +2,12 @@
   "name": "tigerlist",
   "version": "0.1.0",
   "private": true,
- 
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
-
   "dependencies": {
     "@astrajs/collections": "^0.3.4",
     "firebase": "^10.7.0",
@@ -19,6 +17,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "7.34.2",
+    "react-toastify": "^9.1.3",
     "styled-components": "^6.1.1",
     "tedious": "^16.6.1"
   },
@@ -236,5 +235,4 @@
       "node": "16|| 18 || 20"
     }
   }
-  
 }
