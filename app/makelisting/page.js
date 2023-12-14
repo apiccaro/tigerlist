@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const makeListing = async (listingDict) => {
-  const response = await fetch("http://localhost/api/putListing",{
+  const response = await fetch("http://tigerlist.coloradocollege.edu/api/putListing",{
     method:"PUT",
     body : JSON.stringify({
     listing:(listingDict)
