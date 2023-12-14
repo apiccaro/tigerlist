@@ -6,7 +6,7 @@ import {useState,useEffect} from 'react';
 import Loading from "@/app/mylistings/loading";
 const getUser= async()=>{
 
-  const response = await fetch("http://tigerlist.coloradocollege.edu/l_flanagan/tigerlist/api/getListing", {
+  const response = await fetch(process.env.API_CONNECTION_URL+"getUser", {
       method:"GET",
       });
     const data = await response.json();
@@ -18,7 +18,7 @@ const getUser= async()=>{
 
 const getAllModeratedUsers = async () => {
 
-    const response = await fetch("http://localhost/getAllModeratedUsers",{
+    const response = await fetch(process.env.API_CONNECTION_URL+"getAllModeratedUsers",{
       method:"GET",
       });
     const data = await response.json();

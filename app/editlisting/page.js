@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 const getListing = async () => {
-  const response = await fetch("http://tigerlist.coloradocollege.edu/app/api/getListing", {
+  const response = await fetch(process.env.API_CONNECTION_URL+"getListing", {
     method:"GET",
     });
   const data = await response.json();
@@ -17,7 +17,7 @@ const getListing = async () => {
 };
 
 const makeListing = async (listingDict) => {
-  const response = await fetch("http://tigerlist.coloradocollege.edu/api/getListing", {
+  const response = await fetch(process.env.API_CONNECTION_URL+"putListing", {
     method:"PUT",
     body : JSON.stringify({
     listing:(listingDict)
@@ -25,14 +25,6 @@ const makeListing = async (listingDict) => {
     },
     );
   await response;
-};
-
-const getAllListings = async () => {
-  const response = await fetch("http://tigerlist.coloradocollege.edu/l_flanagan/tigerlist/app/api/getListing", {
-    method:"GET",
-    });n
-  const data = await response.json();
-  return data;
 };
 
 export default function EditListing({searchParams}) {
