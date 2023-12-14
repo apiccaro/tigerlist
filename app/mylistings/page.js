@@ -6,7 +6,7 @@ import {useState,useEffect} from 'react';
 import Loading from "@/app/mylistings/loading";
 const getUser= async()=>{
 
-  const response = await fetch(process.env.API_CONNECTION_URL+"getUser", {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser", {
       method:"GET",
       });
     const data = await response.json();
@@ -18,7 +18,7 @@ const getUser= async()=>{
 
 const getAllModeratedUsers = async () => {
 
-    const response = await fetch(process.env.API_CONNECTION_URL+"getAllModeratedUsers",{
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllModeratedUsers",{
       method:"GET",
       });
     const data = await response.json();

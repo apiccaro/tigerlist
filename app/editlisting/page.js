@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 const getListing = async () => {
-  const response = await fetch(process.env.API_CONNECTION_URL+"getListing", {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getListing", {
     method:"GET",
     });
   const data = await response.json();
@@ -17,7 +17,7 @@ const getListing = async () => {
 };
 
 const makeListing = async (listingDict) => {
-  const response = await fetch(process.env.API_CONNECTION_URL+"putListing", {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing", {
     method:"PUT",
     body : JSON.stringify({
     listing:(listingDict)
