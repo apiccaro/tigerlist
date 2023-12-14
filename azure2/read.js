@@ -1,3 +1,4 @@
+/*
 const sql = require('mssql');
 const useDB = true
 const {connectionString} = require('./access.js');
@@ -155,7 +156,7 @@ function testMethod_read(code){
   * Ideally everything above this point is outsider friendly, and changes minimally so pages can call them and expect a consistent result. 
   * When more methods match our standards I'll move them (or an access method) up and comment appropriately
   */ 
-
+/*
 //This one makes things easier. Boolean version optionally prints query result
 async function doQuery(queryText){doQuery(queryText,false)}
 async function doQuery(queryText,printOutput) {

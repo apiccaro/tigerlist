@@ -1,4 +1,4 @@
-//import SQL
+/*//import SQL
 const sql = require('mssql');
 
 //import azureAuth, handles credentials / configuration
@@ -154,3 +154,4 @@ function dictCheck(){
 
 Main()
 // testWrite()
+*/

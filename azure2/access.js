@@ -1,5 +1,5 @@
 //const sql = require('mssql');
-const connectionString = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:tigerlist.database.windows.net,1433;Database=TigerBase;Uid=TigerAdmin;Pwd=TeamSoftwareProject1;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+//const connectionString = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:tigerlist.database.windows.net,1433;Database=TigerBase;Uid=TigerAdmin;Pwd=TeamSoftwareProject1;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
 
 // const config = {
 //     user: 'TigerAdmin@tigerlist.database.windows.net',
@@ -50,4 +50,4 @@ const connectionString = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:tige
 // function testMethod_access(code){
 //     console.log("Hello from access.js - code:",code)
 // }
-module.exports = {connectionString};
+//module.exports = {connectionString};
