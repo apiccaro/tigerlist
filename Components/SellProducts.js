@@ -10,23 +10,34 @@ var myListings = [{listingID: "123", title: "Hockey Ticket", price: "$5", descri
 
 
 // This youtube video provided grid formatting help https://www.youtube.com/watch?v=dTFXufTgfOE
-const ProductsGrid = styled.div`
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 20px;
-`;
+const ProductsGridStyle={
+    marginTop: '20px',
+    marginLeft: '20px',
+    marginRight: '20px',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    gap:'20px',
+}
+
+const getUserListings = async (email) => {
+    const response = await fetch("http://localhost:3000/api/getUserListings",{
+      method:"GET",
+      });
+    const data = await response.json(email);
+    return data;
+  };
 
 export default function Products(){
+    // var userListings=[]
+    // const getOneUserListings=async()=>{
+    //     const response = await getAllUserListings()
+    //     userListings=response;
+    // }
     return(
-        <div className="flex flex-col gap-1 text-4xl font-semibold">
-            <ProductsGrid className="flex flex-grow">
+        <div style={ProductsGridStyle} className="flex flex-grow">
             {myListings.map((listing, index) => (
                 <SellProductBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
             ))}
-            </ProductsGrid>
         </div>
     );
 }

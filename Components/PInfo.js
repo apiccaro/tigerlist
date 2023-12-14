@@ -31,24 +31,29 @@ const ContactBoxStyle = {
     paddingRight: '20px'
 }
 
-const editListing = async (listingDict) => {
-    const response = await fetch("http://localhost:3000/api/deleteListing",{
-      method:"PUT",
-      body : JSON.stringify({
-      listing:(listingDict)
-      })
-      },
-      );
-    await response;
-  };
+const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
-const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
-
+    const editListing = async (listingDict) => {
+        const response = await fetch("http://localhost:3000/api/deleteListing",{
+          method:"PUT",
+          body : JSON.stringify({
+          listing:(listingDict)
+          })
+          },
+          );
+        await response;
+      };
+    
     const [isActive, setIsActive] = useState(true);
-
+    
     const toggleFlagButton = () => {
         setIsActive(!isActive);
     };
+    
+    const handleFlagClick = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+        toggleFlagButton();
+        editListing({listingID, title, price, description, category, condition, location, email, phone, images, flagged});
+    }
 
     return(
         <aside style={{display: "flex", flexDirection: 'col', gap:'3rem', text:"white", padding:"1rem", }} className="flex flex-col gap-10 text-white p-4 mt-5">
@@ -87,7 +92,7 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
             </div>
             <button
             style={{height: '80px', width: '80px', alignItems: 'center', borderRadius: '10px', backgroundColor: 'black', borderColor: 'black'}}
-            onClick={"toggleFlagButton() ; editListing({listingID: listingID, title: title, price: price, description: description, category: category, condition: condition, location: location, email: email, phone: phone, images: images, flagged: !flagged})"}>
+            onClick={() => handleFlagClick({listingID, title, price, description, category, condition, location, email, phone, images, flagged})}>
                 {isActive ? <Image
                                 src="/unflagged.svg"
                                 alt="Tiger Image"

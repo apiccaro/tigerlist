@@ -19,9 +19,23 @@ const ProductsGridStyle={
     gap:'20px',
 }
 
+const getAllListings = async () => {
+    const response = await fetch("http://localhost:3000/api/getAllListings",{
+      method:"GET",
+      });
+    const data = await response.json();
+    return data;
+};
+
 export default function BuyProducts(){
+    // var allListings=[]
+    // const getListings=async()=>{
+    //     const response = await getAllListings()
+    //     allListings=response;
+    // }
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
+            
             {allListings.map((listing, index) => (
                 <BuyProductBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
             ))}
