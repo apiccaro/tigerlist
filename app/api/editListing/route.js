@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 export async function PUT(request){
-    
+
     const postDict = await request.json()
 
     //Build query. Will make this cleaner with $ once this works.
@@ -17,7 +17,7 @@ export async function PUT(request){
             + "active = '" + postDict['active'] + "', "
             + "flagged = " + postDict['flagged'] + ", "
             + "moderator_ban = " + postDict['moderator_ban'] + " "
-            + "WHERE post_key = '" + post_key + "';"
+            + "WHERE post_key = '" + postDict['post_key'] + "';"
         )
 
     //From here down should be pretty much the same for every route.js (unless we're getting something)
