@@ -1,6 +1,8 @@
 //const sql = require('mssql');
 //i dont see why we need this but i dont wanna delete a route.js in the api folder. I deleted the "require access.js" so that better not come back from the dead again
 const useDB = false
+//////////////const {getValidRequest,testMethod_access} = require('./access.js'); This line can fuck all the way off. Keeping this here until its stayed this way for many versions. 
+//If you see a file with any "require access.js" delete the line and not the file, so it doesnt pop up from other people's branches
 
 import { NextResponse } from 'next/server';
 
