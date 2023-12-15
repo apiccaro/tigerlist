@@ -11,9 +11,9 @@ const makeListing = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
 
     method:"PUT",
-    body : JSON.stringify({
-    listing:(listingDict)
-    })
+    body : JSON.stringify(
+    listingDict
+    )
     },
     );
   await response;
