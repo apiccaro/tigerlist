@@ -6,7 +6,7 @@ const testUserEmail = "l_flanagan@coloradocollege.edu";
 
 const handler = httpCasClient({ // creating a handler with my specific configurations 
   casServerUrlPrefix: 'https://cas.coloradocollege.edu/cas',
-  serverName: 'https://tigerlist.vercel.app'
+  serverName: 'http://tigerlist.coloradocollege.edu'
 });
 
 

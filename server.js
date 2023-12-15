@@ -7,7 +7,7 @@ const next = require('next');
  * cas.js actually exports a function (see file)
  * and this exported function is assigned to casHandler 
 */
-const casHandler = require('./app/server/cas');
+const { casHandler } = require('./app/server/cas');
 
 // ENV SETUP //
 // initializes Next.js app and retrieves the request handler
