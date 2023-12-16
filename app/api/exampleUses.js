@@ -37,7 +37,7 @@ const makeListing = async (listingDict) => {
  * @param {*} listingDict 
  */
   const editListing = async (listingDict) => {
-    const response = await fetch("http://localhost:3000/api/deleteListing",{
+    const response = await fetch("http://localhost:3000/api/editListing",{
       method:"PUT",
       body : JSON.stringify({
       listing:(listingDict)
@@ -142,6 +142,7 @@ const makeListing = async (listingDict) => {
     const response = await getListing(id)
     listing=response;
   }
+
 /**
  * Tells DB to return all listings associated with one email.
  * @param {string} email 

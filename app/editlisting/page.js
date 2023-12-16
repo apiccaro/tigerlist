@@ -16,19 +16,12 @@ const getListing = async () => {
 const makeListing = async (listingDict) => {
   const response = await fetch("/api/putListing",{
     method:"PUT",
-    body : JSON.stringify({
-    listing:(listingDict)
-    })
+    body : JSON.stringify(
+    listingDict
+    )
     },
     );
   await response;
-};
-const getAllListings = async () => {
-  const response = await fetch("/api/getAllListings",{
-    method:"GET",
-    });
-  const data = await response.json();
-  return data;
 };
 
 export default function EditListing({searchParams}) {
@@ -582,7 +575,7 @@ export default function EditListing({searchParams}) {
                   id="title"
                   type="text"
                   style={{ color: 'black' }}
-                  defaultValue={productID}
+                  defaultValue={testTitle}
                   value={title}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters

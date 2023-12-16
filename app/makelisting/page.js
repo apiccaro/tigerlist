@@ -5,16 +5,43 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+let dict;
 const makeListing = async (listingDict) => {
   const response = await fetch("http://localhost:3000/api/putListing",{
     method:"PUT",
-    body : JSON.stringify({
-    listing:(listingDict)
-    })
+    body : JSON.stringify(
+      listingDict
+    )
     },
-    );
+    )
   await response;
 };
+const getUser = async (email) => {
+  const response = await fetch("http://localhost:3000/api/getUser",{
+    method:"POST",
+    body : JSON.stringify(
+      "a_piccaro@coloradocollege.edu", // ?️ add missing comma here
+  )
+    },
+    );
+  const user= await response.json();
+  
+  return user;
+};
+var isAutoFlagged;
+var thisUser={};
+  const getOneUser=async()=>{
+    const response = await getUser();
+    thisUser=response.user;
+    if(thisUser.isAutoFlagged){
+      dict.flagged=true;
+    }
+   
+    
+   
+  }
+
+
 
 export default function MakeListing() {
   const SMALLIMAGE = '100px';
@@ -94,7 +121,6 @@ export default function MakeListing() {
   };
 
      */
-    console.log(data);
     const titleValue = data.title;
     const priceValue = data.price;
     const descriptionValue = data.description;
@@ -104,7 +130,7 @@ export default function MakeListing() {
     const emailValue = data.email;
     const phoneValue = data.phonenumber;
     const imageValue = [previewImage, previewImage1, previewImage2, previewImage3, previewImage4];
-    var dict = {
+     dict = {
       title: titleValue,
       price: priceValue,
       description: descriptionValue,
@@ -117,8 +143,12 @@ export default function MakeListing() {
       active: "true",
       flagged: "false"
     }
-    if(makeListing(dict)){
+    
+    getOneUser();  
+   if(makeListing(dict)=="true"){
       toast("Your listing has been uploaded!");
+    }else{
+     toast("Unsuccesful try again");
     }
     
   }
@@ -128,7 +158,7 @@ export default function MakeListing() {
    * @param {list} errors 
    */
   const handleError = (errors) => { };
-
+ 
   return (
     <main style={{
       display: 'flex',

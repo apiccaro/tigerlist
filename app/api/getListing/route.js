@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-
-export async function GET() {
+export async function POST(request){
+const listing= await request.json()
+console.log(listing);
   return NextResponse.json({ title: "couch",
     price: "2000",
     description: "black and leather",
