@@ -5,30 +5,19 @@ import { useForm } from "react-hook-form";
 export const user  = "@coloradocollege.edu";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
-const getListing = async () => {
-  const response = await fetch("/api/getListing",{
-    method:"GET",
-    });
-  const data = await response.json();
-  return data;
-};
-const makeListing = async (listingDict) => {
-  const response = await fetch("/api/putListing",{
+
+const editListing = async (listingDict) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"editListing", {
     method:"PUT",
-    body : JSON.stringify({
-    listing:(listingDict)
-    })
+    body : JSON.stringify(
+    listingDict
+    )
     },
-    );
+  );
   await response;
-};
-const getAllListings = async () => {
-  const response = await fetch("/api/getAllListings",{
-    method:"GET",
-    });
-  const data = await response.json();
-  return data;
 };
 
 export default function EditListing({searchParams}) {
@@ -101,23 +90,7 @@ export default function EditListing({searchParams}) {
 
     // var testTitle = testDict["testTitle"];
     // var testPrice = testDict["testPrice"];
-    const getData =async () => {
-      const data = await getListing();
-      originalTitle=data.title;
-      setDescription(data.description);
-      setPrice(data.price);
-      setCat(data.category);
-      setCond(data.condition);
-      setLoc(data.location);
-      setEmail(data.email);
-      setPhoneNumber(data.phoneValue);
-      console.log(data.images)
-      setPreviewImage(data.images[0])
-      setPreviewImage1(data.images[1])
-      setPreviewImage2(data.images[2])
-      setPreviewImage3(data.images[3])
-      setPreviewImage4(data.images[4])
-}
+  
 /**
 /**
    * Handles the onSubmit action of the form
@@ -136,7 +109,7 @@ export default function EditListing({searchParams}) {
         body: JSON.stringify(updatedListing),
       });
     };*/
-
+ 
   const handleRegistration = (data) => {
     /**const handleUpdate = async (id, completed) => {
       const updatedListing= listings.find((listing) => listing.id === id);
@@ -163,9 +136,11 @@ export default function EditListing({searchParams}) {
       phoneValue: phoneValue,
       image: imageValue,
       active: "true",
-      flagged: "false"
+      flagged: isFlagged,
+      moderator_ban:"false",
+      post_key:listingID,
     }
-    if(makeListing(dict)){
+    if(editListing(dict)){
       toast("Your listing has been edited!");
     }
     
@@ -179,6 +154,9 @@ export default function EditListing({searchParams}) {
    * @param {list} errors 
    */
   const handleError = (errors) => { };
+  ///////////////////////////////////
+  // ACTUALLY CALLING THE FUNCTION //
+  /////////////////////////////////// 
   return (
     <main style={{
       display: 'flex',
@@ -582,7 +560,7 @@ export default function EditListing({searchParams}) {
                   id="title"
                   type="text"
                   style={{ color: 'black' }}
-                  defaultValue={productID}
+                  defaultValue={testTitle}
                   value={title}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters

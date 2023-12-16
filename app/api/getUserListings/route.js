@@ -20,7 +20,7 @@ phoneValue: '9878907890',
 images: (['ticket.jpeg','bomb.jpeg','ticket.jpeg',null,null]),
 active: "false"}
 
-export async function GET() {
+export async function POST() {
     return NextResponse.json({dict1,dict2});
   }
 

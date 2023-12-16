@@ -8,7 +8,7 @@ import Loading from "../loading";
 
 const getUser= async()=>{
 
-    const response = await fetch("http://localhost:3000/api/getUser",{
+    const response = await fetch("http://localhost:3000/api/getUserEmail",{
       method:"GET",
       });
     const data = await response.json();
@@ -16,6 +16,7 @@ const getUser= async()=>{
 }
 
 
+//https://www.youtube.com/watch?v=uR67O6sNjbg&t=431s - Data fetching and loading state
 
 const getAllModeratedUsers = async () => {
 
@@ -23,7 +24,6 @@ const getAllModeratedUsers = async () => {
       method:"GET",
       });
     const data = await response.json();
-    console.log(data)
     return data;
   };
 
@@ -57,10 +57,12 @@ export default function Home() {
             try {
               setLoading(true);
                 const data = await getAllModeratedUsers();
-                setModeratedUsers(data.title);
+                setModeratedUsers(data);
+                console.log(data)
                 const user = await getUser();
-                const userModerated = data.title.includes(user);
                 console.log(user);
+                const userModerated = data.includes(user);
+                
                 setIsModerated(userModerated);
             } catch (error) {
                 console.log(error);
