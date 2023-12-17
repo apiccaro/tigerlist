@@ -5,7 +5,8 @@ IP: 10.3.0.49
 
 ----------------------------------------
 
-Before moving on to the steps below, try SSHing via your machine's terminal. First, enter "ping 10.3.0.49" in a new command line. If you get timeout errors every few seconds, then try the steps below. If not, enter "SSH a_piccaro@coloradocollege.edu@tigerlist.coloradocollege.edu" (change for your email). You should now be into the server, and should be able to cd into tiger list.
+Edit: this part will absolutely work on the guest wifi, but will never work off campus. 
+Before moving on to the steps below, try SSHing via your machine's terminal. First, enter "ping 10.3.0.49" in a new command line. If you get timeout errors every few seconds, then try the steps below. If not, enter "SSH a_piccaro@coloradocollege.edu@tigerlist.coloradocollege.edu" (change for your email). You should now be into the server, and should be able to cd into tiger list. 
 
 ________________________________________
 
