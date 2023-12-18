@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-<<<<<<< HEAD
 export async function DELETE(post_key){
 
     //Assemble string for database query
     const queryText = "DELETE FROM PostTable WHERE post_key = '$1';"
     const queryValues = [postDict['post_key']];
+
 
     //Instantiate database client instance
     const { Client } = require('pg');
@@ -53,10 +53,3 @@ export async function DELETE(post_key){
       
 
     
-=======
-export async function DELETE(request){
-    const id= await request.json();
-    console.log("delete id"+id);
-    return  NextResponse.json(id)
-    }
->>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
