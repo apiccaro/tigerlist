@@ -8,18 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
-const getListing = async () => {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getListing", {
-    method:"GET",
-    });
-  const data = await response.json();
-  return data;
-};
 
-const makeListing = async (listingDict) => {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing", {
+const editListing = async (listingDict) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"editListing", {
     method:"PUT",
-    body : JSON.stringify(listingDict)
+    body : JSON.stringify(
+    listingDict
+    )
     },
   );
   await response;
@@ -158,9 +153,11 @@ export default function EditListing({searchParams}) {
       phoneValue: phoneValue,
       image: imageValue,
       active: "true",
-      flagged: "false"
+      flagged: isFlagged,
+      moderator_ban:"false",
+      post_key:listingID,
     }
-    if(makeListing(dict)){
+    if(editListing(dict)){
       toast("Your listing has been edited!");
     }
     
@@ -177,7 +174,6 @@ export default function EditListing({searchParams}) {
   ///////////////////////////////////
   // ACTUALLY CALLING THE FUNCTION //
   /////////////////////////////////// 
-  getData();
   return (
     <main style={{
       display: 'flex',
@@ -581,7 +577,7 @@ export default function EditListing({searchParams}) {
                   id="title"
                   type="text"
                   style={{ color: 'black' }}
-                  defaultValue={productID}
+                  defaultValue={testTitle}
                   value={title}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters

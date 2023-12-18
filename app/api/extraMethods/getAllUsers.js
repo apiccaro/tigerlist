@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server';
 export async function GET() {
 
     //Assemble string for database query
-    const queryText = "SELECT * FROM PostTable WHERE active = true AND flagged = true;";
+    const queryText = "SELECT * FROM UserTable;"
 
-
+    
     //Instantiate database client instance
     const { Client } = require('pg');
     const client = new Client({
@@ -20,7 +20,7 @@ export async function GET() {
 
     try {
         await client.connect();
-        const result = await client.query(queryText);
+        const result = await client.query(queryText,queryValues);
         query_status = 1
     } 
     catch (error) {
@@ -35,18 +35,19 @@ export async function GET() {
     //Log result to console
     if (query_status = 0){
         console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",queryText)
+        console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }
     else if (query_status = 1){
-        console.log("Database successfully queried with api/getAllFlaggedListings") //comment out once everything is properly tested.
+        console.log("Database successfully queried") //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
-        console.log("Attempted Query: ",queryText)
+        console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }
 
 }
+
 
