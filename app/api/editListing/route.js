@@ -1,28 +1,43 @@
 import { NextResponse } from 'next/server';
 export async function PUT(request){
-
+    
+    //Convert given request from json response into a javascript object
     const postDict = await request.json()
 
-    //Build query. Will make this cleaner with $ once this works.
-    const queryText = (
-            "UPDATE PostTable SET"
-            + "title = '" + postDict['title'] + "', "
-            + "price = '" + postDict['price'] + "', "
-            + "description = '" + postDict['description'] + "', "
-            + "category = '" + postDict['category'] + "', "
-            + "condition = '" + postDict['condition'] + "', "
-            + "location = '" + postDict['location'] + "', "
-            + "email = '" + postDict['email'] + "', "
-            + "phone = '" + postDict['phone'] + "', "
-            + "active = '" + postDict['active'] + "', "
-            + "flagged = " + postDict['flagged'] + ", "
-            + "moderator_ban = " + postDict['moderator_ban'] + " "
-            + "WHERE post_key = '" + postDict['post_key'] + "';"
-        )
 
-    //From here down should be pretty much the same for every route.js (unless we're getting something)
+    //Assemble string components for database query text
+    const queryText =
+        "UPDATE PostTable SET " +
+        "title = $1, " +
+        "price = $2, " +
+        "description = $3, " +
+        "category = $4, " +
+        "condition = $5, " +
+        "location = $6, " +
+        "email = $7, " +
+        "phone = $8, " +
+        "active = $9, " +
+        "flagged = $10, " +
+        "moderator_ban = $11 " +
+        "WHERE post_key = $12;";
 
-    //Make client with credentials
+    const queryValues = [
+        postDict['title'],
+        postDict['price'],
+        postDict['description'],
+        postDict['category'],
+        postDict['condition'],
+        postDict['location'],
+        postDict['email'],
+        postDict['phone'],
+        postDict['active'],
+        postDict['flagged'],
+        postDict['moderator_ban'],
+        postDict['post_key']
+    ];
+
+
+    //Instantiate database client instance
     const { Client } = require('pg');
     const client = new Client({
         user: 'postgres',
@@ -30,28 +45,39 @@ export async function PUT(request){
         port: 5432,
     });
     
+
     //Try to connect to database and query.
-    let query_suceeded = false
+    let query_status = -1
+    let error_status = null
+
     try {
         await client.connect();
-        const result = await client.query(queryText);
-        query_suceeded = true
+        const result = await client.query(queryText,queryValues);
+        query_status = 1
     } 
     catch (error) {
-        console.error('Error executing query:', error);
-        //query_suceeded = false
+        query_status = 0
+        error_status = error
     } 
     finally {
         await client.end();
     }
 
-    //Declare success or send error back
-    if (query_suceeded){
-        //console.log("Seems like the query worked!")
-        //console.log("Result:\n\n",result)
-        return  NextResponse.json('true')
+
+    //Log result to console
+    if (query_status = 0){
+        console.error('Error executing query:', error_status);
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
+    }
+    else if (query_status = 1){
+        console.log("Database successfully queried") //comment out once everything is properly tested.
+        return  NextResponse.json(result.rows)
     }
     else{
-        return NextResponse.error('false');
+        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
     }
+
 }

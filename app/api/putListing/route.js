@@ -1,30 +1,31 @@
 import { NextResponse } from 'next/server';
 
 export async function PUT(request){
-    //converts listing from string to json
+
+    //Convert given request from json response into a javascript object
     const postDict = await request.json()
 
-    //Debug prints
-    // console.log("\npostDict.title: "+postDict.title+"\n")
-    // console.log("\npostDict.phone: "+postDict.phone+"\n")
-    //console.log("\npostDict.price: "+postDict.price+"\n")
-    //console.log("\npostDict.category: "+postDict.category+"\n")
-
     //Build query string - Need to change format so certain input characters don't break it. 
-   const queryText = "INSERT INTO PostTable "
-    +"(title, price, description, "
-    +"category, condition, location, "
-    +"email, phone, active, "
-    +"flagged, moderator_ban) "
-    +"VALUES ('"+postDict.title+"', '"+postDict.price+"', '"+postDict.description+"', "
-    +"'"+postDict.category+"', '"+postDict.condition+"', '"+postDict.location+"', "
-    +"'"+postDict.email+"', '"+postDict.phone+"', '"+postDict.active+"', "
-    +postDict.flagged+", "+postDict.flagged+");"
+    const queryText = "INSERT INTO PostTable" 
+    + " (title, price, description, category, condition, location, email, phone, active, flagged, moderator_ban)" 
+    + " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
+  
+    const queryValues = [
+        postDict.title,
+        postDict.price,
+        postDict.description,
+        postDict.category,
+        postDict.condition,
+        postDict.location,
+        postDict.email,
+        postDict.phone,
+        postDict.active,
+        postDict.flagged,
+        postDict.moderator_ban
+    ];
 
-    
-    //From here down should be pretty much the same for every route.js (unless we're getting something)
 
-    //Make client with credentials
+    //Instantiate database client instance
     const { Client } = require('pg');
     const client = new Client({
         user: 'postgres',
@@ -32,28 +33,40 @@ export async function PUT(request){
         port: 5432,
     });
     
+
     //Try to connect to database and query.
-    let query_suceeded = false
+    let query_status = -1
+    let error_status = null
+
     try {
         await client.connect();
-        const result = await client.query(queryText);
-        query_suceeded = true
+        const result = await client.query(queryText,queryValues);
+        query_status = 1
     } 
     catch (error) {
-        console.error('Error executing query:', error);
-        //query_suceeded = false
+        query_status = 0
+        error_status = error
     } 
     finally {
         await client.end();
     }
 
-    //Declare success or send error back
-    if (query_suceeded){
-        //console.log("Seems like the query worked!")
-        //console.log("Result:\n\n",result)
+
+    //Log result to console
+    if (query_status = 0){
+        console.error('Error executing query:', error_status);
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
+    }
+    else if (query_status = 1){
+        console.log("Database successfully queried") //comment out once everything is properly tested.
         return  NextResponse.json('true')
     }
     else{
-        return NextResponse.error('false');
+        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
     }
+
 }
+

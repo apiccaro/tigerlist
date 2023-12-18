@@ -1,40 +1,56 @@
 import { NextResponse } from 'next/server';
-
 export async function GET(listing_key) {
 
-  queryText = "SELECT * FROM PostTable WHERE post_key = '"+listing_key+"';"
+    //Assemble string for database query
+    const queryText = "SELECT * FROM PostTable WHERE post_key = '$1';"
+    const queryValues = [postDict['post_key']];
 
-  const { Client } = require('pg');
+
+
+
+    //Instantiate database client instance
+    const { Client } = require('pg');
     const client = new Client({
         user: 'postgres',
         host: '10.3.0.49',
         port: 5432,
     });
     
+
     //Try to connect to database and query.
-    let query_suceeded = false
+    let query_status = -1
+    let error_status = null
+
     try {
         await client.connect();
-        const result = await client.query(queryText);
-        query_suceeded = true
+        const result = await client.query(queryText,queryValues);
+        query_status = 1
     } 
     catch (error) {
-        console.error('Error executing query:', error);
-        //query_suceeded = false
+        query_status = 0
+        error_status = error
     } 
     finally {
         await client.end();
     }
 
-    //Declare success or send error back
-    if (query_suceeded){
-        //console.log("Seems like the query worked!")
-        //console.log("Result:\n\n",result)
+
+    //Log result to console
+    if (query_status = 0){
+        console.error('Error executing query:', error_status);
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
+    }
+    else if (query_status = 1){
+        console.log("Database successfully queried") //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
     }
     else{
-        return NextResponse.error('false');
+        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
     }
-    //return NextResponse.json({dict1,dict2});
-  }
+
+}
+
 

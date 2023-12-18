@@ -1,38 +1,70 @@
 import { NextResponse } from 'next/server';
-export async function DELETE(request){
+export async function DELETE(post_key){
 
-    const queryText = "DELETE FROM PostTable WHERE post_key = '"+request.post_key+"';"
+    //Assemble string for database query
+    const queryText = "DELETE FROM PostTable WHERE post_key = '$1';"
+    const queryValues = [postDict['post_key']];
 
+
+    const que2ryText =
+    "UPDATE PostTable SET " +
+    "title = $1, " +
+    "price = $2, " +
+    "description = $3, " +
+    "category = $4, " +
+    "condition = $5, " +
+    "location = $6, " +
+    "email = $7, " +
+    "phone = $8, " +
+    "active = $9, " +
+    "flagged = $10, " +
+    "moderator_ban = $11 " +
+    "WHERE post_key = $12;";
+
+    //Instantiate database client instance
     const { Client } = require('pg');
-      const client = new Client({
-          user: 'postgres',
-          host: '10.3.0.49',
-          port: 5432,
-      });
+    const client = new Client({
+        user: 'postgres',
+        host: '10.3.0.49',
+        port: 5432,
+    });
       
-      //Try to connect to database and query.
-      let query_suceeded = false
-      try {
-          await client.connect();
-          const result = await client.query(queryText);
-          query_suceeded = true
-      } 
-      catch (error) {
-          console.error('Error executing query:', error);
-          //query_suceeded = false
-      } 
-      finally {
-          await client.end();
-      }
-  
-      //Declare success or send error back
-      if (query_suceeded){
-          //console.log("Seems like the query worked!")
-          //console.log("Result:\n\n",result)
-          return  NextResponse.json('true')
-      }
-      else{
-          return NextResponse.error('false');
-      }
-      //return NextResponse.json({dict1,dict2});
+
+    //Try to connect to database and query.
+    let query_status = -1
+    let error_status = null
+
+    try {
+        await client.connect();
+        const result = await client.query(queryText,queryValues);
+        query_status = 1
+    } 
+    catch (error) {
+        query_status = 0
+        error_status = error
+    } 
+    finally {
+        await client.end();
     }
+
+
+    //Log result to console
+    if (query_status = 0){
+        console.error('Error executing query:', error_status);
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
+    }
+    else if (query_status = 1){
+        console.log("Database successfully queried") //comment out once everything is properly tested.
+        return  NextResponse.json('true')
+    }
+    else{
+        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
+    }
+    
+}
+      
+
+    
