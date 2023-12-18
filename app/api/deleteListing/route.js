@@ -12,7 +12,7 @@ export async function DELETE(post_key){
         user: 'postgres',
         host: '10.3.0.49',
         port: 5432,
-    });``
+    });
       
 
     //Try to connect to database and query.
