@@ -5,22 +5,6 @@ export async function DELETE(post_key){
     const queryText = "DELETE FROM PostTable WHERE post_key = '$1';"
     const queryValues = [postDict['post_key']];
 
-
-    const que2ryText =
-    "UPDATE PostTable SET " +
-    "title = $1, " +
-    "price = $2, " +
-    "description = $3, " +
-    "category = $4, " +
-    "condition = $5, " +
-    "location = $6, " +
-    "email = $7, " +
-    "phone = $8, " +
-    "active = $9, " +
-    "flagged = $10, " +
-    "moderator_ban = $11 " +
-    "WHERE post_key = $12;";
-
     //Instantiate database client instance
     const { Client } = require('pg');
     const client = new Client({
