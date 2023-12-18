@@ -1,25 +1,10 @@
 import { NextResponse } from 'next/server';
+<<<<<<< HEAD
 export async function DELETE(post_key){
 
     //Assemble string for database query
     const queryText = "DELETE FROM PostTable WHERE post_key = '$1';"
     const queryValues = [postDict['post_key']];
-
-
-    const que2ryText =
-    "UPDATE PostTable SET " +
-    "title = $1, " +
-    "price = $2, " +
-    "description = $3, " +
-    "category = $4, " +
-    "condition = $5, " +
-    "location = $6, " +
-    "email = $7, " +
-    "phone = $8, " +
-    "active = $9, " +
-    "flagged = $10, " +
-    "moderator_ban = $11 " +
-    "WHERE post_key = $12;";
 
     //Instantiate database client instance
     const { Client } = require('pg');
@@ -68,3 +53,10 @@ export async function DELETE(post_key){
       
 
     
+=======
+export async function DELETE(request){
+    const id= await request.json();
+    console.log("delete id"+id);
+    return  NextResponse.json(id)
+    }
+>>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
