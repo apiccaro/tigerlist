@@ -5,17 +5,6 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-<<<<<<< HEAD
-
-
-const makeListing = async (listingDict) => {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
-
-    method:"PUT",
-    body : JSON.stringify(
-    listingDict
-    )
-=======
 let dict;
 const makeListing = async (listingDict) => {
   const response = await fetch("http://localhost:3000/api/putListing",{
@@ -36,7 +25,6 @@ const getUser = async (email) => {
     body : JSON.stringify(
       "a_piccaro@coloradocollege.edu", // ?️ add missing comma here
   )
->>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
     },
     );
   const user= await response.json();

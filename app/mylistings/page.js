@@ -8,11 +8,7 @@ import Loading from "../loading";
 
 const getUser= async()=>{
 
-<<<<<<< HEAD
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser", {
-=======
-    const response = await fetch("http://localhost:3000/api/getUserEmail",{
->>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
       method:"GET",
       });
     const data = await response.json();
