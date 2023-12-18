@@ -5,6 +5,8 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
 const makeListing = async (listingDict) => {
   const response = await fetch(process.env.API_CONNECTION_URL+"putListing",{
     method:"PUT",

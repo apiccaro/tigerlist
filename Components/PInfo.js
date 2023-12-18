@@ -31,7 +31,7 @@ const ContactBoxStyle = {
     paddingRight: '20px'
 }
 
-const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
 
     const editListing = async (listingDict) => {
         const response = await fetch("http://localhost:3000/api/deleteListing",{
@@ -50,9 +50,9 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
         setIsActive(!isActive);
     };
     
-    const handleFlagClick = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+    const handleFlagClick = ({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
         toggleFlagButton();
-        editListing({listingID, title, price, description, category, condition, location, email, phone, images, flagged});
+        editListing({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned});
     }
 
     return(
@@ -92,7 +92,7 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
             </div>
             <button
             style={{height: '80px', width: '80px', alignItems: 'center', borderRadius: '10px', backgroundColor: 'black', borderColor: 'black'}}
-            onClick={() => handleFlagClick({listingID, title, price, description, category, condition, location, email, phone, images, flagged})}>
+            onClick={() => handleFlagClick({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned})}>
                 {isActive ? <Image
                                 src="/unflagged.svg"
                                 alt="Tiger Image"

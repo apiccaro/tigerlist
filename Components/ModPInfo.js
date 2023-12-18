@@ -32,7 +32,7 @@ const ContactBoxStyle = {
     paddingRight: '20px'
 }
 
-const ModProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
+const ModProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, active, flagged, banned}) => {
 
     const [isActive, setIsActive] = useState(true);
 
@@ -102,7 +102,7 @@ const ModProductInfo = ({listingID, title, price, description, category, conditi
                             priority
                         />}
                 </button>
-                <AllowDelete />
+                <AllowDelete ID={listingID} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} active={active} flagged={flagged} banned={banned}/>
             </div>
 
 

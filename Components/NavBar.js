@@ -9,10 +9,10 @@ import { useState } from "react";
 
 const NavBarBGStyle = {
     backgroundColor: 'black',
-    height: '150px',
+    height: '155px',
     display: 'flex',
-    alignItems: 'bottom', 
-    justifyContent: 'center',
+    alignItems: 'center', 
+    justifyContent: 'flex-start',
     borderRadius: '10px',
 }
 const LinkStyle={
@@ -35,8 +35,8 @@ export default function NavBar() {
                 src="/CCLogoDerp.png"
                 alt="Tiger Image"
                 accept="image/*"
-                width={'200'}
-                height={'50'}
+                width={'130'}
+                height={'70'}
                 
                 priority
                 />
@@ -44,15 +44,15 @@ export default function NavBar() {
 
             <div style={{fontSize: "1.60rem", fontWeight: "semibold", display:"flex", padding:"1.25rem",color:"white"}}>
                 <Link href={'/'} style={{display:"flex",padding:"1.25rem"}} className="flex p-3">
-                    Browse
+                    BROWSE
                 </Link>
 
                 <Link href={'/makelisting'} style={{display:"flex",padding:"1.25rem", color:'white'}} className="underline-on-hover">
-                    Make Listing   
+                    MAKE LISTING
                 </Link>
 
-                <div style={{display:"flex",padding:"1.25rem", color:"white"}} className="flex p-3">
-                    Search
+                {/* <div style={{display:"flex",padding:"1.25rem", color:"white"}} className="flex p-3">
+                    SEARCH
                 </div>
 
                 <label>
@@ -67,7 +67,7 @@ export default function NavBar() {
                         placeholder="Enter a title"
                         onChange={e => setTitle(e.target.value)}
                           /> 
-                </label>
+                </label> */}
                 
                 <Link href={'/mylistings'} style={{display:"flex",padding:"1.25rem", color:'white'}} className="flex p-3">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{width:'3rem', height:'3rem'}} className="w-12 h-12">
@@ -75,9 +75,9 @@ export default function NavBar() {
                     </svg>
                 </Link>
 
-                <Link href={'/'}  style={{display:"flex",padding:"1.25rem",color:"white"}} className="flex p-3">
+                {/* <Link href={'/'}  style={{display:"flex",padding:"1.25rem",color:"white"}} className="flex p-3">
                     Sign Out
-                </Link>
+                </Link> */}
 
             </div>
             

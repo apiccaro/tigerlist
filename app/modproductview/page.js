@@ -13,13 +13,15 @@ export default function Home({searchParams}) {
     const {listerEmail} = searchParams;
     const {listerPhone} = searchParams;
     const {productImages} = searchParams;
+    const {isActive} = searchParams;
     const {isFlagged} = searchParams;
+    const {isBanned} = searchParams;
 
   return (
     <div className="bg-yellow-600 min-h-screen">
         <div className="flex flex-row gap-2">
-            <PNI ID={listingID} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} flagged={isFlagged}/>
-            <ModProductInfo ID={listingID} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} flagged={isFlagged}/>
+            <PNI ID={listingID} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} active={isActive} flagged={isFlagged} banned={isBanned}/>
+            <ModProductInfo ID={listingID} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} active={isActive} flagged={isFlagged} banned={isBanned}/>
         </div>
     </div>
     );

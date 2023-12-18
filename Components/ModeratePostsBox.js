@@ -8,8 +8,6 @@ import ActiveInactive from "./ActiveInactive";
 import {useState} from 'react';
 import AllowDelete from "./AllowDelete";
 
-const Wrapper = styled.div``;
-
 const ProductBGStyle ={
     backgroundColor: 'black',
     height: '250px',
@@ -31,8 +29,7 @@ const buttonStyle = {
     marginTop: '2px',
 };
 
-
-const ModeratePostsBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const ModeratePostsBox = ({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
     return(
         <div>
             <div style={ProductBGStyle}>
@@ -49,7 +46,9 @@ const ModeratePostsBox = ({listingID, title, price, description, category, condi
                         listerEmail: email,
                         listerPhone: phone,
                         productImages: images,
-                        isFlagged: flagged
+                        isActive: active,
+                        isFlagged: flagged,
+                        isBanned: banned
                     } 
                 }} style={linkStyle}>
                     <Image
@@ -66,7 +65,7 @@ const ModeratePostsBox = ({listingID, title, price, description, category, condi
             </div>
             <div className="flex flex-row gap-40 mt-2 justify-center">
                 {/* Put allow/delete buttons here */}
-                <AllowDelete />
+                <AllowDelete ID={listingID} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} active={isActive} flagged={isFlagged} banned={isBanned}/>
             </div>
         </div>
     );

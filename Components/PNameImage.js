@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-  const PNI = ({listing, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+  const PNI = ({listing, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
     const [previewImage, setPreviewImage] = useState();
     const [previewImage1, setPreviewImage1] = useState();
     const [previewImage2, setPreviewImage2] = useState();

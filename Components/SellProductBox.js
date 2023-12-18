@@ -34,7 +34,7 @@ const buttonStyle = {
 };
 
 
-const SellProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const SellProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
     return(
         <div>
             <div style={ProductBGStyle}>
@@ -51,7 +51,9 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                         listerEmail: email,
                         listerPhone: phone,
                         productImages: images,
-                        isFlagged: flagged
+                        isActive: active,
+                        isFlagged: flagged,
+                        isBanned: banned
                     } 
                 }} style={linkStyle}>
                     <Image
@@ -80,13 +82,15 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                         listerEmail: email,
                         listerPhone: phone,
                         productImages: images,
-                        isFlagged: flagged
+                        isActive: active,
+                        isFlagged: flagged,
+                        isBanned: banned
                     } 
                 }} style={linkStyle}>
                     {title}
                 </Link>
                 {/* Need to send data to ActiveInactive for edit link to access */}
-                <ActiveInactive listingID={listingID} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} flagged={flagged}/>
+                <ActiveInactive listingID={listingID} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} active={active} flagged={flagged} banned={banned}/>
             </div>
         </div>
     );

@@ -29,7 +29,7 @@ const getAllModeratedUsers = async () => {
 export default function Home() {
     const [moderatedUsers, setModeratedUsers] = useState();
     const [isModerated,setIsModerated]=useState();
-    useEffect(() => {
+    (() => {
       
         const fetchData = async () => {
           
@@ -62,8 +62,15 @@ export default function Home() {
     const showFlaggedPostsLink = moderators.includes(currentUser);
 
     return (
-      <main>
-        <div className="flex flex-col bg-yellow-600 min-h-screen">
+        <main style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor:'#D09B2C',
+            color: '#D09B2C',
+            height: '100%',
+            width: '100%',
+          }}>
             <div style={RowStyle}>
                 <div className="text-4xl text-black font-semibold p-5">My Listings</div><br></br>
                 {isModerated && (
@@ -71,7 +78,6 @@ export default function Home() {
                 )}
             </div>
             <SellProducts />
-        </div>
         </main>
-        );
+    );
 }

@@ -3,10 +3,15 @@ import BuyProducts from "@/Components/BuyProducts";
 
 export default function Home() {
     return (
-        <div className="flex flex-row bg-yellow-600 min-h-screen">
-             
+        <main style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor:'#D09B2C',
+            color: 'black'
+          }}>
             <Filter />
             <BuyProducts />
-        </div>
+        </main>
         );
 }

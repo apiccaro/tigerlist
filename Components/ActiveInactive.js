@@ -3,7 +3,18 @@ import React, { useState } from 'react';
 import EditLink from './EditLink';
 import Link from 'next/link';
 
-const ActiveInactive = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const editListing = async (listingDict) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
+    method:"PUT",
+    body : JSON.stringify({
+    listing:(listingDict)
+    })
+    },
+    );
+  await response;
+};
+
+const ActiveInactive = ({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
   // Used in button state to change button color and text
   const [isActive, setIsActive] = useState(true);
 
@@ -11,13 +22,19 @@ const ActiveInactive = ({listingID, title, price, description, category, conditi
     setIsActive(!isActive);
   };
 
+  const handleClick = ({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
+    active = !active;
+    editListing({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned});
+    toggleButtonText();
+  }
+
+
   return (
     <div>
-        <EditLink title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} flagged={flagged}/>
+        <EditLink title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} active={isActive} flagged={flagged} banned={isBanned}/>
         <button
-        style={{ width: '80px', height: '30px', justifyContent: 'center', alignItems: 'center', borderRadius: '10px', fontSize:"1.3rem", backgroundColor: isActive ? 'white' : 'black', color: isActive ? 'black' : 'white'}}
-        onClick={toggleButtonText} className="flex font-bold text-xl"
-        >
+        style={{ display: 'flex', width: '80px', height: '30px', fontWeight: '600', alignItems:'center', justifyContent: 'center', borderRadius: '10px', fontSize:"1.3rem", backgroundColor: isActive ? 'white' : 'black', color: isActive ? 'black' : 'white'}}
+        onClick={() => handleClick({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned})}        >
         {isActive ? 'Active' : 'Hold'}
         </button>
     </div>

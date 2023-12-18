@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 const getListing = async () => {
-  const response = await fetch(process.env.API_CONNECTION_URL+"getListing", {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getListing", {
     method:"GET",
     });
   const data = await response.json();
@@ -86,7 +86,9 @@ export default function EditListing({searchParams}) {
     const {testEmail} = searchParams;
     const {testPhone} = searchParams;
     const {testImages} = searchParams;
+    const {isActive} = searchParams;
     const {isFlagged} = searchParams;
+    const {isBanned} = searchParams;
 
     var originalImage = testImages[0];
     var originalImage1 = testImages[1];
@@ -159,8 +161,8 @@ export default function EditListing({searchParams}) {
       email: emailValue,
       phoneValue: phoneValue,
       image: imageValue,
-      active: "true",
-      flagged: "false"
+      active: isActive,
+      flagged: isFlagged
     }
     if(makeListing(dict)){
       toast("Your listing has been edited!");
@@ -583,7 +585,7 @@ export default function EditListing({searchParams}) {
                   id="title"
                   type="text"
                   style={{ color: 'black' }}
-                  defaultValue={productID}
+                  defaultValue={testTitle}
                   value={title}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters

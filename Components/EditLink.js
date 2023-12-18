@@ -9,8 +9,6 @@ import Link from "next/link";
 //                 email: "test@coloradocollege.edu", phone: "2079561870" 
 // }
 
-const Wrapper = styled.div``;
-
 const LinkBGStyle = {
     backgroundColor: 'black',
     height: '30px',
@@ -28,9 +26,8 @@ const EditStyle = {
     
 };
 
-const EditLink = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const EditLink = ({listingID, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
     return(
-        <Wrapper>
             <div style={LinkBGStyle}>
                 <Link href={{
                     pathname: '/editlisting',
@@ -45,13 +42,14 @@ const EditLink = ({listingID, title, price, description, category, condition, lo
                         testEmail: email,
                         testPhone: phone,
                         testImages: images,
-                        isFlagged: flagged
+                        isActive: active,
+                        isFlagged: flagged,
+                        isBanned: banned
                     }
                 }} style={EditStyle}>
                     Edit
                 </Link>
             </div>
-        </Wrapper>
     );
 }
 
