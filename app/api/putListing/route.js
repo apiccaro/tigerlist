@@ -7,8 +7,8 @@ export async function PUT(request){
 
     //Build query string - Need to change format so certain input characters don't break it. 
     const queryText = "INSERT INTO PostTable" 
-    + " (title, price, description, category, condition, location, email, phone, active, flagged, moderator_ban)" 
-    + " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
+    + " (title, price, description, category, condition, location, email, phoneValue, active, flagged, moderator_ban, images)" 
+    + " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
   
     const queryValues = [
         postDict.title,
@@ -18,10 +18,11 @@ export async function PUT(request){
         postDict.condition,
         postDict.location,
         postDict.email,
-        postDict.phone,
+        postDict.phoneValue,
         postDict.active,
         postDict.flagged,
-        postDict.moderator_ban
+        postDict.moderator_ban,
+        postDict.images
     ];
 
 
@@ -59,7 +60,7 @@ export async function PUT(request){
         return  NextResponse.json('false')
     }
     else if (query_status = 1){
-        console.log("Database successfully queried") //comment out once everything is properly tested.
+        console.log("Database successfully queried with api/putListing") //comment out once everything is properly tested.
         return  NextResponse.json('true')
     }
     else{

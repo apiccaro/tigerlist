@@ -39,8 +39,8 @@ export async function GET() {
         return  NextResponse.json('false')
     }
     else if (query_status = 1){
-        console.log("Database successfully queried") //comment out once everything is properly tested.
-        return  NextResponse.json(result.rows)
+        console.log("Database successfully queried with api/getAllModeratedUsers") //comment out once everything is properly tested.
+        return  NextResponse.json('true')
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");

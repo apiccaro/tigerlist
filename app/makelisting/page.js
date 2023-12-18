@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let dict;
 const makeListing = async (listingDict) => {
-  const response = await fetch("http://localhost:3000/api/putListing",{
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
     method:"PUT",
     body : JSON.stringify(
       listingDict
@@ -20,7 +20,7 @@ const makeListing = async (listingDict) => {
   return data
 };
 const getUser = async (email) => {
-  const response = await fetch("http://localhost:3000/api/getUser",{
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser",{
     method:"POST",
     body : JSON.stringify(
       "a_piccaro@coloradocollege.edu", // ?️ add missing comma here

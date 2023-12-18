@@ -12,7 +12,7 @@ export async function DELETE(post_key){
         user: 'postgres',
         host: '10.3.0.49',
         port: 5432,
-    });
+    });``
       
 
     //Try to connect to database and query.
@@ -40,7 +40,7 @@ export async function DELETE(post_key){
         return  NextResponse.json('false')
     }
     else if (query_status = 1){
-        console.log("Database successfully queried") //comment out once everything is properly tested.
+        console.log("Database successfully queried with api/deleteListing") //comment out once everything is properly tested.
         return  NextResponse.json('true')
     }
     else{

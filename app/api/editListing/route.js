@@ -15,11 +15,12 @@ export async function PUT(request){
         "condition = $5, " +
         "location = $6, " +
         "email = $7, " +
-        "phone = $8, " +
+        "phoneValue = $8, " +
         "active = $9, " +
         "flagged = $10, " +
         "moderator_ban = $11 " +
-        "WHERE post_key = $12;";
+        "images = $12 " +
+        "WHERE post_key = $13;";
 
     const queryValues = [
         postDict['title'],
@@ -29,10 +30,11 @@ export async function PUT(request){
         postDict['condition'],
         postDict['location'],
         postDict['email'],
-        postDict['phone'],
+        postDict['phoneValue'],
         postDict['active'],
         postDict['flagged'],
         postDict['moderator_ban'],
+        postDict['images'],
         postDict['post_key']
     ];
 
@@ -71,8 +73,8 @@ export async function PUT(request){
         return  NextResponse.json('false')
     }
     else if (query_status = 1){
-        console.log("Database successfully queried") //comment out once everything is properly tested.
-        return  NextResponse.json(result.rows)
+        console.log("Database successfully queried with api/editListing") //comment out once everything is properly tested.
+        return  NextResponse.json('true')
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
