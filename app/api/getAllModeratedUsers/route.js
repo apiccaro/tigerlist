@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 export async function GET() {
-<<<<<<< HEAD
 
     //Assemble string for database query
     const queryText = "SELECT * FROM UserTable WHERE moderator = true;"
@@ -50,9 +49,5 @@ export async function GET() {
     }
 
 }
-=======
-    return NextResponse.json(modUsers);
-  }
->>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
 
 
