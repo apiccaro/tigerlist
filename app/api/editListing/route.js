@@ -74,6 +74,7 @@ export async function PUT(request){
     }
     else if (query_status = 1){
         console.log("Database successfully queried with api/editListing") //comment out once everything is properly tested.
+        console.log("Query result:\n",result) //comment out once everything is properly tested.
         return  NextResponse.json('true')
     }
     else{

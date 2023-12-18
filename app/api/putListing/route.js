@@ -61,10 +61,11 @@ export async function PUT(request){
     }
     else if (query_status = 1){
         console.log("Database successfully queried with api/putListing") //comment out once everything is properly tested.
+        console.log("Query result:\n",result) //comment out once everything is properly tested.
         return  NextResponse.json('true')
     }
     else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
+        console.error('Error executing query: ', "Somehow the try block didnt finish yet no error was caught");
         console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }

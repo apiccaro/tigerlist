@@ -6,10 +6,6 @@
 // }
 
 
-
-
-
-
 //NOTE: Not sure if we still need that cas part^
 //Figma suggests this a simple getter and getUserEmail is the one that needs cas, so i'm making a method here.
 import { NextResponse } from 'next/server';
@@ -56,6 +52,7 @@ export async function GET(user_email) {
     }
     else if (query_status = 1){
         console.log("Database successfully queried with api/getUser") //comment out once everything is properly tested.
+        console.log("Query result:\n",result) //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
     }
     else{

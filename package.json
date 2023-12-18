@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm-run-all --parallel dev-server addRem",
-    "dev-server": "next dev",
+    "dev-server": "node server.js",
     "addRem": "node ./app/addRemMod/page.mjs",
     "build": "next build",
     "start": "next start",
