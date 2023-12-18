@@ -13,6 +13,7 @@
 //NOTE: Not sure if we still need that cas part^
 //Figma suggests this a simple getter and getUserEmail is the one that needs cas, so i'm making a method here.
 import { NextResponse } from 'next/server';
+<<<<<<< HEAD
 export async function GET(user_email) {
 
     //Assemble string for database query
@@ -67,3 +68,16 @@ export async function GET(user_email) {
 }
 
 
+=======
+const user={email:"a_piccaro@coloradocollege.edu",}
+export async function POST(request) {
+  const user= await request.json()
+  console.log(user)
+  return NextResponse.json({
+    user: {
+      name: "a_piccaro@coloradocollege.edu",
+      isAutoFlagged: true,
+    },
+  });
+}
+>>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750

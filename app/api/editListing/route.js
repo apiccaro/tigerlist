@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 export async function PUT(request){
+<<<<<<< HEAD
     
     //Convert given request from json response into a javascript object
     const postDict = await request.json()
@@ -80,4 +81,9 @@ export async function PUT(request){
         return  NextResponse.json('false')
     }
 
+=======
+const listing= await request.json()
+console.log("listing what"+listing)
+return  NextResponse.json(listing)
+>>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
 }

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+<<<<<<< HEAD
 export async function DELETE(post_key){
 
     //Assemble string for database query
@@ -52,3 +53,10 @@ export async function DELETE(post_key){
       
 
     
+=======
+export async function DELETE(request){
+    const id= await request.json();
+    console.log("delete id"+id);
+    return  NextResponse.json(id)
+    }
+>>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750

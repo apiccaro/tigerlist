@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
+<<<<<<< HEAD
 const getListing = async () => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getListing", {
     method:"GET",
@@ -20,6 +21,15 @@ const makeListing = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing", {
     method:"PUT",
     body : JSON.stringify(listingDict)
+=======
+
+const editListing = async (listingDict) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"editListing", {
+    method:"PUT",
+    body : JSON.stringify(
+    listingDict
+    )
+>>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
     },
   );
   await response;
@@ -95,6 +105,7 @@ export default function EditListing({searchParams}) {
 
     // var testTitle = testDict["testTitle"];
     // var testPrice = testDict["testPrice"];
+<<<<<<< HEAD
     const getData =async () => {
       const data = await getListing();
       originalTitle=data.title;
@@ -113,6 +124,9 @@ export default function EditListing({searchParams}) {
       setPreviewImage4(data.images[4])
       
 }
+=======
+  
+>>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
 /**
 /**
    * Handles the onSubmit action of the form
@@ -158,9 +172,11 @@ export default function EditListing({searchParams}) {
       phoneValue: phoneValue,
       image: imageValue,
       active: "true",
-      flagged: "false"
+      flagged: isFlagged,
+      moderator_ban:"false",
+      post_key:listingID,
     }
-    if(makeListing(dict)){
+    if(editListing(dict)){
       toast("Your listing has been edited!");
     }
     
@@ -177,7 +193,10 @@ export default function EditListing({searchParams}) {
   ///////////////////////////////////
   // ACTUALLY CALLING THE FUNCTION //
   /////////////////////////////////// 
+<<<<<<< HEAD
   getData();
+=======
+>>>>>>> 789a115d4563edeabc9328fd25d9b035f65d9750
   return (
     <main style={{
       display: 'flex',
@@ -581,7 +600,7 @@ export default function EditListing({searchParams}) {
                   id="title"
                   type="text"
                   style={{ color: 'black' }}
-                  defaultValue={productID}
+                  defaultValue={testTitle}
                   value={title}
                   placeholder='Title'
                    //confirms that users submit a title under 50 characters

@@ -3,6 +3,14 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from "react-hook-form";
 
+const MyComponent = () => {
+    const router = useRouter();
+    // Force refresh the page
+    const handleReload = () => {
+      router.reload();
+    };
+};
+
 const RowStyle={
     display: 'flex', 
     flexDirection: 'row',
@@ -11,18 +19,18 @@ const RowStyle={
     }
 
 const deleteListing = async (listingID) => {
+  console.log("Listing ID"+listingID);
     const response = await fetch("http://localhost:3000/api/deleteListing",{
     method:"DELETE",
-    body : JSON.stringify({
-    listingId:(listingID)
-    })
+    body : JSON.stringify("1234"
+    )
     },
     );
     await response;
 };
 
 const editListing = async (listingDict) => {
-    const response = await fetch("http://localhost:3000/api/deleteListing",{
+    const response = await fetch("http://localhost:3000/api/editListing",{
       method:"PUT",
       body : JSON.stringify({
       listing:(listingDict)
@@ -32,8 +40,14 @@ const editListing = async (listingDict) => {
     await response;
   };
 
-  const handleDeleteClick = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+  const handleDeleteClick = (listingID) => {
     deleteListing(listingID);
+    MyComponent();
+  }
+
+  const handleAllowClick = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+    editListing({listingID, title, price, description, category, condition, location, email, phone, images, flagged});
+    MyComponent();
   }
 
 // Next Step: remove post from flagged posts page when Allow or Delete is selected.
@@ -43,12 +57,12 @@ const AllowDelete = ({listingID, title, price, description, category, condition,
     <div style={RowStyle}>
 
         <button style={{height: '30px', width: '100px', borderWidth: "4px", alignItems: 'center', justifyContent: 'center', borderRadius: '10px', backgroundColor: 'white', color: 'black', borderColor: 'green'}} 
-        onClick={deleteListing(listingID)}>
+        onClick={handleAllowClick({listingID, title, price, description, category, condition, location, email, phone, images, flagged})}>
             Allow
         </button>
 
         <button style={{height: '30px', width: '100px', borderWidth: "4px", alignItems: 'center', justifyContent: 'center', borderRadius: '10px', backgroundColor: 'white', color: 'black', borderColor: 'red'}} 
-        onClick={handleDeleteClick({listingID, title, price, description, category, condition, location, email, phone, images, flagged})}>
+        onClick={handleDeleteClick(listingID)}>
             Delete
         </button>
     </div>
