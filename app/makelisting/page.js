@@ -7,15 +7,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let dict;
 const makeListing = async (listingDict) => {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
-
+  const response = await fetch("http://localhost:3000/api/putListing",{
     method:"PUT",
     body : JSON.stringify(
       listingDict
     )
     },
     )
-  await response;
+
+  const data=await response.json();
+  console.log(data);
+  return data
 };
 const getUser = async (email) => {
   const response = await fetch("http://localhost:3000/api/getUser",{
@@ -105,7 +107,7 @@ export default function MakeListing() {
    * Place holder as of now
    * @param {*} data 
    */
-  const handleRegistration = (data) => {
+  const handleRegistration = async (data) => {
     /**
      * const handleCreate = async () => {
     if (inputValue.trim()) {
@@ -143,11 +145,13 @@ export default function MakeListing() {
       image: imageValue,
       active: "true",
       flagged: "false"
-      
+
     }
     
     getOneUser();  
-   if(makeListing(dict)=="true"){
+    var waiting=await makeListing(dict);
+    console.log(waiting);
+   if(waiting=="true"){
       toast("Your listing has been uploaded!");
     }else{
      toast("Unsuccesful try again");
