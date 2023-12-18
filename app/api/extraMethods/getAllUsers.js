@@ -1,21 +1,10 @@
 import { NextResponse } from 'next/server';
-export async function PUT(request){
+export async function GET() {
+
+    //Assemble string for database query
+    const queryText = "SELECT * FROM UserTable;"
+
     
-    //Convert given request from json response into a javascript object
-    const postDict = await request.json()
-
-
-    //Assemble string components for database query text
-    const queryText =
-        "UPDATE UserTable SET " +
-        "moderator = true " +
-        "WHERE email = $1;";
-
-    const queryValues = [
-        postDict['email']
-    ];
-
-
     //Instantiate database client instance
     const { Client } = require('pg');
     const client = new Client({
@@ -60,3 +49,5 @@ export async function PUT(request){
     }
 
 }
+
+
