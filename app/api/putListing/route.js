@@ -38,10 +38,11 @@ export async function PUT(request){
     //Try to connect to database and query.
     let query_status = -1
     let error_status = null
+    let result = null
 
     try {
         await client.connect();
-        const result = await client.query(queryText,queryValues);
+        result = await client.query(queryText,queryValues);
         query_status = 1
     } 
     catch (error) {
@@ -55,7 +56,8 @@ export async function PUT(request){
 
     //Log result to console
     if (query_status = 0){
-        console.error('Error executing query:', error_status);
+        console.log("Error: ",error_status)
+        //console.error('Error executing query:', error_status);
         console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }

@@ -46,7 +46,8 @@ export async function GET(user_email) {
 
     //Log result to console
     if (query_status = 0){
-        console.error('Error executing query:', error_status);
+        console.log("Error: ",error_status)
+        //console.error('Error executing query:', error_status);
         console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }
