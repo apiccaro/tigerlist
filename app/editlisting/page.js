@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 
 const editListing = async (listingDict) => {
@@ -84,8 +85,6 @@ export default function EditListing({ searchParams }) {
   const { testPhone } = searchParams;
   const { testImages } = searchParams;
   const { isFlagged } = searchParams;
-  const base64String = "";
-  const binaryData = atob(base64String);
 
   var originalImage = testImages[0];
   var originalImage1 = testImages[1];

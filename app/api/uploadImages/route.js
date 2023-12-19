@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-const { join } = require('path');
+const { join, extname } = require('path');
 const { writeFile,mkdir } = require('fs/promises');
+//https://www.youtube.com/watch?v=-_bhH4MLq1Y
 
 export async function POST(request){
 var worked="true";
@@ -20,25 +21,21 @@ const buffer =Buffer.from(bytes)
 const publicPath = join(process.cwd(), 'public');
 const imagePath = join(publicPath, key);
 
-const filename = file.name;
+const fileExtension = extname(file.name);
+const filename = `${fileKey}${fileExtension}`;
 const path = join(imagePath, filename);
 try {
     await mkdir(imagePath, { recursive: true });
   } catch (error) {
-    console.error('Error creating directory:', error);
     worked="false"
   }
 
   try {
     await writeFile(path, buffer);
-    console.log('Image written successfully');
   } catch (error) {
-    console.error('Error writing image:', error);
     worked="false"
   }
 }
   }
-
-
   return NextResponse.json(worked);
 }
