@@ -2,7 +2,7 @@ TigerList is a website for Colorado College to buy, sell and exchange goods. Mim
 The website has a Colorado College sign in with Duopush to confirm a student’s identity. From there, the student can browse listings and sort them, make a listing, and edit one of their personal listings. Based on other online marketplaces, TigerList has a familiarity that students can easily navigate. 
 
 
-This is a [Next.js](https://nextjs.org/) project using HTML/CSS with a postgresql database to be implemented and to eventually be hosted on Colorado College's server.
+This is a [Next.js](https://nextjs.org/) project using HTML/CSS with a PostgreSQL database to be implemented and to eventually be hosted on Colorado College's server.
 
 First, run the development server: 
 
