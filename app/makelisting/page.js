@@ -23,7 +23,7 @@ const getUser = async (email) => {
   const response = await fetch("http://localhost:3000/api/getUser",{
     method:"POST",
     body : JSON.stringify(
-      "a_piccaro@coloradocollege.edu", // ?️ add missing comma here
+      "a_piccaro@coloradocollege.edu", 
   )
     },
     );
@@ -31,6 +31,17 @@ const getUser = async (email) => {
   
   return user;
 };
+const uploadImages = async (imageData) => {
+  const response = await fetch("http://localhost:3000/api/uploadImages",{
+    method:"POST",
+    body : imageData
+    }
+    );
+  const success= await response.json();
+  
+  return success;
+};
+
 var isAutoFlagged;
 var thisUser={};
   const getOneUser=async()=>{
@@ -59,6 +70,12 @@ export default function MakeListing() {
   const [previewImage2, setPreviewImage2] = useState();
   const [previewImage3, setPreviewImage3] = useState();
   const [previewImage4, setPreviewImage4] = useState();
+  const [imageFile, setImageFile] = useState();
+  const [imageFile1, setImageFile1] = useState();
+  const [imageFile2, setImageFile2] = useState();
+  const [imageFile3, setImageFile3] = useState();
+  const [imageFile4, setImageFile4] = useState();
+  
   const [email, setEmail] = useState();
   const [phonenumber, setPhoneNumber] = useState();
   const [imgWidth, setWidth] = useState();
@@ -142,7 +159,6 @@ export default function MakeListing() {
       location: locValue,
       email: emailValue,
       phoneValue: phoneValue,
-      image: imageValue,
       active: "true",
       flagged: "false"
 
@@ -151,7 +167,33 @@ export default function MakeListing() {
     getOneUser();  
     var waiting=await makeListing(dict);
     console.log(waiting);
-   if(waiting=="true"){
+   if(waiting=="124444"){
+    console.log("correctid");
+    const dataImage = new FormData();
+    dataImage.set("key",waiting);
+    if(imageFile){
+    console.log('thereisimagefile'); 
+        dataImage.set("file_0",imageFile);
+    }
+    if(imageFile1){
+      console.log('thereisimagefile'); 
+          dataImage.set("file_1",imageFile1);
+      }
+      if(imageFile2){
+        console.log('thereisimagefile'); 
+            dataImage.set("file_2",imageFile2);
+        }
+        if(imageFile3){
+          console.log('thereisimagefile'); 
+              dataImage.set("file_3",imageFile3);
+          }
+          if(imageFile4){
+            console.log('thereisimagefile'); 
+                dataImage.set("file_4",imageFile4);
+            }
+
+    uploadImages(dataImage);
+      
       toast("Your listing has been uploaded!");
     }else{
      toast("Unsuccesful try again");
@@ -223,6 +265,7 @@ export default function MakeListing() {
                         //sets all imagePreview fields
                         setHeight('400px');
                         setWidth('500px');
+                        setImageFile(event.target.files[0]);
                         setPreviewImage(reader.result);
                         setLabelHeight(40);
                         setBorderStyle('4px solid black');
@@ -280,6 +323,7 @@ export default function MakeListing() {
                           var reader1 = new FileReader();
                           reader1.onloadend = () => {
                             //sets all small image fields
+                            setImageFile1(event.target.files[0]);
                             setPreviewImage1(reader1.result);
                             setWidth1(SMALLIMAGE);
                             setHeight1(SMALLIMAGE);
@@ -349,6 +393,7 @@ export default function MakeListing() {
                           var reader = new FileReader();
                           reader.onloadend = () => {
                             //sets all small image fields
+                            setImageFile2(event.target.files[0]);
                             setPreviewImage2(reader.result);
                             setWidth2(SMALLIMAGE);
                             setHeight2(SMALLIMAGE);
@@ -419,6 +464,7 @@ export default function MakeListing() {
                           var reader = new FileReader();
                           reader.onloadend = () => {
                             //sets all small image fields
+                            setImageFile3(event.target.files[0]);
                             setPreviewImage3(reader.result);
                             setWidth3(SMALLIMAGE);
                             setHeight3(SMALLIMAGE);
@@ -490,6 +536,7 @@ export default function MakeListing() {
                           var reader = new FileReader();
                           reader.onloadend = () => {
                             //sets all small image fields
+                            setImageFile4(event.target.files[0]);
                             setPreviewImage4(reader.result);
                             setWidth4(SMALLIMAGE);
                             setHeight4(SMALLIMAGE);

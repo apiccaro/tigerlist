@@ -38,6 +38,7 @@ export default function EditListing({ searchParams }) {
   const [previewImage2, setPreviewImage2] = useState();
   const [previewImage3, setPreviewImage3] = useState();
   const [previewImage4, setPreviewImage4] = useState();
+  const [imageFile4,setImageFile4]=useState();
   const [email, setEmail] = useState();
   const [phonenumber, setPhoneNumber] = useState();
   const [borderStyle, setBorderStyle] = useState();
@@ -146,6 +147,9 @@ export default function EditListing({ searchParams }) {
       moderator_ban: "false",
       post_key: listingID,
     }
+    var imageSendable = imageFile4.toString('base64');
+    
+
     var waiting = await editListing(dict);
     console.log(waiting);
     if (waiting == "true") {
@@ -520,7 +524,8 @@ export default function EditListing({ searchParams }) {
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
                           const file = event.target.files[0];
-                          console.log(event.target.files[0]);
+                          setImageFile4(file);
+                         // console.log(event.target.files[0]);
                           const reader = new FileReader();
                           reader.onloadend = () => {
 
@@ -533,6 +538,8 @@ export default function EditListing({ searchParams }) {
                             setHeight4(SMALLIMAGE);
                             setBorderStyle4('');
                             setLabelText4('');
+                            const imageSendable = reader.result.split(',')[1];
+      console.log(imageSendable);
                           };
                           reader.readAsDataURL(file);
                         }
