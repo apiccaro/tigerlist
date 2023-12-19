@@ -1,8 +1,8 @@
 'use client'
-import { useState,useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-export const user  = "@coloradocollege.edu";
+export const user = "@coloradocollege.edu";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -10,20 +10,23 @@ import 'react-toastify/dist/ReactToastify.css';
 //USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
 
 const editListing = async (listingDict) => {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"editListing", {
-    method:"PUT",
-    body : JSON.stringify(
-    listingDict
+  console.log(listingDict);
+  const response = await fetch("http://localhost:3000/api/editListing", {
+    method: "PUT",
+    body: JSON.stringify(
+      listingDict
     )
-    },
+  },
   );
-  await response;
+  const data = await response.json();
+  console.log(data);
+  return data
 };
 
-export default function EditListing({searchParams}) {
+export default function EditListing({ searchParams }) {
   //var id=listingID.id;
-  
-  const SMALLIMAGE='100px';
+
+  const SMALLIMAGE = '100px';
   const [title, setTitle] = useState();
   const [price, setPrice] = useState();
   const [cat, setCat] = useState();
@@ -61,61 +64,63 @@ export default function EditListing({searchParams}) {
   const [readinTitle, setReadinTitle] = useState("");
 
 
-    /*const updateListing = async (id, updatedListing) => {
-      await fetch(`/api/todos/update/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedTodo),
-      });
-    };*/
+  /*const updateListing = async (id, updatedListing) => {
+    await fetch(`/api/todos/update/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedTodo),
+    });
+  };*/
 
-    const {listingID} = searchParams;
-    const {testTitle} = searchParams;
-    const {testPrice} = searchParams;
-    const {testDescription} = searchParams;
-    const {testCategory} = searchParams;
-    const {testCondition} = searchParams;
-    const {testLocation} = searchParams;
-    const {testEmail} = searchParams;
-    const {testPhone} = searchParams;
-    const {testImages} = searchParams;
-    const {isFlagged} = searchParams;
+  const { listingID } = searchParams;
+  const { testTitle } = searchParams;
+  const { testPrice } = searchParams;
+  const { testDescription } = searchParams;
+  const { testCategory } = searchParams;
+  const { testCondition } = searchParams;
+  const { testLocation } = searchParams;
+  const { testEmail } = searchParams;
+  const { testPhone } = searchParams;
+  const { testImages } = searchParams;
+  const { isFlagged } = searchParams;
+  const base64String = "";
+  const binaryData = atob(base64String);
 
-    var originalImage = testImages[0];
-    var originalImage1 = testImages[1];
-    var originalImage2 = testImages[2];
-    var originalImage3 = testImages[3];
-    var originalImage4 = testImages[4];
+  var originalImage = testImages[0];
+  var originalImage1 = testImages[1];
+  var originalImage2 = testImages[2];
+  var originalImage3 = testImages[3];
+  var originalImage4 = testImages[4];
 
 
-    // var testTitle = testDict["testTitle"];
-    // var testPrice = testDict["testPrice"];
-  
-/**
-/**
-   * Handles the onSubmit action of the form
-   */
+  // var testTitle = testDict["testTitle"];
+  // var testPrice = testDict["testPrice"];
+
+  /**
+  /**
+     * Handles the onSubmit action of the form
+     */
   const { register, handleSubmit, formState: { errors } } = useForm();
-   /**
-   * Takes in data from the form and builds a dictionary to be 
-   * write into the database.
-   * Place holder as of now
-   * @param {*} data 
-   */
-    /*const updateListing = async (id, updatedListing) => {
-      await fetch(`/api/todos/update/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedListing),
-      });
-    };*/
- 
-  const handleRegistration = (data) => {
+  /**
+  * Takes in data from the form and builds a dictionary to be 
+  * write into the database.
+  * Place holder as of now
+  * @param {*} data 
+  */
+  /*const updateListing = async (id, updatedListing) => {
+    await fetch(`/api/todos/update/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedListing),
+    });
+  };*/
+
+  const handleRegistration = async (data) => {
     /**const handleUpdate = async (id, completed) => {
       const updatedListing= listings.find((listing) => listing.id === id);
       await updateListing(id, updatedListing);
     };**/
-  
+
     const titleValue = data.title;
     const priceValue = data.price;
     const descriptionValue = data.description;
@@ -124,7 +129,8 @@ export default function EditListing({searchParams}) {
     const locValue = data.location;
     const emailValue = data.email;
     const phoneValue = data.phonenumber;
-    const imageValue = [previewImage,previewImage1,previewImage2,previewImage3,previewImage4];
+    const imageValue = [previewImage, previewImage1, previewImage2, previewImage3, previewImage4];
+    console.log(previewImage4);
     var dict = {
       title: titleValue,
       price: priceValue,
@@ -137,17 +143,21 @@ export default function EditListing({searchParams}) {
       image: imageValue,
       active: "true",
       flagged: isFlagged,
-      moderator_ban:"false",
-      post_key:listingID,
+      moderator_ban: "false",
+      post_key: listingID,
     }
-    if(editListing(dict)){
-      toast("Your listing has been edited!");
+    var waiting = await editListing(dict);
+    console.log(waiting);
+    if (waiting == "true") {
+      toast("Your listing has been uploaded!");
+    } else {
+      toast("Unsuccesful try again");
     }
-    
-  }
-  
 
- 
+  }
+
+
+
   /**
    * Takes in a list of error messages and applies them when necessary 
    * when input checking.
@@ -162,21 +172,21 @@ export default function EditListing({searchParams}) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor:'#D09B2C',
+      backgroundColor: '#D09B2C',
       color: 'black'
     }}>
-      <ToastContainer 
-      position="top-center"
-      autoClose={3000}
-      hideProgressBar={true}
-      color='black'
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      theme="dark" />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        color='black'
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        theme="dark" />
       <div >
         <div>
-          <h1 style={{fontWeight: 'bold'}}>Edit Your Listing</h1>
+          <h1 style={{ fontWeight: 'bold' }}>Edit Your Listing</h1>
         </div>
         <div >
           <form onSubmit={handleSubmit(handleRegistration, handleError)} >
@@ -185,11 +195,11 @@ export default function EditListing({searchParams}) {
                 htmlFor="image"
                 style={{
                   width: '500px',
-                  borderRadius:'10px',
+                  borderRadius: '10px',
                   fontWeight: '600',
                   //if there is not an original image or an uploaded 
                   //image default to "add image" setting
-                  
+
                   height: originalImage || previewImage ? '40px' : '280px',
                   border: originalImage || previewImage ? '4px solid black' : '4px dashed black',
                   cursor: 'pointer',
@@ -214,7 +224,7 @@ export default function EditListing({searchParams}) {
                    * @param {event} event 
                    */
                   onChange={(event) => {
-                    if (event?.target?.files?.[0]) {
+                    if (event?.tar?.files?.[0]) {
                       //gets the first file and uploads it
                       const file = event.target.files[0];
                       const reader = new FileReader();
@@ -237,13 +247,14 @@ export default function EditListing({searchParams}) {
               <img
                 id="imagePreview"
                 //if no previewImage- load in the original image
-                src={previewImage ? previewImage : originalImage? setPreviewImage(originalImage):originalImage}
+                 src={previewImage ? previewImage : originalImage? setPreviewImage(originalImage):originalImage}
+
                 style={{
                   objectFit: 'cover',
                   width: originalImage || previewImage ? '500px' : 0,
                   height: originalImage || previewImage ? '350px' : 0,
                 }}
-                //if not original image- do not show image component at all
+              //if not original image- do not show image component at all
               />
               <div style={{ display: 'inline-block' }}>
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left' }}>
@@ -251,7 +262,7 @@ export default function EditListing({searchParams}) {
                     htmlFor="image1"
                     style={{
                       width: '115px',
-                      borderRadius:'10px',
+                      borderRadius: '10px',
                       fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
@@ -300,20 +311,20 @@ export default function EditListing({searchParams}) {
                   <img
                     id="imagePreview1"
                     //if no previewImage- load in the original image
-                    src={previewImage1 ? previewImage1 : originalImage1? setPreviewImage1(originalImage1):originalImage1}
+                    src={previewImage1 ? previewImage1 : originalImage1 ? setPreviewImage1(originalImage1) : originalImage1}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
                       //if not original image- do not show image component at all
-                    width:originalImage1 || previewImage1 ? '100px' : 0,
-                    height:originalImage1 || previewImage1 ? '100px' : 0,
+                      width: originalImage1 || previewImage1 ? '100px' : 0,
+                      height: originalImage1 || previewImage1 ? '100px' : 0,
                     }}
-                    
+
                     /**
                      * When you click the image it swaps with the main big image
                      * @param {event} event
                      */
-                     onClick={(event) => {
+                    onClick={(event) => {
                       var replace = previewImage;
                       setPreviewImage(previewImage1)
                       setPreviewImage1(replace)
@@ -326,9 +337,9 @@ export default function EditListing({searchParams}) {
                     htmlFor="image2"
                     style={{
                       width: '115px',
-                      borderRadius:'10px',
+                      borderRadius: '10px',
                       fontWeight: '600',
-                       //if there is not an original image or an uploaded 
+                      //if there is not an original image or an uploaded 
                       //image default to "add image" setting
                       height: originalImage2 || previewImage2 ? '0px' : '115px',
                       border: originalImage2 || previewImage2 ? '' : '4px dashed black',
@@ -347,19 +358,19 @@ export default function EditListing({searchParams}) {
                         float: 'left'
                       }}
                       //Author: Leigh Halliday -> https://github.com/leighhalliday/house-course/commit/eaee0e8b3292a4127beadf19dec399fa260150b5
-                       /**
-                        * When there is a change of uploading photo, show the photo 
-                        * and change the label
-                        * 
-                        * @param {event} event 
-                        */
+                      /**
+                       * When there is a change of uploading photo, show the photo 
+                       * and change the label
+                       * 
+                       * @param {event} event 
+                       */
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
                           const file = event.target.files[0];
                           const reader = new FileReader();
                           reader.onloadend = () => {
                             setPreviewImage2(reader.result);
-                            setWidt2(SMALLIMAGE);
+                            setWidth2(SMALLIMAGE);
                             setHeight2(SMALLIMAGE);
                             setBorderStyle2('');
                             setLabelText2('');
@@ -375,20 +386,21 @@ export default function EditListing({searchParams}) {
                   <img
                     id="imagePreview2"
                     //if no previewImage- load in the original image
-                    src={previewImage2 ? previewImage2 : originalImage2? setPreviewImage2(originalImage2):originalImage2}
+                    src={previewImage2 ? previewImage2 : originalImage2 ? setPreviewImage2(originalImage2) : originalImage2}
+
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
-                      width:originalImage2 || previewImage2 ? 100 : 0,
-                      height:originalImage2 || previewImage2 ? 100 : 0,
+                      width: originalImage2 || previewImage2 ? 100 : 0,
+                      height: originalImage2 || previewImage2 ? 100 : 0,
                     }}
                     //if not original image- do not show image component at all
-                    
+
                     /**
                      * When you click the image it swaps with the main big image
                      * @param {event} event
                      */
-                     onClick={(event) => {
+                    onClick={(event) => {
                       var replace = previewImage;
                       setPreviewImage(previewImage2)
                       setPreviewImage2(replace)
@@ -401,7 +413,7 @@ export default function EditListing({searchParams}) {
                     htmlFor="image3"
                     style={{
                       width: '115px',
-                      borderRadius:'10px',
+                      borderRadius: '10px',
                       fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
@@ -422,12 +434,12 @@ export default function EditListing({searchParams}) {
                         float: 'left'
                       }}
                       //Author: Leigh Halliday -> https://github.com/leighhalliday/house-course/commit/eaee0e8b3292a4127beadf19dec399fa260150b5
-                       /**
-                        * When there is a change of uploading photo, show the photo 
-                        * and change the label
-                        * 
-                        * @param {event} event 
-                        */
+                      /**
+                       * When there is a change of uploading photo, show the photo 
+                       * and change the label
+                       * 
+                       * @param {event} event 
+                       */
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
                           const file = event.target.files[0];
@@ -450,21 +462,22 @@ export default function EditListing({searchParams}) {
                   <img
                     id="imagePreview3"
                     //if no previewImage- load in the original image
-                    src={previewImage3 ? previewImage3 : originalImage3? setPreviewImage3(originalImage3):originalImage3}
+                    //src={previewImage3 ? previewImage3 : originalImage3? setPreviewImage3(originalImage3):originalImage3}
+                    src=""
                     //src={previewImage1 ? previewImage1 : setPreviewImage1(originalImage1)}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
-                       //if not original image- do not show image component at all
-                    width:originalImage3 || previewImage3 ? 100 : 0,
-                    height:originalImage3 || previewImage3 ? 100 : 0,
+                      //if not original image- do not show image component at all
+                      width: originalImage3 || previewImage3 ? 100 : 0,
+                      height: originalImage3 || previewImage3 ? 100 : 0,
                     }}
-                   
+
                     /**
                      * When you click the image it swaps with the main big image
                      * @param {event} event
                      */
-                     onClick={(event) => {
+                    onClick={(event) => {
                       var replace = previewImage;
                       setPreviewImage(previewImage3)
                       setPreviewImage3(replace)
@@ -477,7 +490,7 @@ export default function EditListing({searchParams}) {
                     htmlFor="image4"
                     style={{
                       width: '115px',
-                      borderRadius:'10px',
+                      borderRadius: '10px',
                       fontWeight: '600',
                       //if there is not an original image or an uploaded 
                       //image default to "add image" setting
@@ -498,18 +511,24 @@ export default function EditListing({searchParams}) {
                         float: 'left'
                       }}
                       //Author: Leigh Halliday -> https://github.com/leighhalliday/house-course/commit/eaee0e8b3292a4127beadf19dec399fa260150b5
-                       /**
-                        * When there is a change of uploading photo, show the photo 
-                        * and change the label
-                        * 
-                        * @param {event} event 
-                        */
+                      /**
+                       * When there is a change of uploading photo, show the photo 
+                       * and change the label
+                       * 
+                       * @param {event} event 
+                       */
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
                           const file = event.target.files[0];
+                          console.log(event.target.files[0]);
                           const reader = new FileReader();
                           reader.onloadend = () => {
-                            setPreviewImage4(reader.result);
+
+                           
+                            
+                            const url = URL.createObjectURL(event.target.files[0]);
+
+                            setPreviewImage4(url);
                             setWidth4(SMALLIMAGE);
                             setHeight4(SMALLIMAGE);
                             setBorderStyle4('');
@@ -526,20 +545,20 @@ export default function EditListing({searchParams}) {
                   <img
                     id="imagePreview4"
                     //if no previewImage- load in the original image
-                    src={previewImage4 ? previewImage4 : originalImage4? setPreviewImage4(originalImage4):originalImage4}
+                    src={previewImage4 ? previewImage4 : originalImage4 ? setPreviewImage4(originalImage4) : originalImage4}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
-                       //if not original image- do not show image component at all
-                    width:originalImage4 || previewImage4 ? 100 : 0,
-                    height:originalImage4 || previewImage4 ? 100 : 0,
+                      //if not original image- do not show image component at all
+                      width: originalImage4 || previewImage4 ? 100 : 0,
+                      height: originalImage4 || previewImage4 ? 100 : 0,
                     }}
-                   
+
                     /**
                      * When you click the image it swaps with the main big image
                      * @param {event} event
                      */
-                     onClick={(event) => {
+                    onClick={(event) => {
                       var replace = previewImage;
                       setPreviewImage(previewImage4)
                       setPreviewImage4(replace)
@@ -555,7 +574,7 @@ export default function EditListing({searchParams}) {
             }}>
               <label><span className='formOption'>
                 Edit Title: <br></br>
-                </span>
+              </span>
                 <input
                   id="title"
                   type="text"
@@ -563,7 +582,7 @@ export default function EditListing({searchParams}) {
                   defaultValue={testTitle}
                   value={title}
                   placeholder='Title'
-                   //confirms that users submit a title under 50 characters
+                  //confirms that users submit a title under 50 characters
                   onChange={e => setTitle(e.target.value)}
                   {...register("title", {
                     required: 'Please enter a title with less than 50 characters', maxLength: { value: 50, message: "Please enter a title with less than 50 characters" }
@@ -577,7 +596,7 @@ export default function EditListing({searchParams}) {
               <span></span>
               <label><span className='formOption'>
                 Edit Price: <br></br>
-                </span>
+              </span>
                 <input type="text"
                   style={{ color: 'black' }}
                   defaultValue={testPrice}
@@ -585,7 +604,7 @@ export default function EditListing({searchParams}) {
                   placeholder='Price'
                   onChange={e => setPrice(e.target.value)}
                   {//confirms that users submit a price under 10 digits
-                    ...register("price", {
+                  ...register("price", {
                     required: 'Please enter a number', maxLength: { value: 10, message: "We cannot support purchases over $999,999,999" },
                     pattern: {
                       value: /^[0-9]+$/,
@@ -600,7 +619,7 @@ export default function EditListing({searchParams}) {
               </label><br></br>
               <label>
                 <span className='formOption'>
-                Edit Description: <br></br>
+                  Edit Description: <br></br>
                 </span>
                 <input type="text"
                   style={{ color: 'black' }}
@@ -623,7 +642,7 @@ export default function EditListing({searchParams}) {
               > </label>
               <span className='formOption'>
                 Edit Category: <br></br>
-                </span>
+              </span>
               <select name="category"
                 id="category"
                 defaultValue={testCategory}
@@ -649,7 +668,7 @@ export default function EditListing({searchParams}) {
               <label for="condition" > </label>
               <span className='formOption'>
                 Edit Category: <br></br>
-                </span>
+              </span>
               <select name="condition"
                 id="condition"
                 defaultValue={testCondition}
@@ -674,7 +693,7 @@ export default function EditListing({searchParams}) {
               <label for="location" > </label>
               <span className='formOption'>
                 Edit Location: <br></br>
-                </span>
+              </span>
               <select name="location"
                 id="location"
                 value={loc}
@@ -695,9 +714,9 @@ export default function EditListing({searchParams}) {
                 {errors?.location && errors.location.message}
               </small>
               <br></br>
-              <label>  
+              <label>
                 <span className='formOption'>
-                Edit Email: <br></br>
+                  Edit Email: <br></br>
                 </span>
                 <input
                   id="email"
@@ -723,7 +742,7 @@ export default function EditListing({searchParams}) {
               </label><br></br>
               <label><span className='formOption'>
                 Edit Phone Number: <br></br>
-                </span>
+              </span>
                 <input
                   id="phonenumber"
                   type="tel"
@@ -751,19 +770,21 @@ export default function EditListing({searchParams}) {
                 </small>
               </label><br></br>
               <div >
-                <button style={{ width: '100px',
-                 height: '50px',
+                <button style={{
+                  width: '100px',
+                  height: '50px',
                   alignItems: 'center',
-                   margin: "0 0 15px 135px" }}>
-                    Submit
-                    </button>
+                  margin: "0 0 15px 135px"
+                }}>
+                  Submit
+                </button>
               </div>
             </div>
           </form>
-         
+
         </div>
       </div>
     </main>
   )
-                
+
 }

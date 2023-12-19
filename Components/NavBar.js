@@ -55,7 +55,7 @@ export default function NavBar() {
                     Search
                 </div>
 
-                <label>
+                <label style={{display:"flex",paddingTop:"1rem", color:"white"}}>
                     <input 
                         id="Enter Keyword"
                         name="Enter Keyword"
@@ -75,9 +75,6 @@ export default function NavBar() {
                     </svg>
                 </Link>
 
-                <Link href={'/'}  style={{display:"flex",padding:"1.25rem",color:"white"}} className="flex p-3">
-                    Sign Out
-                </Link>
 
             </div>
             
