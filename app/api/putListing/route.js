@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 
 export async function PUT(request){
+    console.log("Using putListing/route.js to add a listing") //debug print
 
     //Convert given request from json response into a javascript object
     const postDict = await request.json()
+    console.log("Title: ",postDict.title)
 
     //Build query string - Need to change format so certain input characters don't break it. 
     const queryText = "INSERT INTO PostTable" 
@@ -41,11 +43,15 @@ export async function PUT(request){
     let result = null
 
     try {
+        console.log("Starting try block in putListing/route.js") //debug print
+
         await client.connect();
         result = await client.query(queryText,queryValues);
         query_status = 1
     } 
     catch (error) {
+        console.log("Starting catch block in putListing/route.js") //debug print
+
         query_status = 0
         error_status = error
     } 
@@ -53,6 +59,7 @@ export async function PUT(request){
         await client.end();
     }
 
+    console.log("Wrapping up putListing/route.js") //debug print
 
     //Log result to console
     if (query_status = 0){
