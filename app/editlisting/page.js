@@ -75,6 +75,7 @@ export default function EditListing({ searchParams }) {
   };*/
 
   const { listingID } = searchParams;
+  const listingFake=124444;
   const { testTitle } = searchParams;
   const { testPrice } = searchParams;
   const { testDescription } = searchParams;
@@ -85,8 +86,8 @@ export default function EditListing({ searchParams }) {
   const { testPhone } = searchParams;
   const { testImages } = searchParams;
   const { isFlagged } = searchParams;
-
-  var originalImage = testImages[0];
+  var originalImageFilePath="/124444/file_0.jpg";
+  var originalImage = originalImageFilePath;
   var originalImage1 = testImages[1];
   var originalImage2 = testImages[2];
   var originalImage3 = testImages[3];
@@ -146,7 +147,7 @@ export default function EditListing({ searchParams }) {
       moderator_ban: "false",
       post_key: listingID,
     }
-    var imageSendable = imageFile4.toString('base64');
+  
     
 
     var waiting = await editListing(dict);

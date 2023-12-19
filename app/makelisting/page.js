@@ -6,6 +6,17 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let dict;
+const editListing = async (listingDict) => {
+  const response = await fetch("http://localhost:3000/api/editListing", {
+    method: "PUT",
+    body: JSON.stringify(
+      listingDict
+    )
+  },
+  );
+  const data = await response.json();
+  return data
+};
 const makeListing = async (listingDict) => {
   const response = await fetch("http://localhost:3000/api/putListing",{
     method:"PUT",
@@ -16,7 +27,7 @@ const makeListing = async (listingDict) => {
     )
 
   const data=await response.json();
-  console.log(data);
+
   return data
 };
 const getUser = async (email) => {
@@ -158,6 +169,7 @@ export default function MakeListing() {
       condition: condValue,
       location: locValue,
       email: emailValue,
+      image:imageValue,
       phoneValue: phoneValue,
       active: "true",
       flagged: "false"
@@ -166,33 +178,45 @@ export default function MakeListing() {
     
     getOneUser();  
     var waiting=await makeListing(dict);
-    console.log(waiting);
    if(waiting=="124444"){
-    console.log("correctid");
     const dataImage = new FormData();
     dataImage.set("key",waiting);
     if(imageFile){
-    console.log('thereisimagefile'); 
         dataImage.set("file_0",imageFile);
     }
     if(imageFile1){
-      console.log('thereisimagefile'); 
           dataImage.set("file_1",imageFile1);
       }
       if(imageFile2){
-        console.log('thereisimagefile'); 
             dataImage.set("file_2",imageFile2);
         }
         if(imageFile3){
-          console.log('thereisimagefile'); 
+
               dataImage.set("file_3",imageFile3);
           }
           if(imageFile4){
-            console.log('thereisimagefile'); 
+ 
                 dataImage.set("file_4",imageFile4);
             }
 
-    uploadImages(dataImage);
+    var images= await uploadImages(dataImage);
+    if(images!="false"){
+      dict = {
+        title: titleValue,
+        price: priceValue,
+        description: descriptionValue,
+        category: catValue,
+        condition: condValue,
+        location: locValue,
+        email: emailValue,
+        image:images,
+        phoneValue: phoneValue,
+        active: "true",
+        flagged: "false"
+  
+      }
+      editListing(dict);
+    }
       
       toast("Your listing has been uploaded!");
     }else{

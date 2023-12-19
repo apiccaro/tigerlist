@@ -4,6 +4,7 @@ const { writeFile,mkdir } = require('fs/promises');
 //https://www.youtube.com/watch?v=-_bhH4MLq1Y
 
 export async function POST(request){
+var imageNames=[]
 var worked="true";
 const images= await request.formData();
 const key=images.get("key");
@@ -15,6 +16,7 @@ for (let i = 0; i < 5; i++) {
   const file = images.get(fileKey);
 console.log(file)
 if(file!=null){
+    
 
 const bytes = await file.arrayBuffer();
 const buffer =Buffer.from(bytes)
@@ -23,6 +25,7 @@ const imagePath = join(publicPath, key);
 
 const fileExtension = extname(file.name);
 const filename = `${fileKey}${fileExtension}`;
+imageNames.push(filename)
 const path = join(imagePath, filename);
 try {
     await mkdir(imagePath, { recursive: true });
@@ -37,5 +40,6 @@ try {
   }
 }
   }
-  return NextResponse.json(worked);
+  console.log(imageNames);
+  return NextResponse.json(imageNames);
 }
