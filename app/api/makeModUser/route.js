@@ -1,8 +1,19 @@
 import { NextResponse } from 'next/server';
-export async function GET() {
+export async function PUT(request){
+    
+    //Convert given request from json response into a javascript object
+    const postDict = await request.json()
 
-    //Assemble string for database query
-    const queryText = "SELECT * FROM PostTable WHERE active = true AND flagged = true;";
+
+    //Assemble string components for database query text
+    const queryText =
+        "UPDATE UserTable SET " +
+        "moderator = true " +
+        "WHERE email = $1;";
+
+    const queryValues = [
+        postDict['email']
+    ];
 
 
     //Instantiate database client instance
@@ -20,7 +31,7 @@ export async function GET() {
 
     try {
         await client.connect();
-        const result = await client.query(queryText);
+        const result = await client.query(queryText,queryValues);
         query_status = 1
     } 
     catch (error) {
@@ -35,18 +46,17 @@ export async function GET() {
     //Log result to console
     if (query_status = 0){
         console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",queryText)
+        console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }
     else if (query_status = 1){
-        console.log("Database successfully queried with api/getAllFlaggedListings") //comment out once everything is properly tested.
-        return  NextResponse.json(result.rows)
+        console.log("Database successfully queried with api/makeModUser") //comment out once everything is properly tested.
+        return  NextResponse.json('true')
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
-        console.log("Attempted Query: ",queryText)
+        console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }
 
 }
-

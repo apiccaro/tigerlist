@@ -1,38 +1,41 @@
 // script from GitHub repo: https://github.com/produck/cas-client/blob/master/README.md 
-
+ 
 const http = require('http');
 const httpCasClient = require('http-cas-client'); //import the cas module from above repo 
-const testUserEmail = "l_flanagan@coloradocollege.edu";
-
+var userEmail = 'empty'
+ 
 const handler = httpCasClient({ // creating a handler with my specific configurations 
   casServerUrlPrefix: 'https://cas.coloradocollege.edu/cas',
   serverName: 'http://tigerlist.coloradocollege.edu'
 });
-
-
+ 
+ 
 const casHandler = async (req, res) => {
-  if (!await handler(req, res)) {
+  var data = await handler(req, res)
+  console.log('REQUEST: '+data);
+  if (!data) {
+    console.log('No data found');
     return false; // return false to indicate authentication failure
   }
-
-   // extract user information
-   const { principal, ticket } = req;
-
-   // assuming the email is sent as an attribute
-   const userEmail = principal.attributes.email;
-  
+  else {
  
-   if (userEmail) {
-     console.log("User's Email: ", userEmail);
-     // here is where we would store the email in the database! 
-   }
-
-  // additional logic...
-  // const { principal, ticket } = req;
-  // console.log(principal, ticket);
-  // { user: 'test', attributes: { ... } }
-
+        try {
+                // extract user information
+                var { principal, ticket } = req;
+ 
+                if(principal.attributes!=undefined) {
+                        userEmail = principal.attributes.email;
+                        console.log('USER\'S EMAIL: '+userEmail );
+                        return true;
+                }
+         }
+         catch (error) {
+                 console.log('principal undefined for this particular request')
+         }
+ 
+  }
   return true; // return true to indicate successful authentication
 };
-
-module.exports = {casHandler,testUserEmail}; // export the casHandler function to make available for server.js
+ 
+module.exports = {casHandler,userEmail}; // export the casHandler function to make available for server.js
+ 

@@ -1,32 +1,34 @@
 import { NextResponse } from 'next/server';
 
 export async function PUT(request){
-    //Get request as json. Might need to cast something or ensure postDict is a dictionary  
+    console.log("Using putListing/route.js to add a listing") //debug print
+
+    //Convert given request from json response into a javascript object
     const postDict = await request.json()
+    console.log("Title: ",postDict.title)
 
-    //Debug prints
-    console.log("Attempting to add a listing with content:\n"+postDict+"\n")
-    console.log("\nAs string:\n"+JSON.stringified(postDict)+"\n")
-    console.log("\nTitle with '.': "+postDict.title+"\n")
-    console.log("\nTitle with '[]': "+postDict['title']+"\n")
+    //Build query string - Need to change format so certain input characters don't break it. 
+    const queryText = "INSERT INTO PostTable" 
+    + " (title, price, description, category, condition, location, email, phoneValue, active, flagged, moderator_ban, images)" 
+    + " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
+  
+    const queryValues = [
+        postDict.title,
+        postDict.price,
+        postDict.description,
+        postDict.category,
+        postDict.condition,
+        postDict.location,
+        postDict.email,
+        postDict.phoneValue,
+        postDict.active,
+        postDict.flagged,
+        postDict.moderator_ban,
+        postDict.images
+    ];
 
 
-    //Build query. Will make this cleaner with $ once this works.
-    const queryText = "INSERT INTO PostTable "
-    +"(title, price, description, "
-    +"category, condition, location, "
-    +"email, phone, active,"
-    +" flagged, moderator_ban) "
-
-    +"VALUES ('"+postDict['title']+"', '"+postDict['title']+"', '"+postDict['title']+"', "
-    +"'"+postDict['title']+"', '"+postDict['title']+"', '"+postDict['title']+"', "
-    +"'"+postDict['title']+"', '"+postDict['title']+"', "
-    +postDict['flagged']+", "+postDict['flagged']+", "+postDict['flagged']+");"
-
-
-    //From here down should be pretty much the same for every route.js
-
-    //Make client with credentials
+    //Instantiate database client instance
     const { Client } = require('pg');
     const client = new Client({
         user: 'postgres',
@@ -34,27 +36,48 @@ export async function PUT(request){
         port: 5432,
     });
     
+
     //Try to connect to database and query.
-    let query_suceeded = false
+    let query_status = -1
+    let error_status = null
+    let result = null
+
     try {
+        console.log("Starting try block in putListing/route.js") //debug print
+
         await client.connect();
-        const result = await client.query(queryText);
-        query_suceeded = true
+        result = await client.query(queryText,queryValues);
+        query_status = 1
     } 
     catch (error) {
-        console.error('Error executing query:', error);
-        query_suceeded = false
+        console.log("Starting catch block in putListing/route.js") //debug print
+
+        query_status = 0
+        error_status = error
     } 
     finally {
         await client.end();
     }
 
-    //Declare success or send error back
-    if (query_suceeded){
-        console.log("Seems like the query worked!")
-        console.log("Result:\n\n",result)
+    console.log("Wrapping up putListing/route.js") //debug print
 
+    //Log result to console
+    if (query_status = 0){
+        console.log("Error: ",error_status)
+        //console.error('Error executing query:', error_status);
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
+    }
+    else if (query_status = 1){
+        console.log("Database successfully queried with api/putListing") //comment out once everything is properly tested.
+        console.log("Query result:\n",result) //comment out once everything is properly tested.
         return  NextResponse.json('true')
     }
-    return NextResponse.error('false');
+    else{
+        console.error('Error executing query: ', "Somehow the try block didnt finish yet no error was caught");
+        console.log("Attempted Query: ",(queryText,queryValues))
+        return  NextResponse.json('false')
+    }
+
 }
+
