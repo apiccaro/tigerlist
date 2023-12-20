@@ -100,13 +100,13 @@ export default function EditListing({ searchParams }) {
   const { testPhone } = searchParams;
   const { testImages } = searchParams;
   const { isFlagged } = searchParams;
-  var originalFile=testImages[0]?testImages[0].substring(1):null;
+  var originalFile = testImages[0]?.substring(1) ?? null;
   
-  var originalFile1=testImages[1].substring(1);
+  var originalFile1 = testImages[1]?.substring(1) ?? null;
 
-  var originalFile2=testImages[2].substring(1);
-  var originalFile3=testImages[3]?testImages[3].substring(1):null;
-  var originalFile4=testImages[4]?testImages[4].substring(1):null;
+  var originalFile2 = testImages[2]?.substring(1) ?? null;
+  var originalFile3 = testImages[3]?.substring(1) ?? null;
+  var originalFile4 = testImages[4]?.substring(1) ?? null;
 
   var originalImageFilePath="/124444/file_0.jpg";
   var originalImage = testImages[0];
