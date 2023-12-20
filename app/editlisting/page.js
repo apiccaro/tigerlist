@@ -23,6 +23,16 @@ const editListing = async (listingDict) => {
   console.log(data);
   return data
 };
+const uploadImages = async (imageData) => {
+  const response = await fetch("http://localhost:3000/api/uploadImages",{
+    method:"POST",
+    body : imageData
+    }
+    );
+  const success= await response.json();
+  
+  return success;
+};
 
 export default function EditListing({ searchParams }) {
   //var id=listingID.id;
@@ -39,6 +49,10 @@ export default function EditListing({ searchParams }) {
   const [previewImage2, setPreviewImage2] = useState();
   const [previewImage3, setPreviewImage3] = useState();
   const [previewImage4, setPreviewImage4] = useState();
+  const [imageFile, setImageFile] = useState();
+  const [imageFile1, setImageFile1] = useState();
+  const [imageFile2, setImageFile2] = useState();
+  const [imageFile3, setImageFile3] = useState();
   const [imageFile4,setImageFile4]=useState();
   const [email, setEmail] = useState();
   const [phonenumber, setPhoneNumber] = useState();
@@ -86,12 +100,23 @@ export default function EditListing({ searchParams }) {
   const { testPhone } = searchParams;
   const { testImages } = searchParams;
   const { isFlagged } = searchParams;
+  var originalFile=testImages[0]?testImages[0].substring(1):null;
+  
+  var originalFile1=testImages[1].substring(1);
+
+  var originalFile2=testImages[2].substring(1);
+  var originalFile3=testImages[3]?testImages[3].substring(1):null;
+  var originalFile4=testImages[4]?testImages[4].substring(1):null;
+
   var originalImageFilePath="/124444/file_0.jpg";
-  var originalImage = originalImageFilePath;
+  var originalImage = testImages[0];
   var originalImage1 = testImages[1];
   var originalImage2 = testImages[2];
   var originalImage3 = testImages[3];
   var originalImage4 = testImages[4];
+ 
+  
+
 
 
   // var testTitle = testDict["testTitle"];
@@ -130,7 +155,8 @@ export default function EditListing({ searchParams }) {
     const locValue = data.location;
     const emailValue = data.email;
     const phoneValue = data.phonenumber;
-    const imageValue = [previewImage, previewImage1, previewImage2, previewImage3, previewImage4];
+
+    const imageValue = [imageFile, imageFile1, imageFile2, imageFile3, imageFile4];
     console.log(previewImage4);
     var dict = {
       title: titleValue,
@@ -153,6 +179,26 @@ export default function EditListing({ searchParams }) {
     var waiting = await editListing(dict);
     console.log(waiting);
     if (waiting == "true") {
+      const dataImage = new FormData();
+      dataImage.set("key",waiting);
+      if(imageFile){
+          dataImage.set("file_0",imageFile);
+      }
+      if(imageFile1){
+            dataImage.set("file_1",imageFile1);
+        }
+        if(imageFile2){
+              dataImage.set("file_2",imageFile2);
+          }
+          if(imageFile3){
+  
+                dataImage.set("file_3",imageFile3);
+            }
+            if(imageFile4){
+   
+                  dataImage.set("file_4",imageFile4);
+              }
+        uploadImages(dataImage)
       toast("Your listing has been uploaded!");
     } else {
       toast("Unsuccesful try again");
@@ -171,6 +217,7 @@ export default function EditListing({ searchParams }) {
   ///////////////////////////////////
   // ACTUALLY CALLING THE FUNCTION //
   /////////////////////////////////// 
+
   return (
     <main style={{
       display: 'flex',
@@ -234,6 +281,7 @@ export default function EditListing({ searchParams }) {
                       const reader = new FileReader();
                       reader.onloadend = () => {
                         //sets all imagePreview fields
+                        setImageFile(event.target.files[0]);
                         setPreviewImage(reader.result);
                         setWidth(400);
                         setHeight(200);
@@ -251,7 +299,7 @@ export default function EditListing({ searchParams }) {
               <img
                 id="imagePreview"
                 //if no previewImage- load in the original image
-                 src={previewImage ? previewImage : originalImage? setPreviewImage(originalImage):originalImage}
+                 src={previewImage ? previewImage : originalImage? (setPreviewImage(originalImage),setImageFile(originalFile)):originalImage}
 
                 style={{
                   objectFit: 'cover',
@@ -298,6 +346,7 @@ export default function EditListing({ searchParams }) {
                           const file = event.target.files[0];
                           const reader = new FileReader();
                           reader.onloadend = () => {
+                            setImageFile1(event.target.files[0]);
                             setPreviewImage1(reader.result);
                             setWidth1(SMALLIMAGE);
                             setHeight1(SMALLIMAGE);
@@ -315,7 +364,7 @@ export default function EditListing({ searchParams }) {
                   <img
                     id="imagePreview1"
                     //if no previewImage- load in the original image
-                    src={previewImage1 ? previewImage1 : originalImage1 ? setPreviewImage1(originalImage1) : originalImage1}
+                    src={previewImage1 ? previewImage1 : originalImage1 ?(setPreviewImage1(originalImage1),setImageFile1(originalFile1)): originalImage1}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
@@ -373,6 +422,7 @@ export default function EditListing({ searchParams }) {
                           const file = event.target.files[0];
                           const reader = new FileReader();
                           reader.onloadend = () => {
+                            setImageFile2(event.target.files[0]);
                             setPreviewImage2(reader.result);
                             setWidth2(SMALLIMAGE);
                             setHeight2(SMALLIMAGE);
@@ -390,7 +440,7 @@ export default function EditListing({ searchParams }) {
                   <img
                     id="imagePreview2"
                     //if no previewImage- load in the original image
-                    src={previewImage2 ? previewImage2 : originalImage2 ? setPreviewImage2(originalImage2) : originalImage2}
+                    src={previewImage2 ? previewImage2 : originalImage2 ? (setPreviewImage2(originalImage2),setImageFile2(originalFile2)) : originalImage2}
 
                     style={{
                       cursor: 'pointer',
@@ -449,6 +499,7 @@ export default function EditListing({ searchParams }) {
                           const file = event.target.files[0];
                           const reader = new FileReader();
                           reader.onloadend = () => {
+                            setImageFile3(event.target.files[0]);
                             setPreviewImage3(reader.result);
                             setWidth3(SMALLIMAGE);
                             setHeight3(SMALLIMAGE);
@@ -466,9 +517,9 @@ export default function EditListing({ searchParams }) {
                   <img
                     id="imagePreview3"
                     //if no previewImage- load in the original image
-                    //src={previewImage3 ? previewImage3 : originalImage3? setPreviewImage3(originalImage3):originalImage3}
-                    src=""
-                    //src={previewImage1 ? previewImage1 : setPreviewImage1(originalImage1)}
+                    src={previewImage3 ? previewImage3 : originalImage3? (setPreviewImage3(originalImage3),setImageFile3(originalFile3)):originalImage3}
+                    
+                    
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',
@@ -524,22 +575,20 @@ export default function EditListing({ searchParams }) {
                       onChange={(event) => {
                         if (event?.target?.files?.[0]) {
                           const file = event.target.files[0];
-                          setImageFile4(file);
+                          
                          // console.log(event.target.files[0]);
                           const reader = new FileReader();
                           reader.onloadend = () => {
 
                            
                             
-                            const url = URL.createObjectURL(event.target.files[0]);
-
-                            setPreviewImage4(url);
+                            
+                            setImageFile4(file);
+                            setPreviewImage3(reader.result);
                             setWidth4(SMALLIMAGE);
                             setHeight4(SMALLIMAGE);
                             setBorderStyle4('');
                             setLabelText4('');
-                            const imageSendable = reader.result.split(',')[1];
-      console.log(imageSendable);
                           };
                           reader.readAsDataURL(file);
                         }
@@ -552,7 +601,7 @@ export default function EditListing({ searchParams }) {
                   <img
                     id="imagePreview4"
                     //if no previewImage- load in the original image
-                    src={previewImage4 ? previewImage4 : originalImage4 ? setPreviewImage4(originalImage4) : originalImage4}
+                    src={previewImage4 ? previewImage4 : originalImage4 ?(setPreviewImage4(originalImage4),setImageFile4(originalFile4)) : originalImage4}
                     style={{
                       cursor: 'pointer',
                       objectFit: 'cover',

@@ -18,8 +18,10 @@ console.log(file)
 if(file!=null){
     
 
-const bytes = await file.arrayBuffer();
-const buffer =Buffer.from(bytes)
+try{
+    //
+    const bytes = await file.arrayBuffer();
+    const buffer =Buffer.from(bytes)
 const publicPath = join(process.cwd(), 'public');
 const imagePath = join(publicPath, key);
 
@@ -38,6 +40,12 @@ try {
   } catch (error) {
     worked="false"
   }
+}catch(e){
+//will be caught if the file already exists and is being passed as string not a file
+
+imageNames.push(file)
+}
+
 }
   }
   console.log(imageNames);
