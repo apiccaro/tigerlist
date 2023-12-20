@@ -5,6 +5,8 @@ export async function GET(user_email) {
     const queryText = "SELECT * FROM UserTable WHERE email = '$1';"
     const queryValues = [user_email];
 
+    console.log("getUser debug - assembled query:",(queryText,queryValues))
+
 
     //Instantiate database client instance
     const { Client } = require('pg');
@@ -40,7 +42,7 @@ export async function GET(user_email) {
         return  NextResponse.json('false')
     }
     else if (query_status == 1){
-        console.log("Database successfully queried") //comment out once everything is properly tested.
+        console.log("Database successfully queried with api/getUser") //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
     }
     else{
