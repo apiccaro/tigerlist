@@ -35,7 +35,7 @@ var isAutoFlagged;
 var thisUser={};
   const getOneUser=async()=>{
     const response = await getUser();
-    thisUser=response.user;
+    thisUser=response;
     if(thisUser.isAutoFlagged){
       dict.flagged=true;
     }
