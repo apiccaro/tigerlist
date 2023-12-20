@@ -2,5 +2,7 @@ pre-force was created with the command
 
 "git branch pre-force 4f870887436fde8286fcd89e1b8ae21e2589354f"
 
-By Jay at 11:49am on tuesday Dec 19.
-its a copy of lucy's "fixing hydration errors" commit that we want to copy over to main using a force push
+Being force pushed to main to work from as we go forward
+
+Lucy copying her branch (with some important changes) also copied whatever code gave us the 
+"TypeError: Response body object should not be disturbed or locked" issue

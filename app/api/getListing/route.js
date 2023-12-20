@@ -6,8 +6,6 @@ export async function GET(listing_key) {
     const queryValues = [postDict['post_key']];
 
 
-
-
     //Instantiate database client instance
     const { Client } = require('pg');
     const client = new Client({
@@ -36,12 +34,12 @@ export async function GET(listing_key) {
 
 
     //Log result to console
-    if (query_status = 0){
+    if (query_status == 0){
         console.error('Error executing query:', error_status);
         console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }
-    else if (query_status = 1){
+    else if (query_status == 1){
         console.log("Database successfully queried with api/getListing") //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
     }
