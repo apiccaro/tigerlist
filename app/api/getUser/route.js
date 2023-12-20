@@ -15,6 +15,7 @@ export async function GET(user_email) {
     const queryText = "SELECT * FROM UserTable WHERE email = '$1';"
     const queryValues = [user_email];
 
+    console.log("getUser debug - assembled query:",(queryText,queryValues))
 
 
     //Instantiate database client instance
@@ -45,15 +46,13 @@ export async function GET(user_email) {
 
 
     //Log result to console
-    if (query_status = 0){
-        console.log("Error: ",error_status)
-        //console.error('Error executing query:', error_status);
+    if (query_status == 0){
+        console.error('Error executing query:', error_status);
         console.log("Attempted Query: ",(queryText,queryValues))
         return  NextResponse.json('false')
     }
-    else if (query_status = 1){
+    else if (query_status == 1){
         console.log("Database successfully queried with api/getUser") //comment out once everything is properly tested.
-        console.log("Query result:\n",result) //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
     }
     else{
