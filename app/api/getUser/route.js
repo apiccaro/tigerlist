@@ -26,7 +26,6 @@ export async function GET(user_email) {
         port: 5432,
     });
     
-
     //Try to connect to database and query.
     let query_status = -1
     let error_status = null

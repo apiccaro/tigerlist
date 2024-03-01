@@ -41,6 +41,7 @@ export async function GET() {
     else if (query_status == 1){
         console.log("Database successfully queried with api/getAllModeratedUsers") //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
+        //return NextResponse.json('true') //(previous version) Not sure what annika actually wanted to be returned here. will test.
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");

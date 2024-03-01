@@ -19,7 +19,9 @@ export async function PUT(request){
         "active = $9, " +
         "flagged = $10, " +
         "moderator_ban = $11 " +
-        "WHERE post_key = $12;";
+        "images = $12 " +
+        "WHERE post_key = $13;";
+
 
     const queryValues = [
         postDict['title'],
@@ -33,6 +35,7 @@ export async function PUT(request){
         postDict['active'],
         postDict['flagged'],
         postDict['moderator_ban'],
+        postDict['images'],
         postDict['post_key']
     ];
 
@@ -73,6 +76,7 @@ export async function PUT(request){
     else if (query_status == 1){
         console.log("Database successfully queried with api/editListing") //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
+        //return NextResponse.json('true') //(previous version) Not sure what annika actually wanted to be returned here. will test.
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
