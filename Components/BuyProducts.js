@@ -4,7 +4,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from 'next/link';
-// import BuyProductBox from "./BuyProductBox";
+import BuyProductBox from "./BuyProductBox";
 
 
 // //reference copy 

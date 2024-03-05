@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function PUT(request){
+export async function GET(request){
 
     console.log("Using apiTest/route.js to test basic API functionality") //debug print
     console.log("request content: \n",request)
