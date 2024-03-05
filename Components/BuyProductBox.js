@@ -7,6 +7,10 @@ import Link from "next/link";
 import { DynamicServerError } from "next/dist/client/components/hooks-server-context";
 import React, { useState } from 'react';
 
+
+
+
+
 const ProductBGStyle ={
     backgroundColor: 'black',
     height: '250px',
@@ -55,8 +59,10 @@ const BuyProductBox = ({listingID, title, price, description, category, conditio
                     } 
                 }} className="flex text-semibold text-2xl">
                     <Image
-                        src={images[0]? images[0]:"/photo.svg"}
-                        //src={images[0]}
+
+                        //src={images[0]? images[0]:"/photo.svg"} // Replacing with line below until we have DB image functionality
+                        src={"/CCLogoDerp.png"}
+
                         alt="Product Image"
                         accept="image/*"
                         className="flex flex-grow"

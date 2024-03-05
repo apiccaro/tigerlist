@@ -17,10 +17,13 @@ export async function GET() {
     //Try to connect to database and query.
     let query_status = -1
     let error_status = null
+    let result = null;
+
+    console.log("api/getAllListings: Starting try/catch")
 
     try {
         await client.connect();
-        const result = await client.query(queryText,queryValues);
+        result = await client.query(queryText);
         query_status = 1
     } 
     catch (error) {
@@ -28,19 +31,19 @@ export async function GET() {
         error_status = error
     } 
     finally {
-        await client.end();
+        console.log("api/getAllListings: Completing try/catch")
     }
-
+    await client.end();
 
     //Log result to console
     if (query_status == 0){
         console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",(queryText,queryValues))
+        console.log("Attempted Query: ",queryText)
         return  NextResponse.json('false')
     }
     else if (query_status == 1){
         console.log("Database successfully queried with api/getAllListings") //comment out once everything is properly tested.
-        return  NextResponse.json(result.rows)
+        return (result)
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");

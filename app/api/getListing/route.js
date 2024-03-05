@@ -18,10 +18,11 @@ export async function GET(listing_key) {
     //Try to connect to database and query.
     let query_status = -1
     let error_status = null
+    let result;
 
     try {
         await client.connect();
-        const result = await client.query(queryText,queryValues);
+        result = await client.query(queryText,queryValues);
         query_status = 1
     } 
     catch (error) {

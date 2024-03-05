@@ -17,3 +17,17 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+
+
+
+
+
+
+
+Current notable changes:
+3/5 - Components/BuyProductBox - replacing image variable with reference to image in public folder so DB listings can show up right.
+3/5 - Components/BuyProducts - Makes API call and puts contents in the same array to be displayed.
+
+3/5 - Some other format changes in route.js

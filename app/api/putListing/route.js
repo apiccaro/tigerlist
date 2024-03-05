@@ -43,6 +43,8 @@ export async function PUT(request){
     let error_status = null
     let result = null
 
+    console.log("api/putListing: Starting try/catch")
+
     try {
         console.log("Starting try block in putListing/route.js") //debug print
 
@@ -58,8 +60,9 @@ export async function PUT(request){
             let result = null
     } 
     finally {
-        await client.end();
+        console.log("api/putListing: Completing try/catch")
     }
+    await client.end();
 
 
 
