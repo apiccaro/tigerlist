@@ -19,13 +19,18 @@ import BuyProductBox from "./BuyProductBox";
 
 
 const allPostsfromDB = async () => {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",{
+    //const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",{ // original line, replace below once things are working
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",{
+
       method:"GET",
+      body: JSON.stringify( "Hello from the front end" ), //Goes against comvention to have a body in a GET method, but shouldnt break anything
+
       })
     .then(
         response => response.json()
         )
     .catch(error => console.error('Fetch failed:', error));
+    
 
     const data = response;
     
