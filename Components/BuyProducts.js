@@ -4,24 +4,57 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from 'next/link';
-import BuyProductBox from "./BuyProductBox";
+// import BuyProductBox from "./BuyProductBox";
 
 
-const allPostsfromDB = async (listingDict) => {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",
-    {
+// //reference copy 
+// const getAllListings = async () => {
+//     const response = await fetch("http://localhost:3000/api/getAllListings",{
+//       method:"GET",
+//       });
+//     const data = await response.json();
+//     return data;
+//   };
+
+
+
+const allPostsfromDB = async () => {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",{
       method:"GET",
-      body : JSON.stringify()
-      },
-    )  
-    //.then(response => response.json()) //we get response.json below now
+      })
+    .then(
+        response => response.json()
+        )
     .catch(error => console.error('Fetch failed:', error));
 
-    const data = await response.json();
+    const data = response;
+    
     console.log("Data from API: ",data);
+
     return data;
 
   };
+
+
+// const allPostsfromDB_subbedout = async (listingDict) => {
+//     const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",
+//     {
+//       method:"GET",
+//       body : JSON.stringify()
+//       },
+//     )  
+//     .then(
+//         response => response.json()
+//         )
+//     .catch(error => console.error('Fetch failed:', error));
+
+//     const data = response;
+    
+//     console.log("Data from API: ",data);
+
+//     return data;
+
+//   };
 
 
 //// New version, gets content from api, displays as listing.

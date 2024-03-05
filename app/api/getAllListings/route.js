@@ -43,7 +43,7 @@ export async function GET() {
     }
     else if (query_status == 1){
         console.log("Database successfully queried with api/getAllListings") //comment out once everything is properly tested.
-        return (result)
+        return  NextResponse.json(result)
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
