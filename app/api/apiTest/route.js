@@ -1,24 +1,22 @@
 import { NextResponse } from 'next/server';
 
-export async function GET(request){
-    // co?nsole.log(await request.json())
+// export async function GET(request){
+
+//     const req = await request.json()
+//     console.log("Using apiTest/route.js to test basic API functionality") //debug print
+//     console.log("request content: \n",req)
+
+//     return NextResponse.json('response text')
+//     return res.status(200).json({ message: 'Hello from Next.js!' })
 
 
-    const req = await request.json()
+// }
 
 
-    console.log("Using apiTest/route.js to test basic API functionality") //debug print
-    console.log("request content: \n",req)
-    console.log("request body: \n",req.body)
 
-
-    //Convert given request from json response into a javascript object
-
-    const requestJson = await request.json()
-
-    //Return 'true'
-
-    return NextResponse.json('true')
-
+export default function handler(req, res) {
+    console.log("Using apiTest/route.js to test basic API functionality:")
+    console.log(res)
+    res.status(200).json({ message: 'Hello from api folder' })
 }
 

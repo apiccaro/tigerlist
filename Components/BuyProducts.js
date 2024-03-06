@@ -16,7 +16,25 @@ import BuyProductBox from "./BuyProductBox";
 //     return data;
 //   };
 
+const tryDB = async () => {
+    fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`error: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('response:', data);
+    })
+    .catch(error => {
+      console.error('error:', error);
+    });
+}
 
+
+
+  
 
 const allPostsfromDB = async () => {
     //const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",{ // original line, replace below once things are working
@@ -65,8 +83,11 @@ const allPostsfromDB = async () => {
 //// New version, gets content from api, displays as listing.
 // (Work in progress, something wont be right.)
 // The bigger question is why we get ECONNREFUSED for this one.
-var listingData = allPostsfromDB()
-var allListings = [listingData]
+//var listingData = allPostsfromDB()
+tryDB()
+var allListings = []
+
+//var allListings = [listingData]
 
 
 //// Old hardcoded objects to represent listings
