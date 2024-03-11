@@ -55,34 +55,29 @@ const allPostsFromDB = async () => {
 };
 
 
-var newDBlistings = []
-console.log("alright here we go");
+var newDBlistings = [];
 
 (async () => {
-  console.log("Starting an IIFE")
+  console.log("Starting IIFE in BuyProducts.js")
 
-  console.log("Testing tryDB2 first.")
+  console.log("Testing tryDB2")
   await tryDB2()
 
-  console.log("Testing await allPostsFromDB() now")
-  var dbcontent = await allPostsFromDB()
+  console.log("Testing allPostsFromDB()")
+  let dbcontent = await allPostsFromDB()
   if (dbcontent !== undefined){
     newDBlistings = dbcontent
   }
 
-  console.log("Done with IIFE")
+  console.log("Finishing IIFE in BuyProducts.js")
 })();
 
-
-if (newDBlistings !== undefined){
+if (newDBlistings.lenth < 0){
   console.log("For now, we're not displaying all content, but here's one dict:")
   console.log(newDBlistings[0])
 }
 
-
-
-
-
+//Current hardcoded listing dictionaries. Replacing with queried data once api methods work
 var allListings = [{listingID: "123", title: "Proof of concept", price: "$5", description: "Ticket for Friday's game against North Dakota", category: "Service", condition: "New", location: "Off Campus", email: "student1@coloradocollege.edu", phone: "1234567890", images: ["/testimage3.jpeg", "/testimage4.jpeg"], flagged: false},
                     {listingID: "456", title: "Jacket", price: "$30", description: "Brown leather jacket. Good condition. Size medium.", category: "Clothing", condition: "Used-Good", location: "West Campus", email: "student2@coloradocollege.edu", phone: "2071233333", images: ["/testimage1.jpeg", "/testimage5.jpeg", "/testimage2.jpeg"], flagged: false},
                     {listingID: "789", title: "Carpool", price: "$15", description: "Driving to DIA Wednesday at 2:30pm.", category: "Carpool", condition: "New", location: "East Campus", email: "student3@coloradocollege.edu", phone: "5555552222", images: [""], flagged: true}]
@@ -164,16 +159,6 @@ export default function BuyProducts(){
 //     return data;
 
 //   };
-
-
-//// New version, gets content from api, displays as listing.
-// (Work in progress, something wont be right.)
-// The bigger question is why we get ECONNREFUSED for this one.
-//var listingData = allPostsFromDB()
-//await tryDB2()
-//var allListings = []
-
-//// Old hardcoded objects to represent listings
 
 
 
