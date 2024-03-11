@@ -8,5 +8,5 @@ export default function Home() {
             <Filter />
             <BuyProducts />
         </div>
-        );
+    );
 }

@@ -7,6 +7,110 @@ import Link from 'next/link';
 import BuyProductBox from "./BuyProductBox";
 
 
+//test, shouldnt be relevant anymore
+const tryMakeListing = async (listingDict) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
+    method:"PUT",
+      body : JSON.stringify(
+        listingDict
+      )
+    },
+  )
+
+  const data=await response.json();
+  console.log(data);
+  return data
+};
+
+
+
+//test, shouldnt be relevant anymore
+const tryDB2 = async () => {
+  console.log ("Called tryDB2")
+
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",{
+    method:"GET",
+  }).catch(error => console.error('Error: fetch failed in Components/BuyProducts.js: ', error));
+
+  console.log ("Finished tryDB2")
+};
+
+
+const allPostsFromDB = async () => {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",{//original line, replace below once things are working
+      method:"GET",
+      })
+    .then(
+        response => response.json()
+        )
+    .catch(error => console.error('Fetch failed in allPostsFromDB:', error));
+    
+
+    const data = response;
+    
+    //console.log("Data from API: ",data);
+
+    return data;
+
+};
+
+
+var newDBlistings = []
+console.log("alright here we go");
+
+(async () => {
+  console.log("Starting an IIFE")
+
+  console.log("Testing tryDB2 first.")
+  await tryDB2()
+
+  console.log("Testing await allPostsFromDB() now")
+  var dbcontent = await allPostsFromDB()
+  if (dbcontent !== undefined){
+    newDBlistings = dbcontent
+  }
+
+  console.log("Done with IIFE")
+})();
+
+
+if (newDBlistings !== undefined){
+  console.log("For now, we're not displaying all content, but here's one dict:")
+  console.log(newDBlistings[0])
+}
+
+
+
+
+
+var allListings = [{listingID: "123", title: "Proof of concept", price: "$5", description: "Ticket for Friday's game against North Dakota", category: "Service", condition: "New", location: "Off Campus", email: "student1@coloradocollege.edu", phone: "1234567890", images: ["/testimage3.jpeg", "/testimage4.jpeg"], flagged: false},
+                    {listingID: "456", title: "Jacket", price: "$30", description: "Brown leather jacket. Good condition. Size medium.", category: "Clothing", condition: "Used-Good", location: "West Campus", email: "student2@coloradocollege.edu", phone: "2071233333", images: ["/testimage1.jpeg", "/testimage5.jpeg", "/testimage2.jpeg"], flagged: false},
+                    {listingID: "789", title: "Carpool", price: "$15", description: "Driving to DIA Wednesday at 2:30pm.", category: "Carpool", condition: "New", location: "East Campus", email: "student3@coloradocollege.edu", phone: "5555552222", images: [""], flagged: true}]
+
+const ProductsGridStyle={
+    marginTop: '20px',
+    marginLeft: '20px',
+    marginRight: '20px',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    gap:'20px',
+}
+
+export default function BuyProducts(){
+    return(
+        <div style={ProductsGridStyle} className="flex flex-grow">
+            {allListings.map((listing, index) => (
+                <BuyProductBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
+            ))}
+        </div>
+    );
+}
+
+
+
+  
+
+
 // //reference copy 
 // const getAllListings = async () => {
 //     const response = await fetch("http://localhost:3000/api/getAllListings",{
@@ -16,50 +120,32 @@ import BuyProductBox from "./BuyProductBox";
 //     return data;
 //   };
 
-const tryDB = async () => {
-    fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('response:', data);
-    })
-    .catch(error => {
-      console.error('error:', error);
-    });
-}
-
-
-
+// const tryDB = async () => {
+    
+//     const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",
+//     {
+//     method:"GET",
+//     })
+//   .then(
+//       response => response.json()
+//       )
+//   .catch(error => console.error('Error: fetch failed in Components/BuyProducts.js: ', error));
   
-
-const allPostsfromDB = async () => {
-    //const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",{ // original line, replace below once things are working
-    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",{
-
-      method:"GET",
-      body: JSON.stringify( "Hello from the front end" ), //Goes against comvention to have a body in a GET method, but shouldnt break anything
-
-      })
-    .then(
-        response => response.json()
-        )
-    .catch(error => console.error('Fetch failed:', error));
-    
-
-    const data = response;
-    
-    console.log("Data from API: ",data);
-
-    return data;
-
-  };
+//   console.log ("If nothing bad happened yet thats a win")
 
 
-// const allPostsfromDB_subbedout = async (listingDict) => {
+//   //const data = response;
+//   //console.log("Data from API: ",data);
+
+
+// };
+
+//demoDict = {listingID: "789", title: "Carpool", price: "$15", description: "Driving to DIA Wednesday at 2:30pm.", category: "Carpool", condition: "New", location: "East Campus", email: "student3@coloradocollege.edu", phone: "5555552222", images: [""], flagged: true}
+//tryMakeListing(demoDict)
+
+
+
+// const allPostsFromDB_subbedout = async (listingDict) => {
 //     const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",
 //     {
 //       method:"GET",
@@ -83,40 +169,12 @@ const allPostsfromDB = async () => {
 //// New version, gets content from api, displays as listing.
 // (Work in progress, something wont be right.)
 // The bigger question is why we get ECONNREFUSED for this one.
-//var listingData = allPostsfromDB()
-tryDB()
-var allListings = []
-
-//var allListings = [listingData]
-
+//var listingData = allPostsFromDB()
+//await tryDB2()
+//var allListings = []
 
 //// Old hardcoded objects to represent listings
-// var allListings = [{listingID: "123", title: "Hockey Ticket", price: "$5", description: "Ticket for Friday's game against North Dakota", category: "Service", condition: "New", location: "Off Campus", email: "student1@coloradocollege.edu", phone: "1234567890", images: ["/testimage3.jpeg", "/testimage4.jpeg"], flagged: false},
-//                     {listingID: "456", title: "Jacket", price: "$30", description: "Brown leather jacket. Good condition. Size medium.", category: "Clothing", condition: "Used-Good", location: "West Campus", email: "student2@coloradocollege.edu", phone: "2071233333", images: ["/testimage1.jpeg", "/testimage5.jpeg", "/testimage2.jpeg"], flagged: false},
-//                     {listingID: "789", title: "Carpool", price: "$15", description: "Driving to DIA Wednesday at 2:30pm.", category: "Carpool", condition: "New", location: "East Campus", email: "student3@coloradocollege.edu", phone: "5555552222", images: [""], flagged: true}]
 
-
-
-
-
-const ProductsGridStyle={
-    marginTop: '20px',
-    marginLeft: '20px',
-    marginRight: '20px',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr',
-    gap:'20px',
-}
-
-export default function BuyProducts(){
-    return(
-        <div style={ProductsGridStyle} className="flex flex-grow">
-            {allListings.map((listing, index) => (
-                <BuyProductBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
-            ))}
-        </div>
-    );
-}
 
 
 
