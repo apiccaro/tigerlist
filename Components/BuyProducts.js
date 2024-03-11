@@ -50,7 +50,7 @@ const allPostsFromDB = async () => {
     
     //console.log("Data from API: ",data);
 
-    return data;
+    return data.rows;
 
 };
 
