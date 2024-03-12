@@ -15,38 +15,37 @@ export async function GET() {
     
 
     //Try to connect to database and query.
-    let query_status = -1
-    let error_status = null
+    let error_status;
+    let result;
 
     try {
         await client.connect();
-        const result = await client.query(queryText);
-        query_status = 1
+        result = await client.query(queryText);
     } 
     catch (error) {
-        query_status = 0
         error_status = error
     } 
     finally {
-        await client.end();
+        //console.log("api/getAllListings: Completing try/catch")
     }
+    await client.end();
+    console.log("api/getAllListings: Database client closed")
 
 
+
+    
     //Log result to console
-    if (query_status == 0){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",queryText)
-        return  NextResponse.json('false')
-    }
-    else if (query_status == 1){
+    if (error_status === undefined){
         console.log("Database successfully queried with api/getAllFlaggedListings") //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
     }
     else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
+        console.error('api/getAllFlaggedListings: Error executing query - ', error_status);
         console.log("Attempted Query: ",queryText)
         return  NextResponse.json('false')
-    }
+    } 
+
+
 
 }
 

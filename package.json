@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm-run-all --parallel dev-server addRem",
-    "dev-server": "node server.js", 
-    "addRem": "node ./app/addRemMod/page.mjs",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

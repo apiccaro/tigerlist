@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 export async function GET(listing_key) {
 
     //Assemble string for database query
-    const queryText = "SELECT * FROM PostTable WHERE post_key = '$1';"
-    const queryValues = [postDict['post_key']];
+    const queryText = "SELECT * FROM PostTable WHERE post_key = $1;";
+    const queryValues = [listing_key];  // Use the parameter listing_key here
 
 
     //Instantiate database client instance
@@ -15,41 +15,39 @@ export async function GET(listing_key) {
     });
     
 
-    //Try to connect to database and query.
-    let query_status = -1
-    let error_status = null
-    let result;
-
-    try {
-        await client.connect();
-        result = await client.query(queryText,queryValues);
-        query_status = 1
-    } 
-    catch (error) {
-        query_status = 0
-        error_status = error
-    } 
-    finally {
-        await client.end();
-    }
-
-
-    //Log result to console
-    if (query_status == 0){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
-    }
-    else if (query_status == 1){
+      //Try to connect to database and query.
+      let error_status;
+      let result;
+  
+      try {
+          await client.connect();
+          result = await client.query(queryText);
+      } 
+      catch (error) {
+          error_status = error
+      } 
+      finally {
+          //console.log("api/getAllListings: Completing try/catch")
+      }
+      await client.end();
+      console.log("api/getAllListings: Database client closed")
+  
+  
+  
+      
+      //Log result to console
+      if (error_status === undefined){
         console.log("Database successfully queried with api/getListing") //comment out once everything is properly tested.
-        return  NextResponse.json(result.rows)
-    }
-    else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
-    }
-
+          return  NextResponse.json(result.rows)
+      }
+      else{
+          console.error('api/getListing: Error executing query - ', error_status);
+          console.log("Attempted Query: ",queryText)
+          return  NextResponse.json('false')
+      } 
+  
+  
+  
 }
 
 

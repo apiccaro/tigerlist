@@ -15,39 +15,35 @@ export async function GET() {
     
 
     //Try to connect to database and query.
-    let query_status = -1
-    let error_status = null
+
+    let error_status;
+    let result;
 
     try {
         await client.connect();
-        const result = await client.query(queryText);
-        query_status = 1
+        result = await client.query(queryText);
     } 
     catch (error) {
-        query_status = 0
         error_status = error
     } 
-    finally {
-        await client.end();
-    }
+    await client.end();
+    console.log("api/getAllListings: Database client closed")
 
+
+    //Debug print to verify successful query 
+    //console.log("api/getAllListings: printing a row from the result: ")
+    //console.log(result.rows[68])
 
     //Log result to console
-    if (query_status == 0){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",queryText)
-        return  NextResponse.json('false')
-    }
-    else if (query_status == 1){
-        console.log("Database successfully queried with api/getAllModeratedUsers") //comment out once everything is properly tested.
+    if (error_status === undefined){
+        console.log("Database successfully queried with api/getAllListings") //comment out once everything is properly tested.
         return  NextResponse.json(result.rows)
-        //return NextResponse.json('true') //(previous version) Not sure what annika actually wanted to be returned here. will test.
     }
     else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
+        console.error('api/getAllListings: Error executing query - ', error_status);
         console.log("Attempted Query: ",queryText)
         return  NextResponse.json('false')
-    }
+    } 
 
 }
 

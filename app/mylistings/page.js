@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import Loading from "../loading";
 
 const getUser= async()=>{
+    console.log("calling getUser in app/mylistings/page.js")
 
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser", {
       method:"GET",
@@ -15,6 +16,16 @@ const getUser= async()=>{
     return data;
 }
 
+const getUserCAS= async()=>{
+    console.log("calling getUserCAS in app/mylistings/page.js")
+
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserCAS", {
+      method:"GET",
+      });
+    const data = await response.json();
+    console.log(data)
+    return data;
+}
 
 //https://www.youtube.com/watch?v=uR67O6sNjbg&t=431s - Data fetching and loading state
 
@@ -26,6 +37,8 @@ const getAllModeratedUsers = async () => {
     const data = await response.json();
     return data;
   };
+
+  
 
 export default function Home() {
     const [moderatedUsers, setModeratedUsers] = useState();
@@ -59,7 +72,8 @@ export default function Home() {
                 const data = await getAllModeratedUsers();
                 setModeratedUsers(data);
                 console.log(data)
-                const user = await getUser();
+                const user = await getUserCAS();
+                console.log("apparently got data")
                 console.log(user);
                 const userModerated = data.includes(user);
                 

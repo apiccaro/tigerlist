@@ -12,12 +12,12 @@ export async function GET() {
         port: 5432,
     });
     
-    //Define status for
-    //let query_status = -1
+
+    //Try to connect to database and query.
+
     let error_status;
     let result;
 
-    //Try to connect to database and query.
     try {
         await client.connect();
         result = await client.query(queryText);
