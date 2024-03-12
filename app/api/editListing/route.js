@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-export async function PUT(request){
+export async function POST(request){
     
     //Convert given request from json response into a javascript object
-    const postDict = await request.json()
+    const reqObject = await request.json()
 
 
     //Assemble string components for database query text
@@ -24,19 +24,19 @@ export async function PUT(request){
 
 
     const queryValues = [
-        postDict['title'],
-        postDict['price'],
-        postDict['description'],
-        postDict['category'],
-        postDict['condition'],
-        postDict['location'],
-        postDict['email'],
-        postDict['phoneValue'],
-        postDict['active'],
-        postDict['flagged'],
-        postDict['moderator_ban'],
-        postDict['images'],
-        postDict['post_key']
+        reqObject['title'],
+        reqObject['price'],
+        reqObject['description'],
+        reqObject['category'],
+        reqObject['condition'],
+        reqObject['location'],
+        reqObject['email'],
+        reqObject['phoneValue'],
+        reqObject['active'],
+        reqObject['flagged'],
+        reqObject['moderator_ban'],
+        reqObject['images'],
+        reqObject['post_key']
     ];
 
 

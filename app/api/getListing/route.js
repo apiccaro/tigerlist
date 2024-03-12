@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server';
-export async function GET(listing_key) {
+export async function POST(request){
+    
+    //Convert given request from json response into a javascript object
+    const reqObject = await request.json()
+    const listingID = reqObject.id
+
 
     //Assemble string for database query
     const queryText = "SELECT * FROM PostTable WHERE post_key = $1;";
-    const queryValues = [listing_key];  // Use the parameter listing_key here
+    const queryValues = [listingID]; 
 
 
     //Instantiate database client instance

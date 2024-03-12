@@ -45,7 +45,7 @@ const allPostsFromDB = async () => {
 //Actual method for this page's api use. Currently replaced by allPostsFromDB in line 187.
 const makeListing = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
-    method:"PUT",
+    method:"POST",
     body : JSON.stringify(
       listingDict
     )
@@ -184,17 +184,18 @@ export default function MakeListing() {
     }
     
     getOneUser();  
-    var waiting = await allPostsFromDB(); //swapping api method to test ECONNREFUSED bug in buyproducts.
-    //var waiting=await makeListing(dict);
+    //var waiting = await allPostsFromDB(); //swapping api method to test ECONNREFUSED bug in buyproducts.
+    var waiting = await makeListing(dict);
 
 
     
-    console.log(waiting);
-   if(waiting=="true"){
+  console.log(waiting);
+  if(waiting=="true"){
       toast("Your listing has been uploaded!");
-    }else{
-     toast("Unsuccesful try again");
-    }
+  }
+  else{
+    toast("Unsuccesful try again");
+  }
     
   }
   /**

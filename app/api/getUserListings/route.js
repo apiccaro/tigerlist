@@ -3,11 +3,11 @@ export async function POST(request) {
 
     console.log("Using getUserListings/route.js to get a set of listings") //debug print
     const requestObject = await request.json()
-    userEmail = requestObject.email;
+    var userEmail = requestObject.email;
 
 
     //Assemble string for database query
-    const queryText = "SELECT * FROM PostTable WHERE email = '$1';"
+    const queryText = "SELECT * FROM PostTable WHERE email = $1;"
     const queryValues = [userEmail];
 
     //Instantiate database client instance

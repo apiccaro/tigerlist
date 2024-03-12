@@ -9,11 +9,15 @@
 //NOTE: Not sure if we still need that cas part^
 //Figma suggests this a simple getter and getUserEmail is the one that needs cas, so i'm making a method here.
 import { NextResponse } from 'next/server';
-export async function GET(user_email) {
+export async function POST(request){
+    
+    //Convert given request from json response into a javascript object
+    const reqObject = await request.json()
+    const userEmail = reqObject.email
 
     //Assemble string for database query
-    const queryText = "SELECT * FROM UserTable WHERE email = '$1';"
-    const queryValues = [user_email];
+    const queryText = "SELECT * FROM UserTable WHERE email = $1;"
+    const queryValues = [userEmail];
 
     console.log("getUser debug - assembled query:",(queryText,queryValues))
 

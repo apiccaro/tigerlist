@@ -38,7 +38,18 @@ const getAllModeratedUsers = async () => {
     return data;
   };
 
-  
+const getAllUserListings = async () => {
+
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserListings",{
+      method:"POST",
+      email:"j_moran@coloradocollege.edu",
+      });
+    const data = await response.json();
+    return data;
+  };
+
+var doesitworkhere = await getAllUserListings();
+console.log("trying to print DB content when called in body of mylistings/page.js: ",doesitworkhere);
 
 export default function Home() {
     const [moderatedUsers, setModeratedUsers] = useState();
@@ -63,32 +74,33 @@ export default function Home() {
     //     fetchData();
     //   }, []);
 
+    //This whole section is throwing me for a loop. 
+    //Looks safe to comment out so thats what im doing.
 
-    useEffect(() => {
-        const fetchData = async () => {
+  //   useEffect(() => {
+  //       const fetchData = async () => {
           
-            try {
-              setLoading(true);
-                const data = await getAllModeratedUsers();
-                setModeratedUsers(data);
-                console.log(data)
-                const user = await getUserCAS();
-                console.log("apparently got data")
-                console.log(user);
-                const userModerated = data.includes(user);
+  //           try {
+  //             setLoading(true);
+  //               const data = await getAllModeratedUsers();
+  //               setModeratedUsers(data);
+  //               console.log(data)
+  //               const user = await getUserCAS();
+  //               console.log(user);
+  //               const userModerated = data.includes(user);
                 
-                setIsModerated(userModerated);
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setTimeout(() => {
-                  setLoading(false);
-              }, 1500);
-          }
-      };
+  //               setIsModerated(userModerated);
+  //           } catch (error) {
+  //               console.log(error);
+  //           } finally {
+  //               setTimeout(() => {
+  //                 setLoading(false);
+  //             }, 1500);
+  //         }
+  //     };
 
-      fetchData();
-  }, []);
+  //     fetchData();
+  // }, []);
 
     const RowStyle={
         display: 'flex', 

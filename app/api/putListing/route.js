@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 
-export async function PUT(request){
+export async function POST(request){
 
     console.log("Using putListing/route.js to add a listing") //debug print
 
     //Convert given request from json response into a javascript object
-    const postDict = await request.json()
-    console.log("Title: ",postDict.title)
+    const reqObject = await request.json()
+    const listingID = reqObject.id
+
 
     //Build query string - Need to change format so certain input characters don't break it. 
     const queryText = "INSERT INTO PostTable" 
@@ -14,18 +15,18 @@ export async function PUT(request){
     + " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12 )";
   
     const queryValues = [
-        postDict.title,
-        postDict.price,
-        postDict.description,
-        postDict.category,
-        postDict.condition,
-        postDict.location,
-        postDict.email,
-        postDict.phoneValue,
-        postDict.active,
-        postDict.flagged,
-        postDict.moderator_ban,
-        postDict.images
+        reqObject.title,
+        reqObject.price,
+        reqObject.description,
+        reqObject.category,
+        reqObject.condition,
+        reqObject.location,
+        reqObject.email,
+        reqObject.phoneValue,
+        reqObject.active,
+        reqObject.flagged,
+        reqObject.moderator_ban,
+        reqObject.images
     ];
 
 
