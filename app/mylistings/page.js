@@ -6,26 +6,39 @@ import {useState,useEffect} from 'react';
 import { Suspense } from "react";
 import Loading from "../loading";
 
-const getUser= async()=>{
-    console.log("calling getUser in app/mylistings/page.js")
-
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser", {
+const getUserFromDB= async()=>{
+  console.log("called getUserFromDB()")
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserEmail", {
       method:"GET",
       });
-    const data = await response.json();
-    return data;
+  const data = await response.json();
+  return data;
 }
 
-const getUserCAS= async()=>{
-    console.log("calling getUserCAS in app/mylistings/page.js")
 
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserCAS", {
-      method:"GET",
-      });
+//api method that queries DB for all lisitngs 
+const allPostsFromDB = async () => {
+  try {
+    //attempt to make fetch and turn response into usable data.
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",
+    {
+      method:"GET"
+    })
+    .catch(error => console.error('Error: fetch failed in Components/BuyProducts.js: ', error));
     const data = await response.json();
-    console.log(data)
+
+    //assuming no error, print a listing from the returned set
+    console.log("printing all db content:")
+    console.log(data);
     return data;
-}
+  } 
+  catch (error) {
+    console.error('Fetch failed in allPostsFromDB:', error)
+    return null;
+  } 
+};
+
+
 
 //https://www.youtube.com/watch?v=uR67O6sNjbg&t=431s - Data fetching and loading state
 
@@ -47,9 +60,10 @@ const getAllUserListings = async () => {
     const data = await response.json();
     return data;
   };
+  console.log("trying to access DB content in body of mylistings/page.js: ");
 
 var doesitworkhere = await getAllUserListings();
-console.log("trying to print DB content when called in body of mylistings/page.js: ",doesitworkhere);
+console.log(doesitworkhere);
 
 export default function Home() {
     const [moderatedUsers, setModeratedUsers] = useState();
@@ -74,33 +88,39 @@ export default function Home() {
     //     fetchData();
     //   }, []);
 
-    //This whole section is throwing me for a loop. 
-    //Looks safe to comment out so thats what im doing.
 
-  //   useEffect(() => {
-  //       const fetchData = async () => {
+    useEffect(() => {
+        const fetchData = async () => {
           
-  //           try {
-  //             setLoading(true);
-  //               const data = await getAllModeratedUsers();
-  //               setModeratedUsers(data);
-  //               console.log(data)
-  //               const user = await getUserCAS();
-  //               console.log(user);
-  //               const userModerated = data.includes(user);
-                
-  //               setIsModerated(userModerated);
-  //           } catch (error) {
-  //               console.log(error);
-  //           } finally {
-  //               setTimeout(() => {
-  //                 setLoading(false);
-  //             }, 1500);
-  //         }
-  //     };
+            try {
+              setLoading(true);
 
-  //     fetchData();
-  // }, []);
+                // console.log("first we're just querying db for all posts for shits and gigs")
+                // const allpostdata = allPostsFromDB();
+                // console.log(allpostdata)
+
+                var data = await getAllModeratedUsers();
+                setModeratedUsers(data);
+                console.log("data returned from getAllModeratedUsers: ")
+                console.log(data)
+
+                var user = await getUserFromDB();
+                console.log("data returned from getUserEmail: ")
+                console.log(user);
+
+                const userModerated = data.includes(user);
+                setIsModerated(userModerated);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setTimeout(() => {
+                  setLoading(false);
+              }, 1500);
+          }
+      };
+
+      fetchData();
+  }, []);
 
     const RowStyle={
         display: 'flex', 

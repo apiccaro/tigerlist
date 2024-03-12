@@ -19,6 +19,38 @@ const ProductsGrid = styled.div`
     gap: 20px;
 `;
 
+
+//api method that queries DB for all lisitngs 
+const allPostsFromDB = async () => {
+    try {
+      //attempt to make fetch and turn response into usable data.
+      const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",
+      {
+        method:"GET"
+      })
+      .catch(error => console.error('Error: fetch failed in Components/BuyProducts.js: ', error));
+      const data = await response.json();
+  
+      //assuming no error, print a listing from the returned set
+      console.log("printing all db content:")
+      console.log(data);
+      return data;
+    } 
+    catch (error) {
+      console.error('Fetch failed in allPostsFromDB:', error)
+      return null;
+    } 
+  };
+  
+
+
+
+console.log("trying to query db from a component:")
+myListings = await allPostsFromDB();
+console.log("db content:")
+console.log(myListings)
+
+
 export default function Products(){
     return(
         <div className="flex flex-col gap-1 text-4xl font-semibold">

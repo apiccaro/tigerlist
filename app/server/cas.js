@@ -36,6 +36,27 @@ const casHandler = async (req, res) => {
   }
   return true; // return true to indicate successful authentication
 };
+
+
+
+const askUserEmail = async () => {
+  console.log('using askUserEmail in server/cas.js');
+  var email = principal.attributes.email;
+
+  try{
+    if (email!==undefined){
+      console.log('Email: ',email)
+      return email;
+    }
+    else{
+      console.log('Something went wrong with principal.attributes.email ')
+      console.log('Email: ',email)
+  }}
+  catch (error) {
+    console.log('Error using principal.attributes.email - ',error)
+  } 
+  return null;
+};
  
-module.exports = {casHandler,userEmail}; // export the casHandler function to make available for server.js
+module.exports = {casHandler,userEmail,askUserEmail}; // export the casHandler function to make available for server.js
  
