@@ -1,3 +1,5 @@
+//Current changes: getuser and getoneuser were causing issues and seem vestigial, commented out
+
 'use client'
 
 import { useState } from 'react';
@@ -6,41 +8,6 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let dict;
-
-//Adding this temporarily to figure out why API methods work here and not elsewhere
-const tryDB2 = async () => {
-  console.log ("Called tryDB2")
-
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",
-  {
-    method:"GET",
-  })
-  .catch(error => console.error('Error: fetch failed in Components/BuyProducts.js: ', error));
-
-  //const data = await response.json();
-  //return data;
-  console.log ("Finished tryDB2")
-};
-
-//Adding this temporarily to figure out why API methods work here and not elsewhere
-const allPostsFromDB = async () => {
-  try {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL + "getAllListings", {
-      method: "GET",
-    });
-
-    const data = await response.json();
-
-    console.log("Data from API:", data.rows[4]);
-    console.log("(For the sake of terminal readability, omitted "+data.rows.length+" lines)");
-
-    return data;
-
-  } catch (error) {
-    console.error('MakeListing/page.js - Fetch failed:', error);
-    return null;
-  }
-};
 
 //Actual method for this page's api use. Currently replaced by allPostsFromDB in line 187.
 const makeListing = async (listingDict) => {
@@ -56,28 +23,32 @@ const makeListing = async (listingDict) => {
   return data
 };
 
-const getUser = async (email) => {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser",{
-    method:"POST",
-    body : JSON.stringify(
-      "a_piccaro@coloradocollege.edu", // ?️ add missing comma here
-  )
-    },
-    );
-  const user= await response.json();
+// const getUser = async (email) => {
+//   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser",{
+//     method:"POST",
+//     body : JSON.stringify(
+//       "a_piccaro@coloradocollege.edu", // ?️ add missing comma here
+//   )
+//     },
+//     );
+// const user = await response.json();
   
-  return user;
-};
-var isAutoFlagged;
-var thisUser={};
-  const getOneUser=async()=>{
-    const response = await getUser();
-    thisUser=response;
-    if(thisUser.isAutoFlagged){
-      dict.flagged=true;
-    }
+//   return user;
+// };
+
+
+// var isAutoFlagged;
+
+
+// var thisUser={};
+//   const getOneUser=async()=>{
+//     const response = await getUser();
+//     thisUser=response;
+//     if(thisUser.isAutoFlagged){
+//       dict.flagged=true;
+//     }
   
-  }
+//   }
 
 
 
@@ -183,7 +154,7 @@ export default function MakeListing() {
 
     }
     
-    getOneUser();  
+    //getOneUser();  
     //var waiting = await allPostsFromDB(); //swapping api method to test ECONNREFUSED bug in buyproducts.
     var waiting = await makeListing(dict);
 
