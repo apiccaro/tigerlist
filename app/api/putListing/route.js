@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function PUT(request){
+export async function POST(request){
 
     //Convert given request from json response into a javascript object
     const postDict = await request.json()
@@ -62,7 +62,12 @@ export async function PUT(request){
     }
     else if (query_status == 1){
         console.log("Database successfully queried with api/putListing") //comment out once everything is properly tested.
-        return  NextResponse.json('true')
+
+        output = {
+            success: "true",
+          }
+
+        return  NextResponse.json(success)
     }
     else{
         console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");

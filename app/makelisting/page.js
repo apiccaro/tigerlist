@@ -8,15 +8,15 @@ import 'react-toastify/dist/ReactToastify.css';
 let dict;
 const makeListing = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
-    method:"PUT",
+    method:"POST",
     body : JSON.stringify(
       listingDict
     )
     },
     )
 
-  const data=await response.json();
-  console.log(data);
+  const data = await response.json();
+  //console.log(data);
   return data
 };
 const getUser = async (email) => {
@@ -149,9 +149,10 @@ export default function MakeListing() {
     }
     
     getOneUser();  
-    var waiting=await makeListing(dict);
-    console.log(waiting);
-   if(waiting=="true"){
+    console.log("about to use makeListing")
+    var waiting = await makeListing(dict);
+    //console.log(waiting);
+    if(waiting.success=="true"){
       toast("Your listing has been uploaded!");
     }else{
      toast("Unsuccesful try again");
