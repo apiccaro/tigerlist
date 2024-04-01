@@ -22,6 +22,23 @@ const tryMakeListing = async (listingDict) => {
   return data
 };
 
+const getNew = async (listingDict) => {
+  console.log("Calling getNew in BuyProducts.js")
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getNewListings",{
+    method:"POST",
+    body : JSON.stringify(
+      listingDict
+    )
+  },)
+
+  const data = await response.json();
+  console.log(data);
+  return data
+};
+
+console.log("About to call getNew in the main body in BuyProducts.js")
+getNew();
+
 
 
 //test, shouldnt be relevant anymore
