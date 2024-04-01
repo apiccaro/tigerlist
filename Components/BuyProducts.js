@@ -113,12 +113,12 @@ const ProductsGridStyle={
     gridTemplateColumns: '1fr 1fr 1fr 1fr',
     gap:'20px',
 }
-const newPosts = async () =>{
-  content = await getNew();
-  return content
-}
-export default function BuyProducts(){
-  allListings = newPosts()
+// const newPosts = async () =>{
+//   content = await getNew();
+//   return content
+// }
+export default async function BuyProducts(){
+  allListings = await getNew();
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
           {allListings.map((listing, index) => (
