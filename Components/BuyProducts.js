@@ -94,16 +94,16 @@ var allListings = [{listingID: "123", title: "Proof of concept", price: "$5", de
                     {listingID: "789", title: "Carpool", price: "$15", description: "Driving to DIA Wednesday at 2:30pm.", category: "Carpool", condition: "New", location: "East Campus", email: "student3@coloradocollege.edu", phone: "5555552222", images: [""], flagged: true}]
 
 //Try getting new listings from API
-newDBlistings = await getNew()
+//newDBlistings = await getNew()
 
-if (newDBlistings.length > 0){
-  console.log("For now, we're not displaying all content, but here's the first listing:")
-  allListings = newDBlistings;
-  console.log(newDBlistings[0])
-}
-else {
-  console.log("newDBlistings.length = 0, nothing to add to listings array:")
-}
+// if (newDBlistings.length > 0){
+//   console.log("For now, we're not displaying all content, but here's the first listing:")
+//   allListings = newDBlistings;
+//   console.log(newDBlistings[0])
+// }
+// else {
+//   console.log("newDBlistings.length = 0, nothing to add to listings array:")
+// }
 
 const ProductsGridStyle={
     marginTop: '20px',
@@ -113,11 +113,16 @@ const ProductsGridStyle={
     gridTemplateColumns: '1fr 1fr 1fr 1fr',
     gap:'20px',
 }
-
+const newPosts = async () =>{
+  content = await getNew();
+  return content
+}
 export default function BuyProducts(){
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
-            {allListings.map((listing, index) => (
+            {newPosts.map((listing, index) => (
+          //{allListings.map((listing, index) => (
+
                 <BuyProductBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
             ))}
         </div>

@@ -16,7 +16,7 @@ const getNew = async (listingDict) => {
     console.log(data);
     return data
   };
-getNew();
+//getNew();
 export default function Home() {
 
     return (
