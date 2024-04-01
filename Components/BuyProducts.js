@@ -9,16 +9,25 @@ import BuyProductBox from "./BuyProductBox";
 //Eventually replace with non test api method
 const getNew = async (listingDict) => {
   console.log("Calling getNew in BuyProducts.js")
+  var data;
+  try{
+
+  
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getNewListings",{
     method:"POST",
     body : JSON.stringify(
       listingDict
     )
-  },).catch(error => console.error('Error caught in Components/BuyProducts.js/getNew:', error));
+  },)
+  data = await response.json();
+} 
 
-  const data = await response.json();
-  console.log(data);
-  return data
+catch (error){
+  console.log("Caught Error: ",error)
+  console.log("This ECONNREFUSED nonsense is annoying")
+}
+
+return data
 };
 
 
