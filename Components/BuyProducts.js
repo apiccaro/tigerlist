@@ -118,9 +118,10 @@ const newPosts = async () =>{
   return content
 }
 export default function BuyProducts(){
+  var content = newPosts()
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
-            {newPosts.map((listing, index) => (
+            {content.map((listing, index) => (
           //{allListings.map((listing, index) => (
 
                 <BuyProductBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
