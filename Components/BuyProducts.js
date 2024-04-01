@@ -14,7 +14,7 @@ const getNew = async (listingDict) => {
     body : JSON.stringify(
       listingDict
     )
-  },)
+  },).catch(error => console.error('Error caught in Components/BuyProducts.js/getNew:', error));
 
   const data = await response.json();
   console.log(data);
