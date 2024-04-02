@@ -1,4 +1,10 @@
 'use client'
+
+
+//I changed this page name so i could test a simplified version of the page. 
+//Currently works as intended given a hardcoded email!
+
+
 // Design for the "My Listings" page of the website
 import SellProducts from "@/Components/SellProducts";
 import Link from "next/link";

@@ -9,12 +9,12 @@ import Image from "next/image";
 import Link from 'next/link';
 import BuyProductBox from "./BuyProductBox";
 
-const getUserListings = async () => {
+const getUserListings = async (userEmail) => {
 
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserListings",{
     method:"POST",
     body: JSON.stringify({
-      email: "j_moran@coloradocollege.edu"
+      email: userEmail
     })
     });
   const data = await response.json();
@@ -39,7 +39,7 @@ const ProductsGridStyle={
 
 export default async function SellProducts_new(){
 
-  var userEmail = "j_moran@coloradocollege.edu"
+  var userEmail = "l_flanagan@coloradocollege.edu"
 
   const apiListings = await getUserListings(userEmail);
   if (apiListings!==undefined){
