@@ -6,6 +6,11 @@ import {useState,useEffect} from 'react';
 import { Suspense } from "react";
 import Loading from "../loading";
 
+//https://www.youtube.com/watch?v=uR67O6sNjbg&t=431s - Data fetching and loading state
+
+
+
+//tries to use api/getUserEmail
 const getUserFromDB= async()=>{
   console.log("called getUserFromDB()")
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserEmail", {
@@ -15,35 +20,8 @@ const getUserFromDB= async()=>{
   return data;
 }
 
-
-//api method that queries DB for all lisitngs 
-const allPostsFromDB = async () => {
-  try {
-    //attempt to make fetch and turn response into usable data.
-    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",
-    {
-      method:"GET"
-    })
-    .catch(error => console.error('Error: fetch failed in Components/BuyProducts.js: ', error));
-    const data = await response.json();
-
-    //assuming no error, print a listing from the returned set
-    console.log("printing all db content:")
-    console.log(data);
-    return data;
-  } 
-  catch (error) {
-    console.error('Fetch failed in allPostsFromDB:', error)
-    return null;
-  } 
-};
-
-
-
-//https://www.youtube.com/watch?v=uR67O6sNjbg&t=431s - Data fetching and loading state
-
+//gets list of moderated users, not sure why
 const getAllModeratedUsers = async () => {
-
     const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllModeratedUsers",{
       method:"GET",
       });
@@ -51,6 +29,8 @@ const getAllModeratedUsers = async () => {
     return data;
   };
 
+//gets listings that correspond to given user.
+//Currently hardcoded as me, since the getEmail methods dont seem to work
 const getAllUserListings = async () => {
 
     const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserListings",{
@@ -60,15 +40,20 @@ const getAllUserListings = async () => {
     const data = await response.json();
     return data;
   };
-  console.log("trying to access DB content in body of mylistings/page.js: ");
 
-var doesitworkhere = await getAllUserListings();
-console.log(doesitworkhere);
+
+
 
 export default function Home() {
     const [moderatedUsers, setModeratedUsers] = useState();
     const [isModerated,setIsModerated]=useState();
     const [loading, setLoading] = useState(false);
+
+
+    //this section was giving a lot of errors and im not positive what its supposed to do
+    //if we just want to see if the user is a mod, we can query user info and check the moderator boolean instead of returning a full list of mods and looking for a match
+    //Also it seems like thats more for a moderation page than mylistings, not sure if its supposed to go elsewhere later
+
     // useEffect(() => {
       
     //     const fetchData = async () => {
@@ -95,10 +80,6 @@ export default function Home() {
             try {
               setLoading(true);
 
-                // console.log("first we're just querying db for all posts for shits and gigs")
-                // const allpostdata = allPostsFromDB();
-                // console.log(allpostdata)
-
                 var data = await getAllModeratedUsers();
                 setModeratedUsers(data);
                 console.log("data returned from getAllModeratedUsers: ")
@@ -110,6 +91,7 @@ export default function Home() {
 
                 const userModerated = data.includes(user);
                 setIsModerated(userModerated);
+                
             } catch (error) {
                 console.log(error);
             } finally {

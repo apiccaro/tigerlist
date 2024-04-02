@@ -23,6 +23,16 @@ const makeListing = async (listingDict) => {
   return data
 };
 
+const getEmail = async () => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserEmail",{
+    method:"GET",
+  },)
+
+  const data = await response.json();
+  console.log(data);
+  return data
+};
+
 // const getUser = async (email) => {
 //   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser",{
 //     method:"POST",
@@ -156,6 +166,9 @@ export default function MakeListing() {
     
     //getOneUser();  
     //var waiting = await allPostsFromDB(); //swapping api method to test ECONNREFUSED bug in buyproducts.
+
+    var DBemail = await getEmail();
+    console.log("Email: ",DBemail)
     var waiting = await makeListing(dict);
 
 
