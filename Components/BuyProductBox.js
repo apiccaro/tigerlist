@@ -44,10 +44,10 @@ const BuyProductBox = ({listingID, title, price, description, category, conditio
     const categoryImageMap = {
         'Textbook': '/testimage1.jpeg',
         'Furniture': '/testimage2.jpeg',
-        'Appliance': '/testimage3.jpeg',
+        'Appliances': '/testimage3.jpeg',
         'Clothing': '/testimage4.jpeg',
         'Service': '/testimage5.jpeg',
-        'Carpool': '/CCLogoDerp.jpeg', 
+        'Carpool': '/CCLogoDerp.png',
     };
 
     //use categoryImageMap to get link to image
@@ -78,7 +78,7 @@ const BuyProductBox = ({listingID, title, price, description, category, conditio
                     <Image
 
                         //src={images[0]? images[0]:"/photo.svg"} // Replacing with line below until we have DB image functionality
-                        src={getImageUrl}
+                        src={getImageUrl()}
                         
 
                         alt="Product Image"

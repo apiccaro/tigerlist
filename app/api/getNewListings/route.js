@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 export async function POST() {
 
     //Assemble string for database query
-    const queryText = "SELECT * FROM PostTable WHERE post_timestamp >= NOW() - INTERVAL '60 minutes';"
+    const queryText = "SELECT * FROM PostTable WHERE post_timestamp >= NOW() - INTERVAL '60 days';"
     
     //Instantiate database client instance
     const { Client } = require('pg');

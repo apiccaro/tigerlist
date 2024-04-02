@@ -126,7 +126,7 @@ const ProductsGridStyle={
 //   return content
 // }
 export default async function BuyProducts(){
-  apiListings = await getNew();
+  const apiListings = await getNew();
   if (apiListings!==undefined){
     allListings = apiListings
   }
