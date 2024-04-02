@@ -123,10 +123,13 @@ const ProductsGridStyle={
 //   return content
 // }
 export default async function BuyProducts(){
+
   const apiListings = await getNew();
   if (apiListings!==undefined){
     allListings = apiListings
   }
+
+  
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
           {allListings.map((listing, index) => (
