@@ -44,7 +44,7 @@ const askUserEmail = async () => {
   try{
     // var email = principal.attributes.email;
 
-    email = userEmail
+    var email = userEmail
 
     if (email=='empty'){
       console.log("Looks like there was no saved email here in cas.js")

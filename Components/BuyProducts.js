@@ -77,9 +77,6 @@ return data
 
 // };
 
-
-var newDBlistings = [];
-
 // (async () => {
 //   console.log("Starting IIFE in BuyProducts.js")
 

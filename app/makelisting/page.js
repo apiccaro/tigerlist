@@ -167,8 +167,8 @@ export default function MakeListing() {
     //getOneUser();  
     //var waiting = await allPostsFromDB(); //swapping api method to test ECONNREFUSED bug in buyproducts.
 
-    var DBemail = await getEmail();
-    console.log("Email: ",DBemail)
+    // var DBemail = await getEmail();
+    // console.log("Email: ",DBemail)
     var waiting = await makeListing(dict);
 
 
