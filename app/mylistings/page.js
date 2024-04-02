@@ -1,51 +1,18 @@
-'use client'
-// Design for the "My Listings" page of the website
-import SellProducts from "@/Components/SellProducts";
-import Link from "next/link";
-import {useState,useEffect} from 'react'; 
-import { Suspense } from "react";
-import Loading from "../loading";
+import Filter from "@/Components/Filter";
+import BuyProducts from "@/Components/BuyProducts";
+const readline = require('readline');
 
-//https://www.youtube.com/watch?v=uR67O6sNjbg&t=431s - Data fetching and loading state
-
+//Literally just copied the main page.js, replacing buyproducts with sellproducts
 
 export default function Home() {
-    const [moderatedUsers, setModeratedUsers] = useState();
-    const [isModerated,setIsModerated]=useState();
-    const [loading, setLoading] = useState(false);
 
-    const RowStyle={
-        display: 'flex', 
-        flexDirection: 'row',
-         gap: '8px',
-    }
-
-    const moderators = ['j_dresser@coloradocollege.edu']
-    const currentUser = 'j_dresser@coloradocollege.edu'
-    //const currentUser = 's_treat@coloradocollege.edu'
-
-    const showFlaggedPostsLink = moderators.includes(currentUser);
     return (
-      <div>
+        <div className="flex flex-row bg-yellow-600 min-h-screen">
+            <Filter />
+            <SellProducts/>
+        </div>
+    );
 
-    
-      {loading&& <Loading/>}
-          <main>
-            
-              {!loading&&<div className="flex flex-col bg-yellow-600 min-h-screen">
-                  <div style={RowStyle}>
-                      <div className="text-4xl text-black font-semibold p-5">My Listings</div>
-                      <br></br>
-                      {isModerated && (
-                          <Link href={'/flaggedposts'} className="text-4xl text-black font-semibold p-5">
-                              Flagged Posts
-                          </Link>
-                      )}
-                  </div>
-                  <SellProducts />
-              </div>}
 
-          </main>
-          </div>
-  );
 }
+
