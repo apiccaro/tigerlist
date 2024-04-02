@@ -13,7 +13,7 @@ const getUserListings = async (userEmail) => {
     body: JSON.stringify({
       email: userEmail,
     })
-    });
+  });
   const data = await response.json();
   return data;
 };

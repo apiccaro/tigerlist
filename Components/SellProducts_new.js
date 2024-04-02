@@ -9,15 +9,19 @@ import Image from "next/image";
 import Link from 'next/link';
 import BuyProductBox from "./BuyProductBox";
 
-const getUserListings = async (userEmail) => {
+const getUserListings = async () => {
 
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserListings",{
     method:"POST",
-    email:userEmail,
+    body: JSON.stringify({
+      email: "j_moran@coloradocollege.edu"
+    })
     });
   const data = await response.json();
   return data;
 };
+
+
 
 //Current hardcoded listing dictionaries. Replacing with queried data once api methods work
 var allListings = [{listingID: "123", title: "Hardcoded listing", price: "$5", description: "Ticket for Friday's game against North Dakota", category: "Service", condition: "New", location: "Off Campus", email: "student1@coloradocollege.edu", phone: "1234567890", images: ["/testimage3.jpeg", "/testimage4.jpeg"], flagged: false},
@@ -33,7 +37,7 @@ const ProductsGridStyle={
     gap:'20px',
 }
 
-export default async function BuyProducts(){
+export default async function SellProducts_new(){
 
   var userEmail = "j_moran@coloradocollege.edu"
 
