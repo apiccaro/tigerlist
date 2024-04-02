@@ -10,7 +10,7 @@ import BuyProductBox from "./BuyProductBox";
 const getNew = async (listingDict) => {
   console.log("Calling getNew in BuyProducts.js")
   var data;
-  try{
+  // try{
 
   
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getNewListings",{
@@ -20,12 +20,11 @@ const getNew = async (listingDict) => {
     )
   },)
   data = await response.json();
-} 
-
-catch (error){
-  console.log("Caught Error: ",error)
-  console.log("This ECONNREFUSED nonsense is annoying")
-}
+// } 
+// catch (error){
+//   console.log("Caught Error: ",error)
+//   console.log("This ECONNREFUSED nonsense is annoying")
+// }
 
 return data
 };
@@ -127,7 +126,10 @@ const ProductsGridStyle={
 //   return content
 // }
 export default async function BuyProducts(){
-  allListings = await getNew();
+  apiListings = await getNew();
+  if (apiListings!==undefined){
+    allListings = apiListings
+  }
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
           {allListings.map((listing, index) => (
