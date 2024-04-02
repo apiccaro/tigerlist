@@ -41,21 +41,26 @@ const casHandler = async (req, res) => {
 
 const askUserEmail = async () => {
   console.log('using askUserEmail in server/cas.js');
-  var email = principal.attributes.email;
-
   try{
-    if (email!==undefined){
+    // var email = principal.attributes.email;
+
+    email = userEmail
+
+    if (email=='empty'){
+      console.log("Looks like there was no saved email here in cas.js")
+    }
+    else if (email!==undefined){
       console.log('Email: ',email)
       return email;
     }
     else{
-      console.log('Something went wrong with principal.attributes.email ')
+      console.log('Something went wrong when requesting user email in cas.js')
       console.log('Email: ',email)
   }}
   catch (error) {
     console.log('Error using principal.attributes.email - ',error)
   } 
-  return null;
+  return "roccy@coloradocollege.edu";
 };
  
 module.exports = {casHandler,userEmail,askUserEmail}; // export the casHandler function to make available for server.js
