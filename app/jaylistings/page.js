@@ -1,5 +1,5 @@
 import Filter from "@/Components/Filter";
-import BuyProducts from "@/Components/BuyProducts";
+import BuyJayProducts from "@/Components/BuyJayProducts";
 const readline = require('readline');
 
 
@@ -22,7 +22,7 @@ export default function Home() {
     return (
         <div className="flex flex-row bg-yellow-600 min-h-screen">
             <Filter />
-            <BuyProducts/>
+            <BuyJayProducts/>
         </div>
     );
 
