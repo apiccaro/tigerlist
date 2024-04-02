@@ -10,7 +10,9 @@ const getUserListings = async (userEmail) => {
 
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserListings",{
     method:"POST",
-    email:userEmail,
+    body: JSON.stringify({
+      email: userEmail,
+    })
     });
   const data = await response.json();
   return data;
@@ -54,3 +56,6 @@ export default async function BuyJayProducts(){
 
 
   
+
+
+
