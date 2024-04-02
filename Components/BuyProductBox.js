@@ -39,6 +39,23 @@ const RowStyle={
 
 const BuyProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
+
+    //Categories map to usable images
+    const categoryImageMap = {
+        'Textbook': '/testimage1.jpeg',
+        'Furniture': '/testimage2.jpeg',
+        'Appliance': '/testimage3.jpeg',
+        'Clothing': '/testimage4.jpeg',
+        'Service': '/testimage5.jpeg',
+        'Carpool': '/CCLogoDerp.jpeg', 
+    };
+
+    //use categoryImageMap to get link to image
+    const getImageUrl = () => {
+        const defaultImageUrl = '/product.png';
+        return categoryImageMap[category] || defaultImageUrl;
+    };
+
     return (
     <div>
             <div style={ProductBGStyle}>
@@ -61,7 +78,8 @@ const BuyProductBox = ({listingID, title, price, description, category, conditio
                     <Image
 
                         //src={images[0]? images[0]:"/photo.svg"} // Replacing with line below until we have DB image functionality
-                        src={"/CCLogoDerp.png"}
+                        src={getImageUrl}
+                        
 
                         alt="Product Image"
                         accept="image/*"
