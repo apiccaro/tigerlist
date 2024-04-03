@@ -18,10 +18,14 @@ const mailOptions = {
     from: 'tigerlistmoderation@gmail.com',
     to: 'jaymoran103@gmail.com',
     subject: 'Hello from app/moderation/sendMail.js!',
-    text: 'This would be sick'
+    text: 'default message text'
 };
 
-export default function sendDefault() {
+export default function sendMail(message) {
+
+    if (message){
+        mailOptions.text = message
+    }
 
     return (
         transporter.sendMail(mailOptions, function(error, info){

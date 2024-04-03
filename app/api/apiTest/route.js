@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const {sendDefault} = require ('./../../moderation/sendMail');
+const {sendMail} = require ('./../../moderation/sendMail');
 
 
 export async function GET(request){
@@ -16,7 +16,7 @@ export async function GET(request){
 
 export async function POST(request){
     console.log("Using apiTest to try and send an email") 
-    sendDefault();
+    sendMail("Hello World");
     return NextResponse.json('response text')
 }
 
