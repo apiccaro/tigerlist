@@ -35,7 +35,7 @@ var myListings = [{listingID: "123", title: "Hockey Ticket", price: "$5", descri
 
 
 // Export function that queries user listings based on a hardcoded email, presenting recieved content in a grid                   
-export default async function SellProducts(){
+export default async function Products(){
 
   var userEmail = "l_flanagan@coloradocollege.edu"
   const apiListings = await getUserListings(userEmail);
