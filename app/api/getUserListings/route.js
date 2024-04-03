@@ -13,7 +13,7 @@ export async function POST(request) {
     const queryValues = [userEmail];
 
     //Instantiate database client instance
-    const { getClient } = require('./dbTools/dbTools');
+    const { getClient } = require('./../dbTools/dbTools');
     const client = getClient();
 
 

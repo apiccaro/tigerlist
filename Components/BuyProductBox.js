@@ -7,7 +7,7 @@ import Link from "next/link";
 import { DynamicServerError } from "next/dist/client/components/hooks-server-context";
 import React, { useState } from 'react';
 
-
+getImageUrl
 
 
 
@@ -36,6 +36,14 @@ const RowStyle={
     flexDirection: 'row',
      gap: '8px',
     }
+
+
+
+
+//set default imageUrl based on listing category
+const { getImageUrl } = require('./imageTools');
+const imageUrl = getImageUrl(category)
+
 
 const BuyProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
@@ -76,9 +84,8 @@ const BuyProductBox = ({listingID, title, price, description, category, conditio
                     } 
                 }} className="flex text-semibold text-2xl">
                     <Image
-
                         //src={images[0]? images[0]:"/photo.svg"} // Replacing with line below until we have DB image functionality
-                        src={getImageUrl()}
+                        src={imageUrl}
                         
 
                         alt="Product Image"

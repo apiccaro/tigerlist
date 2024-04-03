@@ -33,6 +33,9 @@ const buttonStyle = {
     color:"white",
 };
 
+//set default imageUrl based on listing category
+const { getImageUrl } = require('./imageTools');
+const imageUrl = getImageUrl(category)
 
 const SellProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
     return(
@@ -55,8 +58,8 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                     } 
                 }} style={linkStyle}>
                     <Image
-                        //src="/product.png"
-                        src={images[0]? images[0]:"/photo.svg"}
+                        src={imageUrl}
+                        //src={images[0]? images[0]:imageUrl}
                         alt="Product Image"
                         accept="image/*"
                         //className="dark:invert"
