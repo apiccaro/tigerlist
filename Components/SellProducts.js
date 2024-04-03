@@ -41,7 +41,10 @@ export default async function SellProducts(){
   const apiListings = await getUserListings(userEmail);
 
   if (apiListings!==undefined){
-    myListings = apiListings
+    myListings = apiListings.sort(function(x, y){
+        return x.post_timestamp - y.post_timestamp;
+    })
+
   }
 
     return(

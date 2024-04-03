@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
 
     //Assemble string for database query
-    const queryText = "SELECT * FROM PostTable WHERE active = true;"
+    const queryText = "SELECT * FROM PostTable WHERE active = true ORDER BY post_timestamp DESC NULLS LAST;"
     
     //Instantiate database client instance
     const { Client } = require('pg');
