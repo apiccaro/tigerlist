@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-
-const {sendMail} = require ('./../../moderation/sendMail');
-
+import sendMail from './../../moderation/sendMail';
 
 export async function GET(request){
     console.log("Using apiTest/route.js (GET) to test basic API functionality")
@@ -15,9 +13,25 @@ export async function GET(request){
 
 
 export async function POST(request){
+
+    var title = "Sample Title"
+    var price = "10"
+    var description = "Sample Description"
+
+    var emailBody = "Post Contents:"
+    + "\nTitle: " + title
+    + "\nprice: " + price 
+    + "\ndescription: " + description
+
     console.log("Using apiTest to try and send an email") 
-    sendMail("Hello World");
-    return NextResponse.json('response text')
+    try {
+        await sendMail(emailBody); 
+        console.log("Email sent");
+        return NextResponse.json("Email sent");
+    } catch (error) {
+        console.error("Error sending email:", error);
+        return NextResponse.error(error.message, { status: 500 });
+    }
 }
 
 
