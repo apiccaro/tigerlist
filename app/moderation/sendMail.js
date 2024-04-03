@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
 
-export default async function sendMail(message) {
+export default async function sendMail(emailTitle,emailBody) {
 
     // Create transporter instance with app credentials
     const transporter = nodemailer.createTransport({
@@ -18,8 +18,9 @@ export default async function sendMail(message) {
     const mailOptions = {
         from: 'tigerlistmoderation@gmail.com',
         to: 'jaymoran103@gmail.com',
-        subject: 'Tigerlist Moderation Message',
-        text: message || 'default message text' // Use custom message or default
+        subject: emailTitle || 'default email title', // Use custom message or default
+        text: emailBody || 'default message text' // Use custom message or default
+
     };
 
     // Try to send the email

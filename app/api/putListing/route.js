@@ -1,4 +1,37 @@
 import { NextResponse } from 'next/server';
+import sendMail from './../../moderation/sendMail';
+
+
+//Format a notification email and send to a moderator
+//Later on i'll want to just hand off the reqObject (or something from query response) and format the email elsewhere
+async function emailNotify(listingData){
+
+    //Determine email title and content based on post data
+    var emailTitle = 
+    "New Listing from " + listingData.email.split('@')[0] 
+    + ": " + listingData.title
+
+    var emailBody =
+    + "User email: " + listingData.email
+    +"\n\nPost Contents:"
+    + "\nTitle: " + listingData.title
+    + "\nprice: " + listingData.price 
+    + "\ndescription: " + listingData.description
+
+    //Try sending the email
+    //Maybe makes sense to log failures in a db table or text file, since errors wont neccesarrily happen when youre sitting at the computer
+    try {
+        await sendMail(emailTitle,emailBody); 
+        console.log("Email sent");
+        return NextResponse.json("Email sent");
+    } catch (error) {
+        console.error("Error sending email:", error);
+        return NextResponse.error(error.message, { status: 500 });
+    }
+}
+
+
+
 
 export async function POST(request){
 
@@ -78,6 +111,8 @@ export async function POST(request){
     else if (query_status == 1){
         console.log("Database successfully queried with api/putListing") //comment out once everything is properly tested.
         console.log("Query result:\n",result) //debug print
+        console.log("Emailing Jay a notification")
+        await emailNotify(reqObject)
         return  NextResponse.json('true')
     }
     else{

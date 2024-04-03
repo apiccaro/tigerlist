@@ -14,18 +14,12 @@ export async function GET(request){
 
 export async function POST(request){
 
-    var title = "Sample Title"
-    var price = "10"
-    var description = "Sample Description"
-
-    var emailBody = "Post Contents:"
-    + "\nTitle: " + title
-    + "\nprice: " + price 
-    + "\ndescription: " + description
+    var emailTitle = "apiTest confirmation"
+    var emailBody = "This email was triggered by an apiTest POST request"
 
     console.log("Using apiTest to try and send an email") 
     try {
-        await sendMail(emailBody); 
+        await sendMail(emailTitle,emailBody); 
         console.log("Email sent");
         return NextResponse.json("Email sent");
     } catch (error) {
