@@ -7,7 +7,6 @@ import Link from "next/link";
 import { DynamicServerError } from "next/dist/client/components/hooks-server-context";
 import React, { useState } from 'react';
 
-getImageUrl
 
 
 

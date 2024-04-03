@@ -1,5 +1,10 @@
 import { NextResponse } from 'next/server';
+
+const { getClient } = require('./dbTools/dbTools');
+
 export async function DELETE(post_key){
+
+
 
     //Assemble string for database query
     const queryText = "DELETE FROM PostTable WHERE post_key = '$1';"
@@ -7,12 +12,7 @@ export async function DELETE(post_key){
 
 
     //Instantiate database client instance
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: '10.3.0.49',
-        port: 5432,
-    });
+    const client = getClient();
       
 
     //Try to connect to database and query.
