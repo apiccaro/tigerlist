@@ -9,7 +9,7 @@ export async function POST(request) {
 
 
     //Assemble string for database query
-    const queryText = "SELECT * FROM PostTable WHERE email = $1;"
+    const queryText = "SELECT * FROM PostTable WHERE email = $1 ORDER BY post_timestamp DESC NULLS LAST;;"
     const queryValues = [userEmail];
 
     //Instantiate database client instance
