@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 export async function POST(request) {
 
-    console.log("Using getUserListings/route.js to get a set of listings") //debug print
+
+    //console.log("Using getUserListings/route.js to get a set of listings") //debug print
+    
     const requestObject = await request.json()
     var userEmail = requestObject.email;
 
@@ -11,16 +13,11 @@ export async function POST(request) {
     const queryValues = [userEmail];
 
     //Instantiate database client instance
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: '10.3.0.49',
-        port: 5432,
-    });
-    
+    const { getClient } = require('./dbTools/dbTools');
+    const client = getClient();
+
 
     //Try to connect to database and query.
-
     let error_status;
     let result;
 
