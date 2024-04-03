@@ -1,5 +1,4 @@
-    //Object mapping Categories to images urls
-
+    //Object mapping categories to images urls
     const categoryToImage = {
         'Textbook': '/testimage1.jpeg',
         'Furniture': '/testimage2.jpeg',
@@ -11,8 +10,9 @@
 
     //use categoryToImage to get link to image
     function getImageUrl(category) {
+        console.log("category:",category)
         const defaultImageUrl = '/CCLogoDerp.png';
-        return categoryImageMap[category] || defaultImageUrl;
+        return categoryToImage[category] || defaultImageUrl;
     };
 
 

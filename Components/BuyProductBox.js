@@ -39,29 +39,14 @@ const RowStyle={
 
 
 
-//set default imageUrl based on listing category
-const { getImageUrl } = require('./imageTools');
-const imageUrl = getImageUrl(category)
 
 
 const BuyProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
 
-    //Categories map to usable images
-    const categoryImageMap = {
-        'Textbook': '/testimage1.jpeg',
-        'Furniture': '/testimage2.jpeg',
-        'Appliances': '/testimage3.jpeg',
-        'Clothing': '/testimage4.jpeg',
-        'Service': '/testimage5.jpeg',
-        'Carpool': '/CCLogoDerp.png',
-    };
-
-    //use categoryImageMap to get link to image
-    const getImageUrl = () => {
-        const defaultImageUrl = '/product.png';
-        return categoryImageMap[category] || defaultImageUrl;
-    };
+    //set default imageUrl based on listing category
+    const { getImageUrl } = require('./imageTools');
+    const imageUrl = getImageUrl(category)
 
     return (
     <div>
