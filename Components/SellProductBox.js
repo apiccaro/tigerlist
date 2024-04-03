@@ -33,11 +33,17 @@ const buttonStyle = {
     color:"white",
 };
 
-//set default imageUrl based on listing category
-const { getImageUrl } = require('./imageTools');
-const imageUrl = getImageUrl(category)
+
 
 const SellProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+
+
+    //set default imageUrl based on listing category
+    const { getImageUrl } = require('./imageTools');
+    const imageUrl = getImageUrl(category)
+
+
+
     return(
         <div>
             <div style={ProductBGStyle}>
