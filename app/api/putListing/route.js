@@ -12,9 +12,8 @@ async function emailNotify(listingData){
     + ": " + listingData.title
 
     var emailBody =
-    + "User email: " + listingData.email
-    +"\n\nPost Contents:"
-    + "\nTitle: " + listingData.title
+    "User email: " + listingData.email
+    + "\n\nTitle: " + listingData.title
     + "\nprice: " + listingData.price 
     + "\ndescription: " + listingData.description
 
