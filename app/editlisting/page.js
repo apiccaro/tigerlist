@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const editListing = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"editListing", {
-    method:"PUT",
+    method:"POST",
     body : JSON.stringify(
     listingDict
     )
