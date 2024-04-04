@@ -2,6 +2,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import BuyProductBox from './BuyProductBox';
 
 const ProductsGridStyle={
     marginTop: '20px',
@@ -32,9 +33,7 @@ export default function Filter(){
     const [selectedCondition, setSelectedCondition] = useState('');
     const [selectedLocation, setSelectedLocation] = useState('');
 
-    // useEffect(() => {
-    //     getAllFilteredListings(selectedCategory, selectedCondition, selectedLocation).then((data) => setListings(data));
-    //   }, [selectedCategory, selectedCondition, selectedLocation]);
+
 
     useEffect(() => {
         getAllFilteredListings(selectedCategory, selectedCondition, selectedLocation)
@@ -44,9 +43,7 @@ export default function Filter(){
           });
       }, [selectedCategory, selectedCondition, selectedLocation]);
       
-    // const handleCategoryChange = (category) => {
-    //     setSelectedCategory(category);
-    // };
+  
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
         getAllFilteredListings(category, selectedCondition, selectedLocation)
@@ -56,9 +53,7 @@ export default function Filter(){
           });
     };
 
-    // const handleConditionChange = (condition) => {
-    //     setSelectedCondition(condition);
-    // };
+ 
     const handleConditionChange = (condition) => {
         setSelectedCondition(condition);
         getAllFilteredListings(selectedCategory, condition, selectedLocation)
@@ -68,9 +63,7 @@ export default function Filter(){
           });
     };
 
-    // const handleLocationChange = (location) => {
-    //     setSelectedLocation(location);
-    // };
+   
     const handleLocationChange = (location) => {
         setSelectedLocation(location);
         getAllFilteredListings(selectedCategory, selectedCondition, location)
@@ -80,13 +73,7 @@ export default function Filter(){
           });
     };
 
-    // const filteredListings = listings.filter((listing) => {
-    //     return (
-    //       (selectedCategory === '' || listing.category === selectedCategory) &&
-    //       (selectedCondition === '' || listing.condition === selectedCondition) &&
-    //       (selectedLocation === '' || listing.location === selectedLocation)
-    //     );
-    //   });
+    
     const filteredListings = Array.isArray(listings) ? listings.filter((listing) => {
       return (
         (selectedCategory === '' || listing.category === selectedCategory) &&
@@ -135,7 +122,7 @@ export default function Filter(){
                 {/* <option value="Off Campus">Off Campus</option>  */}
             {/* </select><br></br> */}
 
-            <div style={ProductsGridStyle} className="flex flex-grow">
+            {/* <div style={ProductsGridStyle} className="flex flex-grow">
                 {filteredListings.map((listing, index) => (
                     <BuyProductBox
                     key={index}
@@ -154,7 +141,7 @@ export default function Filter(){
                     banned={listing.banned}
                     />
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -8,9 +8,12 @@
     "start": "next start",
     "lint": "next lint"
   },
+
   "dependencies": {
     "@astrajs/collections": "^0.3.4",
+    "@types/formidable": "^3.4.5",
     "firebase": "^10.7.0",
+    "formidable": "^3.5.1",
     "http-cas-client": "^0.4.3",
     "mssql": "^10.0.1",
     "next": "^14.0.3",

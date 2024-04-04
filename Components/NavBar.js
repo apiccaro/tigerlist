@@ -1,3 +1,7 @@
+/**
+ * Configuration for all of the links that appear on the navigation bar that exists at the top of each page.
+ * @returns {JSX.Element} The JSX element representing the navigation bar.
+ */
 // Configutation for all of the links that appear on the navigation bar that exists at the top of each page.
 'use client'
 
@@ -22,7 +26,10 @@ const LinkStyle={
         alignItems: 'center',
 };
 
-
+/**
+ * The navigation bar component.
+ * @returns {JSX.Element} The JSX element representing the navigation bar.
+ */
 export default function NavBar() {
      
     const [title, setTitle] = useState();
