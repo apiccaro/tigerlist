@@ -8,12 +8,37 @@
         'Carpool': '/testimage1.jpeg',
     };
 
-    //use categoryToImage to get link to image
-    function getImageUrl(category) {
+    //uses categoryToImage to get link to a default image
+    function getCategoryImage(category) {
         console.log("category:",category)
         const defaultImageUrl = '/CCLogoDerp.png';
         return categoryToImage[category] || defaultImageUrl;
     };
 
+    //returns a given image url if a corresponding image exists, or null if not found
+    function getImageFile(filename){
+        //Check public for file matching given filename
 
-    module.exports = { getImageUrl }
+        var file;
+        try {   // Check if file exists
+            var directory = './../public'
+            fs.statSync(directory+filePath);
+            file = filename;
+        } catch (error) {   // Catch if file doesn't exist
+            goodFile = null;
+        }
+
+        return file
+    }
+
+    //Uses getImageFile to return a valid filename, replacing with the category default if an image does not exist
+    function getImageFileDefault(filename,category){
+        var filepath = getImageFile(filename)
+        if (filepath == null){
+            return getCategoryImage(category)
+        }
+        return filepath
+    }
+
+
+    module.exports = { getCategoryImage, getImageFileDefault}

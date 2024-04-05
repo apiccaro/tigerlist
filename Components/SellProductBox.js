@@ -39,8 +39,8 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
 
 
     //set default imageUrl based on listing category
-    const { getImageUrl } = require('./imageTools');
-    const imageUrl = getImageUrl(category)
+    const { getCategoryImage } = require('./imageTools');
+    const imageUrl = getCategoryImage(category)
 
 
 

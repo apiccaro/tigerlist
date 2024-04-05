@@ -12,15 +12,15 @@ import Image from 'next/image';
     const [previewImage4, setPreviewImage4] = useState();
 
     //replacing array images with hardcoded filenames. Will replace with imagetools use once things work.
-    var originalImage = '/testimage1.jpeg';
+    var originalImage = '/CCLogoDerp.png';
     //var originalImage = null;
-    var originalImage1 = '/testimage2.jpeg';
+    var originalImage1 = '/CCLogoDerp.png';
     //var originalImage1 = null;
-    var originalImage2 = '/testimage3.jpeg';
+    var originalImage2 = '/CCLogoDerp.png';
     //var originalImage2 = null;
-    var originalImage3 = '/testimage4.jpeg';
+    var originalImage3 = '/CCLogoDerp.png';
     //var originalImage3 = null;
-    var originalImage4 = '/testimage5.jpeg';
+    var originalImage4 = '/CCLogoDerp.png';
     //var originalImage4 = null;
 
     // var originalImage = images[0];
@@ -28,6 +28,30 @@ import Image from 'next/image';
     // var originalImage2 = images[2];
     // var originalImage3 = images[3];
     // var originalImage4 = images[4];
+
+
+    const { getCategoryImage, getImageFileDefault } = require('./imageTools');
+    const imageUrl = getCategoryImage(category)
+
+    var originalImage = imageUrl;
+
+    console.log("PNameImage.js: Just testing the success of file name approach for now:")
+
+    var testName = 'product.png'
+    var testCategory = 'Textbook'
+    var testResult1 = getImageFileDefault(testName,testCategory)
+    console.log("Expecting 'product.png': ",testResult1)
+
+    var badName = 'fakefilenameyaaaaa.png'
+    var goodCategory = 'Furniture'
+    var testResult2 = getImageFileDefault(testName,testCategory)
+
+    console.log("Expecting '/testimage2.jpeg': ",testResult2)
+
+
+
+
+
 
     // Need catches for when any of the images are null
     return(
