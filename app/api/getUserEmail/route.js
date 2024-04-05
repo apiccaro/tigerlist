@@ -5,7 +5,7 @@ export async function GET() {
   console.log("Trying to use cas.askUserEmail")
 
   // get user email from cas
-  var casResult = await casHandler(req, res)
+  var casResult = await casHandler(null, null)
   var email = casResult.user
   console.log("User email from getUserEmail: ",email);
 
