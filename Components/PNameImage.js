@@ -10,22 +10,24 @@ import Image from 'next/image';
     const [previewImage2, setPreviewImage2] = useState();
     const [previewImage3, setPreviewImage3] = useState();
     const [previewImage4, setPreviewImage4] = useState();
-    //var originalImage = '/testimage1.jpeg';
+
+    //replacing array images with hardcoded filenames. Will replace with imagetools use once things work.
+    var originalImage = '/testimage1.jpeg';
     //var originalImage = null;
-    //var originalImage1 = '/testimage2.jpeg';
+    var originalImage1 = '/testimage2.jpeg';
     //var originalImage1 = null;
-    //var originalImage2 = '/testimage3.jpeg';
+    var originalImage2 = '/testimage3.jpeg';
     //var originalImage2 = null;
-    //var originalImage3 = '/testimage4.jpeg';
+    var originalImage3 = '/testimage4.jpeg';
     //var originalImage3 = null;
-    //var originalImage4 = '/testimage5.jpeg';
+    var originalImage4 = '/testimage5.jpeg';
     //var originalImage4 = null;
 
-    var originalImage = images[0];
-    var originalImage1 = images[1];
-    var originalImage2 = images[2];
-    var originalImage3 = images[3];
-    var originalImage4 = images[4];
+    // var originalImage = images[0];
+    // var originalImage1 = images[1];
+    // var originalImage2 = images[2];
+    // var originalImage3 = images[3];
+    // var originalImage4 = images[4];
 
     // Need catches for when any of the images are null
     return(
