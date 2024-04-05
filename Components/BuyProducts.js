@@ -58,9 +58,9 @@ const ProductsGridStyle={
 
 export default async function BuyProducts(){
 
-  console.log("Trying getCasEmail")
-  const casResult = getCasEmail();
-  console.log("Did it work?",casResult)
+  // console.log("Trying getCasEmail")
+  // const casResult = getCasEmail();
+  // console.log("Did it work?",casResult) //it did not
 
   const apiListings = await getNew();
   if (apiListings!==undefined){
