@@ -1,4 +1,7 @@
-    //Object mapping categories to images urls
+const fs = require('fs');
+
+
+//Object mapping categories to images urls
     const categoryToImage = {
         'Textbook': '/testimage1.jpeg',
         'Furniture': '/testimage2.jpeg',
@@ -10,7 +13,7 @@
 
     //uses categoryToImage to get link to a default image
     function getCategoryImage(category) {
-        console.log("category:",category)
+        //console.log("category:",category)
         const defaultImageUrl = '/CCLogoDerp.png';
         return categoryToImage[category] || defaultImageUrl;
     };
@@ -25,11 +28,30 @@
             fs.statSync(directory+filePath);
             file = filename;
         } catch (error) {   // Catch if file doesn't exist
-            goodFile = null;
+            console.log("Didn't find the file we were looking for: ",filePath)
+            file = null;
         }
 
         return file
     }
+
+    function printDirContents(path) {
+        fs.readdir(path, (err, files) => {
+          if (err) {
+            console.error('Error reading directory contents:', err);
+            return;
+          }
+      
+          // Print all files in the directory
+          console.log("Contents of "+path+":")
+          files.forEach((file) => {
+            console.log(file);
+          });
+        });
+    }
+
+
+    
 
     //Uses getImageFile to return a valid filename, replacing with the category default if an image does not exist
     function getImageFileDefault(filename,category){
