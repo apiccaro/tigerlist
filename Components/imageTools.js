@@ -25,6 +25,8 @@ const fs = require('fs');
         var file;
         try {   // Check if file exists
             var directory = './../public'
+            printDirContents(directory)
+
             fs.statSync(directory+filePath);
             file = filename;
         } catch (error) {   // Catch if file doesn't exist
