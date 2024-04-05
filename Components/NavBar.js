@@ -75,9 +75,9 @@ export default function NavBar() {
                     </svg>
                 </Link>
 
-                <Link href={'/'}  style={{display:"flex",padding:"1.25rem",color:"white"}} className="flex p-3">
+                {/* <Link href={'/'}  style={{display:"flex",padding:"1.25rem",color:"white"}} className="flex p-3">
                     Sign Out
-                </Link>
+                </Link> */}
 
             </div>
             

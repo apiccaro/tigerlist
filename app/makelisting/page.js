@@ -23,6 +23,8 @@ const makeListing = async (listingDict) => {
   return data
 };
 
+
+//old tester
 const getEmail = async () => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserEmail",{
     method:"GET",
