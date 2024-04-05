@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
-import cas from "/app/server/cas.js";
+const { casHandler } = require('../../server/cas');
+
 export async function GET() {
   console.log("Trying to use cas.askUserEmail")
 
-  var email = await cas.askUserEmail()
-  console.log(email);
+  // get user email from cas
+  var casResult = await casHandler(req, res)
+  var email = casResult.user
+  console.log("User email from getUserEmail: ",email);
+
   return NextResponse.json(email);
 }

@@ -21,7 +21,12 @@ app.prepare().then(() => {
   http.createServer(async (req, res) => {
     // the cas logic using casHandler
     // await to ensure that CAS logic is completed before moving on
-    if (!await casHandler(req, res)) {
+
+    //Use casHandler to verify user identity
+    var casResult = await casHandler(req, res)
+
+
+    if (!casResult.verified) {
       return res.end(); // End response if authentication fails
     }
 

@@ -15,7 +15,15 @@ const casHandler = async (req, res) => {
   console.log('REQUEST: '+data);
   if (!data) {
     console.log('No data found');
-    return false; // return false to indicate authentication failure
+
+  //make a return object that tells server.js what it needs to know, and provides api methods with the user email they need
+
+    var casResult = {
+      verified: false, // return false to indicate authentication failure
+      user: "roccy@coloradocollege.edu"
+    }
+
+    return casResult;
   }
   else {
  
@@ -26,7 +34,14 @@ const casHandler = async (req, res) => {
                 if(principal.attributes!=undefined) {
                         userEmail = principal.attributes.email;
                         console.log('USER\'S EMAIL: '+userEmail );
-                        return true;
+
+                          //make a return object that tells server.js what it needs to know, and provides api methods with the user email they need
+                        var casResult = {
+                          verified: true, // return true to indicate successful authentication
+                          user: userEmail
+                        }
+                                            
+                        return casResult; 
                 }
          }
          catch (error) {
@@ -34,11 +49,17 @@ const casHandler = async (req, res) => {
          }
  
   }
-  return true; // return true to indicate successful authentication
+
+  //make a return object that tells server.js what it needs to know, and provides api methods with the user email they need
+  var casResult = {
+    verified: true, // return true to indicate successful authentication
+    user: userEmail
+  }
+  return casResult; 
 };
 
 
-
+//Jay made this. Experiment didn't work. 
 const askUserEmail = async () => {
   console.log('using askUserEmail in server/cas.js');
   try{
