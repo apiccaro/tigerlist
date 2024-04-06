@@ -733,7 +733,7 @@ export default function MakeListing() {
                     required: 'Please enter your CC email', maxLength: { value: 50, message: "Please enter your CC email" },
                     pattern: {
                       value: /\S+@coloradocollege+\.edu+/,
-                      message: "Please enter your CC email",
+                      message: "Please enter a CC email",
                     },
                   })}
                 />

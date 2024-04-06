@@ -24,6 +24,8 @@ import Image from 'next/image';
     console.log("PNI postkey:",ID)
     console.log("PNI category:",category)
 
+    console.log("Whole given object: "+{ID, title, price, description, category, condition, location, email, phone, images, flagged})
+
     images = customImageArray(ID,category)
 
 
