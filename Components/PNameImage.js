@@ -11,10 +11,10 @@ import Image from 'next/image';
     const [previewImage3, setPreviewImage3] = useState();
     const [previewImage4, setPreviewImage4] = useState();
     var originalImage = '/testimage1.jpeg';
-    var originalImage1 = '/testimage2.jpeg';
-    var originalImage2 = '/testimage3.jpeg';
-    var originalImage3 = '/testimage4.jpeg';
-    var originalImage4 = '/testimage5.jpeg';
+    var originalImage1 = '/product.png';
+    var originalImage2 = '/product.png';
+    var originalImage3 = '/product.png';
+    var originalImage4 = '/product.png';
 
     // var originalImage = images[0];
     // var originalImage1 = images[1];
