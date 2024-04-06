@@ -10,21 +10,20 @@ import Image from 'next/image';
     const [previewImage2, setPreviewImage2] = useState();
     const [previewImage3, setPreviewImage3] = useState();
     const [previewImage4, setPreviewImage4] = useState();
-    var originalImage = '/testimage1.jpeg';
-    var originalImage1 = '/product.png';
-    var originalImage2 = '/product.png';
-    var originalImage3 = '/product.png';
-    var originalImage4 = '/product.png';
 
-    // var originalImage = images[0];
-    // var originalImage1 = images[1];
-    // var originalImage2 = images[2];
-    // var originalImage3 = images[3];
-    // var originalImage4 = images[4];
+
     const { getCategoryImage } = require('./imageTools');
     const defaultUrl = getCategoryImage(category)
+    const nullUrl = '/empty100x100.png'
 
-    var originalImage = defaultUrl;
+    images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
+
+    var originalImage = images[0];
+    var originalImage1 = images[1];
+    var originalImage2 = images[2];
+    var originalImage3 = images[3];
+    var originalImage4 = images[4];
+
     // Need catches for when any of the images are null
     return(
         <aside className="flex flex-col text-white p-4">
@@ -63,9 +62,12 @@ import Image from 'next/image';
                      * @param {event} event
                      */
                     onClick={(event) => {
-                        var replace = previewImage;
-                        setPreviewImage(previewImage1)
-                        setPreviewImage1(replace)
+                        if (originalImage1 = '/empty100x100.png'){}
+                        else{
+                            var replace = previewImage;
+                            setPreviewImage(previewImage1)
+                            setPreviewImage1(replace)
+                        }
                     }
                     }
                     />
@@ -89,9 +91,12 @@ import Image from 'next/image';
                     * @param {event} event
                     */
                     onClick={(event) => {
-                        var replace = previewImage;
-                        setPreviewImage(previewImage2)
-                        setPreviewImage2(replace)
+                        if (originalImage1 = '/empty100x100.png'){}
+                        else{
+                            var replace = previewImage;
+                            setPreviewImage(previewImage2)
+                            setPreviewImage2(replace)
+                        }
                     }
                     }
                     />
@@ -115,9 +120,12 @@ import Image from 'next/image';
                     * @param {event} event
                     */
                     onClick={(event) => {
-                        var replace = previewImage;
-                        setPreviewImage(previewImage3)
-                        setPreviewImage3(replace)
+                        if (originalImage1 = '/empty100x100.png'){}
+                        else{
+                            var replace = previewImage;
+                            setPreviewImage(previewImage3)
+                            setPreviewImage3(replace)
+                        }    
                     }
                     }
                     />
@@ -141,9 +149,13 @@ import Image from 'next/image';
                     * @param {event} event
                     */
                     onClick={(event) => {
-                        var replace = previewImage;
-                        setPreviewImage(previewImage4)
-                        setPreviewImage4(replace)
+                        if (originalImage1 = '/empty100x100.png'){}
+                        else{
+                            var replace = previewImage;
+                            setPreviewImage(previewImage4)
+                            setPreviewImage4(replace)
+                        }
+                        
                     }
                     }
                     />
