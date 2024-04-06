@@ -16,12 +16,16 @@ import Image from 'next/image';
 
 
 
-    // const defaultUrl = getCategoryImage(category)
-    // const nullUrl = '/empty100x100.png'
+    const defaultUrl = getCategoryImage(category)
+    const nullUrl = '/empty100x100.png'
 
-    // images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
+    images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
+
+    console.log("PNI postkey:",id)
+    console.log("PNI category:",category)
 
     images = customImageArray(listing,category)
+
 
     var originalImage = images[0];
     var originalImage1 = images[1];
