@@ -1,8 +1,0 @@
-pre-force was created with the command
-
-"git branch pre-force 4f870887436fde8286fcd89e1b8ae21e2589354f"
-
-Being force pushed to main to work from as we go forward
-
-Lucy copying her branch (with some important changes) also copied whatever code gave us the 
-"TypeError: Response body object should not be disturbed or locked" issue
