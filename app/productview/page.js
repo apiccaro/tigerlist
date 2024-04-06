@@ -15,6 +15,9 @@ export default function Home({searchParams}) {
   const {productImages} = searchParams;
   const {isFlagged} = searchParams;
 
+  console.log("productview debug print - listingID: ",listingID)
+
+
   return (
       <div className="bg-yellow-600 min-h-screen">
         <div className="flex flex-row gap-2">

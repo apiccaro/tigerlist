@@ -10,7 +10,10 @@ import Image from 'next/image';
     const [previewImage2, setPreviewImage2] = useState();
     const [previewImage3, setPreviewImage3] = useState();
     const [previewImage4, setPreviewImage4] = useState();
-
+    var argstring = "\nID: "+ID+"\ntitle: "+title+ "\nprice: "+price+"\ndescription: "+description+ "\ncategory: "+category+ "\ncondition: "+condition+"\nlocation: "+location+ "\nemail: "+email+ "\nphone: "+phone+ "\nimages: "+images+"\nflagged: "+flagged
+    // console.log("PNI postkey:",ID)
+    // console.log("PNI category:",category)
+    console.log("Whole given object: ",argstring)
 
     const { getCategoryImage ,customImageArray} = require('./imageTools');
 
@@ -21,10 +24,7 @@ import Image from 'next/image';
 
     images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
 
-    console.log("PNI postkey:",ID)
-    console.log("PNI category:",category)
 
-    console.log("Whole given object: "+{ID, title, price, description, category, condition, location, email, phone, images, flagged})
 
     images = customImageArray(ID,category)
 
