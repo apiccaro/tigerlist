@@ -151,7 +151,7 @@ export default function EditListing({searchParams}) {
       location: locValue,
       email: emailValue,
       phoneValue: phoneValue,
-      image: imageValue,
+      images: imageValue,
       active: "true",
       flagged: isFlagged,
       moderator_ban:"false",

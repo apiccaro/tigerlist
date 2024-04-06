@@ -160,7 +160,7 @@ export default function MakeListing() {
       location: locValue,
       email: emailValue,
       phoneValue: phoneValue,
-      image: imageValue,
+      images: imageValue,
       active: "true",
       flagged: "false"
 
@@ -249,7 +249,8 @@ export default function MakeListing() {
                         //sets all imagePreview fields
                         setHeight('400px');
                         setWidth('500px');
-                        setPreviewImage(reader.result);
+                        //setPreviewImage("reader.result");
+                        setPreviewImage(file.name)
                         setLabelHeight(40);
                         setBorderStyle('4px solid black');
                         setLabelText('Change Image');
@@ -306,7 +307,9 @@ export default function MakeListing() {
                           var reader1 = new FileReader();
                           reader1.onloadend = () => {
                             //sets all small image fields
-                            setPreviewImage1(reader1.result);
+                            //setPreviewImage1(reader1.result);
+                            setPreviewImage1(file1.name)
+
                             setWidth1(SMALLIMAGE);
                             setHeight1(SMALLIMAGE);
                             setLabelHeight1(0);
@@ -375,7 +378,9 @@ export default function MakeListing() {
                           var reader = new FileReader();
                           reader.onloadend = () => {
                             //sets all small image fields
-                            setPreviewImage2(reader.result);
+                            // setPreviewImage2(reader.result);
+                            setPreviewImage2(file2.name);
+
                             setWidth2(SMALLIMAGE);
                             setHeight2(SMALLIMAGE);
                             setLabelHeight2(0);
@@ -445,7 +450,8 @@ export default function MakeListing() {
                           var reader = new FileReader();
                           reader.onloadend = () => {
                             //sets all small image fields
-                            setPreviewImage3(reader.result);
+                            // setPreviewImage3(reader.result);
+                            setPreviewImage3(file3.name);
                             setWidth3(SMALLIMAGE);
                             setHeight3(SMALLIMAGE);
                             setLabelHeight3(0);
@@ -516,7 +522,8 @@ export default function MakeListing() {
                           var reader = new FileReader();
                           reader.onloadend = () => {
                             //sets all small image fields
-                            setPreviewImage4(reader.result);
+                            // setPreviewImage4(reader.result);
+                            setPreviewImage4(file4.name);
                             setWidth4(SMALLIMAGE);
                             setHeight4(SMALLIMAGE);
                             setLabelHeight4(0);
