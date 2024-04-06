@@ -1,4 +1,3 @@
-const fs = require('fs');
 
 
 //Object mapping categories to images urls
@@ -25,7 +24,7 @@ const fs = require('fs');
         var file;
         try {   // Check if file exists
             var directory = './../public'
-            printDirContents(directory)
+            //printDirContents(directory)
 
             fs.statSync(directory+filePath);
             file = filename;
@@ -52,7 +51,6 @@ const fs = require('fs');
         });
     }
 
-
     
 
     //Uses getImageFile to return a valid filename, replacing with the category default if an image does not exist
@@ -65,4 +63,4 @@ const fs = require('fs');
     }
 
 
-    module.exports = { getCategoryImage, getImageFileDefault}
+    module.exports = { getCategoryImage}

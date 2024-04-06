@@ -30,23 +30,23 @@ import Image from 'next/image';
     // var originalImage4 = images[4];
 
 
-    const { getCategoryImage, getImageFileDefault } = require('./imageTools');
-    const imageUrl = getCategoryImage(category)
+    const { getCategoryImage } = require('./imageTools');
+    const defaultUrl = getCategoryImage(category)
 
     var originalImage = imageUrl;
 
-    console.log("PNameImage.js: Just testing the success of file name approach for now:")
+    // console.log("PNameImage.js: Just testing the success of file name approach for now:")
 
-    var testName = 'product.png'
-    var testCategory = 'Textbook'
-    var testResult1 = getImageFileDefault(testName,testCategory)
-    console.log("Expecting 'product.png': ",testResult1)
+    // var testName = 'product.png'
+    // var testCategory = 'Textbook'
+    // var testResult1 = getImageFileDefault(testName,testCategory)
+    // console.log("Expecting 'product.png': ",testResult1)
 
-    var badName = 'fakefilenameyaaaaa.png'
-    var goodCategory = 'Furniture'
-    var testResult2 = getImageFileDefault(testName,testCategory)
+    // var badName = 'fakefilenameyaaaaa.png'
+    // var goodCategory = 'Furniture'
+    // var testResult2 = getImageFileDefault(testName,testCategory)
 
-    console.log("Expecting '/testimage2.jpeg': ",testResult2)
+    // console.log("Expecting '/testimage2.jpeg': ",testResult2)
 
 
 
@@ -94,8 +94,12 @@ import Image from 'next/image';
                         var replace = previewImage;
                         setPreviewImage(previewImage1)
                         setPreviewImage1(replace)
-                    }
-                    }
+                    }}
+                    //onError={handleImageError}
+                    //data-default-src='/CCLogoDerp.png'
+
+                    
+
                     />
                 </div>
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left'}}>
