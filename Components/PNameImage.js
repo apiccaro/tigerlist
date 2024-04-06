@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-  const PNI = ({listing, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+  const PNI = ({ID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
     const [previewImage, setPreviewImage] = useState();
     const [previewImage1, setPreviewImage1] = useState();
     const [previewImage2, setPreviewImage2] = useState();
@@ -21,10 +21,10 @@ import Image from 'next/image';
 
     images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
 
-    console.log("PNI postkey:",id)
+    console.log("PNI postkey:",ID)
     console.log("PNI category:",category)
 
-    images = customImageArray(listing,category)
+    images = customImageArray(ID,category)
 
 
     var originalImage = images[0];
