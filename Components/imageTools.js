@@ -2,13 +2,27 @@
 
 //Object mapping categories to images urls
     const categoryToImage = {
-        'Textbook': '/testimage1.jpeg',
-        'Furniture': '/testimage2.jpeg',
-        'Appliances': '/testimage3.jpeg',
-        'Clothing': '/testimage4.jpeg',
-        'Service': '/testimage5.jpeg',
-        'Carpool': '/testimage1.jpeg',
+        'Textbook': '/default_textbook.jpeg',
+        'Furniture': '/default_furniture.jpeg',
+        'Appliances': '/default_applicances.jpeg',
+        'Clothing': '/default_clothing.jpeg',
+        'Service': '/default_service.jpeg',
+        'Carpool': '/default_carpool.jpeg',
     };
+
+    const nullUrl = '/empty100x100.png'
+    const customMap = {
+        167:['custom167.jpeg',nullUrl,nullUrl,nullUrl,nullUrl,nullUrl],
+        168:['custom168a.jpeg','custom168b.jpeg',nullUrl,nullUrl,nullUrl,nullUrl]
+    }
+
+    function customImageArray(id,category){
+        //return either a custom array, or an array with one image determined by getCategoryImage
+        return customMap[id] || [getCategoryImage(category),nullUrl,nullUrl,nullUrl,nullUrl,nullUrl];
+    
+    }
+
+    
 
     //uses categoryToImage to get link to a default image
     function getCategoryImage(category) {
@@ -63,4 +77,4 @@
     }
 
 
-    module.exports = { getCategoryImage}
+    module.exports = { getCategoryImage, customImageArray}

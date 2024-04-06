@@ -12,11 +12,16 @@ import Image from 'next/image';
     const [previewImage4, setPreviewImage4] = useState();
 
 
-    const { getCategoryImage } = require('./imageTools');
-    const defaultUrl = getCategoryImage(category)
-    const nullUrl = '/empty100x100.png'
+    const { getCategoryImage ,customImageArray} = require('./imageTools');
 
-    images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
+
+
+    // const defaultUrl = getCategoryImage(category)
+    // const nullUrl = '/empty100x100.png'
+
+    // images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
+
+    images = customImageArray(listing,category)
 
     var originalImage = images[0];
     var originalImage1 = images[1];
