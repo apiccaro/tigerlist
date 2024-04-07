@@ -13,6 +13,34 @@ import Image from 'next/image';
 
 
 
+    //image sizing logic 
+
+    var width = 100
+    var height = 500
+
+    var maxwidth = 100
+    var maxheight = 100
+
+    var yscale = maxheight / height
+    var xscale = maxwidth / width
+
+    var scale = xscale;
+    if (yscale<xscale){
+        scale = yscale
+    }
+
+
+
+    function getDims(){
+
+    }
+
+
+
+
+
+
+
     //debug print. Cant for the life of me tell why ID always comes undefined, but everything else is fine
     // var argstring = 
     // "\nID: "+ID+"\ntitle: "+title+ "\nprice: "+price
@@ -74,14 +102,16 @@ import Image from 'next/image';
 
                 style={{
                     borderRadius: '10px',
-                    objectFit: 'cover',
+                    objectFit: 'scale-down',
 
-                    //width: originalImage || previewImage ? '630px' : 0,
-                    //height: originalImage || previewImage ? '400px' : 0,
+                    width: originalImage || previewImage ? '630px' : 0,
+                    height: originalImage || previewImage ? '400px' : 0,
                     //sorry this is ugly for now
                     //basically im getting the dimensions of whichever image ends up being used. If the replacement was more straightforward we could tie dimensions to each image before handing off.
-                    width: (originalImage ? `${originalImage.width}px` : (previewImage ? `${originalImage.width}px` : 0)),
-                    width: (originalImage ? `${originalImage.height}px` : (previewImage ? `${originalImage.height}px` : 0)),
+                    // width: (originalImage ? `${originalImage.width}px` : (previewImage ? `${previewImage.width}px` : 0)),
+                    // height: (originalImage ? `${originalImage.height}px` : (previewImage ? `${previewImage.height}px` : 0)),
+                    
+
 
                 }}
                 

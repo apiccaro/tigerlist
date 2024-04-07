@@ -77,7 +77,10 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                         accept="image/*"
                         //className="dark:invert"
                         onError={handleImageError} 
-
+                        style={{
+                            borderRadius: '10px',
+                            objectFit: 'scale-down',
+                        }}
                         width={250}
                         height={250}
                         priority

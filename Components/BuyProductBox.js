@@ -77,6 +77,10 @@ const BuyProductBox = ({ listingID, title, price, description, category, conditi
             width={250}
             height={250} 
             onError={handleImageError} 
+            style={{
+              borderRadius: '10px',
+              objectFit: 'contain',
+          }}
             priority
           />
         </Link>
