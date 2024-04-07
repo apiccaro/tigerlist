@@ -37,7 +37,7 @@ const BuyProductBox = ({listingID, title, price, description, category, conditio
 
     //Get good image name, either given or based on category
     const { getGoodImage } = require('./imageTools');
-    const imageUrl = getGoodImage(images[0]);
+    const imageUrl = getGoodImage(images[0],category);
     
 
     return (

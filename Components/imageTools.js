@@ -24,7 +24,7 @@
     
     }
 
-    function getGoodImage(imageName){
+    function getGoodImage(imageName,category){
         if (imageName == "" || imageName==null){
             return getCategoryImage(category)
         }
