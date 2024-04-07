@@ -35,39 +35,42 @@ async function editListing(listingDict) {
     const response = await fetch("http://localhost:3000/api/deleteListing",{
       method:"PUT",
       body : JSON.stringify({
-      listing:(listingDict)
+      listing:(listingDict),
+      message:(listingID)
       })
       },
       );
     await response;
 };
 
-async function testCall() {
+
+
+
+async function testCall(listingID_message) {
     const response = await fetch("http://localhost:3000/api/apiTest",{
-      method:"PUT",
-    },
-    );
+        method:"PUT",
+        body : JSON.stringify({
+        listing:(listingDict),
+        message:(listingID_message)
+        })
+        },
+        );
     await response;
 };
-
-async function flagButtonClicked(){
-    console.log("click!")
-    toggleFlagButton()
-    await testCall()
-}
-
-
-const toggleFlagButton = () => {
-        setIsActive(!isActive);
-};
-
 
 const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
 
     const [isActive, setIsActive] = useState(true);
 
+
+    async function flagButtonClicked(listingID){
+        console.log("click!")
+        setIsActive(!isActive); //toggle flag button. (replaced method call)
+        await testCall(listingID)
+    } 
+    
     // const toggleFlagButton = () => {
-    //     setIsActive(!isActive);
+    //         setIsActive(!isActive);
     // };
 
     return(
@@ -108,7 +111,7 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
             <button
             style={{height: '80px', width: '80px', alignItems: 'center', borderRadius: '10px', backgroundColor: 'black', borderColor: 'black'}}
             // onClick={"toggleFlagButton() ; editListing({listingID: listingID, title: title, price: price, description: description, category: category, condition: condition, location: location, email: email, phone: phone, images: images, flagged: !flagged})"}>
-            onClick={flagButtonClicked()}>
+            onClick={flagButtonClicked}>
 
                 {isActive ? <Image
                                 src="/unflagged.svg"

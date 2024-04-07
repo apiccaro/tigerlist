@@ -3,6 +3,13 @@ import sendMail from './../../moderation/sendMail';
 
 export async function GET(request){
     console.log("Using apiTest/route.js (GET) to test basic API functionality")
+
+    var reqParsed = await request.json()
+
+    if (reqParsed.message){
+        console.log(reqParsed.message)
+    }
+    
     return NextResponse.json('sample response text (GET method)')
 }
 
