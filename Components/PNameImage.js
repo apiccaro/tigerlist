@@ -10,25 +10,45 @@ import Image from 'next/image';
     const [previewImage2, setPreviewImage2] = useState();
     const [previewImage3, setPreviewImage3] = useState();
     const [previewImage4, setPreviewImage4] = useState();
-    var argstring = "\nID: "+ID+"\ntitle: "+title+ "\nprice: "+price+"\ndescription: "+description+ "\ncategory: "+category+ "\ncondition: "+condition+"\nlocation: "+location+ "\nemail: "+email+ "\nphone: "+phone+ "\nimages: "+images+"\nflagged: "+flagged
-    // console.log("PNI postkey:",ID)
-    // console.log("PNI category:",category)
+
+
+
+    //debug print. Cant for the life of me tell why ID always comes undefined, but everything else is fine
+    var argstring = 
+    "\nID: "+ID+"\ntitle: "+title+ "\nprice: "+price
+    +"\ndescription: "+description+ "\ncategory: "+category
+    + "\ncondition: "+condition+"\nlocation: "+location
+    + "\nemail: "+email+ "\nphone: "+phone
+    + "\nimages: "+images+"\nflagged: "+flagged
+
     console.log("Whole given object: ",argstring)
 
-    const { getCategoryImage ,customImageArray} = require('./imageTools');
 
 
 
+    //Get a better image array by replacing a first null image with default, and other nulls with blank image.
+
+    const { getCategoryImage} = require('./imageTools');
     const defaultUrl = getCategoryImage(category)
     const nullUrl = '/empty100x100.png'
 
-    images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
+    for (i in images){
+        if (images[i]==null){
+            if (i==0){
+                images[0]=defaultUrl
+            }
+            else{
+                images[i]=nullUrl
+            }
+        }
 
+    }
+    
+    //overwriting with predetermined arrays
+    //images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
+    //images = customImageArray(ID,category)
 
-
-    images = customImageArray(ID,category)
-
-
+    //set images to values from array
     var originalImage = images[0];
     var originalImage1 = images[1];
     var originalImage2 = images[2];
