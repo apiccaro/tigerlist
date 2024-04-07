@@ -2,17 +2,20 @@ import { NextResponse } from 'next/server';
 import sendMail from './../../moderation/sendMail';
 
 export async function GET(request){
-    console.log("Using apiTest/route.js (GET) to test basic API functionality")
+    console.log("Using apiTest/route.js (GET) to test basic API functionality")    
+    return NextResponse.json('sample response text (GET method)')
+}
+
+export async function PUT(request){
+    console.log("Using apiTest/route.js (PUT) to test basic API functionality")
 
     var reqParsed = await request.json()
 
     if (reqParsed.message){
         console.log(reqParsed.message)
     }
-    
-    return NextResponse.json('sample response text (GET method)')
+    return NextResponse.json('Got and returned "'+(reqParsed.message+'"'||'a PUT request with no message field'))
 }
-
 // export async function POST(request){
 //     console.log("Using apiTest/route.js (POST) to test basic API functionality") 
 //     return NextResponse.json('sample response text (POST method)')

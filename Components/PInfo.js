@@ -50,8 +50,7 @@ async function testCall(listingID_message) {
     const response = await fetch("http://localhost:3000/api/apiTest",{
         method:"PUT",
         body : JSON.stringify({
-        listing:(listingDict),
-        message:(listingID_message)
+            message:(listingID_message)
         })
         },
         );
@@ -63,7 +62,7 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
     const [isActive, setIsActive] = useState(true);
 
 
-    async function flagButtonClicked(listingID){
+    async function flagButtonClicked(){
         console.log("click!")
         setIsActive(!isActive); //toggle flag button. (replaced method call)
         await testCall(listingID)
