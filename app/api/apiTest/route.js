@@ -14,6 +14,9 @@ export async function PUT(request){
     if (reqParsed.message){
         console.log(reqParsed.message)
     }
+    console.log("recieved: "+reqParsed)
+    emailNotify()
+    
     return NextResponse.json('Got and returned "'+(reqParsed.message+'"'||'a PUT request with no message field'))
 }
 
