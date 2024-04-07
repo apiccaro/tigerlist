@@ -43,18 +43,17 @@ async function editListing(listingDict) {
     await response;
 };
 
-
-
-
 async function testCall(listingID_message) {
-    const response = await fetch("http://localhost:3000/api/apiTest",{
+    console.log("using testCall()")
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",{
         method:"PUT",
         body : JSON.stringify({
             message:(listingID_message)
         })
         },
         );
-    await response;
+    var result = await response.json();
+    console.log(result)
 };
 
 const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
