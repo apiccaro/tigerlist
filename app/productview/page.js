@@ -4,6 +4,7 @@ import ProductInfo from "@/Components/PInfo";
 
 export default function Home({searchParams}) {
   const {listingID} = searchParams;
+  const {post_key} = post_key;
   const {productTitle} = searchParams;
   const {productPrice} = searchParams;
   const {productDescription} = searchParams;
@@ -16,7 +17,6 @@ export default function Home({searchParams}) {
   const {isFlagged} = searchParams;
 
   console.log("productview debug print - listingID: ",listingID)
-
 
   return (
       <div className="bg-yellow-600 min-h-screen">
