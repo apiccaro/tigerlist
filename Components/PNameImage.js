@@ -70,12 +70,22 @@ import Image from 'next/image';
                 //if no previewImage- load in the original image
                 src={previewImage ? previewImage : originalImage? setPreviewImage(originalImage):"/photo.svg"}
                 //if not original image- do not show image component at all
+                //style={{ width: `${dimensions.width}px`, height: `${dimensions.height}px` }}
+
                 style={{
                     borderRadius: '10px',
                     objectFit: 'cover',
-                    width: originalImage || previewImage ? '630px' : 0,
-                    height: originalImage || previewImage ? '400px' : 0,
+
+                    //width: originalImage || previewImage ? '630px' : 0,
+                    //height: originalImage || previewImage ? '400px' : 0,
+                    //sorry this is ugly for now
+                    //basically im getting the dimensions of whichever image ends up being used. If the replacement was more straightforward we could tie dimensions to each image before handing off.
+                    width: (originalImage ? `${originalImage.width}px` : (previewImage ? `${originalImage.width}px` : 0)),
+                    width: (originalImage ? `${originalImage.height}px` : (previewImage ? `${originalImage.height}px` : 0)),
+
                 }}
+                
+
                 />
                 <div style={{ display: 'inline-block' }}>
                 <div style={{ width: '22%', margin: '0 15.5px 0px 0px', float: 'left'}}>

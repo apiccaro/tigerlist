@@ -39,16 +39,15 @@ const RowStyle = {
 const BuyProductBox = ({ listingID, title, price, description, category, condition, location, email, phone, images, flagged }) => {
 
 
-
-  // Get good image name, either given or based on category
-  const { getGoodImage,getCategoryImage } = require('./imageTools');
-  const imageUrl = getGoodImage(images[0], category);
-  const defaultUrl = getCategoryImage(category)
+    // Get good image name, either given or based on category
+    const { getGoodImage,getCategoryImage } = require('./imageTools');
+    const imageUrl = getGoodImage(images[0], category);
+    const defaultUrl = getCategoryImage(category)
 
     // method to handle image loading error when a file name is invalid
     const handleImageError = (e) => {
         e.target.src = defaultUrl
-      };
+    };
 
   return (
     <div>
