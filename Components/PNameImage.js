@@ -14,14 +14,14 @@ import Image from 'next/image';
 
 
     //debug print. Cant for the life of me tell why ID always comes undefined, but everything else is fine
-    var argstring = 
-    "\nID: "+ID+"\ntitle: "+title+ "\nprice: "+price
-    +"\ndescription: "+description+ "\ncategory: "+category
-    + "\ncondition: "+condition+"\nlocation: "+location
-    + "\nemail: "+email+ "\nphone: "+phone
-    + "\nimages: "+images+"\nflagged: "+flagged
+    // var argstring = 
+    // "\nID: "+ID+"\ntitle: "+title+ "\nprice: "+price
+    // +"\ndescription: "+description+ "\ncategory: "+category
+    // + "\ncondition: "+condition+"\nlocation: "+location
+    // + "\nemail: "+email+ "\nphone: "+phone
+    // + "\nimages: "+images+"\nflagged: "+flagged
 
-    console.log("Whole given object: ",argstring)
+    // console.log("Whole given object: ",argstring)
 
 
 
@@ -32,17 +32,20 @@ import Image from 'next/image';
     const defaultUrl = getCategoryImage(category)
     const nullUrl = '/empty100x100.png'
 
-    for (i in images){
-        if (images[i]==null){
-            if (i==0){
-                images[0]=defaultUrl
-            }
-            else{
-                images[i]=nullUrl
+    // console.log("images: ",images)
+    images.forEach((image, index) => {
+        if (image == null || image == "") {
+            // console.log("null image triggered:")
+            if (index === 0) {
+                // console.log("first image was null")
+                // console.log("true null: ",images[0]==null)
+                // console.log("empty string: ",images[0]=="")
+                images[0] = defaultUrl;
+            } else {
+                images[index] = nullUrl;
             }
         }
-
-    }
+    });
     
     //overwriting with predetermined arrays
     //images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
@@ -93,12 +96,12 @@ import Image from 'next/image';
                      * @param {event} event
                      */
                     onClick={(event) => {
-                        if (originalImage1 = '/empty100x100.png'){}
-                        else{
+                        // if (originalImage1 = '/empty100x100.png'){console.log("clicked on empty image")}
+                        // else{
                             var replace = previewImage;
                             setPreviewImage(previewImage1)
                             setPreviewImage1(replace)
-                        }
+                        // }
                     }
                     }
                     />
@@ -122,12 +125,12 @@ import Image from 'next/image';
                     * @param {event} event
                     */
                     onClick={(event) => {
-                        if (originalImage1 = '/empty100x100.png'){}
-                        else{
+                        // if (originalImage2 = '/empty100x100.png'){console.log("originalimage2 is empty!!!")}
+                        // else{
                             var replace = previewImage;
                             setPreviewImage(previewImage2)
                             setPreviewImage2(replace)
-                        }
+                        // }
                     }
                     }
                     />
@@ -151,12 +154,12 @@ import Image from 'next/image';
                     * @param {event} event
                     */
                     onClick={(event) => {
-                        if (originalImage1 = '/empty100x100.png'){}
-                        else{
+                        // if (originalImage3 = '/empty100x100.png'){console.log("clicked on empty image")}
+                        // else{
                             var replace = previewImage;
                             setPreviewImage(previewImage3)
                             setPreviewImage3(replace)
-                        }    
+                        // }    
                     }
                     }
                     />
@@ -180,12 +183,12 @@ import Image from 'next/image';
                     * @param {event} event
                     */
                     onClick={(event) => {
-                        if (originalImage1 = '/empty100x100.png'){}
-                        else{
+                        // if (originalImage4 = '/empty100x100.png'){console.log("clicked on empty image")}
+                        // else{
                             var replace = previewImage;
                             setPreviewImage(previewImage4)
                             setPreviewImage4(replace)
-                        }
+                        // }
                         
                     }
                     }

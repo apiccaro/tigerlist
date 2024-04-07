@@ -38,11 +38,9 @@ const buttonStyle = {
 const SellProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
 
-    //set default imageUrl based on listing category
-    const { getCategoryImage } = require('./imageTools');
-    const imageUrl = getCategoryImage(category)
-
-
+    //Get good image name, either given or based on category
+    const { getGoodImage } = require('./imageTools');
+    const imageUrl = getGoodImage(images[0]);
 
     return(
         <div>

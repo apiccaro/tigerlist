@@ -24,6 +24,15 @@
     
     }
 
+    function getGoodImage(imageName){
+        if (imageName == "" || imageName==null){
+            return getCategoryImage(category)
+        }
+        else{
+            return "/"+imageName
+        }
+    }
+
     
 
     //uses categoryToImage to get link to a default image
@@ -79,4 +88,4 @@
     }
 
 
-    module.exports = { getCategoryImage, customImageArray}
+    module.exports = { getCategoryImage, customImageArray, getGoodImage}
