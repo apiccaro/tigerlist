@@ -22,9 +22,7 @@ export async function PUT(request){
 async function emailNotify(listingData){
 
     //Determine email title and content based on post data
-    var emailTitle = 
-    "Flagged Listing from " + listingData.email.split('@')[0] 
-    + ": " + listingData.title
+    var emailTitle = "Flagged Listing"
 
     // var emailBody =
     // "User email: " + listingData.email
