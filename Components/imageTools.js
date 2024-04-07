@@ -2,12 +2,12 @@
 
 //Object mapping categories to images urls
     const categoryToImage = {
-        'Textbook': '/default_textbook.jpeg',
-        'Furniture': '/default_furniture.jpeg',
-        'Appliances': '/default_applicances.jpeg',
-        'Clothing': '/default_clothing.jpeg',
-        'Service': '/default_service.jpeg',
-        'Carpool': '/default_carpool.jpeg',
+        'Textbook': 'default_textbook.jpeg',
+        'Furniture': 'default_furniture.jpeg',
+        'Appliances': 'default_applicances.jpeg',
+        'Clothing': 'default_clothing.jpeg',
+        'Service': 'default_service.jpeg',
+        'Carpool': 'default_carpool.jpeg',
     };
 
     const nullUrl = '/empty100x100.png'
@@ -26,7 +26,7 @@
 
     function getGoodImage(imageName,category){
         if (imageName == "" || imageName==null){
-            return getCategoryImage(category)
+            return "/"+getCategoryImage(category)
         }
         else{
             return "/"+imageName

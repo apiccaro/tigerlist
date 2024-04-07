@@ -42,6 +42,13 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
     const { getGoodImage } = require('./imageTools');
     const imageUrl = getGoodImage(images[0],category);
 
+
+        // method to handle image loading error when a file name is invalid
+        const handleImageError = (e) => {
+            e.target.src = defaultUrl
+          };
+    
+
     return(
         <div>
             <div style={ProductBGStyle}>
@@ -67,6 +74,8 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                         alt="Product Image"
                         accept="image/*"
                         //className="dark:invert"
+                        onError={handleImageError} 
+
                         width={300}
                         height={100}
                         priority
