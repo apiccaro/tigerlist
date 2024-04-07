@@ -31,7 +31,7 @@ const ContactBoxStyle = {
     paddingRight: '20px'
 }
 
-const editListing = async (listingDict) => {
+async function editListing(listingDict) {
     const response = await fetch("http://localhost:3000/api/deleteListing",{
       method:"PUT",
       body : JSON.stringify({
@@ -40,15 +40,35 @@ const editListing = async (listingDict) => {
       },
       );
     await response;
-  };
+};
+
+async function testCall() {
+    const response = await fetch("http://localhost:3000/api/apiTest",{
+      method:"PUT",
+    },
+    );
+    await response;
+};
+
+async function flagButtonClicked(){
+    console.log("click!")
+    toggleFlagButton()
+    await testCall()
+}
+
+
+const toggleFlagButton = () => {
+        setIsActive(!isActive);
+};
+
 
 const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
 
     const [isActive, setIsActive] = useState(true);
 
-    const toggleFlagButton = () => {
-        setIsActive(!isActive);
-    };
+    // const toggleFlagButton = () => {
+    //     setIsActive(!isActive);
+    // };
 
     return(
         <aside style={{display: "flex", flexDirection: 'col', gap:'3rem', text:"white", padding:"1rem", }} className="flex flex-col gap-10 text-white p-4 mt-5">
@@ -87,7 +107,9 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
             </div>
             <button
             style={{height: '80px', width: '80px', alignItems: 'center', borderRadius: '10px', backgroundColor: 'black', borderColor: 'black'}}
-            onClick={"toggleFlagButton() ; editListing({listingID: listingID, title: title, price: price, description: description, category: category, condition: condition, location: location, email: email, phone: phone, images: images, flagged: !flagged})"}>
+            // onClick={"toggleFlagButton() ; editListing({listingID: listingID, title: title, price: price, description: description, category: category, condition: condition, location: location, email: email, phone: phone, images: images, flagged: !flagged})"}>
+            onClick={flagButtonClicked()}>
+
                 {isActive ? <Image
                                 src="/unflagged.svg"
                                 alt="Tiger Image"

@@ -81,7 +81,8 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                             borderRadius: '10px',
                             objectFit: 'scale-down',
                         }}
-                        width={250}
+
+                        width={175}
                         height={250}
                         priority
                     />

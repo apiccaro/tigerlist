@@ -74,13 +74,15 @@ const BuyProductBox = ({ listingID, title, price, description, category, conditi
             alt="Product Image"
             accept="image/*"
             className="flex flex-grow"
-            width={250}
-            height={250} 
+  
             onError={handleImageError} 
             style={{
               borderRadius: '10px',
-              objectFit: 'contain',
-          }}
+              objectFit: 'scale-down',
+            }}
+
+            width={175}
+            height={250}
             priority
           />
         </Link>
