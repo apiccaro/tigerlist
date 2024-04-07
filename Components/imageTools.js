@@ -26,7 +26,7 @@
 
     function getGoodImage(imageName,category){
         if (imageName == "" || imageName==null){
-            return "/"+getCategoryImage(category)
+            return +getCategoryImage(category)
         }
         else{
             return "/"+imageName
@@ -38,8 +38,8 @@
     //uses categoryToImage to get link to a default image
     function getCategoryImage(category) {
         //console.log("category:",category)
-        const defaultImageUrl = '/CCLogoDerp.png';
-        return categoryToImage[category] || defaultImageUrl;
+        const defaultImageUrl = 'CCLogoDerp.png';
+        return "/"+categoryToImage[category] || "/"+defaultImageUrl;
     };
 
     //returns a given image url if a corresponding image exists, or null if not found
