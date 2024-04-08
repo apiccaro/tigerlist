@@ -92,7 +92,7 @@ import Image from 'next/image';
     return(
         <aside className="flex flex-col text-white p-4">
             <h2 className="flex pl-10 mt-5 text-black text-4xl font-semibold"> {title} </h2>
-            <h2 className="flex pl-10 mt-5 text-white text-3xl font-semibold"> {price} </h2>
+            <h2 className="flex pl-10 mt-5 text-white text-3xl font-semibold"> {"$"+price} </h2>
 
             <div style={{ float: "left", margin: "10px 40px 0 30px"}}>
                 <img

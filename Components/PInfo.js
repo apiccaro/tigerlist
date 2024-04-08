@@ -102,7 +102,7 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
         // // + "\nimages: "+images
         // +"\nflagged: "+flagged
 
-        console.log("Whole listing object: ",listingObject)
+        //console.log("Whole listing object: ",listingObject)
 
 
 

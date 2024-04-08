@@ -18,8 +18,8 @@
     }
 
     function customImageArray(id,category){
-        console.log("customImageArray postkey:",id)
-        console.log("customImageArray category:",category)
+        // console.log("customImageArray postkey:",id)
+        // console.log("customImageArray category:",category)
         //return either a custom array, or an array with one image determined by getCategoryImage
         return customMap[id] || [getCategoryImage(category),nullUrl,nullUrl,nullUrl,nullUrl,nullUrl];
     

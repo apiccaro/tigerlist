@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import sendMail from './../../../moderation/sendMail';
-
+import sendMail from './../../moderation/sendMail'
 
 //Format a notification email and send to a moderator
 //Later on i'll want to just hand off the reqObject (or something from query response) and format the email elsewhere

@@ -100,7 +100,6 @@ export default function EditListing({searchParams}) {
       setLoc(data.location);
       setEmail(data.email);
       setPhoneNumber(data.phoneValue);
-      console.log(data.images)
       setPreviewImage(data.images[0])
       setPreviewImage1(data.images[1])
       setPreviewImage2(data.images[2])

@@ -3,19 +3,6 @@ import BuyProducts from "@/../Components/BuyProducts";
 const readline = require('readline');
 
 
-//simple api test method
-const tryDB = async () => {
-    console.log ("Called tryDB")
-  
-    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",
-    {
-      method:"GET",
-    })
-    .catch(error => console.error('Error: fetch failed in Components/BuyProducts.js: ', error));
-  
-    console.log ("Finished tryDB")
-};
-
 //api method that queries DB for all lisitngs 
 const allPostsFromDB = async () => {
   try {
