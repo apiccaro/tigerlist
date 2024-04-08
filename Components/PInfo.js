@@ -57,12 +57,22 @@ async function testCall(listingObject) {
 };
 
 
+async function flagListing(flagInfo) {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",{
+        method:"PUT",
+        body : JSON.stringify(
+            flagInfo
+        )
+      },)
+    var result = await response.json();
+    console.log(result)
+};
+
+
 const ProductInfo = ({post_key, title, price, description, category, condition, location, email, phone, flagged}) => {
-    console.log("pInfo - post_key:",post_key)
     const [isActive, setIsActive] = useState(true);
 
     async function flagButtonClicked(){
-        console.log("click! - "+post_key)
 
 
         var listingObject = {
@@ -78,6 +88,7 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
             flagged: flagged,
             message: "this is an object being sent to apiTest, with post_key "+post_key
         };
+
 
 
         

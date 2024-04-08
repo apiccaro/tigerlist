@@ -6,7 +6,6 @@ import Image from 'next/image';
 
   const PNI = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
-    console.log("PNI - post_key:",post_key)
 
     const [previewImage, setPreviewImage] = useState();
     const [previewImage1, setPreviewImage1] = useState();

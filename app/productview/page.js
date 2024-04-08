@@ -15,7 +15,6 @@ export default function Home({searchParams}) {
   const {productImages} = searchParams;
   const {isFlagged} = searchParams;
 
-  //console.log("productview debug print - post_key: ",post_key)
 
   return (
       <div className="bg-yellow-600 min-h-screen">
