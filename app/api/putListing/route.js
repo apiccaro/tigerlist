@@ -22,10 +22,10 @@ async function emailNotify(listingData){
     try {
         await sendMail(emailTitle,emailBody); 
         console.log("Email sent");
-        return NextResponse.json("Email sent");
+        //return NextResponse.json("Email sent");
     } catch (error) {
         console.error("Error sending email:", error);
-        return NextResponse.error(error.message, { status: 500 });
+        //return NextResponse.error(error.message, { status: 500 });
     }
 }
 
