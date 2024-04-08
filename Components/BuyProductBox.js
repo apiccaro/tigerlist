@@ -57,6 +57,7 @@ const BuyProductBox = ({ post_key, title, price, description, category, conditio
         <Link href={{
           pathname: '/productview',
           query: {
+            irrelevant_field:"im an irrelevant field",
             post_key:post_key,
             productTitle: title,
             productPrice: price,

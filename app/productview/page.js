@@ -20,8 +20,8 @@ export default function Home({searchParams}) {
   return (
       <div className="bg-yellow-600 min-h-screen">
         <div className="flex flex-row gap-2">
-          <PNI ID={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} flagged={isFlagged}/>
-          <ProductInfo ID={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} flagged={isFlagged}/>
+          <PNI post_key={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} flagged={isFlagged}/>
+          <ProductInfo post_key={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} flagged={isFlagged}/>
         </div>
       </div>
       );
