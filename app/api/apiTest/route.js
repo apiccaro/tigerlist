@@ -15,17 +15,15 @@ export async function PUT(request){
         console.log(reqParsed.message)
     }
     console.log("recieved: "+reqParsed)
-    emailNotify()
+    emailNotify(reqParsed)
     
     return NextResponse.json('Got and returned "'+(reqParsed.message+'"'||'a PUT request with no message field'))
 }
 
-
-
 async function emailNotify(listingData){
 
     //Determine email title and content based on post data
-    var emailTitle = "Flagged Listing"
+    var emailTitle = "Flagged Listing: "+(listingData.title||"couldn't get title")
 
     // var emailBody =
     // "User email: " + listingData.email

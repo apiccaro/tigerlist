@@ -60,11 +60,45 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
 
     const [isActive, setIsActive] = useState(true);
 
-
     async function flagButtonClicked(){
-        console.log("click!")
+        console.log("click! - "+listingID)
+
+
+        var listingObject = {
+            listingID: listingID,
+            title: title,
+            price: price,
+            description: description,
+            category: category,
+            condition: condition,
+            location: location,
+            email: email,
+            phone: phone,
+            flagged: flagged,
+            message: "this is an object being sent to apiTest, with listingID "+listingID
+        };
+
+
+        
+
+        // var argstring = 
+        // "\nlistingID: "+listingID+"\ntitle: "+title+ "\nprice: "+price
+        // +"\ndescription: "+description+ "\ncategory: "+category
+        // + "\ncondition: "+condition+"\nlocation: "+location
+        // + "\nemail: "+email+ "\nphone: "+phone
+        // // + "\nimages: "+images
+        // +"\nflagged: "+flagged
+
+        console.log("Whole listing object: ",listingObject)
+
+
+
+        
         setIsActive(!isActive); //toggle flag button. (replaced method call)
-        await testCall(listingID)
+        await testCall(listingObject)
+
+
+
     } 
     
     // const toggleFlagButton = () => {

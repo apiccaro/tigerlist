@@ -24,7 +24,7 @@ export default function ModeratePosts(){
         <div className="flex flex-col gap-1 text-xl font-semibold">
             <ProductsGrid className="flex flex-grow">
             {myListings.map((listing, index) => (
-                <ModeratePostsBox key={index} listingID={listing.listingID} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phone} images={listing.images} flagged={listing.flagged}/>
+                <ModeratePostsBox key={index} listingID={listing.post_key} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phonevalue} images={listing.images} flagged={listing.flagged}/>
             ))}
             </ProductsGrid>
         </div>
