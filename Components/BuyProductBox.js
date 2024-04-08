@@ -36,7 +36,7 @@ const RowStyle = {
   gap: '8px',
 };
 
-const BuyProductBox = ({ listingID, title, price, description, category, condition, location, email, phone, images, flagged }) => {
+const BuyProductBox = ({ post_key, title, price, description, category, condition, location, email, phone, images, flagged }) => {
 
 
     // Get good image name, either given or based on category

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import EditLink from './EditLink';
 import Link from 'next/link';
 
-const ActiveInactive = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const ActiveInactive = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
   // Used in button state to change button color and text
   const [isActive, setIsActive] = useState(true);
 

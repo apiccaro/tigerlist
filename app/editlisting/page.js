@@ -21,7 +21,7 @@ const editListing = async (listingDict) => {
 };
 
 export default function EditListing({searchParams}) {
-  //var id=listingID.id;
+  //var id=post_key.id;
   
   const SMALLIMAGE='100px';
   const [title, setTitle] = useState();
@@ -69,7 +69,7 @@ export default function EditListing({searchParams}) {
       });
     };*/
 
-    const {listingID} = searchParams;
+    const {post_key} = searchParams;
     const {testTitle} = searchParams;
     const {testPrice} = searchParams;
     const {testDescription} = searchParams;
@@ -155,7 +155,7 @@ export default function EditListing({searchParams}) {
       active: "true",
       flagged: isFlagged,
       moderator_ban:"false",
-      post_key:listingID,
+      post_key:post_key,
     }
     if(editListing(dict)){
       toast("Your listing has been edited!");

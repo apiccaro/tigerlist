@@ -3,7 +3,7 @@ import PNI from "@/Components/PNameImage"
 import ProductInfo from "@/Components/PInfo";
 
 export default function Home({searchParams}) {
-  const {listingID} = searchParams;
+  const {post_key} = searchParams;
   const {productTitle} = searchParams;
   const {productPrice} = searchParams;
   const {productDescription} = searchParams;
@@ -15,13 +15,13 @@ export default function Home({searchParams}) {
   const {productImages} = searchParams;
   const {isFlagged} = searchParams;
 
-  //console.log("productview debug print - listingID: ",listingID)
+  //console.log("productview debug print - post_key: ",post_key)
 
   return (
       <div className="bg-yellow-600 min-h-screen">
         <div className="flex flex-row gap-2">
-          <PNI ID={listingID} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} flagged={isFlagged}/>
-          <ProductInfo ID={listingID} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} flagged={isFlagged}/>
+          <PNI ID={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} flagged={isFlagged}/>
+          <ProductInfo ID={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} flagged={isFlagged}/>
         </div>
       </div>
       );

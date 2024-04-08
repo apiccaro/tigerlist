@@ -35,7 +35,7 @@ const buttonStyle = {
 
 
 
-const SellProductBox = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const SellProductBox = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
 
     //Get good image name, either given or category default
@@ -57,7 +57,7 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                 <Link href={{
                     pathname: '/productview',
                     query: {
-                        productID: listingID,
+                        productID: post_key,
                         productTitle: title,
                         productPrice: price,
                         productDescription: description,
@@ -92,7 +92,7 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                 <Link href={{
                     pathname: '/productview',
                     query: {
-                        productID: listingID,
+                        productID: post_key,
                         productTitle: title,
                         productPrice: price,
                         productDescription: description,
@@ -108,7 +108,7 @@ const SellProductBox = ({listingID, title, price, description, category, conditi
                     {title}
                 </Link>
                 {/* Need to send data to ActiveInactive for edit link to access */}
-                <ActiveInactive listingID={listingID} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} flagged={flagged}/>
+                <ActiveInactive post_key={post_key} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} flagged={flagged}/>
             </div>
         </div>
     );

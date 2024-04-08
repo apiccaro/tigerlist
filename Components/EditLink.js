@@ -28,14 +28,14 @@ const EditStyle = {
     
 };
 
-const EditLink = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const EditLink = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
     return(
         <Wrapper>
             <div style={LinkBGStyle}>
                 <Link href={{
                     pathname: '/editlisting',
                     query: {
-                        listingID: listingID,
+                        post_key: post_key,
                         testTitle: title,
                         testPrice: price,
                         testDescription: description,

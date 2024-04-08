@@ -3,12 +3,12 @@ export async function POST(request){
     
     //Convert given request from json response into a javascript object
     const reqObject = await request.json()
-    const listingID = reqObject.id
+    const post_key = reqObject.id
 
 
     //Assemble string for database query
     const queryText = "SELECT * FROM PostTable WHERE post_key = $1;";
-    const queryValues = [listingID]; 
+    const queryValues = [post_key]; 
 
 
     //Instantiate database client instance

@@ -32,7 +32,7 @@ const ContactBoxStyle = {
     paddingRight: '20px'
 }
 
-const ModProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
+const ModProductInfo = ({post_key, title, price, description, category, condition, location, email, phone, flagged}) => {
 
     const [isActive, setIsActive] = useState(true);
 

@@ -36,13 +36,12 @@ async function editListing(listingDict) {
       method:"PUT",
       body : JSON.stringify({
       listing:(listingDict),
-      message:(listingID)
+      message:(post_key)
       })
       },
       );
     await response;
 };
-
 
 
 async function testCall(listingObject) {
@@ -58,17 +57,16 @@ async function testCall(listingObject) {
 };
 
 
-
-const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
+const ProductInfo = ({post_key, title, price, description, category, condition, location, email, phone, flagged}) => {
 
     const [isActive, setIsActive] = useState(true);
 
     async function flagButtonClicked(){
-        console.log("click! - "+listingID)
+        console.log("click! - "+post_key)
 
 
         var listingObject = {
-            listingID: listingID,
+            post_key: post_key,
             title: title,
             price: price,
             description: description,
@@ -78,14 +76,14 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
             email: email,
             phone: phone,
             flagged: flagged,
-            message: "this is an object being sent to apiTest, with listingID "+listingID
+            message: "this is an object being sent to apiTest, with post_key "+post_key
         };
 
 
         
 
         // var argstring = 
-        // "\nlistingID: "+listingID+"\ntitle: "+title+ "\nprice: "+price
+        // "\npost_key: "+post_key+"\ntitle: "+title+ "\nprice: "+price
         // +"\ndescription: "+description+ "\ncategory: "+category
         // + "\ncondition: "+condition+"\nlocation: "+location
         // + "\nemail: "+email+ "\nphone: "+phone
@@ -145,7 +143,7 @@ const ProductInfo = ({listingID, title, price, description, category, condition,
             </div>
             <button
             style={{height: '80px', width: '80px', alignItems: 'center', borderRadius: '10px', backgroundColor: 'black', borderColor: 'black'}}
-            // onClick={"toggleFlagButton() ; editListing({listingID: listingID, title: title, price: price, description: description, category: category, condition: condition, location: location, email: email, phone: phone, images: images, flagged: !flagged})"}>
+            // onClick={"toggleFlagButton() ; editListing({post_key: post_key, title: title, price: price, description: description, category: category, condition: condition, location: location, email: email, phone: phone, images: images, flagged: !flagged})"}>
             onClick={flagButtonClicked}>
 
                 {isActive ? <Image

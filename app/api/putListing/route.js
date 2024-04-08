@@ -38,7 +38,7 @@ export async function POST(request){
 
     //Convert given request from json response into a javascript object
     const reqObject = await request.json()
-    const listingID = reqObject.id
+    const post_key = reqObject.id
     console.log("Object given to api/putlisting:")
     console.log(reqObject)
 
