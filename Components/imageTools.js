@@ -4,7 +4,7 @@
     const categoryToImage = {
         'Textbook': 'default_textbook.jpeg',
         'Furniture': 'default_furniture.jpeg',
-        'Appliances': 'default_applicances.jpeg',
+        'Appliances': 'default_appliances.jpeg',
         'Clothing': 'default_clothing.jpeg',
         'Service': 'default_service.jpeg',
         'Carpool': 'default_carpool.jpeg',
