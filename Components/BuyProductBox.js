@@ -109,9 +109,19 @@ const BuyProductBox = ({ post_key, title, price, description, category, conditio
           style={ProductStyle}>
           {title}
         </Link>
-        <div style={PriceStyle}>
+
+
+
+        {/* <div style={PriceStyle}>
           {price}
+        </div> */}
+
+
+        <div style={PriceStyle}>
+          ${price} {/* Adding dollar sign here */}
         </div>
+
+
       </div>
     </div>
   )
