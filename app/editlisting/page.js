@@ -658,6 +658,7 @@ export default function EditListing({searchParams}) {
                 <option value="Clothing">Clothing</option>
                 <option value="Service">Service</option>
                 <option value="Carpool">Carpool</option>
+                <option value="Other">Other</option>
               </select>
               <small style={{ color: 'red' }}>
                 <br></br>

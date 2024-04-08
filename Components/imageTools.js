@@ -8,6 +8,7 @@
         'Clothing': 'default_clothing.jpeg',
         'Service': 'default_service.jpeg',
         'Carpool': 'default_carpool.jpeg',
+        'Other': 'default_service.jpeg',
     };
 
     const nullUrl = '/empty100x100.png'
