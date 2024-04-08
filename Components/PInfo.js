@@ -73,6 +73,7 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
     const [isActive, setIsActive] = useState(true);
 
     async function flagButtonClicked(){
+        setIsActive(!isActive); //toggle flag button. (replaced method call)
 
 
         var listingObject = {
@@ -85,7 +86,7 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
             location: location,
             email: email,
             phone: phone,
-            flagged: flagged,
+            flagged: !flagged,
             message: "this is an object being sent to apiTest, with post_key "+post_key
         };
 
@@ -106,7 +107,6 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
 
 
         
-        setIsActive(!isActive); //toggle flag button. (replaced method call)
         await testCall(listingObject)
 
 

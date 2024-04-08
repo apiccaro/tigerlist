@@ -84,7 +84,9 @@ export async function POST(request){
     }
     else if (query_status == 1){
         console.log("Database successfully queried with api/editListing") //comment out once everything is properly tested.
-        emailNotify(reqObject)
+        if(reqObject.flagged){
+            emailNotify(reqObject)
+        }
         return  NextResponse.json(result.rows)
         //return NextResponse.json('true') //(previous version) Not sure what annika actually wanted to be returned here. will test.
     }
