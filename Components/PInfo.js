@@ -58,7 +58,7 @@ async function testCall(listingObject) {
 
 
 const ProductInfo = ({post_key, title, price, description, category, condition, location, email, phone, flagged}) => {
-
+    console.log("pInfo - post_key:",post_key)
     const [isActive, setIsActive] = useState(true);
 
     async function flagButtonClicked(){

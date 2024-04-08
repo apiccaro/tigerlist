@@ -37,6 +37,7 @@ const RowStyle = {
 };
 
 const BuyProductBox = ({ post_key, title, price, description, category, condition, location, email, phone, images, flagged }) => {
+    console.log("making a buybox with post_key: "+post_key)
 
 
     // Get good image name, either given or based on category

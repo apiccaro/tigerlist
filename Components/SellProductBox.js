@@ -36,7 +36,7 @@ const buttonStyle = {
 
 
 const SellProductBox = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
-
+    console.log("making a sellbox with post_key: "+post_key)
 
     //Get good image name, either given or category default
     const { getGoodImage,getCategoryImage } = require('./imageTools');
