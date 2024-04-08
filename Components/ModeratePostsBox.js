@@ -39,7 +39,7 @@ const ModeratePostsBox = ({post_key, title, price, description, category, condit
                 <Link href={{
                     pathname: '/modproductview',
                     query: {
-                        productID: post_key,
+                        post_key: post_key,
                         productTitle: title,
                         productPrice: price,
                         productDescription: description,
