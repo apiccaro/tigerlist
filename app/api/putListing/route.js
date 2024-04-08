@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import sendMail from './../../moderation/sendMail';
+import sendMail from './../../../moderation/sendMail';
 
 
 //Format a notification email and send to a moderator

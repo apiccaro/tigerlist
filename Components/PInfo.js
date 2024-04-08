@@ -58,8 +58,8 @@ async function testCall(listingObject) {
 
 
 async function flagListing(flagInfo) {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",{
-        method:"PUT",
+    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"flagListing",{
+        method:"POST",
         body : JSON.stringify(
             flagInfo
         )

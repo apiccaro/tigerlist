@@ -38,7 +38,7 @@ export async function POST(request){
     //Assemble string components for database query text
     const queryText =
         "UPDATE PostTable SET " +
-        "flagged = $1, " +
+        "flagged = $1 " +
         "WHERE post_key = $2;";
 
 
