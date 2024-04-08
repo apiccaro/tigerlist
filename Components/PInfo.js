@@ -43,18 +43,21 @@ async function editListing(listingDict) {
     await response;
 };
 
-async function testCall(listingID_message) {
+
+
+async function testCall(listingObject) {
     console.log("using testCall()")
     const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",{
         method:"PUT",
-        body : JSON.stringify({
-            message:(listingID_message)
-        })
-        },
-        );
+        body : JSON.stringify(
+            listingObject
+        )
+      },)
     var result = await response.json();
     console.log(result)
 };
+
+
 
 const ProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
 
