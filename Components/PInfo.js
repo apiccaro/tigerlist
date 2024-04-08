@@ -107,7 +107,7 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
 
 
         
-        await testCall(listingObject)
+        await flagListing(listingObject)
 
 
 
