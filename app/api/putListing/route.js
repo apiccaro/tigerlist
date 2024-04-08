@@ -21,10 +21,10 @@ async function emailNotify(listingData){
     try {
         await sendMail(emailTitle,emailBody); 
         console.log("Email sent");
-        return NextResponse.json("Email sent");
+        return
     } catch (error) {
         console.error("Error sending email:", error);
-        return NextResponse.error(error.message, { status: 500 });
+        return
     }
 }
 
@@ -106,7 +106,7 @@ export async function POST(request){
     if (query_status == 0){
         console.error('Error executing query:', error_status);
         console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
+        return NextResponse.error(error.message, { status: 500 });
     }
     else if (query_status == 1){
         console.log("Database successfully queried with api/putListing") //comment out once everything is properly tested.
