@@ -41,9 +41,9 @@ const allPostsFromDB = async () => {
 console.log("using allPostsFromDB() in main body")
 let result1 = await allPostsFromDB();
 console.log("finished allPostsFromDB() in main body")
-if (result1 !== undefined || result1 !== null){
-  console.log("sample listing: "+result1[15]);
-}
+// if (result1 !== undefined || result1 !== null){
+//   console.log("sample listing: "+result1[15]);
+// }
 
 
 
@@ -54,9 +54,9 @@ export default async function Home() {
     let result2 = await allPostsFromDB();
     console.log("finished allPostsFromDB() in Home()")
 
-    if (result2 !== undefined || result2 !== null){
-      console.log("sample listing: "+result2[12]);
-    }
+    // if (result2 !== undefined || result2 !== null){
+    //   console.log("sample listing: "+result2[12]);
+    // }
     
     return (
         <div className="flex flex-row bg-yellow-600 min-h-screen">

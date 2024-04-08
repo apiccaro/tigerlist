@@ -67,11 +67,6 @@ export default async function BuyProducts(){
     allListings = apiListings
   }
 
-  console.log("postkey 0: "+allListings[0].post_key)
-  console.log("postkey 2: "+allListings[2].post_key)
-  console.log("postkey 10: "+allListings[10].post_key)
-  console.log("postkey 15: "+allListings[15].post_key)
-
   
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
