@@ -56,6 +56,7 @@ const BuyProductBox = ({ post_key, title, price, description, category, conditio
         <Link href={{
           pathname: '/productview',
           query: {
+            post_key:post_key,
             productTitle: title,
             productPrice: price,
             productDescription: description,
@@ -92,6 +93,7 @@ const BuyProductBox = ({ post_key, title, price, description, category, conditio
         <Link href={{
           pathname: '/productview',
           query: {
+            post_key:post_key,
             productTitle: title,
             productPrice: price,
             productDescription: description,

@@ -67,11 +67,15 @@ export default async function BuyProducts(){
     allListings = apiListings
   }
 
+  console.log("postkey 0: "+allListings[0].post_key)
+  console.log("postkey 2: "+allListings[2].post_key)
+  console.log("postkey 10: "+allListings[10].post_key)
+  console.log("postkey 15: "+allListings[15].post_key)
+
   
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
           {allListings.map((listing, index) => (
-
                 <BuyProductBox key={index} post_key={listing.post_key} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phonevalue} images={listing.images} flagged={listing.flagged}/>
             ))}
         </div>

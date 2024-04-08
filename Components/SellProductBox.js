@@ -57,7 +57,7 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
                 <Link href={{
                     pathname: '/productview',
                     query: {
-                        productID: post_key,
+                        post_key: post_key,
                         productTitle: title,
                         productPrice: price,
                         productDescription: description,
@@ -92,7 +92,7 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
                 <Link href={{
                     pathname: '/productview',
                     query: {
-                        productID: post_key,
+                        post_key: post_key,
                         productTitle: title,
                         productPrice: price,
                         productDescription: description,
