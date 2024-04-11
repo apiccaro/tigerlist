@@ -11,9 +11,12 @@ import Link from 'next/link';
 import BuyProductBox from "./BuyProductBox";
 import React from "react";
 
-//Fetch all new database posts, sorts by newest by default
-const getNew = async (listingDict) => {
-  console.log("Calling getNew in BuyProducts.js")
+
+/**Fetch all new database posts, sorts by newest by default
+* 
+ * @returns new posts
+ */
+const getAllPosts = async () => {
   var data;
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getAllListings",{
     method:"GET",
@@ -25,8 +28,11 @@ const getNew = async (listingDict) => {
 return data
 };
 
+/**Fetch user's email thrtough new database posts, sorts by newest by default
+ * 
+ * @returns user email
+ */
 const getCasEmail = async () => {
-  console.log("Calling getCasEmail in BuyProducts.js")
   var data;
 
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserEmail",{
@@ -62,7 +68,7 @@ export default async function BuyProducts(){
   // const casResult = getCasEmail();
   // console.log("Did it work?",casResult) //it did not. Doesnt seem like cas doesn't wanna be used by api methods.
 
-  const apiListings = await getNew();
+  const apiListings = await getAllPosts();
   if (apiListings!==undefined){
     allListings = apiListings
   }

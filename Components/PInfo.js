@@ -47,36 +47,11 @@
  }
  
 
+
      /**
       * Edits the listing's status to be flagged or unflagged.
       * @param {Object} listingDict - The dictionary containing the listing details.
       */
-async function editListing(listingDict) {
-    const response = await fetch("http://localhost:3000/api/deleteListing",{
-      method:"PUT",
-      body : JSON.stringify({
-      listing:(listingDict),
-      message:(post_key)
-      })
-      },
-      );
-    await response;
-};
-
-
-async function testCall(listingObject) {
-    console.log("using testCall()")
-    const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"apiTest",{
-        method:"PUT",
-        body : JSON.stringify(
-            listingObject
-        )
-      },)
-    var result = await response.json();
-    console.log(result)
-};
-
-
 async function flagListing(flagInfo) {
     const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"flagListing",{
         method:"POST",
@@ -85,7 +60,6 @@ async function flagListing(flagInfo) {
         )
       },)
     var result = await response.json();
-    console.log(result)
 };
 
 
@@ -116,17 +90,6 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
             message: "this is an object being sent to apiTest, with post_key "+post_key
         };
         
-        //Debug Print, worth keeping cause bad object names are frequently sent here
-        // var argstring = 
-        // "\npost_key: "+post_key+"\ntitle: "+title+ "\nprice: "+price
-        // +"\ndescription: "+description+ "\ncategory: "+category
-        // + "\ncondition: "+condition+"\nlocation: "+location
-        // + "\nemail: "+email+ "\nphone: "+phone
-        // // + "\nimages: "+images
-        // +"\nflagged: "+flagged
-
-        //console.log("Whole listing object: ",listingObject)
-
         
         await flagListing(listingObject)
 

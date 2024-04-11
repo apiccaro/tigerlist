@@ -19,6 +19,14 @@ const FilterOptions = {
     // Add this line for left padding
 }
 
+/** Asynchronously get set of filtered listings. This wont do anything for a few reasons
+ * I always wanted to have features like this but was under the impresssion front end team wanted to keep it simple and just sort through themselves on the pages
+ * 
+ * @param {*} category 
+ * @param {*} condition 
+ * @param {*} location 
+ * @returns 
+ */
 const getAllFilteredListings = async (category, condition, location) => {
     const response = await fetch("http://localhost:3000/api/getAllFilteredListings",{
       method:"GET",

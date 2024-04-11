@@ -48,44 +48,15 @@ import Image from 'next/image';
     }
 
 
-
-    function getDims(){
-
-    }
-
-
-
-
-
-
-
-    //debug print. Cant for the life of me tell why ID always comes undefined, but everything else is fine
-    // var argstring = 
-    // "\nID: "+ID+"\ntitle: "+title+ "\nprice: "+price
-    // +"\ndescription: "+description+ "\ncategory: "+category
-    // + "\ncondition: "+condition+"\nlocation: "+location
-    // + "\nemail: "+email+ "\nphone: "+phone
-    // + "\nimages: "+images+"\nflagged: "+flagged
-
-    // console.log("Whole given object: ",argstring)
-
-
-
-
     //Get a better image array by replacing a first null image with default, and other nulls with blank image.
 
     const { getCategoryImage} = require('./imageTools');
     const defaultUrl = getCategoryImage(category)
     const nullUrl = '/empty100x100.png'
 
-    // console.log("images: ",images)
     images.forEach((image, index) => {
         if (image == null || image == "") {
-            // console.log("null image triggered:")
             if (index === 0) {
-                // console.log("first image was null")
-                // console.log("true null: ",images[0]==null)
-                // console.log("empty string: ",images[0]=="")
                 images[0] = defaultUrl;
             } else {
                 images[index] = nullUrl;

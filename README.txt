@@ -7,13 +7,16 @@ This version:
 - Not planning to add any functionality changes or improvements
 
 To Do:
-+ Add all of Jack's documentation.
+- Add j_moran scripts, j_moran/tests, and whatever other psql stuff is worth hanging onto
 - Check if this is as much as annika wants to document her code
-- If time allows, make a set of fetch methods that are imported instead of varied file to file.
-- Make SMTP code more modular, update documentation. 
-- Remove vestigial methods, comment tests or test references to tests.
-- Make api code (mainly database methods) modular.
-- Make folder for manual scripts, add all scripts living in my /j_moran folder scripts
+- Clean up main tigerlist folder
 - If Lucy writes more scripts, make sure to get them added
-- Add some record of psql configuration and content.
 - Replace README.txt (this doc) with contents of readme-for-final.txt, and update its contents substantially.
+
+Done:
+- Add all of Jack's documentation.
+- Make SMTP code more modular, update documentation. 
+- Make api code (mainly database methods) modular.
+- Remove vestigial methods, comment tests or test references to tests.
+
+

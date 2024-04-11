@@ -7,7 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let dict;
 
-//Actual method for this page's api use. Currently replaced by allPostsFromDB in line 187.
+
+/** Asynchronously adds listing to db
+  * @param {Object} listingDict - The listing information
+  *
+ * @returns true or false based on query success
+ */
 const makeListingFetcher = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
     method:"POST",
@@ -17,10 +22,15 @@ const makeListingFetcher = async (listingDict) => {
   },)
 
   const data = await response.json();
-  console.log(data);
   return data
 
 };
+
+/** Some stub that would be part of the photo upload process
+ * Wish I knew about these before a week ago
+ * @param {*} imageData 
+ * @returns true or false based on query success
+ */
 const uploadImages = async (imageData) => {
   const response = await fetch("http://localhost:3000/api/uploadImages",{
     method:"POST",
@@ -145,16 +155,9 @@ export default function MakeListing() {
 
     }
     
-    //getOneUser();  
-    //var waiting = await allPostsFromDB(); //swapping api method to test ECONNREFUSED bug in buyproducts.
-
-    // var DBemail = await getEmail();
-    // console.log("Email: ",DBemail)
     var waiting = await makeListingFetcher(dict);
 
 
-    
-  console.log(waiting);
   if(waiting=="true"){
       toast("Your listing has been uploaded!");
   }

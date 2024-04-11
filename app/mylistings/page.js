@@ -24,7 +24,6 @@ const getUser = async () => {
       method: "GET",
   });
   const data = await response.json();
-  console.log(data)
   return data;
 }
 
@@ -63,7 +62,7 @@ export default function Home() {
 
 }
 
-//Version from Jack's branch. Relies on fetches that were never supported 
+//Version from Jack's branch. Relies on fetches that I never saw work
 
 // export default function Home() {
 //   const [moderatedUsers, setModeratedUsers] = useState();

@@ -54,7 +54,6 @@ const ActiveInactive = ({post_key, title, price, description, category, conditio
   const toggleButtonText = () => {
     setIsActive(!isActive);
   };
-
    
    /**
     * Handles the click event of the button.

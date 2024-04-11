@@ -54,10 +54,6 @@ async function queryDB(queryText,queryValues,callerName){
     } 
     await client.end();
 
-    //console.log("error_status: "+error_status)
-    //await console.log("result.rows: "+result.rows)
-    //await console.log("JSON.stringify(result.rows): "+JSON.stringify(result.rows))
-
     //Define returned object using query status variables
     var queryOutcome = {
         'error_status':error_status,
