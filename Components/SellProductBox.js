@@ -118,7 +118,7 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
                         listerEmail: email,
                         listerPhone: phone,
                         productImages: images,
-                        isActive: true,
+                        active: true,
                         isFlagged: flagged,
                     } 
                 }} style={linkStyle}>

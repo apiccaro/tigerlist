@@ -25,7 +25,7 @@ export async function POST(request){
 
     //Return set of listings if no error occurred, false if one did
     if (queryOutcome.error_status==undefined){
-        return NextResponse.json(queryOutcome.result)
+        return NextResponse.json(queryOutcome.result.rows)
     }
     else{
         return NextResponse.json('false')

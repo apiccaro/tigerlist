@@ -44,7 +44,7 @@ import Link from 'next/link';
   * @param {Object} props - The props containing listing information.
   * @returns {JSX.Element} The JSX element representing the active/inactive button.
   */
-const ActiveInactive = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const ActiveInactive = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged, active}) => {
   // Used in button state to change button color and text
   const [isActive, setIsActive] = useState(true);
 

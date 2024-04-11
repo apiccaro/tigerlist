@@ -22,7 +22,7 @@ export async function GET() {
 
     //Return set of users if no error occurred.
     if (queryOutcome.error_status==undefined){
-        return NextResponse.json(queryOutcome.result)
+        return NextResponse.json(queryOutcome.result.rows)
     }
     else{
         return NextResponse.json([])

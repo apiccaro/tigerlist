@@ -43,12 +43,10 @@ async function queryDB(queryText,queryValues,callerName){
     
     //Try to connect to database and query.
     try {
-        console.log("about to try connecting for "+callerName)
         await client.connect();
         
         result = await client.query(queryText,queryValues);
         // result = await client.query("SELECT * FROM PostTable WHERE active = true ORDER BY post_timestamp DESC NULLS LAST;");
-        console.log("seemed to query without errors!")
     } 
     catch (error) {
         console.log("Something went wrong in "+callerName)
@@ -63,7 +61,7 @@ async function queryDB(queryText,queryValues,callerName){
     //Define returned object using query status variables
     var queryOutcome = {
         'error_status':error_status,
-        result:result.rows
+        'result':result
     }
 
     return queryOutcome
