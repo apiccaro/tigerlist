@@ -48,8 +48,7 @@
     }
     else {
         console.log("Database successfully queried with api/flagListing") //comment out once everything is properly tested.
-        console.log("Query result:\n",queryOutcome.result) //debug print
-        emailNotify(reqObject)
+        //console.log("Query result:\n",queryOutcome.result) //debug print
     }}
 
 

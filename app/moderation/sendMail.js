@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
 
-export default async function sendMail(emailTitle,emailBody) {
+async function sendMail(emailTitle,emailBody) {
 
     // Create transporter instance with app credentials
     const transporter = nodemailer.createTransport({
@@ -32,4 +32,31 @@ export default async function sendMail(emailTitle,emailBody) {
         console.error('Error sending email:', error);
         throw error;
     }
+
 }
+
+async function emailNotifyFlag(listingData){
+
+    //Determine email title and content based on post data
+    var emailTitle = "Flagged Listing: "+(listingData.title||"couldn't get title")
+
+    var emailBody =
+    "User email: " + listingData.email
+    + "\n\nTitle: " + listingData.title
+    + "\nprice: " + listingData.price 
+    + "\ndescription: " + listingData.description
+
+    //Try sending the email
+    //Maybe makes sense to log failures in a db table or text file, since errors wont neccesarrily happen when youre sitting at the computer
+    try {
+        await sendMail(emailTitle,emailBody); 
+        console.log("Email sent");
+        //return NextResponse.json("Email sent");
+    } catch (error) {
+        console.error("Error sending email:", error);
+        //return NextResponse.error(error.message, { status: 500 });
+    }
+}
+
+module.exports = {sendMail, emailNotifyFlag} 
+
