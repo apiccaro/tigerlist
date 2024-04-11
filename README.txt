@@ -1,33 +1,18 @@
-TigerList is a website for Colorado College to buy, sell and exchange goods. Mimicking an online marketplace, TigerList allows only Colorado College students to buy and sell goods. Instead of other online marketplaces, TigerList guarantees products are within walking distance, are in safe locations and are amongst other students. This increases safety of students and reusability of any item on campus. Colorado College students have no single interface to message each other about buying and selling goods. Messages end up in class GroupMes or Instagram stories or by word of mouth. TigerList is a confluence for students to buy and sell goods without going to extreme measures. 
-The website has a Colorado College sign in with Duopush to confirm a student’s identity. From there, the student can browse listings and sort them, make a listing, and edit one of their personal listings. Based on other online marketplaces, TigerList has a familiarity that students can easily navigate. 
+This version: 
+- Branch copied from demo-monday on 4/10/24.
+- demo-monday was a slightly tweaked copy of Jay-B6, which holds pretty much all work since Block 4. No meaningful difference between them.
+- Will merge in Jack's documentation. A lot will be outdated but I'll match his conventions and update as I go through.
 
+- Everything works in current state, response bodies still break when cas is toggled on.
+- Not planning to add any functionality changes or improvements
 
-This is a [Next.js](https://nextjs.org/) project using HTML/CSS with a PostgreSQL database to be implemented and to eventually be hosted on Colorado College's server.
-
-First, run the development server: 
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-
-
-
-
-
-
-
-
-Current notable changes:
-3/5 - Components/BuyProductBox - replacing image variable with reference to image in public folder so DB listings can show up right.
-3/5 - Components/BuyProducts - Makes API call and puts contents in the same array to be displayed.
-
-3/5 - Some other format changes in route.js
+To Do:
+- Add all of Jack's documentation.
+- If time allows, make a set of fetch methods that are imported instead of varied file to file.
+- Make SMTP code more modular, update documentation. 
+- Remove vestigial methods, comment tests or test references to tests.
+- Make api code (mainly database methods) modular.
+- Make folder for manual scripts, add all scripts living in my /j_moran folder scripts
+- If Lucy writes more scripts, make sure to get them added
+- Add some record of psql configuration and content.
+- Replace README.txt (this doc) with contents of readme-for-final.txt, and update its contents substantially.
