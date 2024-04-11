@@ -18,7 +18,7 @@ export async function DELETE(request){
     const queryValues = [reqObject.post_key];
 
     //Query database with assembled text and values
-    const queryOutcome = queryDB(queryText,queryValues,"deleteListing/route.js")
+    const queryOutcome = await queryDB(queryText,queryValues,"deleteListing/route.js")
 
     //Report outcome of query
     reportOutcome(queryText,queryValues,queryOutcome,"deleteListing/route.js")

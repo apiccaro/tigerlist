@@ -24,7 +24,7 @@ export async function POST(request){
     ];
 
     //Query database with assembled text and values
-    const queryOutcome = queryDB(queryText,queryValues,"flagListing/route.js")
+    const queryOutcome = await queryDB(queryText,queryValues,"flagListing/route.js")
 
     //Report outcome of query
     reportOutcome(queryText,queryValues,queryOutcome,"flagListing/route.js")

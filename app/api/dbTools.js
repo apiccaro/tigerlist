@@ -43,8 +43,12 @@ async function queryDB(queryText,queryValues,callerName){
     
     //Try to connect to database and query.
     try {
+        console.log("about to try connecting for "+callerName)
         await client.connect();
+        
         result = await client.query(queryText,queryValues);
+        // result = await client.query("SELECT * FROM PostTable WHERE active = true ORDER BY post_timestamp DESC NULLS LAST;");
+        console.log("seemed to query without errors!")
     } 
     catch (error) {
         console.log("Something went wrong in "+callerName)
@@ -52,22 +56,27 @@ async function queryDB(queryText,queryValues,callerName){
     } 
     await client.end();
 
+    //console.log("error_status: "+error_status)
+    //await console.log("result.rows: "+result.rows)
+    //await console.log("JSON.stringify(result.rows): "+JSON.stringify(result.rows))
+
     //Define returned object using query status variables
     var queryOutcome = {
-        error_status:error_status,
-        result:result
+        'error_status':error_status,
+        result:result.rows
     }
+
     return queryOutcome
 }
 
 
 /**reportOutcome prints query outcome to terminal based on outcome of query and const booleans deciding what gets printed
  * 
- * @param {*} queryText - main text used in query, useful for checking why a query went wrong
- * @param {*} queryValues - values used in query, useful for checking why a query went wrong
- * @param {*} queryOutcome - object representing the result of the query, used for conditional logic and reporting
+ * @param {string} queryText - main text used in query, useful for checking why a query went wrong
+ * @param {Array<string>} queryValues - values used in query, useful for checking why a query went wrong
+ * @param {object} queryOutcome - object representing the result of the query, used for conditional logic and reporting
  */
-async function reportOutcome(queryText,queryValues,queryOutcome,callerName) {
+function reportOutcome(queryText,queryValues,queryOutcome,callerName) {
 if (queryOutcome.error_status!=undefined){
     if (DO_API_ERROR_PRINT){
         console.error('Error executing query:', queryOutcome.error_status);

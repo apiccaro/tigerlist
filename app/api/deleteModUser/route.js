@@ -24,7 +24,7 @@ export async function POST(request){
 
 
     //Query database with assembled text and values
-    const queryOutcome = queryDB(queryText,queryValues,"deleteModUser/route.js")
+    const queryOutcome = await queryDB(queryText,queryValues,"deleteModUser/route.js")
 
     //Report outcome of query
     reportOutcome(queryText,queryValues,queryOutcome,"deleteModUser/route.js")

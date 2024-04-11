@@ -46,7 +46,7 @@ export async function POST(request){
     ];
 
     //Query database with assembled text and values
-    const queryOutcome = queryDB(queryText,queryValues,"editListing/route.js")
+    const queryOutcome = await queryDB(queryText,queryValues,"editListing/route.js")
 
     //Report outcome of query
     reportOutcome(queryText,queryValues,queryOutcome,"editListing/route.js")

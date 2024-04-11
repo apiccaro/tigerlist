@@ -18,14 +18,14 @@ export async function POST(request){
     const queryValues = [reqObject.email]; 
 
     //Query database with assembled text and values
-    const queryOutcome = queryDB(queryText,queryValues,"getUser/route.js")
+    const queryOutcome = await queryDB(queryText,queryValues,"getUser/route.js")
 
     //Report outcome of query
     reportOutcome(queryText,queryValues,queryOutcome,"getUser/route.js")
 
     //Return user data object if no error occurred, false if one did
     if (queryOutcome.error_status==undefined){
-        return NextResponse.json(reportOutcome.result)
+        return NextResponse.json(queryOutcome.result)
     }
     else{
         return NextResponse.json('false')

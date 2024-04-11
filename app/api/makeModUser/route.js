@@ -23,7 +23,7 @@ export async function POST(request){
     ];
 
     //Query database with assembled text and values
-    const queryOutcome = queryDB(queryText,queryValues,"makeModUser/route.js")
+    const queryOutcome = await queryDB(queryText,queryValues,"makeModUser/route.js")
 
     //Report outcome of query
     reportOutcome(queryText,queryValues,queryOutcome,"makeModUser/route.js")

@@ -14,14 +14,14 @@ export async function GET(){
     const queryValues = null;
 
     //Query database with assembled text and values
-    const queryOutcome = queryDB(queryText,queryValues,"getNewListings/route.js")
+    const queryOutcome = await queryDB(queryText,queryValues,"getNewListings/route.js")
 
     //Report outcome of query
     reportOutcome(queryText,queryValues,queryOutcome,"getNewListings/route.js")
 
     //Return set of listings if no error occurred
     if (queryOutcome.error_status==undefined){
-        return NextResponse.json(reportOutcome.result)
+        return NextResponse.json(queryOutcome.result)
     }
     else{
         return NextResponse.json([])
