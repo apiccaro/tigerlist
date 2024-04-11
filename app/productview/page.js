@@ -29,7 +29,7 @@ import ProductInfo from "@/Components/PInfo";
  export default function Home({searchParams}) {  
      // Destructure searchParams object
      const {
-      productID,
+      post_key,
       productTitle,
       productPrice,
       productDescription,
@@ -44,59 +44,59 @@ import ProductInfo from "@/Components/PInfo";
       isBanned
     } = searchParams;
 
-    return (
-      <main style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor:'#D09B2C',
-        color: 'black'
-      }}>
-        <div className="flex flex-row gap-2">
-          {/* Component for displaying product name and images */}
-          <PNI
-            listingID={post_key}
-            title={productTitle}
-            price={productPrice}
-            description={productDescription}
-            category={productCategory}
-            condition={productCondition}
-            location={productLocation}
-            email={listerEmail}
-            phone={listerPhone}
-            images={productImages}
-            active={isActive}
-            flagged={isFlagged}
-            banned={isBanned}
-          />
-          {/* Component for displaying detailed product information */}
-          <ProductInfo
-            listingID={post_key}
-            title={productTitle}
-            price={productPrice}
-            description={productDescription}
-            category={productCategory}
-            condition={productCondition}
-            location={productLocation}
-            email={listerEmail}
-            phone={listerPhone}
-            active={isActive}
-            flagged={isFlagged}
-            banned={isBanned}
-          />
-        </div>
-      </main>
-    );
+    // return (
+    //   <main style={{
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     backgroundColor:'#D09B2C',
+    //     color: 'black'
+    //   }}>
+    //     <div className="flex flex-row gap-2">
+    //       {/* Component for displaying product name and images */}
+    //       <PNI
+    //         post_key={post_key}
+    //         title={productTitle}
+    //         price={productPrice}
+    //         description={productDescription}
+    //         category={productCategory}
+    //         condition={productCondition}
+    //         location={productLocation}
+    //         email={listerEmail}
+    //         phone={listerPhone}
+    //         images={productImages}
+    //         active={isActive}
+    //         flagged={isFlagged}
+    //         banned={isBanned}
+    //       />
+    //       {/* Component for displaying detailed product information */}
+    //       <ProductInfo
+    //         post_key={post_key}
+    //         title={productTitle}
+    //         price={productPrice}
+    //         description={productDescription}
+    //         category={productCategory}
+    //         condition={productCondition}
+    //         location={productLocation}
+    //         email={listerEmail}
+    //         phone={listerPhone}
+    //         active={isActive}
+    //         flagged={isFlagged}
+    //         banned={isBanned}
+    //       />
+    //     </div>
+    //   </main>
+    // );
 
-  //Version from block 4, updated naming convention for Jay-B6
-  // return (
-      // <div className="bg-yellow-600 min-h-screen">
-      //   <div className="flex flex-row gap-2">
-      //     <PNI post_key={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} flagged={isFlagged}/>
-      //     <ProductInfo post_key={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} flagged={isFlagged}/>
-      //   </div>
-      // </div>
-      // );
+  // Version from block 4, updated naming convention for Jay-B6
+  return (
+      <div className="bg-yellow-600 min-h-screen">
+        <div className="flex flex-row gap-2">
+          <PNI post_key={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} images={productImages} flagged={isFlagged}/>
+          <ProductInfo post_key={post_key} title={productTitle} price={productPrice} description={productDescription} category={productCategory} condition={productCondition} location={productLocation} email={listerEmail} phone={listerPhone} flagged={isFlagged}/>
+        </div>
+      </div>
+      );
  
  }
  

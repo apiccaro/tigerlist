@@ -11,7 +11,7 @@
         });
     }
     
-    async function queryDB(queryTxt,queryVals,callerName){
+    async function queryDB(queryText,queryValues,callerName){
 
         //get client for db query
         const client = getClient();
@@ -32,7 +32,7 @@
         await client.end();
 
         //Define returned object using query status variables
-        queryOutcome = {
+        var queryOutcome = {
             error_status:error_status,
             result:result
         }
