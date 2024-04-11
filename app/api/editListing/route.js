@@ -24,8 +24,8 @@ export async function POST(request){
         "phoneValue = $8, " +
         "active = $9, " +
         "flagged = $10, " +
-        "moderator_ban = $11 " +
-        "images = $12 " +
+        "moderator_ban = $11, " +
+        "images = $12, " +
         "WHERE post_key = $13;";
 
     //Assemble string array for database query values

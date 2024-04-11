@@ -124,6 +124,9 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
                 }} style={linkStyle}>
                     {title}
                 </Link>
+                <div style={PriceStyle}>
+          ${price} {/* Adding dollar sign here */}
+        </div>
                 {/* Need to send data to ActiveInactive for edit link to access */}
                 <ActiveInactive post_key={post_key} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} active={active} flagged={flagged} banned={banned}/>
             </div>
