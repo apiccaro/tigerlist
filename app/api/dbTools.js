@@ -67,7 +67,7 @@ async function queryDB(queryText,queryValues,callerName){
  * @param {*} queryValues - values used in query, useful for checking why a query went wrong
  * @param {*} queryOutcome - object representing the result of the query, used for conditional logic and reporting
  */
-async function reportOutcome(queryText,queryValues,queryOutcome) {
+async function reportOutcome(queryText,queryValues,queryOutcome,callerName) {
 if (queryOutcome.error_status!=undefined){
     if (DO_API_ERROR_PRINT){
         console.error('Error executing query:', queryOutcome.error_status);
@@ -76,7 +76,7 @@ if (queryOutcome.error_status!=undefined){
 }
 else {
     if (DO_API_SUCCESS_PRINT){
-        console.log("Database successfully queried with api/flagListing")
+        console.log("Database successfully queried with "+callerName)
     }
     if (DO_API_RESULT_PRINT){
         console.log("Query result:\n",queryOutcome.result)

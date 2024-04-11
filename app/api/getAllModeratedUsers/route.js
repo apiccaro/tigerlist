@@ -18,7 +18,7 @@ export async function GET() {
     const queryOutcome = queryDB(queryText,queryValues,"getAllModeratedUsers/route.js")
 
     //Report outcome of query
-    reportOutcome(queryText,queryValues,queryOutcome)
+    reportOutcome(queryText,queryValues,queryOutcome,"getAllModeratedUsers/route.js")
 
     //Return set of users if no error occurred.
     if (queryOutcome.error_status==undefined){

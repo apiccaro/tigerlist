@@ -21,7 +21,7 @@ export async function POST(request){
     const queryOutcome = queryDB(queryText,queryValues,"getUser/route.js")
 
     //Report outcome of query
-    reportOutcome(queryText,queryValues,queryOutcome)
+    reportOutcome(queryText,queryValues,queryOutcome,"getUser/route.js")
 
     //Return user data object if no error occurred, false if one did
     if (queryOutcome.error_status==undefined){

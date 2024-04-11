@@ -21,7 +21,7 @@ export async function DELETE(request){
     const queryOutcome = queryDB(queryText,queryValues,"deleteListing/route.js")
 
     //Report outcome of query
-    reportOutcome(queryText,queryValues,queryOutcome)
+    reportOutcome(queryText,queryValues,queryOutcome,"deleteListing/route.js")
 
     //Return true or false based on query success
     if (queryOutcome.error_status==undefined){

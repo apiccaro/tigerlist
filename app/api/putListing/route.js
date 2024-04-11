@@ -37,7 +37,7 @@ export async function POST(request){
     const queryOutcome = queryDB(queryText,queryValues,"putListing/route.js")
 
     //Report outcome of query
-    reportOutcome(queryText,queryValues,queryOutcome)
+    reportOutcome(queryText,queryValues,queryOutcome,"putListing/route.js")
 
     //Return true or false based on query success
     if (queryOutcome.error_status==undefined){

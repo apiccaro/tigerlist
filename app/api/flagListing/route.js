@@ -27,14 +27,14 @@ export async function POST(request){
     const queryOutcome = queryDB(queryText,queryValues,"flagListing/route.js")
 
     //Report outcome of query
-    reportOutcome(queryText,queryValues,queryOutcome)
+    reportOutcome(queryText,queryValues,queryOutcome,"flagListing/route.js")
 
     //Return true or false based on query success
     if (queryOutcome.error_status==undefined){
         emailNotifyFlag(reqObject) // send moderation an email notification of post flagging
-        return NextResponse.json('true')
+        return NextResponse.json(true)
     }
     else{
-        return NextResponse.json('false')
+        return NextResponse.json(false)
     }
 }

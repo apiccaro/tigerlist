@@ -21,7 +21,7 @@ export async function POST(request){
     const queryOutcome = queryDB(queryText,queryValues,"getListing/route.js")
 
     //Report outcome of query
-    reportOutcome(queryText,queryValues,queryOutcome)
+    reportOutcome(queryText,queryValues,queryOutcome,"getListing/route.js")
 
     //Return set of listings if no error occurred, false if one did
     if (queryOutcome.error_status==undefined){

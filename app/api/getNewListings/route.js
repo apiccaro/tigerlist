@@ -17,7 +17,7 @@ export async function GET(){
     const queryOutcome = queryDB(queryText,queryValues,"getNewListings/route.js")
 
     //Report outcome of query
-    reportOutcome(queryText,queryValues,queryOutcome)
+    reportOutcome(queryText,queryValues,queryOutcome,"getNewListings/route.js")
 
     //Return set of listings if no error occurred
     if (queryOutcome.error_status==undefined){
