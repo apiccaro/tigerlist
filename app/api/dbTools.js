@@ -46,7 +46,6 @@ async function queryDB(queryText,queryValues,callerName){
         await client.connect();
         
         result = await client.query(queryText,queryValues);
-        // result = await client.query("SELECT * FROM PostTable WHERE active = true ORDER BY post_timestamp DESC NULLS LAST;");
     } 
     catch (error) {
         console.log("Something went wrong in "+callerName)

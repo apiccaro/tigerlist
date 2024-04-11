@@ -69,8 +69,8 @@ async function emailNotifyFlag(listingData){
 }
 
 
-/**For use in api/flagListing
- * Notifies moderator of a flagged post
+/**For use in api/putListing
+ * Notifies moderator of a new post
  * 
  * @param {object} listingData - object with data for a listing
  */
@@ -97,6 +97,37 @@ async function emailNotifyPost(listingData){
     }
 }
 
+/**For use in api/editListing
+ * Notifies moderator of an edited post
+ * 
+ * @param {object} listingData - object with data for a listing
+ */
+async function emailNotifyEdit(listingData){
 
-module.exports = {sendMail, emailNotifyFlag, emailNotifyPost} 
+    //Determine email title and content based on post data
+    var emailTitle = 
+    "Listing from " + listingData.email.split('@')[0] 
+    + " was edited: " + listingData.title
+
+    var emailBody =
+    "User email: " + listingData.email
+    + "\n\nTitle: " + listingData.title
+    + "\nprice: " + listingData.price 
+    + "\ndescription: " + listingData.description
+    + "\category: " + listingData.category
+    + "\condition: " + listingData.condition
+    + "\location: " + listingData.location
+
+    //Try sending the email
+    //Maybe makes sense to log failures in a db table or text file, since errors wont neccesarrily happen when youre sitting at the computer
+    try {
+        await sendMail(emailTitle,emailBody); 
+        console.log("Email sent");
+    } catch (error) {
+        console.error("Error sending email:", error);
+    }
+}
+
+
+module.exports = {sendMail, emailNotifyFlag, emailNotifyPost, emailNotifyEdit} 
 

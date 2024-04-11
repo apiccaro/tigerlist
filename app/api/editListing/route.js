@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
+import {emailNotifyEdit} from './../../moderation/sendMail';
 const { queryDB,reportOutcome } = require('./../dbTools');
+
 
 /** api/editListing takes a listing data object and sets fields of each field in the row corresponding to the post_key
  * 
@@ -53,6 +55,7 @@ export async function POST(request){
 
     //Return true or false based on query success
     if (queryOutcome.error_status==undefined){
+        emailNotifyEdit(reqObject) // send moderation an email notification of post flagging
         return NextResponse.json('true')
     }
     else{
