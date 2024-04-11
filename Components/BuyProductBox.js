@@ -1,3 +1,21 @@
+/**
+ * Configuration for the product display on the browse page.
+ * @param {Object} props - The props containing product information.
+ * @param {string} props.listingID - The ID of the product listing.
+ * @param {string} props.title - The title of the product.
+ * @param {number} props.price - The price of the product.
+ * @param {string} props.description - The description of the product.
+ * @param {string} props.category - The category of the product.
+ * @param {string} props.condition - The condition of the product.
+ * @param {string} props.location - The location of the product.
+ * @param {string} props.email - The email of the lister.
+ * @param {string} props.phone - The phone number of the lister.
+ * @param {string[]} props.images - The images of the product.
+ * @param {boolean} props.active - The active status of the product.
+ * @param {boolean} props.flagged - The flagged status of the product.
+ * @param {boolean} props.banned - The banned status of the product.
+ * @returns {JSX.Element} The JSX element representing the product display.
+ */
 // Configuration for the product display on the browse page
 'use client'
 
@@ -36,6 +54,11 @@ const RowStyle = {
   gap: '8px',
 };
 
+/**
+ * Functional component for displaying a product box.
+ * @param {Object} props - The props containing product information.
+ * @returns {JSX.Element} The JSX element representing the product box.
+ */
 const BuyProductBox = ({ post_key, title, price, description, category, condition, location, email, phone, images, flagged }) => {
 
 

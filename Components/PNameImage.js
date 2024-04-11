@@ -1,5 +1,21 @@
-// The product name and image layout that are placed in the product grid
-'use client'
+/**
+ * Configuration for the product name and image layout that are placed in the product grid.
+ * @param {string} listingID - The unique identifier for the product listing.
+ * @param {string} title - The title of the product listing.
+ * @param {string} price - The price of the product listing.
+ * @param {string} description - The description of the product listing.
+ * @param {string} category - The category of the product listing.
+ * @param {string} condition - The condition of the product listing.
+ * @param {string} location - The location of the product listing.
+ * @param {string} email - The email of the product listing owner.
+ * @param {string} phone - The phone number of the product listing owner.
+ * @param {Array<string>} images - The images of the product listing.
+ * @param {boolean} active - The status of the product listing (active or inactive).
+ * @param {boolean} flagged - The status of the product listing (flagged or not).
+ * @param {boolean} banned - The status of the product listing (banned or not).
+ * @returns {JSX.Element} The JSX element representing the product name and image layout.
+ */
+ 'use client'
 
 import { useState } from 'react';
 import Image from 'next/image';
@@ -76,10 +92,7 @@ import Image from 'next/image';
             }
         }
     });
-    
-    //overwriting with predetermined arrays
-    //images = [defaultUrl,nullUrl,nullUrl,nullUrl,nullUrl,nullUrl]
-    //images = customImageArray(ID,category)
+
 
     //set images to values from array
     var originalImage = images[0];

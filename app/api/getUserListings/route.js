@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 export async function POST(request) {
 
-
     //console.log("Using getUserListings/route.js to get a set of listings") //debug print
     
     const requestObject = await request.json()

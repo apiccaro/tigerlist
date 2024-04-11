@@ -1,36 +1,56 @@
-// Configuration for where the product and contact information will appear on the product view page
-'use client'
+/**
+ * Configuration for where the product and contact information will appear on the product view page.
+ * @param {string} listingID - The unique identifier for the product listing.
+ * @param {string} title - The title of the product listing.
+ * @param {string} price - The price of the product listing.
+ * @param {string} description - The description of the product listing.
+ * @param {string} category - The category of the product listing.
+ * @param {string} condition - The condition of the product listing.
+ * @param {string} location - The location of the product listing.
+ * @param {string} email - The email of the product listing owner.
+ * @param {string} phone - The phone number of the product listing owner.
+ * @param {Array<string>} images - The images of the product listing.
+ * @param {boolean} active - The status of the product listing (active or inactive).
+ * @param {boolean} flagged - The status of the product listing (flagged or not).
+ * @param {boolean} banned - The status of the product listing (banned or not).
+ * @returns {JSX.Element} The JSX element representing the product information section.
+ */
+ 'use client'
 
-import styled from "styled-components";
-import { useState } from 'react';
-import Image from 'next/image';
+ import styled from "styled-components";
+ import { useState } from 'react';
+ import Image from 'next/image';
+ 
+ const InfoBoxStyle = {
+     backgroundColor: 'black',
+     height: '300px',
+     width: '700px',
+     display: 'flex',
+     alignItems: 'top',
+     justifyContent: 'left',
+     borderRadius: '10px',
+     paddingTop: '20px',
+     paddingLeft: '20px',
+     paddingRight: '20px'
+ }
+ const ContactBoxStyle = {
+     backgroundColor: 'black',
+     height: '140px',
+     width: '700px',
+     display: 'flex',
+     alignItems: 'top',
+     justifyContent: 'left',
+     borderRadius: '10px',
+     paddingTop: '20px',
+     paddingLeft: '20px',
+     paddingRight: '20px'
+ }
+ 
 
-
-const InfoBoxStyle = {
-    backgroundColor: 'black',
-    height: '300px',
-    width: '700px',
-    display: 'flex',
-    alignItems: 'top',
-    justifyContent: 'left',
-    borderRadius: '10px',
-    paddingTop: '20px',
-    paddingLeft: '20px',
-    paddingRight: '20px'
-}
-const ContactBoxStyle = {
-    backgroundColor: 'black',
-    height: '140px',
-    width: '700px',
-    display: 'flex',
-    alignItems: 'top',
-    justifyContent: 'left',
-    borderRadius: '10px',
-    paddingTop: '20px',
-    paddingLeft: '20px',
-    paddingRight: '20px'
-}
-
+     /**
+      * Edits the listing's status to be flagged or unflagged.
+      * @param {Object} listingDict - The dictionary containing the listing details.
+      */
 async function editListing(listingDict) {
     const response = await fetch("http://localhost:3000/api/deleteListing",{
       method:"PUT",
@@ -69,11 +89,17 @@ async function flagListing(flagInfo) {
 };
 
 
-const ProductInfo = ({post_key, title, price, description, category, condition, location, email, phone, flagged}) => {
+const ProductInfo = ({post_key, title, price, description, category, condition, location, email, phone, images, active, flagged, banned}) => {
+
     const [isActive, setIsActive] = useState(true);
 
+
+
+    /**
+      * Handles the click event for the flag button.
+      * Toggles the flag button and edits the listing status accordingly.
+      */
     async function flagButtonClicked(){
-        setIsActive(!isActive); //toggle flag button. (replaced method call)
 
 
         var listingObject = {
@@ -89,11 +115,8 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
             flagged: !flagged,
             message: "this is an object being sent to apiTest, with post_key "+post_key
         };
-
-
-
         
-
+        //Debug Print, worth keeping cause bad object names are frequently sent here
         // var argstring = 
         // "\npost_key: "+post_key+"\ntitle: "+title+ "\nprice: "+price
         // +"\ndescription: "+description+ "\ncategory: "+category
@@ -104,19 +127,13 @@ const ProductInfo = ({post_key, title, price, description, category, condition, 
 
         //console.log("Whole listing object: ",listingObject)
 
-
-
         
         await flagListing(listingObject)
 
+        setIsActive(!isActive); //toggle flag button. (replaced that method call with a single line here)
 
 
     } 
-    
-    // const toggleFlagButton = () => {
-    //         setIsActive(!isActive);
-    // };
-
     return(
         <aside style={{display: "flex", flexDirection: 'col', gap:'3rem', text:"white", padding:"1rem", }} className="flex flex-col gap-10 text-white p-4 mt-5">
             <div style={InfoBoxStyle}>

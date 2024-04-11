@@ -1,5 +1,3 @@
-//Current changes: getuser and getoneuser were causing issues and seem vestigial, commented out
-
 'use client'
 
 import { useState } from 'react';
@@ -10,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 let dict;
 
 //Actual method for this page's api use. Currently replaced by allPostsFromDB in line 187.
-const makeListing = async (listingDict) => {
+const makeListingFetcher = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
     method:"POST",
     body : JSON.stringify(
@@ -21,46 +19,20 @@ const makeListing = async (listingDict) => {
   const data = await response.json();
   console.log(data);
   return data
+
+};
+const uploadImages = async (imageData) => {
+  const response = await fetch("http://localhost:3000/api/uploadImages",{
+    method:"POST",
+    body : imageData
+    }
+    );
+  const success= await response.json();
+  
+  return success;
 };
 
 
-//old tester
-const getEmail = async () => {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUserEmail",{
-    method:"GET",
-  },)
-
-  const data = await response.json();
-  console.log(data);
-  return data
-};
-
-// const getUser = async (email) => {
-//   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser",{
-//     method:"POST",
-//     body : JSON.stringify(
-//       "a_piccaro@coloradocollege.edu", // ?️ add missing comma here
-//   )
-//     },
-//     );
-// const user = await response.json();
-  
-//   return user;
-// };
-
-
-// var isAutoFlagged;
-
-
-// var thisUser={};
-//   const getOneUser=async()=>{
-//     const response = await getUser();
-//     thisUser=response;
-//     if(thisUser.isAutoFlagged){
-//       dict.flagged=true;
-//     }
-  
-//   }
 
 
 
@@ -77,6 +49,12 @@ export default function MakeListing() {
   const [previewImage2, setPreviewImage2] = useState();
   const [previewImage3, setPreviewImage3] = useState();
   const [previewImage4, setPreviewImage4] = useState();
+  const [imageFile, setImageFile] = useState();
+  const [imageFile1, setImageFile1] = useState();
+  const [imageFile2, setImageFile2] = useState();
+  const [imageFile3, setImageFile3] = useState();
+  const [imageFile4, setImageFile4] = useState();
+  
   const [email, setEmail] = useState();
   const [phonenumber, setPhoneNumber] = useState();
   const [imgWidth, setWidth] = useState();
@@ -159,6 +137,7 @@ export default function MakeListing() {
       condition: condValue,
       location: locValue,
       email: emailValue,
+      image:imageValue,
       phoneValue: phoneValue,
       images: imageValue,
       active: "true",
@@ -171,7 +150,7 @@ export default function MakeListing() {
 
     // var DBemail = await getEmail();
     // console.log("Email: ",DBemail)
-    var waiting = await makeListing(dict);
+    var waiting = await makeListingFetcher(dict);
 
 
     
@@ -249,8 +228,12 @@ export default function MakeListing() {
                         //sets all imagePreview fields
                         setHeight('400px');
                         setWidth('500px');
-                        //setPreviewImage("reader.result");
+
+                        // setImageFile(event.target.files[0]);
+                        // setPreviewImage(reader.result);
                         setPreviewImage(file.name)
+                        
+
                         setLabelHeight(40);
                         setBorderStyle('4px solid black');
                         setLabelText('Change Image');
@@ -307,9 +290,9 @@ export default function MakeListing() {
                           var reader1 = new FileReader();
                           reader1.onloadend = () => {
                             //sets all small image fields
-                            //setPreviewImage1(reader1.result);
+                            // setImageFile1(event.target.files[0]);
+                            // setPreviewImage1(reader1.result);
                             setPreviewImage1(file1.name)
-
                             setWidth1(SMALLIMAGE);
                             setHeight1(SMALLIMAGE);
                             setLabelHeight1(0);
@@ -377,7 +360,10 @@ export default function MakeListing() {
                           var file = event.target.files[0];
                           var reader = new FileReader();
                           reader.onloadend = () => {
+
                             //sets all small image fields
+
+                            // setImageFile2(event.target.files[0]);
                             // setPreviewImage2(reader.result);
                             setPreviewImage2(file2.name);
 
@@ -449,9 +435,12 @@ export default function MakeListing() {
                           var file = event.target.files[0];
                           var reader = new FileReader();
                           reader.onloadend = () => {
+
                             //sets all small image fields
+                            // setImageFile3(event.target.files[0]);
                             // setPreviewImage3(reader.result);
                             setPreviewImage3(file3.name);
+
                             setWidth3(SMALLIMAGE);
                             setHeight3(SMALLIMAGE);
                             setLabelHeight3(0);
@@ -522,6 +511,7 @@ export default function MakeListing() {
                           var reader = new FileReader();
                           reader.onloadend = () => {
                             //sets all small image fields
+                            // setImageFile4(event.target.files[0]);
                             // setPreviewImage4(reader.result);
                             setPreviewImage4(file4.name);
                             setWidth4(SMALLIMAGE);

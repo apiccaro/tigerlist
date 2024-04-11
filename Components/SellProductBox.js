@@ -1,5 +1,21 @@
-// Configuration for product appearance on the "My Listings" page.
-'use client'
+/**
+ * Configuration for product appearance on the "My Listings" page.
+ * @param {string} listingID - The unique identifier for the product listing.
+ * @param {string} title - The title of the product listing.
+ * @param {string} price - The price of the product listing.
+ * @param {string} description - The description of the product listing.
+ * @param {string} category - The category of the product listing.
+ * @param {string} condition - The condition of the product listing.
+ * @param {string} location - The location of the product listing.
+ * @param {string} email - The email of the product listing owner.
+ * @param {string} phone - The phone number of the product listing owner.
+ * @param {Array<string>} images - The images of the product listing.
+ * @param {boolean} active - The status of the product listing (active or inactive).
+ * @param {boolean} flagged - The status of the product listing (flagged or not).
+ * @param {boolean} banned - The status of the product listing (banned or not).
+ * @returns {JSX.Element} The JSX element representing the product appearance on the "My Listings" page.
+ */
+ 'use client'
 
 import styled from "styled-components";
 import Image from "next/image";
@@ -66,7 +82,9 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
                         listerEmail: email,
                         listerPhone: phone,
                         productImages: images,
-                        isFlagged: flagged
+                        isActive: active,
+                        isFlagged: flagged,
+                        isBanned: banned
                     } 
                 }} style={linkStyle}>
                     <Image
@@ -101,13 +119,15 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
                         listerEmail: email,
                         listerPhone: phone,
                         productImages: images,
-                        isFlagged: flagged
+                        isActive: active,
+                        isFlagged: flagged,
+                        isBanned: banned
                     } 
                 }} style={linkStyle}>
                     {title}
                 </Link>
                 {/* Need to send data to ActiveInactive for edit link to access */}
-                <ActiveInactive post_key={post_key} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} flagged={flagged}/>
+                <ActiveInactive post_key={post_key} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} active={active} flagged={flagged} banned={banned}/>
             </div>
         </div>
     );

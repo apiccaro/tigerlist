@@ -7,7 +7,8 @@ This version:
 - Not planning to add any functionality changes or improvements
 
 To Do:
-- Add all of Jack's documentation.
++ Add all of Jack's documentation.
+- Check if this is as much as annika wants to document her code
 - If time allows, make a set of fetch methods that are imported instead of varied file to file.
 - Make SMTP code more modular, update documentation. 
 - Remove vestigial methods, comment tests or test references to tests.
