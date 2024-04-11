@@ -4,10 +4,8 @@
 //reportOutcome() takes the return of queryDB and prints based on boolean consts and query outcome
 //getClient() is currently exported, ideally we phase that out and have every api method do it all with queryDB 
 
-
 //Instantiate database client instance
 const { Client } = require('pg');
-
 
 //booleans to decide how much debug printing happens. 
 const DO_API_SUCCESS_PRINT = true; //Never a big deal, but useful to see when the frontend is querying cause sometimes its odd.

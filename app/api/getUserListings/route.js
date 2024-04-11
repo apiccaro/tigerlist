@@ -1,50 +1,34 @@
 import { NextResponse } from 'next/server';
-export async function POST(request) {
+const { queryDB,reportOutcome } = require(''./../dbTools');
 
-    //console.log("Using getUserListings/route.js to get a set of listings") //debug print
+/** api/getUserListings takes a given email and returns the user corresponding to it
+ * 
+ * @returns user corresponding to email
+ */
+export async function POST(request){
     
-    const requestObject = await request.json()
-    var userEmail = requestObject.email;
-
-
-    //Assemble string for database query
+    //Convert given request from json response into a javascript object
+    const reqObject = await request.json()
+    
+    //Assemble string structure for database query text
     const queryText = "SELECT * FROM PostTable WHERE email = $1 ORDER BY post_timestamp DESC NULLS LAST;;"
-    const queryValues = [userEmail];
+    //Assemble string array for database query text
+    const queryValues = [reqObject.userEmail];
 
-    //Instantiate database client instance
-    const { getClient } = require('./../dbTools/dbTools');
-    const client = getClient();
+    //Query database with assembled text and values
+    const queryOutcome = queryDB(queryText,queryValues,"getUserListings/route.js")
 
+    //Report outcome of query
+    reportOutcome(queryText,queryValues,queryOutcome)
 
-    //Try to connect to database and query.
-    let error_status;
-    let result;
-
-    try {
-        await client.connect();
-        result = await client.query(queryText,queryValues);
-    } 
-    catch (error) {
-        error_status = error
-    } 
-
-    await client.end();
-    console.log("api/getUserListings: Database client closed")
-
-
-    //Debug print to verify successful query 
-    //console.log("api/getAllListings: printing a row from the result: ")
-    //console.log(result.rows[68])
-
-    //Log result to console
-    if (error_status === undefined){
-        console.log("Database successfully queried with api/getUserListings")
-        return  NextResponse.json(result.rows)
+    //Return user's listings object if no error occurred, false if one did
+    if (queryOutcome.error_status==undefined){
+        return NextResponse.json(reportOutcome.result)
     }
     else{
-        console.error('api/getUserListings: Error executing query - ', error_status);
-        console.log("Attempted Query: ",queryText)
-        return  NextResponse.json('false')
-    } 
+        return NextResponse.json('false')
+    }
+    
+  
 }
 

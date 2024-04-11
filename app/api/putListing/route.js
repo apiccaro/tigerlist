@@ -1,51 +1,22 @@
 import { NextResponse } from 'next/server';
-import sendMail from './../../moderation/sendMail';
+import {emailNotifyPost} from './../../moderation/sendMail';
+import {queryDB,reportOutcome} from '../dbTools'
 
-
-//Format a notification email and send to a moderator
-//Later on i'll want to just hand off the reqObject (or something from query response) and format the email elsewhere
-async function emailNotify(listingData){
-
-    //Determine email title and content based on post data
-    var emailTitle = 
-    "New Listing from " + listingData.email.split('@')[0] 
-    + ": " + listingData.title
-
-    var emailBody =
-    "User email: " + listingData.email
-    + "\n\nTitle: " + listingData.title
-    + "\nprice: " + listingData.price 
-    + "\ndescription: " + listingData.description
-
-    //Try sending the email
-    //Maybe makes sense to log failures in a db table or text file, since errors wont neccesarrily happen when youre sitting at the computer
-    try {
-        await sendMail(emailTitle,emailBody); 
-        console.log("Email sent");
-    } catch (error) {
-        console.error("Error sending email:", error);
-    }
-}
-
-
-
-
+/** api/putListing takes a listing data object, flags the corresponding post in DB, and notifies a moderator via SMTP
+ * @param {object} request given by fetch
+ * @returns true or false depending on success of query
+ */
 export async function POST(request){
-
-    console.log("Using putListing/route.js to add a listing") //debug print
-
+    
     //Convert given request from json response into a javascript object
     const reqObject = await request.json()
-    const post_key = reqObject.id
-    console.log("Object given to api/putlisting:")
-    console.log(reqObject)
 
-
-    //Build query string - Need to change format so certain input characters don't break it. 
+    //Assemble string components for database query text
     const queryText = "INSERT INTO PostTable" 
     + " (title, price, description, category, condition, location, email, phoneValue, active, flagged, moderator_ban, images)" 
     + " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12 )";
-  
+
+    //Assemble string structure for database query values
     const queryValues = [
         reqObject.title,
         reqObject.price,
@@ -60,65 +31,22 @@ export async function POST(request){
         reqObject.moderator_ban,
         reqObject.images
     ];
-
-
-    //Instantiate database client instance
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: '10.3.0.49',
-        port: 5432,
-    });
     
 
-    //Try to connect to database and query.
-    let query_status = -1
-    let error_status = null
-    let result = null
+    //Query database with assembled text and values
+    const queryOutcome = queryDB(queryText,queryValues,"putListing/route.js")
 
-    console.log("api/putListing: Starting try/catch")
+    //Report outcome of query
+    reportOutcome(queryText,queryValues,queryOutcome)
 
-    try {
-        console.log("Starting try block in putListing/route.js") //debug print
-
-        await client.connect();
-        result = await client.query(queryText,queryValues);
-        query_status = 1
-    } 
-    catch (error) {
-
-        console.log("Starting catch block in putListing/route.js") //debug print
-        query_status = 0
-        error_status = error
-            let result = null
-    } 
-    finally {
-        console.log("api/putListing: Completing try/catch")
-    }
-    await client.end();
-
-
-
-    console.log("Wrapping up putListing/route.js") //debug print
-
-    //Log result to console
-    if (query_status == 0){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
-    }
-    else if (query_status == 1){
-        console.log("Database successfully queried with api/putListing") //comment out once everything is properly tested.
-        console.log("Query result:\n",result) //debug print
-        console.log("Emailing Jay a notification")
-        await emailNotify(reqObject)
-        return  NextResponse.json('true')
+    //Return true or false based on query success
+    if (queryOutcome.error_status==undefined){
+        emailNotifyPost(reqObject) // send moderation an email notification of post flagging
+        return NextResponse.json('true')
     }
     else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
+        return NextResponse.json('false')
     }
-
-
 }
+
+
