@@ -59,7 +59,7 @@ const RowStyle = {
  * @param {Object} props - The props containing product information.
  * @returns {JSX.Element} The JSX element representing the product box.
  */
-const BuyProductBox = ({ post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const BuyProductBox = ({ post_key, title, price, description, category, condition, location, email, phone, images, active, flagged}) => {
 
 
     // Get good image name, either given or based on category

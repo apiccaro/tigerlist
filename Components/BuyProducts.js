@@ -70,7 +70,7 @@ export default async function BuyProducts(){
     return(
         <div style={ProductsGridStyle} className="flex flex-grow">
           {allListings.map((listing, index) => (
-                <BuyProductBox key={index} post_key={listing.post_key} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phonevalue} images={listing.images} flagged={listing.flagged}/>
+                <BuyProductBox key={index} post_key={listing.post_key} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phonevalue} images={listing.images} flagged={listing.flagged} active={listing.active}/>
             ))}
         </div>
     );
