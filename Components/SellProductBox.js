@@ -52,7 +52,7 @@ const buttonStyle = {
 
 
 const SellProductBox = ({post_key, title, price, description, category, condition, location, email, phone, active, images, flagged}) => {
-
+    const banned = false
     //Get good image name, either given or category default
     const { getGoodImage,getCategoryImage } = require('./imageTools');
     const imageUrl = getGoodImage(images[0], category);
@@ -118,9 +118,8 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
                         listerEmail: email,
                         listerPhone: phone,
                         productImages: images,
-                        isActive: active,
+                        isActive: true,
                         isFlagged: flagged,
-                        isBanned: banned
                     } 
                 }} style={linkStyle}>
                     {title}

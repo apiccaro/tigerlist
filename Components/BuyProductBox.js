@@ -91,8 +91,7 @@ const BuyProductBox = ({ post_key, title, price, description, category, conditio
             listerPhone: phone,
             productImages: images,
             isFlagged: flagged,
-            active: active,
-            banned: banned
+            active: active
           }
         }} className="flex text-semibold text-2xl">
           <Image

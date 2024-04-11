@@ -57,7 +57,7 @@ export default async function Products(){
         <div className="flex flex-col gap-1 text-4xl font-semibold">
             <ProductsGrid className="flex flex-grow">
             {myListings.map((listing, index) => (
-                <SellProductBox key={index} post_key={listing.post_key} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phonevalue} images={listing.images} flagged={listing.flagged} active={listing.active}/>
+                <SellProductBox key={index} post_key={listing.post_key} title={listing.title} price={listing.price} description={listing.description} category={listing.category} condition={listing.condition} location={listing.location} email={listing.email} phone={listing.phonevalue} images={listing.images} flagged={listing.flagged} active={listing.active} banned={false}/>
             ))}
             </ProductsGrid>
         </div>
