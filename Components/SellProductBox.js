@@ -55,9 +55,9 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
     const banned = false
     //Get good image name, either given or category default
     const { getGoodImage,getCategoryImage } = require('./imageTools');
-    const imageUrl = getGoodImage(images[0], category);
+    var imageUrl = getGoodImage(images[0], category);
     const defaultUrl = getCategoryImage(category)
-
+    imageUrl = defaultUrl
 
     // method to handle image loading error when a file name is invalid
     const handleImageError = (e) => {

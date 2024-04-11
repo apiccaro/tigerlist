@@ -5,6 +5,7 @@
  * @returns {JSX.Element} The JSX element representing the "My Listings" page.
  */
 // Design for the "My Listings" page of the website
+import Filter from "@/Components/Filter";
 import SellProducts from "@/Components/SellProducts";
 import Link from "next/link";
 import { useState, useEffect } from 'react'; 
@@ -53,6 +54,8 @@ export default function Home() {
 
     return (
         <div className="flex flex-row bg-yellow-600 min-h-screen">
+            <Filter />
+
             <SellProducts/>
         </div>
     );
