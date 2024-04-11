@@ -51,7 +51,7 @@ const buttonStyle = {
 
 
 
-const SellProductBox = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const SellProductBox = ({post_key, title, price, description, category, condition, location, email, phone, active, images, flagged}) => {
 
     //Get good image name, either given or category default
     const { getGoodImage,getCategoryImage } = require('./imageTools');
@@ -84,7 +84,6 @@ const SellProductBox = ({post_key, title, price, description, category, conditio
                         productImages: images,
                         isActive: active,
                         isFlagged: flagged,
-                        isBanned: banned
                     } 
                 }} style={linkStyle}>
                     <Image

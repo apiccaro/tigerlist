@@ -59,13 +59,14 @@ const RowStyle = {
  * @param {Object} props - The props containing product information.
  * @returns {JSX.Element} The JSX element representing the product box.
  */
-const BuyProductBox = ({ post_key, title, price, description, category, condition, location, email, phone, images, flagged }) => {
+const BuyProductBox = ({ post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
 
 
     // Get good image name, either given or based on category
     const { getGoodImage,getCategoryImage } = require('./imageTools');
-    const imageUrl = getGoodImage(images[0], category);
+    var imageUrl = getGoodImage(images[0], category);
     const defaultUrl = getCategoryImage(category)
+    imageUrl = getCategoryImage // frontend isn't liking images, using defaults for now
 
     // method to handle image loading error when a file name is invalid
     const handleImageError = (e) => {
@@ -89,7 +90,9 @@ const BuyProductBox = ({ post_key, title, price, description, category, conditio
             listerEmail: email,
             listerPhone: phone,
             productImages: images,
-            isFlagged: flagged
+            isFlagged: flagged,
+            active: active,
+            banned: banned
           }
         }} className="flex text-semibold text-2xl">
           <Image
