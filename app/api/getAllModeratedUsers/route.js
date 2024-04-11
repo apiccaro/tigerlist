@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-const { queryDB,reportOutcome } = require(''./../dbTools');
+const { queryDB,reportOutcome } = require('./../dbTools');
 
 
 /** api/getAllModeratedUsers returns all moderated users

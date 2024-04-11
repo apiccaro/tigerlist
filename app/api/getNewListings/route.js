@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-const { queryDB,reportOutcome } = require(''./../dbTools');
+const { queryDB,reportOutcome } = require('./../dbTools');
 
 /** api/getNewListings searches for all posts added within the last 2 hours
  * 

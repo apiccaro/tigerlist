@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-const { queryDB,reportOutcome } = require(''./../dbTools');
+const { queryDB,reportOutcome } = require('./../dbTools');
 
 /** api/getAllFlaggedListings returns all active listings marked flagged.
  * 

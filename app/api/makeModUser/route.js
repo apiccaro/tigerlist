@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-const { queryDB,reportOutcome } = require(''./../dbTools');
+const { queryDB,reportOutcome } = require('./../dbTools');
 
 
 /** api/makeModUser takes a user data object, and sets that user to a non-moderator

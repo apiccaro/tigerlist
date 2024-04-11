@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-const { queryDB,reportOutcome } = require(''./../dbTools');
+const { queryDB,reportOutcome } = require('./../dbTools');
 
 /** api/editListing takes a listing data object and sets fields of each field in the row corresponding to the post_key
  * 
