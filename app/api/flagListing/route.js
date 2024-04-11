@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import sendMail from './../../moderation/sendMail';
+import {queryDB,reportOutcome} from '../dbTools/dbTools'
 
 async function emailNotify(listingData){
 
@@ -39,51 +40,23 @@ export async function POST(request){
         "flagged = $1 " +
         "WHERE post_key = $2;";
 
-
-
+    //Assemble string components for database query values
     const queryValues = [
         reqObject['flagged'],
         reqObject['post_key']
     ];
 
+    //query database
+    const queryOutcome = queryDB(queryText,queryValues,"flagListing/route.js")
 
-    //Instantiate database client instance
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: '10.3.0.49',
-        port: 5432,
-    });
-    
+    //report outcome
+    reportOutcome(queryText,queryValues,queryOutcome)
 
-    //Try to connect to database and query.
-    var error_status;
-    var result;
-    
-    try {
-        await client.connect();
-        result = await client.query(queryText,queryValues);
-    } 
-    catch (error) {
-        console.log("Caught error in putListing/route.js") //debug print
-        error_status = error
-    } 
-    await client.end();
-
-
-    //Log result to console
-    if (error_status){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
+    //return true or false based on outcome
+    if (queryOutcome.error_status==undefined){
+        return NextResponse.json('true')
     }
-    else {
-        console.log("Database successfully queried with api/flagListing") //comment out once everything is properly tested.
-        console.log("Query result:\n",result) //debug print
-        emailNotify(reqObject)
-        return  NextResponse.json(true)
+    else{
+        return NextResponse.json('false')
     }
-
-
-
 }
