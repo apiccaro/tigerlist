@@ -1,0 +1,25 @@
+-- HOW TO ACCESS THE REMOTE CC SERVER --
+
+Hostname: tigerlist.coloradocollege.edu
+IP: 10.3.0.49
+
+----------------------------------------
+
+On Campus Instructions
+
+Before moving on to the steps below, try SSHing via your machine's terminal. First, enter "ping 10.3.0.49" in a new command line. If you get timeout errors every few seconds, then try the steps below. If not, enter "SSH youremail@coloradocollege.edu@tigerlist.coloradocollege.edu" (change for your email). You should now be into the server, and should be able to cd into tigerlist. (current version in j_moran)
+
+________________________________________
+
+Off Campus Instructions
+
+First, install VMWare horizon client. Instructions: https://www.coloradocollege.edu/offices/its/guides/connect-from-off-campus.html *WHEN YOU ARE IN THE "DOWNLOAD PRODUCT" MENU AFTER CLICKING "GO TO DOWNLOADS" FOR MAC, DO NOT INSTALL THE MOST RECENT VERSION. INSTALL VERSION 2209*
+
+Now open PuTTY from the installer.
+
+Under "servers" at the far left of the nav bar, click "add server". For this, you shouldn't need to add anything other than server name and display name, which are tiger list.
+
+Click on the new server in the left menu. Now enter the command above with your email. This should get you onto the remote server and you can cd into tigerlist.
+
+________________________________________
+

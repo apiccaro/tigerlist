@@ -1,0 +1,26 @@
+TOGGLING AUTHENTICATION MANUALLY:
+
+package.json code for duo authentication:
+ "scripts": {
+    "dev": "node server.js",
+    "start": "next start"
+  },
+
+  package.json code without duo:
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+
+
+TOGGLING AUTHENTICATION AUTOMATICALLY:
+
+enable duo authentication:
+  cas-on.sh
+
+disable duo authentication:
+  cas-off.sh
+
+!!! Note that these scripts will overwrite all package.json content, and should be changed if package.json is ever updated !!!

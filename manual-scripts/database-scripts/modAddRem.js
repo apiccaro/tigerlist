@@ -1,3 +1,10 @@
+//Annika made this block 4, not sure if it will work when called here.
+//It doesn't seem to be referenced anywhere anymore (imported to page.mjs but its 2 lines and never gets referenced))
+
+/** Adds moderator status for user with given email
+ * 
+ * @param {string} userEmail - key to indicate correct user row
+ */
 const readline = require('readline');
   const addMod = async (userEmail) => {
     const response = await fetch("http://localhost:3000/api/makeModUser",{
@@ -9,6 +16,11 @@ const readline = require('readline');
       );
     await response;
   };
+  
+  /** Removes moderator status for user with given email
+
+   * @param {string} userEmail - key to indicate correct user row
+   */
   const removeMod = async (userEmail) => {
     const response = await fetch("http://localhost:3000/api/deleteModUser",{
       method:"DELETE",
@@ -24,10 +36,14 @@ const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-function addMods(){
 
-    console.log("WELCOME TO TIGERLIST\n");
+/**
+ * Prompts user to add or remove a moderator. 
+ * User logic is a bit unintuitive, should redo prompts and use separate methods if we implement this again.
+ */
+function addMods(){
     console.log("=========================")
+    console.log("Using TigerList Moderation Script\n");
     rl.question("Add or remove a moderator? (Y/N)\n", (answer) => {
         rl.question("Add moderator? (Y/N)\n", (answer) => {
         if (answer.toUpperCase() === "Y") {
