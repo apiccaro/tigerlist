@@ -7,10 +7,21 @@ TigerList
 4) Contributing
 5) Acknowledgements
 
+-------------------------------------------------------------------------------------
+
 1)
-TigerList is a website for Colorado College to buy, sell and exchange goods. Mimicking an online marketplace, TigerList allows only Colorado College students to buy and sell goods. Instead of other online marketplaces, TigerList guarantees products are within walking distance, are in safe locations and are amongst other students. This increases safety of students and reusability of any item on campus. Colorado College students have no single interface to message each other about buying and selling goods. Messages end up in class GroupMes or Instagram stories or by word of mouth. TigerList is a confluence for students to buy and sell goods without going to extreme measures.
+TigerList is a campus-only marketplace service for Colorado College students to buy and sell goods within their community. The platform ensures safety and convenience by restricting access to verified CC students and providing a familiar online marketplace experience.
+
+Like other Colorado College services, TigerList uses Colorado College CAS sign in with Duo Push to confirm a student’s identity. From there, the student can browse listings and sort them, make a listing, and edit one of their personal listings. 
+
+A moderator system is in place to ensure the safety of the platform. Moderators can flag inappropriate content and remove it from the platform. Moderators can also warn users for inappropriate behavior. Moderators can keep tabs on TigerList without signing in, via an email notification service. 
 
 This is a [Next.js](https://nextjs.org/) project with a PostgreSQL database, hosted on an ITS server (IP: 10.3.0.49).
+
+For more info, see the Documentation folder.
+- Documentation/README-technical.md - Technical overview of the project.
+- tigerlist_demo_cas.mov - Demo of the application with CAS authentication.
+- tigerlist-paper.pdf - Formal academic documentation of the project.
 
 -------------------------------------------------------------------------------------
 
