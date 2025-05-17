@@ -15,13 +15,13 @@ const makeListing = async (listingDict) => {
   };
 /**
  * Tells the DB to delete the listing at the specific ID
- * @param {R} listingID 
+ * @param {R} post_key 
  */
-  const deleteListing = async (listingID) => {
+  const deleteListing = async (post_key) => {
     const response = await fetch("http://localhost:3000/api/deleteListing",{
       method:"DELETE",
       body : JSON.stringify({
-      listingId:(listingID)
+      post_key:(post_key)
       })
       },
       );

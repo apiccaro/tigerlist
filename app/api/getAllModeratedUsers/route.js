@@ -1,53 +1,33 @@
 import { NextResponse } from 'next/server';
+const { queryDB,reportOutcome } = require('./../dbTools');
+
+
+/** api/getAllModeratedUsers returns all moderated users
+ * 
+ * @returns set of all moderated users
+ */
 export async function GET() {
-
-    //Assemble string for database query
-    const queryText = "SELECT * FROM UserTable WHERE moderator = true;"
-
-
-    //Instantiate database client instance
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: '10.3.0.49',
-        port: 5432,
-    });
     
+    //Assemble string structure for database query text
+    const queryText = "SELECT * FROM UserTable WHERE moderator = true;"
+    
+    //Set queryValues to null so queryDB gets consistent arguments but wont break
+    const queryValues = null;
 
-    //Try to connect to database and query.
-    let query_status = -1
-    let error_status = null
+    //Query database with assembled text and values
+    const queryOutcome = await queryDB(queryText,queryValues,"getAllModeratedUsers/route.js")
 
-    try {
-        await client.connect();
-        const result = await client.query(queryText);
-        query_status = 1
-    } 
-    catch (error) {
-        query_status = 0
-        error_status = error
-    } 
-    finally {
-        await client.end();
-    }
+    //Report outcome of query
+    reportOutcome(queryText,queryValues,queryOutcome,"getAllModeratedUsers/route.js")
 
-
-    //Log result to console
-    if (query_status == 0){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",queryText)
-        return  NextResponse.json('false')
-    }
-    else if (query_status == 1){
-        console.log("Database successfully queried with api/getAllModeratedUsers") //comment out once everything is properly tested.
-        return  NextResponse.json(result.rows)
+    //Return set of users if no error occurred.
+    if (queryOutcome.error_status==undefined){
+        return NextResponse.json(queryOutcome.result.rows)
     }
     else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
-        console.log("Attempted Query: ",queryText)
-        return  NextResponse.json('false')
+        return NextResponse.json([])
     }
-
+        
 }
 
 

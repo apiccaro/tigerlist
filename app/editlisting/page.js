@@ -6,12 +6,9 @@ export const user  = "@coloradocollege.edu";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-//USING A LOT OF NEXT.JS DOCUMENTATION EXAMPLES -WILL CITE THE ONE THAT EVENTUALLY WORKS
-
 const editListing = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"editListing", {
-    method:"PUT",
+    method:"POST",
     body : JSON.stringify(
     listingDict
     )
@@ -21,7 +18,7 @@ const editListing = async (listingDict) => {
 };
 
 export default function EditListing({searchParams}) {
-  //var id=listingID.id;
+  //var id=post_key.id;
   
   const SMALLIMAGE='100px';
   const [title, setTitle] = useState();
@@ -69,7 +66,7 @@ export default function EditListing({searchParams}) {
       });
     };*/
 
-    const {listingID} = searchParams;
+    const {post_key} = searchParams;
     const {testTitle} = searchParams;
     const {testPrice} = searchParams;
     const {testDescription} = searchParams;
@@ -79,7 +76,9 @@ export default function EditListing({searchParams}) {
     const {testEmail} = searchParams;
     const {testPhone} = searchParams;
     const {testImages} = searchParams;
+    const {isActive} = searchParams;
     const {isFlagged} = searchParams;
+    const {isBanned} = searchParams;
 
     var originalImage = testImages[0];
     var originalImage1 = testImages[1];
@@ -100,7 +99,6 @@ export default function EditListing({searchParams}) {
       setLoc(data.location);
       setEmail(data.email);
       setPhoneNumber(data.phoneValue);
-      console.log(data.images)
       setPreviewImage(data.images[0])
       setPreviewImage1(data.images[1])
       setPreviewImage2(data.images[2])
@@ -151,11 +149,11 @@ export default function EditListing({searchParams}) {
       location: locValue,
       email: emailValue,
       phoneValue: phoneValue,
-      image: imageValue,
+      images: imageValue,
       active: "true",
       flagged: isFlagged,
       moderator_ban:"false",
-      post_key:listingID,
+      post_key:post_key
     }
     if(editListing(dict)){
       toast("Your listing has been edited!");
@@ -658,6 +656,7 @@ export default function EditListing({searchParams}) {
                 <option value="Clothing">Clothing</option>
                 <option value="Service">Service</option>
                 <option value="Carpool">Carpool</option>
+                <option value="Other">Other</option>
               </select>
               <small style={{ color: 'red' }}>
                 <br></br>

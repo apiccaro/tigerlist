@@ -1,17 +1,30 @@
-// The edit link formatted to be the same as the active/on hold button
-'use client'
+ /**
+  * EditLink component displays a link to edit a listing.
+  * @param {Object} props - The props containing information about the listing.
+  * @param {string} props.listingID - The ID of the listing.
+  * @param {string} props.title - The title of the listing.
+  * @param {string} props.price - The price of the listing.
+  * @param {string} props.description - The description of the listing.
+  * @param {string} props.category - The category of the listing.
+  * @param {string} props.condition - The condition of the listing.
+  * @param {string} props.location - The location of the listing.
+  * @param {string} props.email - The email of the listing owner.
+  * @param {string} props.phone - The phone number of the listing owner.
+  * @param {string[]} props.images - The images of the listing.
+  * @param {boolean} props.active - Whether the listing is active.
+  * @param {boolean} props.flagged - Whether the listing is flagged.
+  * @param {boolean} props.banned - Whether the listing is banned.
+  * @returns {JSX.Element} The JSX element representing the edit link.
+  */
+
+ 'use client'
 
 import styled from "styled-components";
 import Link from "next/link";
-
-// var testDict = {title: "test title", price: "test price", description: "test description",
-//                 category: "Textbook", condition: "New", location: "East Campus", 
-//                 email: "test@coloradocollege.edu", phone: "2079561870" 
-// }
-
 const Wrapper = styled.div``;
 
-const LinkBGStyle = {
+ // Styling for the background of the link
+ const LinkBGStyle = {
     backgroundColor: 'black',
     height: '30px',
     width: '80px',
@@ -20,22 +33,22 @@ const LinkBGStyle = {
     justifyContent: 'center',
     borderRadius: '10px',
 }
-const EditStyle = {
+ // Styling for the text of the link
+ const EditStyle = {
     display: 'flex',
     fontWeight: '600', 
     fontSize: `1.3rem`,
     color:'white'
-    
 };
 
-const EditLink = ({listingID, title, price, description, category, condition, location, email, phone, images, flagged}) => {
+const EditLink = ({post_key, title, price, description, category, condition, location, email, phone, images, flagged}) => {
     return(
         <Wrapper>
             <div style={LinkBGStyle}>
                 <Link href={{
                     pathname: '/editlisting',
                     query: {
-                        listingID: listingID,
+                        post_key: post_key,
                         testTitle: title,
                         testPrice: price,
                         testDescription: description,

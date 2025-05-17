@@ -1,54 +1,37 @@
 import { NextResponse } from 'next/server';
-export async function GET(listing_key) {
+const { queryDB,reportOutcome } = require('./../dbTools');
 
-    //Assemble string for database query
-    const queryText = "SELECT * FROM PostTable WHERE post_key = '$1';"
-    const queryValues = [postDict['post_key']];
-
-
-    //Instantiate database client instance
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: '10.3.0.49',
-        port: 5432,
-    });
+/** api/getListing takes a given post_key and returns the post corresponding to it
+ * 
+ * @returns listing corresponding to post_key
+ */
+export async function POST(request){
     
+    //Convert given request from json response into a javascript object
+    const reqObject = await request.json()
+    const post_key = reqObject.post_key
+    
+    //Assemble string structure for database query text
+    const queryText = "SELECT * FROM PostTable WHERE post_key = $1;";
 
-    //Try to connect to database and query.
-    let query_status = -1
-    let error_status = null
+    //Assemble string array for database query text
+    const queryValues = [post_key]; 
 
-    try {
-        await client.connect();
-        const result = await client.query(queryText,queryValues);
-        query_status = 1
-    } 
-    catch (error) {
-        query_status = 0
-        error_status = error
-    } 
-    finally {
-        await client.end();
-    }
+    //Query database with assembled text and values
+    const queryOutcome = await queryDB(queryText,queryValues,"getListing/route.js")
 
+    //Report outcome of query
+    reportOutcome(queryText,queryValues,queryOutcome,"getListing/route.js")
 
-    //Log result to console
-    if (query_status == 0){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
-    }
-    else if (query_status == 1){
-        console.log("Database successfully queried with api/getListing") //comment out once everything is properly tested.
-        return  NextResponse.json(result.rows)
+    //Return set of listings if no error occurred, false if one did
+    if (queryOutcome.error_status==undefined){
+        return NextResponse.json(queryOutcome.result.rows)
     }
     else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
+        return NextResponse.json('false')
     }
-
+    
+  
 }
 
 

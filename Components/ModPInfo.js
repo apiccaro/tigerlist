@@ -1,3 +1,20 @@
+/**
+ * Configuration for where the product and contact information will appear on the product view page.
+ * @param {Object} listingID - The ID of the listing.
+ * @param {string} title - The title of the product.
+ * @param {string} price - The price of the product.
+ * @param {string} description - The description of the product.
+ * @param {string} category - The category of the product.
+ * @param {string} condition - The condition of the product.
+ * @param {string} location - The location of the product.
+ * @param {string} email - The email of the lister.
+ * @param {string} phone - The phone number of the lister.
+ * @param {boolean} active - Whether the product is active.
+ * @param {string[]} images - The images of the product.
+ * @param {boolean} flagged - Whether the product is flagged.
+ * @param {boolean} banned - Whether the product is banned.
+ * @returns {JSX.Element} The JSX element representing the product and contact information.
+ */
 // Configuration for where the product and contact information will appear on the product view page
 'use client'
 
@@ -32,10 +49,11 @@ const ContactBoxStyle = {
     paddingRight: '20px'
 }
 
-const ModProductInfo = ({listingID, title, price, description, category, condition, location, email, phone, flagged}) => {
+const ModProductInfo = ({post_key, title, price, description, category, condition, location, email, phone, flagged, banned}) => {
 
     const [isActive, setIsActive] = useState(true);
 
+    // Function to toggle the flag button
     const toggleFlagButton = () => {
         setIsActive(!isActive);
     };
@@ -102,7 +120,7 @@ const ModProductInfo = ({listingID, title, price, description, category, conditi
                             priority
                         />}
                 </button>
-                <AllowDelete />
+                <AllowDelete ID={listingID} title={title} price={price} description={description} category={category} condition={condition} location={location} email={email} phone={phone} images={images} active={active} flagged={flagged} banned={banned}/>
             </div>
 
 

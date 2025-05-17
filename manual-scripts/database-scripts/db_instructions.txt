@@ -1,0 +1,31 @@
+DATABASE COMMANDS
+
+Access PostgreSQL Shell:
+    sudo -u postgres psql
+
+Edit PostgreSQL config files:
+    sudo vim /var/lib/pgsql/data/pg_hba.conf
+    sudo vim /var/lib/pgsql/data/postgresql.conf
+    
+Restart:
+    sudo systemctl restart postgresql
+
+
+
+
+DATABASE CODE
+
+JS code to create client instance:
+
+    const client = new Client({
+        user: 'postgres',
+        host: '10.3.0.49',
+        port: 5432,
+    });
+
+JS code to use client: (needs try/catch for connect and query)
+
+    await client.connect();
+    result = await client.query(query_string);
+    await client.end();
+

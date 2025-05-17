@@ -1,0 +1,12 @@
+db_instructions.txt - more detailed info on database shell commands and code use
+
+db_tests.js - set of tests from before we had api setup
+modAddRem.js - annika's script to add and remove moderators. Outdated api use
+modifyImages.js - allows user to replace image file names for a listing
+sendTestMessage.js - uses test table to verify querying functionality
+
+showAllPosts.js - prints all posts
+show[something].js - these use similar code to showAllPosts.js, displaying the specified database content.
+
+showNewPosts.sh - used to print recent posts in a format specified by user. 
+More helpful when it sat in a different directory than the scripts it called.

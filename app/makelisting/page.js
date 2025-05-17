@@ -6,43 +6,43 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let dict;
-const makeListing = async (listingDict) => {
+
+
+/** Asynchronously adds listing to db
+  * @param {Object} listingDict - The listing information
+  *
+ * @returns true or false based on query success
+ */
+const makeListingFetcher = async (listingDict) => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"putListing",{
     method:"POST",
     body : JSON.stringify(
       listingDict
     )
-    },
-    )
+  },)
 
   const data = await response.json();
-  //console.log(data);
   return data
+
 };
-const getUser = async (email) => {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_CONNECTION_URL+"getUser",{
+
+/** Some stub that would be part of the photo upload process
+ * Wish I knew about these before a week ago
+ * @param {*} imageData 
+ * @returns true or false based on query success
+ */
+const uploadImages = async (imageData) => {
+  const response = await fetch("http://localhost:3000/api/uploadImages",{
     method:"POST",
-    body : JSON.stringify(
-      "a_piccaro@coloradocollege.edu", // ?️ add missing comma here
-  )
-    },
-    );
-  const user= await response.json();
-  
-  return user;
-};
-var isAutoFlagged;
-var thisUser={};
-  const getOneUser=async()=>{
-    const response = await getUser();
-    thisUser=response;
-    if(thisUser.isAutoFlagged){
-      dict.flagged=true;
+    body : imageData
     }
-   
-    
-   
-  }
+    );
+  const success= await response.json();
+  
+  return success;
+};
+
+
 
 
 
@@ -59,6 +59,12 @@ export default function MakeListing() {
   const [previewImage2, setPreviewImage2] = useState();
   const [previewImage3, setPreviewImage3] = useState();
   const [previewImage4, setPreviewImage4] = useState();
+  const [imageFile, setImageFile] = useState();
+  const [imageFile1, setImageFile1] = useState();
+  const [imageFile2, setImageFile2] = useState();
+  const [imageFile3, setImageFile3] = useState();
+  const [imageFile4, setImageFile4] = useState();
+  
   const [email, setEmail] = useState();
   const [phonenumber, setPhoneNumber] = useState();
   const [imgWidth, setWidth] = useState();
@@ -141,22 +147,23 @@ export default function MakeListing() {
       condition: condValue,
       location: locValue,
       email: emailValue,
+      image:imageValue,
       phoneValue: phoneValue,
-      image: imageValue,
+      images: imageValue,
       active: "true",
       flagged: "false"
 
     }
     
-    getOneUser();  
-    console.log("about to use makeListing")
-    var waiting = await makeListing(dict);
-    //console.log(waiting);
-    if(waiting.success=="true"){
+    var waiting = await makeListingFetcher(dict);
+
+
+  if(waiting=="true"){
       toast("Your listing has been uploaded!");
-    }else{
-     toast("Unsuccesful try again");
-    }
+  }
+  else{
+    toast("Unsuccesful try again");
+  }
     
   }
   /**
@@ -224,7 +231,12 @@ export default function MakeListing() {
                         //sets all imagePreview fields
                         setHeight('400px');
                         setWidth('500px');
-                        setPreviewImage(reader.result);
+
+                        // setImageFile(event.target.files[0]);
+                        // setPreviewImage(reader.result);
+                        setPreviewImage(file.name)
+                        
+
                         setLabelHeight(40);
                         setBorderStyle('4px solid black');
                         setLabelText('Change Image');
@@ -281,7 +293,9 @@ export default function MakeListing() {
                           var reader1 = new FileReader();
                           reader1.onloadend = () => {
                             //sets all small image fields
-                            setPreviewImage1(reader1.result);
+                            // setImageFile1(event.target.files[0]);
+                            // setPreviewImage1(reader1.result);
+                            setPreviewImage1(file1.name)
                             setWidth1(SMALLIMAGE);
                             setHeight1(SMALLIMAGE);
                             setLabelHeight1(0);
@@ -349,8 +363,13 @@ export default function MakeListing() {
                           var file = event.target.files[0];
                           var reader = new FileReader();
                           reader.onloadend = () => {
+
                             //sets all small image fields
-                            setPreviewImage2(reader.result);
+
+                            // setImageFile2(event.target.files[0]);
+                            // setPreviewImage2(reader.result);
+                            setPreviewImage2(file2.name);
+
                             setWidth2(SMALLIMAGE);
                             setHeight2(SMALLIMAGE);
                             setLabelHeight2(0);
@@ -419,8 +438,12 @@ export default function MakeListing() {
                           var file = event.target.files[0];
                           var reader = new FileReader();
                           reader.onloadend = () => {
+
                             //sets all small image fields
-                            setPreviewImage3(reader.result);
+                            // setImageFile3(event.target.files[0]);
+                            // setPreviewImage3(reader.result);
+                            setPreviewImage3(file3.name);
+
                             setWidth3(SMALLIMAGE);
                             setHeight3(SMALLIMAGE);
                             setLabelHeight3(0);
@@ -491,7 +514,9 @@ export default function MakeListing() {
                           var reader = new FileReader();
                           reader.onloadend = () => {
                             //sets all small image fields
-                            setPreviewImage4(reader.result);
+                            // setImageFile4(event.target.files[0]);
+                            // setPreviewImage4(reader.result);
+                            setPreviewImage4(file4.name);
                             setWidth4(SMALLIMAGE);
                             setHeight4(SMALLIMAGE);
                             setLabelHeight4(0);
@@ -632,6 +657,7 @@ export default function MakeListing() {
                 <option value="Clothing">Clothing</option>
                 <option value="Service">Service</option>
                 <option value="Carpool">Carpool</option>
+                <option value="Other">Other</option>
               </select>
               <small style={{ color: 'red' }}>
                 <br></br>
@@ -708,7 +734,7 @@ export default function MakeListing() {
                     required: 'Please enter your CC email', maxLength: { value: 50, message: "Please enter your CC email" },
                     pattern: {
                       value: /\S+@coloradocollege+\.edu+/,
-                      message: "Please enter your CC email",
+                      message: "Please enter a CC email",
                     },
                   })}
                 />

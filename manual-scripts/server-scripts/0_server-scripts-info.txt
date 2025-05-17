@@ -1,0 +1,13 @@
+cas_instructions.txt - more detailed info on toggling cas authentication
+remote_server_instructions.txt - instructions for accessing tigerlist on cc server
+
+cas-off.sh - replaces package.json with cas-free version
+with-cas.json - package.json containing cas-based scripts (for use with cas-off.sh )
+
+cas-on.sh - replaces package.json with cas-based scripts
+without-cas.json - package.json containing cas-free scripts (for use with cas-on.sh )
+
+pm_setup.sh - sets up process manager to run server without an active terminal session
+firewall_config.sh - reconfigures firewalls after a reboot
+setup.sh - sets up tigerlist
+

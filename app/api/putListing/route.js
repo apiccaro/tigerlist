@@ -1,79 +1,52 @@
 import { NextResponse } from 'next/server';
+import {emailNotifyPost} from './../../moderation/sendMail';
+import {queryDB,reportOutcome} from '../dbTools'
 
+/** api/putListing takes a listing data object, flags the corresponding post in DB, and notifies a moderator via SMTP
+ * @param {object} request given by fetch
+ * @returns true or false depending on success of query
+ */
 export async function POST(request){
-
+    
     //Convert given request from json response into a javascript object
-    const postDict = await request.json()
+    const reqObject = await request.json()
 
-    //Build query string - Need to change format so certain input characters don't break it. 
+    //Assemble string components for database query text
     const queryText = "INSERT INTO PostTable" 
-    + " (title, price, description, category, condition, location, email, phoneValue, active, flagged, moderator_ban)" 
-    + " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
-  
+    + " (title, price, description, category, condition, location, email, phoneValue, active, flagged, moderator_ban, images)" 
+    + " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12 )";
+
+    //Assemble string structure for database query values
     const queryValues = [
-        postDict.title,
-        postDict.price,
-        postDict.description,
-        postDict.category,
-        postDict.condition,
-        postDict.location,
-        postDict.email,
-        postDict.phoneValue,
-        postDict.active,
-        postDict.flagged,
-        postDict.moderator_ban
+        reqObject.title,
+        reqObject.price,
+        reqObject.description,
+        reqObject.category,
+        reqObject.condition,
+        reqObject.location,
+        reqObject.email,
+        reqObject.phoneValue,
+        reqObject.active,
+        reqObject.flagged,
+        reqObject.moderator_ban,
+        reqObject.images
     ];
-
-
-    //Instantiate database client instance
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: '10.3.0.49',
-        port: 5432,
-    });
     
 
-    //Try to connect to database and query.
-    let query_status = -1
-    let error_status = null
+    //Query database with assembled text and values
+    const queryOutcome = await queryDB(queryText,queryValues,"putListing/route.js")
 
-    try {
-        console.log("Starting try block in putListing/route.js") //debug print
+    //Report outcome of query
+    reportOutcome(queryText,queryValues,queryOutcome,"putListing/route.js")
 
-        await client.connect();
-        const result = await client.query(queryText,queryValues);
-        query_status = 1
-    } 
-    catch (error) {
-        query_status = 0
-        error_status = error
-    } 
-    finally {
-        await client.end();
-    }
-
-
-    //Log result to console
-    if (query_status == 0){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
-    }
-    else if (query_status == 1){
-        console.log("Database successfully queried with api/putListing") //comment out once everything is properly tested.
-
-        output = {
-            success: "true",
-          }
-
-        return  NextResponse.json(success)
+    //Return true or false based on query success
+    if (queryOutcome.error_status==undefined){
+        emailNotifyPost(reqObject) // send moderation an email notification of post flagging
+        return NextResponse.json('true')
     }
     else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
+        return NextResponse.json('false')
     }
-
 }
+
 

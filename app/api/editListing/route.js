@@ -1,11 +1,19 @@
 import { NextResponse } from 'next/server';
-export async function PUT(request){
+import {emailNotifyEdit} from './../../moderation/sendMail';
+const { queryDB,reportOutcome } = require('./../dbTools');
+
+
+/** api/editListing takes a listing data object and sets fields of each field in the row corresponding to the post_key
+ * 
+* @param {object} request given by fetch
+* @returns true or false depending on success of query
+*/
+export async function POST(request){
     
     //Convert given request from json response into a javascript object
-    const postDict = await request.json()
+    const reqObject = await request.json()
 
-
-    //Assemble string components for database query text
+    //Assemble string structure for database query text
     const queryText =
         "UPDATE PostTable SET " +
         "title = $1, " +
@@ -18,66 +26,41 @@ export async function PUT(request){
         "phoneValue = $8, " +
         "active = $9, " +
         "flagged = $10, " +
-        "moderator_ban = $11 " +
-        "WHERE post_key = $12;";
+        "moderator_ban = $11, " +
+        "images = $12, " +
+        "WHERE post_key = $13;";
 
+    //Assemble string array for database query values
     const queryValues = [
-        postDict['title'],
-        postDict['price'],
-        postDict['description'],
-        postDict['category'],
-        postDict['condition'],
-        postDict['location'],
-        postDict['email'],
-        postDict['phoneValue'],
-        postDict['active'],
-        postDict['flagged'],
-        postDict['moderator_ban'],
-        postDict['post_key']
+        reqObject['title'],
+        reqObject['price'],
+        reqObject['description'],
+        reqObject['category'],
+        reqObject['condition'],
+        reqObject['location'],
+        reqObject['email'],
+        reqObject['phoneValue'],
+        reqObject['active'],
+        reqObject['flagged'],
+        reqObject['moderator_ban'],
+        reqObject['images'],
+        reqObject['post_key']
     ];
 
+    //Query database with assembled text and values
+    const queryOutcome = await queryDB(queryText,queryValues,"editListing/route.js")
 
-    //Instantiate database client instance
-    const { Client } = require('pg');
-    const client = new Client({
-        user: 'postgres',
-        host: '10.3.0.49',
-        port: 5432,
-    });
-    
+    //Report outcome of query
+    reportOutcome(queryText,queryValues,queryOutcome,"editListing/route.js")
 
-    //Try to connect to database and query.
-    let query_status = -1
-    let error_status = null
-
-    try {
-        await client.connect();
-        const result = await client.query(queryText,queryValues);
-        query_status = 1
-    } 
-    catch (error) {
-        query_status = 0
-        error_status = error
-    } 
-    finally {
-        await client.end();
-    }
-
-
-    //Log result to console
-    if (query_status == 0){
-        console.error('Error executing query:', error_status);
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
-    }
-    else if (query_status == 1){
-        console.log("Database successfully queried with api/editListing") //comment out once everything is properly tested.
-        return  NextResponse.json(result.rows)
+    //Return true or false based on query success
+    if (queryOutcome.error_status==undefined){
+        emailNotifyEdit(reqObject) // send moderation an email notification of post flagging
+        return NextResponse.json('true')
     }
     else{
-        console.error('Error executing query:', "somehow the try block didnt finish yet no error was caught");
-        console.log("Attempted Query: ",(queryText,queryValues))
-        return  NextResponse.json('false')
+        return NextResponse.json('false')
     }
+    
 
 }
